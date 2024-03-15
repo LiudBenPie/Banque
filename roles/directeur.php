@@ -1,7 +1,8 @@
 <h1>Espace Directeur</h1>
     <nav>
         <ul class="nav-links">
-            <li><a href="gestion-employes.html" class="link">Créer et modifier les login et mot de passe des employés</a></li>
+            <li><a href="../modification_donnees.php" class="link">Modifier les login et mot de passe des employés</a></li>
+            <li><a href="" class="link">Créer les login et mot de passe des employés</a></li>
             <li><a href="gestion-contrats.html" class="link">Créer, supprimer et modifier la liste des contrats</a></li>
             <li><a href="gestion-comptes.html" class="link">Créer, supprimer et modifier la liste des comptes</a></li>
             <li><a href="gestion-pieces.html" class="link">Créer, supprimer et modifier la liste des pièces à fournir</a></li>
