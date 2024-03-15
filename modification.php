@@ -40,7 +40,7 @@ if (isset($_POST['numEmploye'])) {
 }
 ?>
 
-<form action="listemodification.php" method="post" name='monForm'>
+<form action="modification_donnees.php" method="post" name='monForm'>
     <input type="hidden" name="numEmploye" value="<?php echo htmlspecialchars($employe['numEmploye']); ?>">
     
     <p>
