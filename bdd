@@ -130,9 +130,9 @@ INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, nomCon
 
 -- Insertions dans la table Employe
 INSERT INTO Employe (numEmploye, nom, login, motDePasse, categorie) VALUES
-(401, 'Martin', 'martin123', 'pass123', 'Conseiller'),
-(402, 'Bernard', 'bernard456', 'pass456', 'Directeur'),
-(403, 'Dubois', 'dubois789', 'pass789', 'Agent');
+(401, 'Martin', 'martin123', '5f4dcc3b5aa765d61d8327deb882cf99', 'Conseiller'),
+(402, 'Bernard', 'bernard456', '5f4dcc3b5aa765d61d8327deb882cf99', 'Directeur'),
+(403, 'Dubois', 'dubois789', '5f4dcc3b5aa765d61d8327deb882cf99', 'Agent');
 
 -- Insertions dans la table rdv
 INSERT INTO rdv (numRdv, dateRdv, numEmploye) VALUES
