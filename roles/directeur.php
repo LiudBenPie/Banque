@@ -1,8 +1,13 @@
-<h1>Accueil Directeur</h1>
-        <p>Bienvenue dans votre espace de gestion. Veuillez choisir l'une des options ci-dessous pour commencer.</p>
-        <ul>
-            <li><a href="gestion-utilisateurs.html">Gestion des Utilisateurs</a></li>
-            <li><a href="gestion-contrats.html">Gestion des Contrats</a></li>
-            <li><a href="gestion-documents.html">Gestion des Documents</a></li>
-            <li><a href="statistiques.html">Statistiques</a></li>
+<h1>Espace Directeur</h1>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="gestion-employes.html" class="link">Créer et modifier les login et mot de passe des employés</a></li>
+            <li><a href="gestion-contrats.html" class="link">Créer, supprimer et modifier la liste des contrats</a></li>
+            <li><a href="gestion-comptes.html" class="link">Créer, supprimer et modifier la liste des comptes</a></li>
+            <li><a href="gestion-pieces.html" class="link">Créer, supprimer et modifier la liste des pièces à fournir</a></li>
+            <li><a href="statistiques-contrats.html" class="link">Visualiser les statistiques des contrats souscris</a></li>
+            <li><a href="statistiques-rdv.html" class="link">Visualiser les statistiques des rdv pris</a></li>
+            <li><a href="statistiques-clients.html" class="link">Visualiser le nombre total de clients de la banque</a></li>
+            <li><a href="statistiques-soldes.html" class="link">Visualiser le solde total de tous les clients</a></li>
         </ul>
+    </nav>
