@@ -1,57 +1,61 @@
 <?php
 require('connect.php');
 
+$updateSuccessful = false;
+
 if (isset($_POST['numEmploye'])) {
     $numEmploye = $_POST['numEmploye'];
 
-    // Check if the form was submitted to update an employee
     if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
-        // Collecting the form data
         $nom = $_POST['nom'];
         $login = $_POST['login'];
-        $motDePasse = $_POST['motDePasse']; // Consider hashing this password
+        $motDePasse = $_POST['motDePasse'];
         $categorie = $_POST['categorie'];
 
-        // If the password field is not empty, hash the new password
         if (!empty($motDePasse)) {
-            // Hash the password using a more secure method than MD5, such as bcrypt
-            $hashedPassword = md5($motDePasse);
+            $hashedPassword = md5($motDePasse); // Consider using a more secure hashing algorithm
         } else {
-            // If password is not changed, keep the existing one
             $sql = "SELECT motDePasse FROM employe WHERE numEmploye = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$numEmploye]);
             $hashedPassword = $stmt->fetchColumn();
         }
 
-        // Update query
         $sql = "UPDATE employe SET nom = ?, login = ?, motDePasse = ?, categorie = ? WHERE numEmploye = ?";
         $stmt = $conn->prepare($sql);
-
-        // Execute the query
         $stmt->execute([$nom, $login, $hashedPassword, $categorie, $numEmploye]);
+
+        $_SESSION['updateSuccess'] = true;
+        $updateSuccessful = true; 
+
     } else {
-        // Récupération des détails de l'employé sélectionné
         $sql = "SELECT * FROM employe WHERE numEmploye = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$numEmploye]);
         $employe = $stmt->fetch();
     }
 }
+// Display the message and unset it so it doesn't persist on page refresh
+// At the very end of your PHP script, before closing the PHP tag
+if (isset($_SESSION['updateSuccess'])) {
+    unset($_SESSION['updateSuccess']); // Unset the variable to prevent future alerts
+}
 ?>
 
-<form action="modification_donnees.php" method="post" name='monForm'>
-    <input type="hidden" name="numEmploye" value="<?php echo htmlspecialchars($employe['numEmploye']); ?>">
-    
+<form action="modification.php" method="post" name='monForm'>
+
+        <input type="hidden" name="numEmploye" value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
+
     <p>
         <label for="nom">Nom:</label>
-        <input type="text" id="nom" name="nom" value="<?php echo htmlspecialchars($employe['nom']); ?>">
+        <input type="text" id="nom" name="nom" value="<?php echo isset($employe['nom']) ? htmlspecialchars($employe['nom']) : ''; ?>">
     </p>
-    
+
     <p>
         <label for="login">Login:</label>
-        <input type="text" id="login" name="login" value="<?php echo htmlspecialchars($employe['login']); ?>">
+        <input type="text" id="login" name="login" value="<?php echo isset($employe['login']) ? htmlspecialchars($employe['login']) : ''; ?>">
     </p>
+
     
     <p>
         <label for="motDePasse">Mot de Passe (laissez vide si inchangé):</label>
@@ -61,9 +65,9 @@ if (isset($_POST['numEmploye'])) {
     <p>
         <label for="categorie">Catégorie:</label>
         <select id="categorie" name="categorie">
-            <option value="Conseiller" <?php echo $employe['categorie'] == 'Conseiller' ? 'selected' : ''; ?>>Conseiller</option>
-            <option value="Agent" <?php echo $employe['categorie'] == 'Agent' ? 'selected' : ''; ?>>Agent</option>
-            <option value="Directeur" <?php echo $employe['categorie'] == 'Directeur' ? 'selected' : ''; ?>>Directeur</option>
+            <option value="Conseiller" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Conseiller') ? 'selected' : ''; ?>>Conseiller</option>
+            <option value="Agent" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Agent') ? 'selected' : ''; ?>>Agent</option>
+            <option value="Directeur" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Directeur') ? 'selected' : ''; ?>>Directeur</option>
         </select>
     </p>
     
@@ -71,5 +75,14 @@ if (isset($_POST['numEmploye'])) {
         <button type="submit" name="action" value="modifier">Mettre à jour</button>
     </p>
 </form>
-<?php
-?>
+
+
+
+<script type="text/javascript">
+  window.onload = function() {
+    // If the PHP variable indicates success, show the message
+    <?php if ($updateSuccessful): ?>
+    alert('Les valeurs ont été modifiées avec succès.');
+    <?php endif; ?>
+  }
+</script>
