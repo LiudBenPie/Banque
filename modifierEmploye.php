@@ -42,7 +42,7 @@ if (isset($_SESSION['updateSuccess'])) {
 }
 ?>
 
-<form action="modification.php" method="post" name='monForm'>
+<form action="modifierEmploye.php" method="post" name='monForm'>
 
         <input type="hidden" name="numEmploye" value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
 
