@@ -10,7 +10,6 @@ if (isset($_POST['numClient'])) {
         // Traitement de la modification du découvert du compte sélectionné
         $idCompte = $_POST['idCompte'];
         $nouveauDecouvert = $_POST['nouveauDecouvert'];
-
         $sql = "UPDATE CompteClient SET montantDecouvert = ? WHERE numClient = ? AND idCompte = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$nouveauDecouvert, $numClient, $idCompte]);
@@ -39,16 +38,6 @@ if (isset($_SESSION['updateSuccess'])) {
     <input type="hidden" name="numClient" value="<?php echo isset($_POST['numClient']) ? htmlspecialchars($_POST['numClient']) : ''; ?>">
 
     <p>
-        <!-- Sélection du compte à modifier -->
-        <label for="idCompte">Sélectionnez un compte :</label>
-        <select id="idCompte" name="idCompte">
-            <?php foreach ($comptes as $compte): ?>
-                <option value="<?php echo $compte['idCompte']; ?>"><?php echo "Compte ".$compte['idCompte']." (Solde: ".$compte['solde'].")"; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </p>
-
-    <p>
         <label for="nouveauDecouvert">Nouveau montant autorisé de découvert :</label>
         <input type="text" id="nouveauDecouvert" name="nouveauDecouvert">
     </p>
@@ -62,7 +51,7 @@ if (isset($_SESSION['updateSuccess'])) {
   window.onload = function() {
     // If the PHP variable indicates success, show the message
     <?php if ($updateSuccessful): ?>
-    alert('Le montant autorisé de découvert a été modifié avec succès.');
+        alert('Le montant autorisé de découvert a été modifié avec succès.');
     <?php endif; ?>
   }
 </script>
