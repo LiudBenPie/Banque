@@ -9,6 +9,6 @@
             <li><a href="../vendre-un-contrat-conseiller.php" class="link">Vendre un contrat à un client</a></li>
             <li><a href="../ouvrirCompte.php" class="link">Ouvrir un ou plusieurs comptes pour un client</a></li>
             <li><a href="../rechercherDecouvert.php" class="link">Modifier la valeur d'un découvert</a></li>
-            <li><a href="resilier-contrat-compte.html" class="link">Résilier un contrat ou un compte</a></li>
+            <li><a href="resilier-contrat-compte000.html" class="link">Résilier un contrat ou un compte</a></li>
         </ul>
     </nav>
