@@ -14,7 +14,7 @@
         elseif($auth->checkRole('Agent')){
             include 'roles/agent.php';
         }
-        elseif($auth->checkRole('Conseilleur')){
+        elseif($auth->checkRole('Conseiller')){
             include 'roles/conseiller.php';
         }
     ?>
