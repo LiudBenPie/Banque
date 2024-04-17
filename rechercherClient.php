@@ -1,7 +1,7 @@
 <?php
 require('connect.php');
 // Récupération de la liste des clients
-$sql = "SELECT numClient, nom, prenom, adresse, mail, numtel, situation FROM client";
+$sql = "SELECT numClient, nom, prenom, adresse, mail, numtel, situation, dateNaissance FROM client";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $clients = $stmt->fetchAll();
@@ -11,7 +11,7 @@ $clients = $stmt->fetchAll();
     <select name="numClient" id="client">
         <?php foreach ($clients as $client): ?>
             <option value="<?php echo $client['numClient']; ?>">
-                <?php echo $client['nom'].' '.$client['prenom']; ?>
+                <?php echo $client['nom'].' '.$client['prenom'].' '.$client['dateNaissance']; ?>
             </option>
         <?php endforeach; ?>
     </select>

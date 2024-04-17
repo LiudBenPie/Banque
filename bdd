@@ -1,13 +1,13 @@
-DROP TABLE ContratClient;
-DROP TABLE CompteClient;
-DROP TABLE Operation;
-DROP TABLE rdv;
-DROP TABLE Compte;
-DROP TABLE Client;
-DROP TABLE Employe;
-DROP TABLE Contrat;
-DROP TABLE Motif;
-DROP TABLE TypeCompte;
+DROP TABLE IF EXISTS ContratClient;
+DROP TABLE IF EXISTS CompteClient;
+DROP TABLE IF EXISTS Operation;
+DROP TABLE IF EXISTS rdv;
+DROP TABLE IF EXISTS Compte;
+DROP TABLE IF EXISTS Client;
+DROP TABLE IF EXISTS Employe;
+DROP TABLE IF EXISTS Contrat;
+DROP TABLE IF EXISTS Motif;
+DROP TABLE IF EXISTS TypeCompte;
 
 CREATE TABLE TypeCompte (
     idType INT PRIMARY KEY,
@@ -29,7 +29,8 @@ CREATE TABLE Client (
     adresse VARCHAR(255),
     mail VARCHAR(255),
     numTel VARCHAR(255),
-    situation VARCHAR(255)
+    situation VARCHAR(255),
+    dateNaissance DATE
 );
 
 CREATE TABLE CompteClient (
@@ -86,61 +87,51 @@ CREATE TABLE Motif (
     listePieces VARCHAR(255)
 );
 
--- Insertions dans la table TypeCompte
 INSERT INTO TypeCompte (idType, nomType, description) VALUES
 (1, 'Compte Courant', 'Pour les opérations quotidiennes'),
 (2, 'Livret A', 'Épargne réglementée avec un taux d’intérêt exonéré d’impôts'),
 (3, 'PEL', 'Plan Épargne Logement pour un projet immobilier');
 
--- Insertions dans la table Compte
 INSERT INTO Compte (idCompte, nomCompte, idType) VALUES
 (101, 'CompteCourantAlice', 1),
 (102, 'LivretABob', 2),
 (103, 'PELClara', 3);
 
--- Insertions dans la table Client
-INSERT INTO Client (numClient, nom, prenom, adresse, mail, numTel, situation) VALUES
-(201, 'Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 'Célibataire'),
-(202, 'Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', 'Marié'),
-(203, 'Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', 'Divorcé');
+INSERT IGNORE INTO Client (numClient, nom, prenom, adresse, mail, numTel, situation, dateNaissance) VALUES
+(201, 'Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 'Célibataire', '1985-04-12'),
+(202, 'Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', 'Marié', '1978-08-23'),
+(203, 'Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', 'Divorcé', '1990-11-30');
 
--- Insertions dans la table CompteClient
 INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idCompte) VALUES
 ('2024-01-01', 1500.00, 200.00, 201, 101),
 ('2024-02-01', 3000.00, 0.00, 202, 102),
 ('2024-03-01', 6000.00, 500.00, 203, 103);
 
--- Insertions dans la table Operation
 INSERT INTO Operation (numOp, montant, typeOp, idCompte) VALUES
 (301, 150.00, 'Dépôt', 101),
 (302, 200.00, 'Retrait', 102),
 (303, 400.00, 'Dépôt', 103);
 
--- Insertions dans la table Contrat
 INSERT INTO Contrat (nomContrat) VALUES
 ('ContratBasique'),
 ('ContratPremium'),
 ('ContratEntreprise');
 
--- Insertions dans la table ContratClient
 INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, nomContrat) VALUES
 ('2024-04-01', 9.99, 201, 'ContratBasique'),
 ('2024-05-01', 19.99, 202, 'ContratPremium'),
 ('2024-06-01', 29.99, 203, 'ContratEntreprise');
 
--- Insertions dans la table Employe
 INSERT INTO Employe (numEmploye, nom, login, motDePasse, categorie) VALUES
 (401, 'Martin', 'martin123', '5f4dcc3b5aa765d61d8327deb882cf99', 'Conseiller'),
 (402, 'Bernard', 'bernard456', '5f4dcc3b5aa765d61d8327deb882cf99', 'Directeur'),
 (403, 'Dubois', 'dubois789', '5f4dcc3b5aa765d61d8327deb882cf99', 'Agent');
 
--- Insertions dans la table rdv
 INSERT INTO rdv (numRdv, dateRdv, numEmploye) VALUES
 (501, '2024-07-10', 401),
 (502, '2024-08-15', 402),
 (503, '2024-09-20', 403);
 
--- Insertions dans la table Motif
 INSERT INTO Motif (idMotif, libelleMotif, listePieces) VALUES
 (601, 'Ouverture de compte', 'Pièce d’identité, Justificatif de domicile'),
 (602, 'Demande de prêt', 'Avis d’imposition, Bulletins de salaire'),

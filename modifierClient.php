@@ -12,17 +12,19 @@ if (isset($_POST['action']) && $_POST['action'] === 'modifier' && isset($_POST['
     $mail = $_POST['mail'];
     $numTel = $_POST['numTel'];
     $situation = $_POST['situation'];
+    $dateNaissance = $_POST['dateNaissance'];
 
     // Prépare et exécute la requête SQL pour mettre à jour les informations du client
-    $sql = "UPDATE Client SET nom = ?, prenom = ?, adresse = ?, mail = ?, numTel = ?, situation = ? WHERE numClient = ?";
+    $sql = "UPDATE Client SET nom = ?, prenom = ?, adresse = ?, mail = ?, numTel = ?, situation = ?, dateNaissance = ? WHERE numClient = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->execute([$nom, $prenom, $adresse, $mail, $numTel, $situation, $numClient]);
+    $stmt->execute([$nom, $prenom, $adresse, $mail, $numTel, $situation, $dateNaissance, $numClient]);
 
-    // Indique que la mise à jour a été réussie
-    $updateSuccessful = true; 
-    $_SESSION['updateSuccess'] = true;
-} elseif (isset($_POST['numClient'])) {
-    // Prépare et exécute la requête pour obtenir les informations actuelles du client
+    // Marque que la mise à jour a été réussie
+    $updateSuccessful = true;
+}
+
+// Récupère les informations du client après la mise à jour ou si l'ID est spécifié
+if (isset($_POST['numClient'])) {
     $numClient = $_POST['numClient'];
     $sql = "SELECT * FROM Client WHERE numClient = ?";
     $stmt = $conn->prepare($sql);
@@ -30,16 +32,16 @@ if (isset($_POST['action']) && $_POST['action'] === 'modifier' && isset($_POST['
     $client = $stmt->fetch();
 }
 
-// Si la mise à jour a été réussie, affiche un message et réinitialise le marqueur de succès
-if (isset($_SESSION['updateSuccess'])) {
+// Affiche une alerte si la mise à jour a été réussie
+if ($updateSuccessful) {
     echo '<script>alert("Les informations du client ont été mises à jour avec succès.");</script>';
-    unset($_SESSION['updateSuccess']);
 }
 ?>
 
 <!-- Formulaire pour la mise à jour des informations du client -->
 <form action="modifierClient.php" method="post" name='monForm'>
-    <fieldset><legend>MODIFICATION DES INFORMATIONS DES CLIENTS</legend>
+    <fieldset><legend>INFORMATION DU CLIENT</legend>
+        <!-- Champs du formulaire avec les informations à jour du client -->
         <p>
             <label for="num">ID Client :</label>
             <input type="text" name="numClient" value="<?php echo htmlspecialchars($client['numClient'] ?? ''); ?>" readonly>
@@ -67,6 +69,10 @@ if (isset($_SESSION['updateSuccess'])) {
         <p>
             <label for="situation">Situation :</label>
             <input type="text" id="situation" name="situation" value="<?php echo htmlspecialchars($client['situation'] ?? ''); ?>">
+        </p>
+        <p>
+            <label for="dateNaissance">Date de naissance :</label>
+            <input type="date" id="dateNaissance" name="dateNaissance" value="<?php echo htmlspecialchars($client['dateNaissance'] ?? ''); ?>" readonly>
         </p>
         <p>
             <button type="submit" name="action" value="modifier">Mettre à jour</button>
