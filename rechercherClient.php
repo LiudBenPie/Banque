@@ -7,7 +7,7 @@ $stmt->execute();
 $clients = $stmt->fetchAll();
 ?>
 <form action="modifierClient.php" method="post">
-    <label for="client">Choisir un client à modifier :</label>
+    <label for="client">Sélectionnez le client à modifier :</label>
     <select name="numClient" id="client">
         <?php foreach ($clients as $client): ?>
             <option value="<?php echo $client['numClient']; ?>">
