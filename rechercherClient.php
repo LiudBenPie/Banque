@@ -4,14 +4,14 @@ require('connect.php');
 $sql = "SELECT numClient, nom, prenom, adresse, mail, numtel, situation FROM client";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-$employes = $stmt->fetchAll();
+$clients = $stmt->fetchAll();
 ?>
 <form action="modifierClient.php" method="post">
     <label for="client">Choisir un client à modifier :</label>
     <select name="numClient" id="client">
-        <?php foreach ($client as $client): ?>
+        <?php foreach ($clients as $client): ?>
             <option value="<?php echo $client['numClient']; ?>">
-                <?php echo $client['nom']; ?>
+                <?php echo $client['nom'].' '.$client['prenom']; ?>
             </option>
         <?php endforeach; ?>
     </select>
