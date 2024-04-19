@@ -45,7 +45,7 @@ try {
 }
 ?>
     <h2>Formulaire d\'ouverture de compte</h2>
-    <form action="ouverturedecompte.php" method="post">
+    <form action="ouvrirCompte.php" method="post">
         <label for="date">Date d\'ouverture :</label>
         <input type="date" id="date" name="date" required><br><br>
 

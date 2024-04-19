@@ -75,6 +75,7 @@ if ($updateSuccessful) {
             <input type="date" id="dateNaissance" name="dateNaissance" value="<?php echo htmlspecialchars($client['dateNaissance'] ?? ''); ?>" readonly>
         </p>
         <p>
+            <button><a href="../" class="link">Page precedente</a></button>
             <button type="submit" name="action" value="modifier">Mettre à jour</button>
         </p>
     </fieldset>
