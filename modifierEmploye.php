@@ -35,16 +35,19 @@ if (isset($_POST['numEmploye'])) {
         $employe = $stmt->fetch();
     }
 }
-// Display the message and unset it so it doesn't persist on page refresh
-// At the very end of your PHP script, before closing the PHP tag
-if (isset($_SESSION['updateSuccess'])) {
-    unset($_SESSION['updateSuccess']); // Unset the variable to prevent future alerts
+// Affiche une alerte si la mise à jour a été réussie
+if ($updateSuccessful) {
+    echo '<script>alert("Les informations du employe ont été mises à jour avec succès.");</script>';
 }
 ?>
-
+<!-- Formulaire pour la mise à jour des informations du employe -->
 <form action="modifierEmploye.php" method="post" name='monForm'>
 
+    <!-- Champs du formulaire avec les informations à jour du employe -->
+    <p>
+        <label for="num">ID Employe :</label>
         <input type="hidden" name="numEmploye" value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
+    </p>
 
     <p>
         <label for="nom">Nom:</label>
@@ -75,14 +78,3 @@ if (isset($_SESSION['updateSuccess'])) {
         <button type="submit" name="action" value="modifier">Mettre à jour</button>
     </p>
 </form>
-
-
-
-<script type="text/javascript">
-  window.onload = function() {
-    // If the PHP variable indicates success, show the message
-    <?php if ($updateSuccessful): ?>
-    alert('Les valeurs ont été modifiées avec succès.');
-    <?php endif; ?>
-  }
-</script>
