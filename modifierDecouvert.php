@@ -26,10 +26,9 @@ if (isset($_POST['numClient'])) {
     }
 }
 
-// Display the message and unset it so it doesn't persist on page refresh
-// At the very end of your PHP script, before closing the PHP tag
-if (isset($_SESSION['updateSuccess'])) {
-    unset($_SESSION['updateSuccess']); // Unset the variable to prevent future alerts
+// Affiche une alerte si la mise à jour a été réussie
+if ($updateSuccessful) {
+    echo '<script>alert("Les informations du decouvert ont été mises à jour avec succès.");</script>';
 }
 ?>
 
@@ -47,11 +46,3 @@ if (isset($_SESSION['updateSuccess'])) {
     </p>
 </form>
 
-<script type="text/javascript">
-  window.onload = function() {
-    // If the PHP variable indicates success, show the message
-    <?php if ($updateSuccessful): ?>
-        alert('Le montant autorisé de découvert a été modifié avec succès.');
-    <?php endif; ?>
-  }
-</script>

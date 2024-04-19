@@ -1,33 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <title>Vente d'un contrat</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="accueil.css"/>
-</head>
-<body>
 <?php
 require_once('connect.php');
-
 try {
-    echo '
-    <h2>Formulaire d\'ouverture de compte</h2>
-    <form action="ouverturedecompte.php" method="post">
-        <label for="date">Date d\'ouverture :</label>
-        <input type="date" id="date" name="date" required><br><br>
-
-        <label for="decou">Montant du découvert :</label>
-        <input type="number" id="decou" name="decou" min="0" step="100" required><br><br>
-
-        <label for="nomcli">Nom du client :</label>
-        <input type="text" id="nomcli" name="nomcli" required><br><br>
-
-        <label for="numcon">Nom du compte :</label>
-        <input type="text" id="numcon" name="numcon" required><br><br>
-
-        <input type="submit" name="ventecom" value="Vendre un contrat">
-    </form>';
-
             if(isset($_POST['ventecom'], $_POST['date'], $_POST['decou'], $_POST['nomcli'], $_POST['numcon'])) {
                 // Récupération des données du formulaire
                 $datcon = $_POST['date'];
@@ -71,3 +44,19 @@ try {
     $msg = 'ERREUR dans ' . $e->getFile() . 'Ligne' . $e->getLine() . ':' . $e->getMessage();
 }
 ?>
+    <h2>Formulaire d\'ouverture de compte</h2>
+    <form action="ouverturedecompte.php" method="post">
+        <label for="date">Date d\'ouverture :</label>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label for="decou">Montant du découvert :</label>
+        <input type="number" id="decou" name="decou" min="0" step="100" required><br><br>
+
+        <label for="nomcli">Nom du client :</label>
+        <input type="text" id="nomcli" name="nomcli" required><br><br>
+
+        <label for="numcon">Nom du compte :</label>
+        <input type="text" id="numcon" name="numcon" required><br><br>
+
+        <input type="submit" name="ventecom" value="Vendre un contrat">
+    </form>
