@@ -53,17 +53,18 @@ CREATE TABLE Operation (
 );
 
 CREATE TABLE Contrat (
-    nomContrat VARCHAR(25) PRIMARY KEY
+    numContrat INT PRIMARY KEY AUTO_INCREMENT,
+    nomContrat VARCHAR(25) 
 );
 
 CREATE TABLE ContratClient (
+    idContratClient INT PRIMARY KEY AUTO_INCREMENT,
     dateOuvertureContrat DATE,
     tarifMensuel DECIMAL(10, 2),
     numClient INT,
-    nomContrat VARCHAR(25),
-    PRIMARY KEY (numClient, nomContrat),
+    numContrat INT,
     FOREIGN KEY (numClient) REFERENCES Client(numClient),
-    FOREIGN KEY (nomContrat) REFERENCES Contrat(nomContrat)
+    FOREIGN KEY (numContrat) REFERENCES Contrat(numContrat)
 );
 
 CREATE TABLE Employe (
@@ -117,10 +118,10 @@ INSERT INTO Contrat (nomContrat) VALUES
 ('ContratPremium'),
 ('ContratEntreprise');
 
-INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, nomContrat) VALUES
-('2024-04-01', 9.99, 201, 'ContratBasique'),
-('2024-05-01', 19.99, 202, 'ContratPremium'),
-('2024-06-01', 29.99, 203, 'ContratEntreprise');
+INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, numContrat) VALUES
+('2024-04-01', 9.99, 201, 1),
+('2024-05-01', 19.99, 202, 2),
+('2024-06-01', 29.99, 203, 3);
 
 INSERT INTO Employe (numEmploye, nom, login, motDePasse, categorie) VALUES
 (401, 'Martin', 'martin123', '5f4dcc3b5aa765d61d8327deb882cf99', 'Conseiller'),
