@@ -9,22 +9,21 @@ class Auth {
     }
 
     public function register($username, $password, $nom, $categorie = 'Agent') {
-        $hashedPassword = md5($password); // Using md5 for hashing
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->pdo->prepare("INSERT INTO employe (login, motDePasse, nom, categorie) VALUES (?, ?, ?, ?)");
         return $stmt->execute([$username, $hashedPassword, $nom, $categorie]);
     }
 
     public function login($username, $password) {
-        $hashedPassword = md5($password); // Hash the password with md5 to compare
-        $stmt = $this->pdo->prepare("SELECT * FROM employe WHERE login = ? AND motDePasse = ?");
-        $stmt->execute([$username, $hashedPassword]);
+        $stmt = $this->pdo->prepare("SELECT * FROM employe WHERE login = ?");
+        // $username is the field login 
+        $stmt->execute([$username]);
         $user = $stmt->fetch();
-
-        if ($user) {
+    
+        if ($user && password_verify($password, $user['motDePasse'])) {
             $_SESSION[$this->sessionName] = $user['numEmploye'];
             return true;
         }
-
         return false;
     }
 
@@ -48,5 +47,12 @@ class Auth {
 
     public function isLoggedIn() {
         return isset($_SESSION[$this->sessionName]);
+    }
+
+    public function id() {
+        if(!$this->isLoggedIn()){
+            return null;
+        }
+        return $_SESSION[$this->sessionName];
     }
 }
