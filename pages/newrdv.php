@@ -19,7 +19,7 @@ checkAcl('auth');
                 <input type="datetime-local" id="dateRdv" name="dateRdv" required>
             </div>
             <div>
-                <label for="timeRdv">Numero de minutes RDV:</label>
+                <label for="timeRdv">Durée de RDV (en minutes):</label>
                 <input type="number" id="timeRdv" name="timeRdv" min="0" max="120" required>
             </div>
             <div>

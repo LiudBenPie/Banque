@@ -14,7 +14,7 @@ checkAcl('auth');
     <div class="container">
         <a href="/pages/newrdv.php">Create rdv</a>
         <ul>
-        <?php $sql = "SELECT * FROM rdv JOIN motif ON motif.idMotif=rdv.idMotif";
+        <?php $sql = "SELECT * FROM rdv JOIN motif ON motif.idMotif=rdv.idMotif JOIN employe ON rdv.numEmploye=employe.numEmploye";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $rdvs = $stmt->fetchAll();
@@ -23,7 +23,7 @@ checkAcl('auth');
                         <li>
                             <?php echo $rdv['numRdv']?>
                             <?php echo $rdv['libelleMotif']?>
-                            <?php echo $rdv['listePieces']?>
+                            <?php echo $rdv['nom']?>
                         </li>
                     <?php endforeach; ?> 
         </ul>

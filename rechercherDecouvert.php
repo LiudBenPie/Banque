@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php
-require('connect.php');
+require('init.php');
 // Récupération de la liste des clients
 
 $sql = "SELECT idCompte, solde FROM CompteClient";

@@ -1,5 +1,5 @@
 <?php
-require_once('connect.php');
+require_once('init.php');
 try {
             if(isset($_POST['ventecom'], $_POST['date'], $_POST['decou'], $_POST['nomcli'], $_POST['numcon'])) {
                 // Récupération des données du formulaire
