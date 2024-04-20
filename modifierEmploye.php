@@ -13,7 +13,7 @@ if (isset($_POST['numEmploye'])) {
         $categorie = $_POST['categorie'];
 
         if (!empty($motDePasse)) {
-            $hashedPassword = md5($motDePasse); // Consider using a more secure hashing algorithm
+            $hashedPassword = password_hash($motDePasse, PASSWORD_DEFAULT); // Consider using a more secure hashing algorithm
         } else {
             $sql = "SELECT motDePasse FROM employe WHERE numEmploye = ?";
             $stmt = $conn->prepare($sql);
