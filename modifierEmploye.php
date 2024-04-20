@@ -75,6 +75,7 @@ if ($updateSuccessful) {
     </p>
     
     <p>
+        <button><a href="../">Page précédente</a></button>
         <button type="submit" name="action" value="modifier">Mettre à jour</button>
     </p>
 </form>
