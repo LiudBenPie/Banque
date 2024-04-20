@@ -1,5 +1,5 @@
 <?php
-require('connect.php');
+require('init.php');
 // Récupération de la liste des employés
 $sql = "SELECT numEmploye, nom, categorie FROM employe";
 $stmt = $conn->prepare($sql);

@@ -1,5 +1,5 @@
 <?php
-require('connect.php');
+require('init.php');
 // Récupération de la liste des clients
 $sql = "SELECT idMotif, libelleMotif, listePieces FROM motif";
 $stmt = $conn->prepare($sql);

@@ -1,5 +1,7 @@
 <?php
-require('connect.php');
+require('init.php');
+checkAcl('auth');
+
 // Récupération de la liste des clients
 $sql = "SELECT numClient, nom, prenom, adresse, mail, numtel, situation, dateNaissance FROM client";
 $stmt = $conn->prepare($sql);

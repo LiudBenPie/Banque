@@ -1,6 +1,7 @@
 <?php
 require('../init.php');
 checkAcl('guest');
+//echo password_hash('password', PASSWORD_DEFAULT);
 ?>
 
 <!DOCTYPE html>
