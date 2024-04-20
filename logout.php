@@ -1,6 +1,5 @@
 <?php
-require('connect.php');
-require('auth.php');
+require('init.php');
 
 $auth = new Auth($conn);
 $auth->logout();

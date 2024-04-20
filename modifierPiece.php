@@ -9,19 +9,19 @@ if (isset($_POST['action']) && $_POST['action'] === 'modifier' && isset($_POST['
     $libelleMotif = $_POST['libelleMotif'];
     $listePieces = $_POST['listePieces'];
 
-    // Prépare et exécute la requête SQL pour mettre à jour les informations du client
-    $sql = "UPDATE Motif SET libelleMotif = ?, listePieces = ? WHERE idMotif = ?";
+    // Prépare et exécute la requête SQL pour mettre à jour les informations du motif
+    $sql = "UPDATE motif SET libelleMotif = ?, listePieces = ? WHERE idMotif = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->execute([$listePieces, $libelleMotif, $idMotif]);
+    $stmt->execute([$libelleMotif, $listePieces, $idMotif]);
 
     // Marque que la mise à jour a été réussie
     $updateSuccessful = true;
 }
 
-// Récupère les informations du client après la mise à jour ou si l'ID est spécifié
+// Récupère les informations du motif après la mise à jour ou si l'ID est spécifié
 if (isset($_POST['idMotif'])) {
     $idMotif = $_POST['idMotif'];
-    $sql = "SELECT * FROM Motif WHERE idMotif = ?";
+    $sql = "SELECT * FROM motif WHERE idMotif = ?";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$idMotif]);
     $client = $stmt->fetch();
@@ -29,7 +29,7 @@ if (isset($_POST['idMotif'])) {
 
 // Affiche une alerte si la mise à jour a été réussie
 if ($updateSuccessful) {
-    echo '<script>alert("Les informations du client ont été mises à jour avec succès.");</script>';
+    echo '<script>alert("Les informations du motif ont été mises à jour avec succès.");</script>';
 }
 ?>
 
@@ -50,6 +50,7 @@ if ($updateSuccessful) {
             <input type="text" id="listePieces" name="listePieces" value="<?php echo htmlspecialchars($client['listePieces'] ?? ''); ?>">
         </p>
         <p>
+            <button><a href="../">Page précédente</a></button>
             <button type="submit" name="action" value="modifier">Mettre à jour</button>
         </p>
     </fieldset>

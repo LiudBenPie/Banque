@@ -1,5 +1,6 @@
 <?php
-require('connect.php');
+require('init.php');
+checkAcl('auth');
 
 $updateSuccessful = false;
 
@@ -13,7 +14,7 @@ if (isset($_POST['numEmploye'])) {
         $categorie = $_POST['categorie'];
 
         if (!empty($motDePasse)) {
-            $hashedPassword = md5($motDePasse); // Consider using a more secure hashing algorithm
+            $hashedPassword = password_hash($motDePasse, PASSWORD_DEFAULT); // Consider using a more secure hashing algorithm
         } else {
             $sql = "SELECT motDePasse FROM employe WHERE numEmploye = ?";
             $stmt = $conn->prepare($sql);
@@ -75,6 +76,7 @@ if ($updateSuccessful) {
     </p>
     
     <p>
+        <button><a href="../">Page précédente</a></button>
         <button type="submit" name="action" value="modifier">Mettre à jour</button>
     </p>
 </form>

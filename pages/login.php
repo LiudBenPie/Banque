@@ -1,3 +1,8 @@
+<?php
+require('../init.php');
+checkAcl('guest');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +10,7 @@
 </head>
 <body>
     <h2>Connexion</h2>
-    <form action="authentification.php" method="post">
+    <form action="/authentification.php" method="post">
         <p>
             <label for="">Identifiant :</label>
             <input type="text" name="login" required>
