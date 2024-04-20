@@ -16,11 +16,11 @@ checkAcl('auth');
         <form action="/sauvegarderRdv.php" method="post">
             <div>
                 <label for="dateRdv">Date du RDV:</label>
-                <input type="date" id="dateRdv" name="dateRdv" required>
+                <input type="datetime-local" id="dateRdv" name="dateRdv" required>
             </div>
             <div>
-                <label for="timeRdv">Heure du RDV (en heures):</label>
-                <input type="number" id="timeRdv" name="timeRdv" min="0" max="23" required>
+                <label for="timeRdv">Numero de minutes RDV:</label>
+                <input type="number" id="timeRdv" name="timeRdv" min="0" max="120" required>
             </div>
             <div>
                 <label for="idMotif">Motif du RDV:</label>
