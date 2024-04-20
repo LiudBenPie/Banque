@@ -9,7 +9,7 @@
 <?php
 require_once('connect.php');
 try{
-    echo '<form action="ajout_client_conseiller.php" method="post">
+    echo '<form action="ajouterClient.php" method="post">
             <fieldset>
             <legend>Création du client</legend>
             <p>

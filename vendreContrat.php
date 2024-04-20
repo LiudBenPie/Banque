@@ -12,7 +12,7 @@ require_once('connect.php');
 try {
     echo '
     <h2>Formulaire de Vente de Contrat</h2>
-    <form action="vendre-un-contrat-conseiller.php" method="post">
+    <form action="vendreContract.php" method="post">
         <label for="date">Date d\'ouverture :</label>
         <input type="date" id="date" name="date" required><br><br>
 
