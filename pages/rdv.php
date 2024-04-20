@@ -12,22 +12,25 @@ checkAcl('auth');
 </head>
 <body>
     <div class="container">
-        <a href="/pages/newrdv.php">Create rdv</a>
+        <a href="/logout.php">Deconnexion</a>
+        <a href="/pages/newrdv.php">Creer rdv</a>
         <ul>
-        <?php $sql = "SELECT * FROM rdv JOIN motif ON motif.idMotif=rdv.idMotif JOIN employe ON rdv.numEmploye=employe.numEmploye";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute();
-                        $rdvs = $stmt->fetchAll();
-                    ?>
-                    <?php foreach ($rdvs as $rdv): ?>
-                        <li>
-                            <?php echo $rdv['numRdv']?>
-                            <?php echo $rdv['libelleMotif']?>
-                            <?php echo $rdv['nom']?>
-                        </li>
-                    <?php endforeach; ?> 
-        </ul>
+        <?php $sql = "SELECT distinct nom FROM rdv JOIN motif ON motif.idMotif=rdv.idMotif JOIN employe ON rdv.numEmploye=employe.numEmploye WHERE categorie = 'Conseiller'";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $conseillers = $stmt->fetchAll();
+        ?>
+        <form action="../calendrier.php" method="post">
+        <label for="conseiller">Sélectionnez le nom du conseiller :</label>
+        <select name="conseiller" id="conseiller">
+        <?php foreach ($conseillers as $conseiller): ?>
+            <option value="<?php echo $conseiller['nom']; ?>">
+                <?php echo $conseiller['nom'];?>
+            </option>
+
+        <?php endforeach; ?> 
+        </select>
+        <button type="submit">Modifier</button>
     </div>
-    <a href="/logout.php">Deconnexion</a>
 </body>
 </html>
