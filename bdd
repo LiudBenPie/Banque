@@ -75,18 +75,25 @@ CREATE TABLE Employe (
     categorie VARCHAR(255)
 );
 
-CREATE TABLE rdv (
-    numRdv INT PRIMARY KEY,
-    dateRdv DATE,
-    numEmploye INT,
-    FOREIGN KEY (numEmploye) REFERENCES Employe(numEmploye)
-);
-
 CREATE TABLE Motif (
     idMotif INT PRIMARY KEY,
     libelleMotif VARCHAR(255),
     listePieces VARCHAR(255)
 );
+
+CREATE TABLE rdv (
+    numRdv INT PRIMARY KEY AUTO_INCREMENT,
+    dateRdv DATETIME NOT NULL,
+    timeRdv INT,
+    numEmploye INT,
+    idMotif INT,
+    -- lieu VARCHAR(255),
+    -- estActif BOOLEAN NOT NULL DEFAULT TRUE,
+    FOREIGN KEY (numEmploye) REFERENCES Employe(numEmploye),
+    FOREIGN KEY (idMotif) REFERENCES Motif(idMotif)
+);
+
+
 
 INSERT INTO TypeCompte (idType, nomType, description) VALUES
 (1, 'Compte Courant', 'Pour les opérations quotidiennes'),
@@ -128,12 +135,12 @@ INSERT INTO Employe (numEmploye, nom, login, motDePasse, categorie) VALUES
 (402, 'Bernard', 'bernard456', '5f4dcc3b5aa765d61d8327deb882cf99', 'Directeur'),
 (403, 'Dubois', 'dubois789', '5f4dcc3b5aa765d61d8327deb882cf99', 'Agent');
 
-INSERT INTO rdv (numRdv, dateRdv, numEmploye) VALUES
-(501, '2024-07-10', 401),
-(502, '2024-08-15', 402),
-(503, '2024-09-20', 403);
-
 INSERT INTO Motif (idMotif, libelleMotif, listePieces) VALUES
 (601, 'Ouverture de compte', 'Pièce d’identité, Justificatif de domicile'),
 (602, 'Demande de prêt', 'Avis d’imposition, Bulletins de salaire'),
 (603, 'Clôture de compte', 'RIB, Lettre de clôture');
+
+INSERT INTO rdv (dateRdv, timeRdv, numEmploye, idMotif) VALUES
+('2024-07-10', 15, 401, 601),
+('2024-08-15', 40, 402, 602),
+('2024-09-20', 20, 403, 603);
