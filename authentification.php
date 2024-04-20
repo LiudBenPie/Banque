@@ -1,6 +1,5 @@
 <?php
-require('connect.php');
-require('auth.php');
+require('init.php');
 
 $login = $_POST['login'];
 $password = $_POST['motDePasse'];

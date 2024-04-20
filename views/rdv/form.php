@@ -1,4 +1,3 @@
-
 <h1>Créer un Nouveau RDV</h1>
 <form action="/sauvegarderRdv.php" method="post">
     <div>

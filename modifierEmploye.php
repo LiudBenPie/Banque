@@ -1,5 +1,6 @@
 <?php
-require('connect.php');
+require('init.php');
+checkAcl('auth');
 
 $updateSuccessful = false;
 

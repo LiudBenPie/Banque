@@ -1,3 +1,8 @@
+<?php
+require('../init.php');
+checkAcl('auth');
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
