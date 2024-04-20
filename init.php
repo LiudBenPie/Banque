@@ -1,4 +1,9 @@
 <?php
+//записуємо в рут дір змінну нашу головну папкуб будемо використовувати як інпутитемо файли щоб не вписувати за кожним разом
+//__DIR__ це наша папка
+//ROOT_DIR constanta в яку ми зберіг нашу папку
+define('ROOT_DIR', __DIR__ .'/' );
+define('VIEWS_DIR', __DIR__ .'/views/' );
 require('connect.php');
 require('auth.php');
 session_start();
@@ -6,35 +11,27 @@ session_start();
 $auth = new Auth($conn);
 
 // access control list
-function checkAcl($acl = null) {
-    global $auth;  // Make $auth available inside the function
 
-    switch ($acl) {
-        case 'guest':
-            // Allow access to guests; typically, no action needed unless you want to redirect logged-in users
-            if ($auth->isLoggedIn()) {
-                // Redirect if a logged-in user should not access guest pages
-                header("Location: /views/dashboard.php");
-                exit;
-            }
-            break;
-        case 'auth':
-            // Require the user to be logged in
-            if (!$auth->isLoggedIn()) {
-                header("Location: /views/login.php");
-                exit;
-            }
-            break;
-        default:
-            // Default case to handle unrecognized roles or if no role is specified
-            // Redirect users based on their authentication status
-            if ($auth->isLoggedIn()) {
-                header("Location: /views/dashboard.php");
-                exit;
-            } else {
-                header("Location: /views/login.php");
-                exit;
-            }
-            break;
+function checkAcl($acl = null) {
+    global $auth; 
+    // Define paths for redirection
+    $loginPath = '/pages/login.php';
+    $dashboardPath = '/pages/dashboard.php';
+
+    // Define a function to handle redirection
+    $redirect = function ($path) {
+        header("Location: $path");
+        exit;
+    };
+
+    // Handle authentication based on ACL
+    if ($acl === 'guest' && $auth->isLoggedIn()) {
+        $redirect($dashboardPath);
+    } elseif ($acl === 'auth' && !$auth->isLoggedIn()) {
+        $redirect($loginPath);
+    } elseif ($acl !== 'guest' && $acl !== 'auth') {
+        // Default behavior for unrecognized roles or no role specified
+        $auth->isLoggedIn() ? $redirect($dashboardPath) : $redirect($loginPath);
     }
 }
+

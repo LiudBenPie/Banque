@@ -1,7 +1,5 @@
 <?php
-require('connect.php'); // Inclut le fichier de connexion
-require('auth.php');
-$auth = new Auth($conn);
+require('init.php'); // Inclut le fichier de connexion
 // Vérifier que le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collecter les données du formulaire

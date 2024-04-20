@@ -14,13 +14,13 @@ checkAcl('auth');
     <div class="container">
     <?php
         if($auth->checkRole('Directeur')){
-            include 'roles/directeur.php';
+            include VIEWS_DIR. '/roles/directeur.php';
         }
         elseif($auth->checkRole('Agent')){
-            include 'roles/agent.php';
+            include VIEWS_DIR. '/roles/agent.php';
         }
         elseif($auth->checkRole('Conseiller')){
-            include 'roles/conseiller.php';
+            include VIEWS_DIR. '/roles/conseiller.php';
         }
     ?>
        
