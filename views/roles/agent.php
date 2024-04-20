@@ -1,10 +1,11 @@
 <h1>Espace Agent</h1>
     <nav><ul>
-        <li><a href="/pages/rdv.php">RDV</a></li>
-        <li><a href="../calendrier.php">Consulter son calendrier</a></li>
-        <li><a href="site.php?menu=rdv_client.html">Prendre un rendez-vous client</a></li>
+        <!-- Gestion des clients -->
+        <li><a href="../rechercherClient.php">Modifier les informations du client</a></li>
+        <!-- Gestion des syntheses -->
+        <li><a href="site.php?menu=synthese_client">Consulter la synthèse d'un client</a></li>
+        <!-- Gestion des dépôts et des retraits -->
         <li><a href="site.php?menu=depot_retrait.html">Réaliser un dépôt ou un retrait</a></li>
-        <li><a href="site.php?menu=synthese_client">Synthèse client</a></li>
-        <li><a href="../rechercherClient.php">Modifier les informations client</a></li>
-        <li><a href="../liudTachesencours.html">A supprimer a la fin</a></li>
+        <!-- Gestion des rdv -->
+        <li><a href="/pages/rdv.php">Prendre un rendez-vous pour un client</a></li>
     </ul></nav>

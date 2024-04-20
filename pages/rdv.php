@@ -25,7 +25,7 @@ checkAcl('auth');
         <select name="conseiller" id="conseiller">
         <?php foreach ($conseillers as $conseiller): ?>
             <option value="<?php echo $conseiller['nom']; ?>">
-                <?php echo $conseiller['nom'];?>
+                <?php echo $conseiller['nom']?>
             </option>
 
         <?php endforeach; ?> 

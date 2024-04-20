@@ -20,6 +20,7 @@
 		<?php
 		require_once('init.php');
 		$nom = $_POST['nom'];
+
 		try{
 
 		echo '<table><tr><th colspan="7">CALENDRIER</th></tr>';

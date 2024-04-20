@@ -5,7 +5,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collecter les données du formulaire
     $dateRdv = $_POST['dateRdv'];
     $timeRdv = $_POST['timeRdv'];
-    $numEmploye = $auth->id();
+    // $numEmploye = $auth->id();
+    $numEmploye = $_POST['numEmploye'];
     $idMotif = $_POST['idMotif'];
 
     // Préparer une requête SQL pour insérer les données

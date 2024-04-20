@@ -23,6 +23,23 @@ checkAcl('auth');
                 <input type="number" id="timeRdv" name="timeRdv" min="0" max="120" required>
             </div>
             <div>
+                <label for="numEmploye">Numero du Conseiller :</label>
+                <select name="numEmploye" id="numEmploye">
+                <?php
+                    $sql = "SELECT numEmploye, nom FROM employe WHERE categorie = 'Conseiller'";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $conseillers = $stmt->fetchAll();
+                ?>
+                    <?php foreach ($conseillers as $conseiller): ?>
+                        <option value="<?php echo $conseiller['numEmploye']; ?>">
+                            <?php echo $conseiller['numEmploye'].' '.$conseiller['nom']?>
+                        </option>
+
+                    <?php endforeach; ?>                       
+                </select>
+            </div>
+            <div>
                 <label for="idMotif">Motif du RDV:</label>
                 <select id="idMotif" name="idMotif" required>
                     <option value="">Sélectionner un motif</option>
