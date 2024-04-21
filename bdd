@@ -101,9 +101,9 @@ INSERT INTO TypeCompte (idType, nomType, description) VALUES
 (3, 'PEL', 'Plan Épargne Logement pour un projet immobilier');
 
 INSERT INTO Compte (idCompte, nomCompte, idType) VALUES
-(101, 'CompteCourantAlice', 1),
-(102, 'LivretABob', 2),
-(103, 'PELClara', 3);
+(101, 'CompteCourantDurand', 1),
+(102, 'LivretAMoreau', 2),
+(103, 'PELPetit', 3);
 
 INSERT IGNORE INTO Client (numClient, nom, prenom, adresse, mail, numTel, situation, dateNaissance) VALUES
 (201, 'Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 'Célibataire', '1985-04-12'),
