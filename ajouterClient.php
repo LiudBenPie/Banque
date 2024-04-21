@@ -78,7 +78,7 @@ try{
                             $amcli = $_POST['adressemail'];
                             $ntcli = $_POST['numtel'];
                             $scli = $_POST['situ'];
-                            $req = "INSERT INTO `client` (`numClient`, `nom`, `prenom`, `adresse`, `mail`, `numTel`, `situation`) VALUES (0, '$ncli', '$pcli', '$acli', '$amcli', '$ntcli', '$scli')";
+                            $req = "INSERT INTO `client` (`numClient`, `nom`, `prenom`, `adresse`, `mail`, `numTel`, `situation`) VALUES ('$ncli', '$pcli', '$acli', '$amcli', '$ntcli', '$scli')";
                             $res=$connexion->query($req);
                             $res->closeCursor();
                             echo 'Le client a été ajouté à la base de données';

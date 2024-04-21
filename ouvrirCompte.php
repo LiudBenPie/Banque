@@ -52,7 +52,7 @@ try {
             
             if ($result_compte) {
                 // Insertion des données dans la base de données
-                $req ="INSERT INTO compte (idCompte,nomCompte,idType) VALUE ($concat,$rowcom)";
+                $req ="INSERT INTO compte (nomCompte,idType) VALUE ($concat,$rowcom)";
                 // Le code ne lis pas $res et $res2 alors qu'il le devrait donc il n'execute pas les requêtes mais je ne comprends pas pourquoi
                 $res = $conn->query($req);
 
