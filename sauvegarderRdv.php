@@ -1,5 +1,7 @@
 <?php
 require('init.php'); // Inclut le fichier de connexion
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 // Vérifier que le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collecter les données du formulaire

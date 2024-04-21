@@ -1,5 +1,7 @@
 <?php
 require('init.php');
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 // Récupération de la liste des employés
 $sql = "SELECT numEmploye, nom, categorie FROM employe";
 $stmt = $conn->prepare($sql);

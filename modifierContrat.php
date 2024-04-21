@@ -1,5 +1,7 @@
 <?php
 require('init.php');
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 
 $updateSuccessful = false;
 
@@ -75,7 +77,7 @@ if ($updateSuccessful) {
             <input type="date" id="dateNaissance" name="dateNaissance" value="<?php echo htmlspecialchars($client['dateNaissance'] ?? ''); ?>" readonly>
         </p>
         <p>
-            <button><a href="../">Page précédente</a></button>
+            <a href="../">Page précédente</a>
             <button type="submit" name="action" value="modifier">Mettre à jour</button>
         </p>
     </fieldset>

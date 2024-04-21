@@ -11,20 +11,11 @@ checkAcl('auth');
     <link rel="stylesheet" href="style_directeur.css">
 </head>
 <body>
-    <div class="container">
     <?php
-        if($auth->checkRole('Directeur')){
-            include VIEWS_DIR. '/roles/directeur.php';
-        }
-        elseif($auth->checkRole('Agent')){
-            include VIEWS_DIR. '/roles/agent.php';
-        }
-        elseif($auth->checkRole('Conseiller')){
-            include VIEWS_DIR. '/roles/conseiller.php';
-        }
-    ?>
-       
+         include VIEWS_DIR. '/menu.php';
+    ?>       
+    <div class="container">
+        
     </div>
-    <a href="/logout.php">Deconnexion</a>
 </body>
 </html>
