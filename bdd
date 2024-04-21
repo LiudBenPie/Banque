@@ -1,20 +1,16 @@
-DROP TABLE IF EXISTS ContratClient;
-DROP TABLE IF EXISTS CompteClient;
-DROP TABLE IF EXISTS Operation;
 DROP TABLE IF EXISTS rdv;
-DROP TABLE IF EXISTS Compte;
-DROP TABLE IF EXISTS Client;
-DROP TABLE IF EXISTS Employe;
-DROP TABLE IF EXISTS Contrat;
 DROP TABLE IF EXISTS Motif;
+DROP TABLE IF EXISTS Employe;
+DROP TABLE IF EXISTS ContratClient;
+DROP TABLE IF EXISTS Contrat;
+DROP TABLE IF EXISTS Operation;
+DROP TABLE IF EXISTS CompteClient;
+DROP TABLE IF EXISTS Client;
+DROP TABLE IF EXISTS Compte;
 DROP TABLE IF EXISTS TypeCompte;
 
 CREATE TABLE TypeCompte (
-<<<<<<< HEAD
-    idType INT PRIMARY KEY  AUTO_INCREMENT,
-=======
     idType INT PRIMARY KEY AUTO_INCREMENT,
->>>>>>> 6cd370a (auto increment rajouté)
     nomType VARCHAR(255),
     description VARCHAR(255)
 );
@@ -100,19 +96,19 @@ CREATE TABLE rdv (
 
 
 INSERT INTO TypeCompte (idType, nomType, description) VALUES
-('Compte Courant', 'Pour les opérations quotidiennes'),
-('Livret A', 'Épargne réglementée avec un taux d’intérêt exonéré d’impôts'),
-('PEL', 'Plan Épargne Logement pour un projet immobilier');
+(1, 'Compte Courant', 'Pour les opérations quotidiennes'),
+(2, 'Livret A', 'Épargne réglementée avec un taux d’intérêt exonéré d’impôts'),
+(3, 'PEL', 'Plan Épargne Logement pour un projet immobilier');
 
 INSERT INTO Compte (idCompte, nomCompte, idType) VALUES
-('CompteCourantDurand', 1),
-('LivretMoreau', 2),
-('PELPetit', 3);
+(101, 'CompteCourantDurand', 1),
+(102, 'LivretAMoreau', 2),
+(103, 'PELPetit', 3);
 
 INSERT IGNORE INTO Client (numClient, nom, prenom, adresse, mail, numTel, situation, dateNaissance) VALUES
-('Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 'Célibataire', '1985-04-12'),
-('Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', 'Marié', '1978-08-23'),
-('Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', 'Divorcé', '1990-11-30');
+(201, 'Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 'Célibataire', '1985-04-12'),
+(202, 'Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', 'Marié', '1978-08-23'),
+(203, 'Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', 'Divorcé', '1990-11-30');
 
 INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idCompte) VALUES
 ('2024-01-01', 1500.00, 200.00, 201, 101),
@@ -140,16 +136,16 @@ INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, numCon
 -- (403, 'Dubois', 'dubois789', '5f4dcc3b5aa765d61d8327deb882cf99', 'Agent');
 
 INSERT INTO Employe (numEmploye, nom, login, motDePasse, categorie) VALUES
-(401, 'Martin', 'martin123', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller'),
-(402, 'Bernard', 'bernard456', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur'),
-(403, 'Dubois', 'dubois789', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent'),
-(404, 'Dupon','benoit100','$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m','Conseiller');
+(401, 'Conseiller Y', 'Conseiller Y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller'),
+(402, 'Directeur', 'Directeur', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur'),
+(403, 'Agent', 'Agent', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent'),
+(404, 'Conseiller X', 'Conseiller X', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller'),
 
 
 INSERT INTO Motif (idMotif, libelleMotif, listePieces) VALUES
-(601, 'Ouverture de compte', 'Pièce d’identité, Justificatif de domicile'),
+(601, 'compte type C', 'Pièce d’identité, Justificatif de domicile'),
 (602, 'Demande de prêt', 'Avis d’imposition, Bulletins de salaire'),
-(603, 'Clôture de compte', 'RIB, Lettrede clôture');
+(603, 'Clôture de compte', 'RIB, Lettre de clôture');
 
 INSERT INTO rdv (dateRdv, timeRdv, numEmploye, idMotif) VALUES
 ('2024-07-10', 15, 401, 601),
