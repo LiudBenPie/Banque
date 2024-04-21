@@ -2,7 +2,7 @@
 require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
-// Récupération de la liste des clients
+// Récupération de la liste des pieces
 $sql = "SELECT idMotif, libelleMotif, listePieces FROM motif";
 $stmt = $conn->prepare($sql);
 $stmt->execute();

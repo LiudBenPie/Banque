@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 <?php
 require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
-// Récupération de la liste des clients
-
+// Récupération de la liste des decouverts
 $sql = "SELECT idCompte, solde FROM CompteClient";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
