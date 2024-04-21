@@ -7,7 +7,9 @@
 </head>
 <body>
 <?php
-require_once('connect.php');
+require('init.php');
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 try{
     echo '<form action="ajouterClient.php" method="post">
             <fieldset>

@@ -1,5 +1,6 @@
 <?php
 require('init.php');
+checkAcl('auth');
 
 $updateSuccessful = false;
 
@@ -35,7 +36,8 @@ if ($updateSuccessful) {
 
 <!-- Formulaire pour la mise à jour des informations du client -->
 <form action="modifierPiece.php" method="post" name='monForm'>
-    <fieldset><legend>INFORMATION DU MOTIF</legend>
+    <fieldset>
+        <legend>INFORMATION DU MOTIF</legend>
         <!-- Champs du formulaire avec les informations à jour du client -->
         <p>
             <label for="idMotif">ID Motif :</label>

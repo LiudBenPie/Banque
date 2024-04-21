@@ -1,5 +1,7 @@
 <?php
-require('connect.php');
+require('init.php');
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 
 $updateSuccessful = false;
 
@@ -40,7 +42,8 @@ if ($updateSuccessful) {
 
 <!-- Formulaire pour la mise à jour des informations du client -->
 <form action="modifierClient.php" method="post" name='monForm'>
-    <fieldset><legend>INFORMATION DU CLIENT</legend>
+    <fieldset>
+        <legend>INFORMATION DU CLIENT</legend>
         <!-- Champs du formulaire avec les informations à jour du client -->
         <p>
             <label for="num">ID Client :</label>

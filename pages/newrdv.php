@@ -1,6 +1,7 @@
 <?php
 require('../init.php');
 checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,9 +14,6 @@ checkAcl('auth');
 </head>
 
 <body>
-    <?php
-    include VIEWS_DIR . '/menu.php';
-    ?>
     <div class="container">
         <form action="/sauvegarderRdv.php" method="post">
             <fieldset class="border">

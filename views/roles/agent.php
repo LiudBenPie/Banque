@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
 <div class="container-fluid">
 <a class="navbar-brand" href="/">Banque</a>
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
     </li>
     <!-- Gestion des rdv -->
     <li class="nav-item">
-        <a class="nav-link" href="/pages/rdv.php">Prendre un rendez-vous pour un client</a>
+        <a class="nav-link" href="/pages/newrdv.php">Prendre un rendez-vous pour un client</a>
     </li>
     </ul>
     <a class="btn btn-outline-success" href="/logout.php">Deconnexion</a>
