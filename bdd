@@ -23,7 +23,7 @@ CREATE TABLE Compte (
 );
 
 CREATE TABLE Client (
-    numClient INT PRIMARY KEY,
+    numClient INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
     prenom VARCHAR(255),
     adresse VARCHAR(255),
