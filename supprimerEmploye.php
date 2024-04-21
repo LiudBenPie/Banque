@@ -29,7 +29,7 @@ if ($deleteSuccessful) {
 }
 ?>
 <!-- Formulaire pour la suppression de l'employé -->
-<form action="modifierEmploye.php" method="post" name='monForm'>
+<form action="supprimerEmploye.php" method="post" name='monForm'>
 
     <!-- Champs du formulaire avec les informations de l'employé à supprimer -->
     <p>
