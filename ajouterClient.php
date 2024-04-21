@@ -57,7 +57,7 @@ try{
             </form>';
             if(isset($_POST['adcli'])&& !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['adresse']) && !empty($_POST['adressemail']) && !empty($_POST['numtel']) && !empty($_POST['situ'])){
                 $search = $_POST['nom'];
-                $sql = "SELECT * FROM client WHERE nom LIKE '%$search%'";
+                $sql = "SELECT * FROM client WHERE nom LIKE '%$search%'" ;
                 $result = $conn->query($sql);
                     if (($result->rowCount() > 0)&& ($_POST['adcli'])) {
                     // Afficher les données trouvées
