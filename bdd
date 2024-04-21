@@ -10,7 +10,11 @@ DROP TABLE IF EXISTS Motif;
 DROP TABLE IF EXISTS TypeCompte;
 
 CREATE TABLE TypeCompte (
+<<<<<<< HEAD
     idType INT PRIMARY KEY  AUTO_INCREMENT,
+=======
+    idType INT PRIMARY KEY AUTO_INCREMENT,
+>>>>>>> 6cd370a (auto increment rajouté)
     nomType VARCHAR(255),
     description VARCHAR(255)
 );
@@ -45,7 +49,7 @@ CREATE TABLE CompteClient (
 );
 
 CREATE TABLE Operation (
-    numOp INT PRIMARY KEY,
+    numOp INT PRIMARY KEY AUTO_INCREMENT,
     montant DECIMAL(10, 2),
     typeOp VARCHAR(255),
     idCompte INT,
@@ -68,7 +72,7 @@ CREATE TABLE ContratClient (
 );
 
 CREATE TABLE Employe (
-    numEmploye INT PRIMARY KEY,
+    numEmploye INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
     login VARCHAR(255),
     motDePasse VARCHAR(255),
@@ -76,7 +80,7 @@ CREATE TABLE Employe (
 );
 
 CREATE TABLE Motif (
-    idMotif INT PRIMARY KEY,
+    idMotif INT PRIMARY KEY AUTO_INCREMENT,
     libelleMotif VARCHAR(255),
     listePieces VARCHAR(255)
 );
