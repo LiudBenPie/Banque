@@ -14,7 +14,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="">Créer les login et mot de passe des employés</a></li>
                         <li><a class="dropdown-item" href="/rechercherEmploye.php">Modifier les login et mot de passe des employés</a></li>
-                        <li><a class="dropdown-item" href="">Supprimer les login et mot de passe des employés</a></li>
+                        <li><a class="dropdown-item" href="/rechercherEmployeASupprimer.php">Supprimer des employés</a></li>
                     </ul>
                 </li>
                 <!--Gérer les contrats-->
