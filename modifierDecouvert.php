@@ -1,5 +1,7 @@
 <?php
 require('init.php');
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 
 $updateSuccessful = false;
 
@@ -42,7 +44,7 @@ if ($updateSuccessful) {
     </p>
   
     <p>
-        <button><a href="../">Page précédente</a></button>
+        <a href="../">Page précédente</a>
         <button type="submit" name="action" value="modifier">Modifier le découvert</button>
     </p>
 </form>

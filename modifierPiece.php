@@ -1,7 +1,7 @@
 <?php
 require('init.php');
 checkAcl('auth');
-
+include VIEWS_DIR . '/menu.php';
 $updateSuccessful = false;
 
 // Vérifie si le formulaire a été soumis
@@ -25,7 +25,7 @@ if (isset($_POST['idMotif'])) {
     $sql = "SELECT * FROM motif WHERE idMotif = ?";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$idMotif]);
-    $client = $stmt->fetch();
+    $motif = $stmt->fetch();
 }
 
 // Affiche une alerte si la mise à jour a été réussie
@@ -41,15 +41,15 @@ if ($updateSuccessful) {
         <!-- Champs du formulaire avec les informations à jour du client -->
         <p>
             <label for="idMotif">ID Motif :</label>
-            <input type="text" name="idMotif" value="<?php echo htmlspecialchars($client['idMotif'] ?? ''); ?>" readonly>
+            <input type="text" name="idMotif" value="<?php echo htmlspecialchars($motif['idMotif'] ?? ''); ?>" readonly>
         </p>
         <p>
             <label for="libelle">Libelle :</label>
-            <input type="text" id="libelle" name="libelle" value="<?php echo htmlspecialchars($client['libelleMotif'] ?? ''); ?>">
+            <input type="text" id="libelleMotif" name="libelleMotif" value="<?php echo htmlspecialchars($motif['libelleMotif'] ?? ''); ?>" readonly>
         </p>
         <p>
             <label for="listePieces">Liste dee Pièces:</label>
-            <input type="text" id="listePieces" name="listePieces" value="<?php echo htmlspecialchars($client['listePieces'] ?? ''); ?>">
+            <input type="text" id="listePieces" name="listePieces" value="<?php echo htmlspecialchars($motif['listePieces'] ?? ''); ?>">
         </p>
         <p>
             <button><a href="../">Page précédente</a></button>

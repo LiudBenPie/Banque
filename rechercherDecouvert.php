@@ -8,6 +8,8 @@
 <body>
 <?php
 require('init.php');
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 // Récupération de la liste des clients
 
 $sql = "SELECT idCompte, solde FROM CompteClient";
