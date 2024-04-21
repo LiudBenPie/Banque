@@ -48,7 +48,7 @@ if ($updateSuccessful) {
             <input type="text" id="libelleMotif" name="libelleMotif" value="<?php echo htmlspecialchars($motif['libelleMotif'] ?? ''); ?>" readonly>
         </p>
         <p>
-            <label for="listePieces">Liste dee Pièces:</label>
+            <label for="listePieces">Liste des Pièces:</label>
             <input type="text" id="listePieces" name="listePieces" value="<?php echo htmlspecialchars($motif['listePieces'] ?? ''); ?>">
         </p>
         <p>
