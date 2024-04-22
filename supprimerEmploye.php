@@ -33,7 +33,7 @@ if ($deleteSuccessful) {
 
     <!-- Champs du formulaire avec les informations de l'employé à supprimer -->
     <p>
-        <label for="num">ID Employé :</label>
+        <label for="num">Etes-vous sur de vouloir supprimer :</label>
         <input type="hidden" name="numEmploye" value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
     </p>
 
