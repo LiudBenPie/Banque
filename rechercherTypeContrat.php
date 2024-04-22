@@ -8,7 +8,7 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $contrats = $stmt->fetchAll();
 ?>
-<form action="modifierContrat.php" method="post">
+<form action="modifierTypeContrat.php" method="post">
     <label for="contrat">Choisir un contrat à modifier :</label>
     <select name="numContrat" id="contrat">
         <?php foreach ($contrats as $contrat): ?>

@@ -24,7 +24,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/vendreContrat.php">Créer la liste des contrats</a></li>
-                        <li><a class="dropdown-item" href="/rechercherContrat.php">Gérer la liste des contrats existants</a></li>
+                        <li><a class="dropdown-item" href="/rechercherTypeContrat.php">Gérer la liste des contrats existants</a></li>
                     </ul>
                 </li>
                 <!--Gérer les comptes bancaires-->
@@ -34,7 +34,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/creerCompte.php">Créer la liste des comptes</a></li>
-                        <li><a class="dropdown-item" href="/rechercherCompte.php">Gérer la liste des comptes existants</a></li>
+                        <li><a class="dropdown-item" href="/rechercherTypeCompte.php">Gérer la liste des comptes existants</a></li>
                     </ul>
                 </li>
                 <!-- Gérer les pièces à fournir -->
