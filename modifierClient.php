@@ -46,10 +46,6 @@ if ($updateSuccessful) {
         <legend>INFORMATION DU CLIENT</legend>
         <!-- Champs du formulaire avec les informations à jour du client -->
         <p>
-            <label for="num">ID Client :</label>
-            <input type="text" name="numClient" value="<?php echo htmlspecialchars($client['numClient'] ?? ''); ?>" readonly>
-        </p>
-        <p>
             <label for="nom">Nom:</label>
             <input type="text" id="nom" name="nom" value="<?php echo htmlspecialchars($client['nom'] ?? ''); ?>">
         </p>
@@ -71,15 +67,27 @@ if ($updateSuccessful) {
         </p>
         <p>
             <label for="situation">Situation :</label>
-            <input type="text" id="situation" name="situation" value="<?php echo htmlspecialchars($client['situation'] ?? ''); ?>">
+            <select id="situations" name="situation">
+                <option value="marie" <?php if(isset($client['situation']) && $client['situation'] == 'marie') echo 'selected'; ?>>Marié(e)</option>
+                <option value="celibataire" <?php if(isset($client['situation']) && $client['situation'] == 'celibataire') echo 'selected'; ?>>Célibataire</option>
+                <option value="veuf" <?php if(isset($client['situation']) && $client['situation'] == 'veuf') echo 'selected'; ?>>Veuf/Veuve</option>
+                <option value="divorce" <?php if(isset($client['situation']) && $client['situation'] == 'divorce') echo 'selected'; ?>>Divorcé(e)</option>
+                <option value="en-couple" <?php if(isset($client['situation']) && $client['situation'] == 'en-couple') echo 'selected'; ?>>En couple</option>
+                <option value="concubinage" <?php if(isset($client['situation']) && $client['situation'] == 'concubinage') echo 'selected'; ?>>En concubinage</option>
+                <option value="separe" <?php if(isset($client['situation']) && $client['situation'] == 'separe') echo 'selected'; ?>>Séparé(e)</option>
+                <option value="fiance" <?php if(isset($client['situation']) && $client['situation'] == 'fiance') echo 'selected'; ?>>Fiancé(e)</option>
+                <option value="pacs" <?php if(isset($client['situation']) && $client['situation'] == 'pacs') echo 'selected'; ?>>Pacsé(e)</option>
+                <option value="relation-distance" <?php if(isset($client['situation']) && $client['situation'] == 'relation-distance') echo 'selected'; ?>>En relation à distance</option>
+            </select>
         </p>
         <p>
             <label for="dateNaissance">Date de naissance :</label>
-            <input type="date" id="dateNaissance" name="dateNaissance" value="<?php echo htmlspecialchars($client['dateNaissance'] ?? ''); ?>" readonly>
+            <input type="date" id="dateNaissance" name="dateNaissance" value="<?php echo htmlspecialchars($client['dateNaissance'] ?? ''); ?>">
         </p>
         <p>
-            <button><a href="../" class="link">Page precedente</a></button>
+            <button><a href="../" class="link">Page précédente</a></button>
             <button type="submit" name="action" value="modifier">Mettre à jour</button>
         </p>
     </fieldset>
 </form>
+
