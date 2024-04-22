@@ -1,3 +1,4 @@
+-- Suppression des tables si elles existent déjà
 DROP TABLE IF EXISTS rdv;
 DROP TABLE IF EXISTS Motif;
 DROP TABLE IF EXISTS Employe;
@@ -9,6 +10,7 @@ DROP TABLE IF EXISTS Client;
 DROP TABLE IF EXISTS Compte;
 DROP TABLE IF EXISTS TypeCompte;
 
+-- Création des tables
 CREATE TABLE TypeCompte (
     idType INT PRIMARY KEY AUTO_INCREMENT,
     nomType VARCHAR(255),
@@ -64,7 +66,7 @@ CREATE TABLE ContratClient (
     numClient INT,
     numContrat INT,
     FOREIGN KEY (numClient) REFERENCES Client(numClient),
-    FOREIGN KEY (numContrat) REFERENCES Contrat(numContrat)
+    FOREIGN KEY (numContrat) REFERENCES Contrat(numContrat) ON DELETE CASCADE
 );
 
 CREATE TABLE Employe (
@@ -87,14 +89,11 @@ CREATE TABLE rdv (
     timeRdv INT,
     numEmploye INT,
     idMotif INT,
-    -- lieu VARCHAR(255),
-    -- estActif BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (numEmploye) REFERENCES Employe(numEmploye),
     FOREIGN KEY (idMotif) REFERENCES Motif(idMotif)
 );
 
-
-
+-- Insertion des données
 INSERT INTO TypeCompte (idType, nomType, description) VALUES
 (1, 'Compte Courant', 'Pour les opérations quotidiennes'),
 (2, 'Livret A', 'Épargne réglementée avec un taux d’intérêt exonéré d’impôts'),
@@ -115,10 +114,10 @@ INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idC
 ('2024-02-01', 3000.00, 0.00, 202, 102),
 ('2024-03-01', 6000.00, 500.00, 203, 103);
 
-INSERT INTO Operation (numOp, montant, typeOp, idCompte) VALUES
-(301, 150.00, 'Dépôt', 101),
-(302, 200.00, 'Retrait', 102),
-(303, 400.00, 'Dépôt', 103);
+INSERT INTO Operation (montant, typeOp, idCompte) VALUES
+(150.00, 'Dépôt', 101),
+(200.00, 'Retrait', 102),
+(400.00, 'Dépôt', 103);
 
 INSERT INTO Contrat (nomContrat) VALUES
 ('ContratBasique'),
@@ -130,26 +129,13 @@ INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, numCon
 ('2024-05-01', 19.99, 202, 2),
 ('2024-06-01', 29.99, 203, 3);
 
--- INSERT INTO Employe (numEmploye, nom, login, motDePasse, categorie) VALUES
--- (401, 'Martin', 'martin123', '5f4dcc3b5aa765d61d8327deb882cf99', 'Conseiller'),
--- (402, 'Bernard', 'bernard456', '5f4dcc3b5aa765d61d8327deb882cf99', 'Directeur'),
--- (403, 'Dubois', 'dubois789', '5f4dcc3b5aa765d61d8327deb882cf99', 'Agent');
+INSERT INTO Employe (nom, login, motDePasse, categorie) VALUES
+('Conseiller Y', 'Conseiller Y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller'),
+('Directeur', 'Directeur', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur'),
+('Agent', 'Agent', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent'),
+('Conseiller X', 'Conseiller X', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller');
 
-INSERT INTO Employe (numEmploye, nom, login, motDePasse, categorie) VALUES
-(401, 'Conseiller Y', 'Conseiller Y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller'),
-(402, 'Directeur', 'Directeur', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur'),
-(403, 'Agent', 'Agent', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent'),
-(404, 'Conseiller X', 'Conseiller X', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller'),
-
-
-INSERT INTO Motif (idMotif, libelleMotif, listePieces) VALUES
-(601, 'compte type C', 'Pièce d’identité, Justificatif de domicile'),
-(602, 'Demande de prêt', 'Avis d’imposition, Bulletins de salaire'),
-(603, 'Clôture de compte', 'RIB, Lettre de clôture');
-
-INSERT INTO rdv (dateRdv, timeRdv, numEmploye, idMotif) VALUES
-('2024-07-10', 15, 401, 601),
-('2024-08-15', 40, 402, 602),
-('2024-09-20', 20, 403, 603),
-('2024-07-16', 60,404,603),
-('2024-07-05', 15,404,601);
+INSERT INTO Motif (libelleMotif, listePieces) VALUES
+('compte type C', 'Pièce d’identité, Justificatif de domicile'),
+('Demande de prêt', 'Avis d’imposition, Bulletins de salaire'),
+('Clôture de compte', 'RIB, Lettre de clôture');
