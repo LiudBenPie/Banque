@@ -45,7 +45,7 @@ if ($deleteSuccessful) {
 }
 ?>
 <!-- Formulaire pour la mise à jour et la suppression des informations du contrat -->
-<form action="modifierContrat.php" method="post" name='monForm'>
+<form action="modifierTypeContrat.php" method="post" name='monForm'>
 
     <!-- Champs du formulaire avec les informations à jour du contrat -->
     <p>
