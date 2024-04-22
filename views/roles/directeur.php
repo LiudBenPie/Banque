@@ -24,8 +24,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/vendreContrat.php">Créer la liste des contrats</a></li>
-                        <li><a class="dropdown-item" href="/rechercherContrat.php">Modifier la liste des contrats</a></li>
-                        <li><a class="dropdown-item" href="">Supprimer la liste des contrats</a></li>
+                        <li><a class="dropdown-item" href="/rechercherContrat.php">Gérer les contrats existants</a></li>
                     </ul>
                 </li>
                 <!--Gérer les comptes bancaires-->
