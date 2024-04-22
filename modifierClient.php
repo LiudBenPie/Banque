@@ -72,17 +72,24 @@ if ($updateSuccessful) {
         <p>
             <label for="situation">Situation :</label>
             <select id="situations" name="situation">
-                <option value="marie" <?php if(isset($client['situation']) && $client['situation'] === 'marie') echo 'selected'; ?>>Marié(e)</option>
-                <option value="celibataire" <?php if(isset($client['situation']) && $client['situation'] === 'celibataire') echo 'selected'; ?>>Célibataire</option>
-                <option value="veuf" <?php if(isset($client['situation']) && $client['situation'] === 'veuf') echo 'selected'; ?>>Veuf/Veuve</option>
-                <option value="divorce" <?php if(isset($client['situation']) && $client['situation'] === 'divorce') echo 'selected'; ?>>Divorcé(e)</option>
-                <option value="en-couple" <?php if(isset($client['situation']) && $client['situation'] === 'en-couple') echo 'selected'; ?>>En couple</option>
-                <option value="concubinage" <?php if(isset($client['situation']) && $client['situation'] === 'concubinage') echo 'selected'; ?>>En concubinage</option>
-                <option value="separe" <?php if(isset($client['situation']) && $client['situation'] === 'separe') echo 'selected'; ?>>Séparé(e)</option>
-                <option value="fiance" <?php if(isset($client['situation']) && $client['situation'] === 'fiance') echo 'selected'; ?>>Fiancé(e)</option>
-                <option value="pacs" <?php if(isset($client['situation']) && $client['situation'] === 'pacs') echo 'selected'; ?>>Pacsé(e)</option>
-                <option value="relation-distance" <?php if(isset($client['situation']) && $client['situation'] === 'relation-distance') echo 'selected'; ?>>En relation à distance</option>
+            <?php
+                $sql = "SELECT numClient, situation FROM Client";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $clients=$stmt->fetchAll();
+                foreach ($clients as $client) {
+                    $selected = '';
+                    if ($client['numClient']== $numClient) {
+                        $selected = 'selected';
+                    }
+    
+                    echo '<option ' . $selected .' value="' . $client['situation'] . '">' . $client['situation'].' </option>';
+                }
+                                     
+                         
+            ?>
             </select>
+            
         </p>
         <p>
             <label for="dateNaissance">Date de naissance :</label>
