@@ -33,8 +33,8 @@
                         Comptes
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/creerCompte">Créer la liste des comptes</a></li>
-                        <li><a class="dropdown-item" href="/rechercherCompte">Gérer la liste des comptes existants</a></li>
+                        <li><a class="dropdown-item" href="/creerCompte.php">Créer la liste des comptes</a></li>
+                        <li><a class="dropdown-item" href="/rechercherCompte.php">Gérer la liste des comptes existants</a></li>
                     </ul>
                 </li>
                 <!-- Gérer les pièces à fournir -->
