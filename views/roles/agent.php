@@ -8,8 +8,14 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
     <!-- Gestion des clients -->
-    <li class="nav-item">
-        <a class="nav-link" href="/rechercherClient.php">Modifier les informations du client</a>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Gestion des clients
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/rechercherClient.php">Modifier les informations du client</a></li>
+            <li><a class="dropdown-item" href="/ajouterClient.php">Inscrire un nouveau client</a></li>
+        </ul>
     </li>
     <!-- Gestion des syntheses -->
     <li class="nav-item">
