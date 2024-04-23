@@ -35,8 +35,9 @@ if ($updateSuccessful) {
 ?>
 
 <form action="modifierDecouvert.php" method="post" name='monForm'>
-
     <input type="hidden" name="numClient" value="<?php echo isset($_POST['numClient']) ? htmlspecialchars($_POST['numClient']) : ''; ?>">
+    <!-- Ajout d'un champ pour saisir l'ID du compte -->
+    <input type="hidden" name="idCompte" value="<?php echo isset($_POST['idCompte']) ? htmlspecialchars($_POST['idCompte']) : ''; ?>">
 
     <p>
         <label for="nouveauDecouvert">Nouveau montant autorisé de découvert :</label>
@@ -48,4 +49,5 @@ if ($updateSuccessful) {
         <button type="submit" name="action" value="modifier">Modifier le découvert</button>
     </p>
 </form>
+
 
