@@ -49,5 +49,3 @@ if ($updateSuccessful) {
         <button type="submit" name="action" value="modifier">Modifier le découvert</button>
     </p>
 </form>
-
-
