@@ -3,7 +3,7 @@ require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
 // Récupération de la liste des decouverts
-$sql = "SELECT idCompte, solde FROM CompteClient";
+$sql = "SELECT idCompte, montantDecouvert FROM CompteClient";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $comptes = $stmt->fetchAll();
