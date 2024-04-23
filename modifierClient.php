@@ -88,12 +88,10 @@ if ($updateSuccessful) {
                     }
     
                     echo '<option ' . $selected .' value="' . $client['situation'] . '">' . $client['situation'].' </option>';
-                }
-                                     
+                }               
                          
             ?>
-            </select>
-            
+            </select>       
         </p>
         <p>
             <button><a href="../" class="link">Page précédente</a></button>
