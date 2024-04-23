@@ -23,7 +23,7 @@
     </li>
     <!-- Gestion des dépôts et des retraits -->
     <li class="nav-item">
-        <a class="nav-link" href="">Réaliser un dépôt ou un retrait</a>
+        <a class="nav-link" href="/rechercherCompte.php">Réaliser un dépôt ou un retrait</a>
     </li>
     <!-- Gestion des rdv -->
     <li class="nav-item">
