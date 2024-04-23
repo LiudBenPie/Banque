@@ -62,16 +62,16 @@ try {
                 $res2 = $conn->query($req2);
                 
                 if ($res2){
-                    echo 'Le compte client a été ajouté à la base de données.';
+                    echo '<script> alert ("Le compte client a été ajouté à la base de données.");</script>';
                 }} else {
-                    echo 'Une erreur est survenue lors de l\'ajout du compte client.';
+                    echo '<script> alert ("Une erreur est survenue lors de l\'ajout du compte client.");</script>';
                 }
             } 
         } else {
-            echo 'Le compte spécifié n\'existe pas.';
+            echo '<script> alert ("Le compte spécifié n\'existe pas.");<script>';
         }
     }else {
-        echo 'Aucun client trouvé avec le nom spécifié.';
+        echo '<script> alert ("Aucun client trouvé avec le nom spécifié.");<script>';
     }
 }
 } catch (PDOException $e) {

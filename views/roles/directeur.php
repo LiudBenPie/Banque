@@ -12,7 +12,7 @@
                         Employés
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="">Créer les login et mot de passe des employés</a></li>
+                        <li><a class="dropdown-item" href="/créerEmploye.php">Créer les login et mot de passe des employés</a></li>
                         <li><a class="dropdown-item" href="/rechercherEmploye.php">Modifier les login et mot de passe des employés</a></li>
                         <li><a class="dropdown-item" href="/rechercherEmployeASupprimer.php">Supprimer des employés</a></li>
                     </ul>
@@ -23,7 +23,7 @@
                         Contrats
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/vendreContrat.php">Créer la liste des contrats</a></li>
+                        <li><a class="dropdown-item" href="/créerContrat.php">Créer la liste des contrats</a></li>
                         <li><a class="dropdown-item" href="/rechercherTypeContrat.php">Gérer la liste des contrats existants</a></li>
                     </ul>
                 </li>
@@ -33,7 +33,7 @@
                         Comptes
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/creerCompte.php">Créer la liste des comptes</a></li>
+                        <li><a class="dropdown-item" href="/créerCompte.php">Créer la liste des comptes</a></li>
                         <li><a class="dropdown-item" href="/rechercherTypeCompte.php">Gérer la liste des comptes existants</a></li>
                     </ul>
                 </li>

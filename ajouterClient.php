@@ -81,7 +81,7 @@ try{
                             $req = "INSERT INTO `client` (`numClient`, `nom`, `prenom`, `adresse`, `mail`, `numTel`, `situation`) VALUES ('$ncli', '$pcli', '$acli', '$amcli', '$ntcli', '$scli')";
                             $res=$connexion->query($req);
                             $res->closeCursor();
-                            echo 'Le client a été ajouté à la base de données';
+                            echo '<script> alert"Le client a été ajouté à la base de données"<script>';
                         }
                 }}}}
 catch(PDOException $e){

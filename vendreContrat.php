@@ -63,16 +63,16 @@ try {
                         $res = $conn->query($req);
             
                         if($res) {
-                            echo 'Le contrat client a été ajouté à la base de données.';
+                            echo '<script> alert "Le contrat client a été ajouté à la base de données."</script>';
                         } else {
-                            echo 'Une erreur est survenue lors de l\'ajout du contrat client.';
+                            echo '<script> alert"Une erreur est survenue lors de l\'ajout du contrat client."</script>';
                         }
                     }
                 } else {
-                    echo 'Le contrat spécifié n\'existe pas.';
+                    echo '<script> alert"Le contrat spécifié n\'existe pas."</script>';
                 }
             } else {
-                echo 'Aucun client trouvé avec le nom spécifié.';
+                echo '<script> alert "Aucun client trouvé avec le nom spécifié."</script>';
             }}
     }
  catch(PDOException $e) {

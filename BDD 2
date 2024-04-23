@@ -11,17 +11,10 @@ DROP TABLE IF EXISTS Compte;
 DROP TABLE IF EXISTS TypeCompte;
 
 -- Création des tables
-CREATE TABLE TypeCompte (
-    idType INT PRIMARY KEY AUTO_INCREMENT,
-    nomType VARCHAR(255),
-    description VARCHAR(255)
-);
-
 CREATE TABLE Compte (
-    idCompte INT PRIMARY KEY AUTO_INCREMENT,
-    nomCompte VARCHAR(255),
-    idType INT,
-    FOREIGN KEY (idType) REFERENCES TypeCompte(idType)
+    idType INT PRIMARY KEY AUTO_INCREMENT,
+    nomTypeCompte VARCHAR(255),
+    description VARCHAR(255)
 );
 
 CREATE TABLE Client (
@@ -36,27 +29,28 @@ CREATE TABLE Client (
 );
 
 CREATE TABLE CompteClient (
+    idCompteClient INT PRIMARY KEY AUTO_INCREMENT,
     dateOuverture DATE,
     solde DECIMAL(10, 2),
     montantDecouvert DECIMAL(10, 2),
     numClient INT,
-    idCompte INT,
-    PRIMARY KEY (numClient, idCompte),
+    idType INT,
     FOREIGN KEY (numClient) REFERENCES Client(numClient),
-    FOREIGN KEY (idCompte) REFERENCES Compte(idCompte)
+    FOREIGN KEY (idType) REFERENCES Compte(idType)
 );
 
 CREATE TABLE Operation (
     numOp INT PRIMARY KEY AUTO_INCREMENT,
     montant DECIMAL(10, 2),
     typeOp VARCHAR(255),
-    idCompte INT,
-    FOREIGN KEY (idCompte) REFERENCES Compte(idCompte)
+    idCompteClient INT,
+    FOREIGN KEY (idCompteClient) REFERENCES CompteClient(idCompteClient)
 );
 
 CREATE TABLE Contrat (
     numContrat INT PRIMARY KEY AUTO_INCREMENT,
-    nomContrat VARCHAR(25) 
+    nomTypeContrat VARCHAR(25),
+    description VARCHAR(255) 
 );
 
 CREATE TABLE ContratClient (
@@ -94,35 +88,30 @@ CREATE TABLE rdv (
 );
 
 -- Insertion des données
-INSERT INTO TypeCompte (idType, nomType, description) VALUES
-(1, 'Compte Courant', 'Pour les opérations quotidiennes'),
-(2, 'Livret A', 'Épargne réglementée avec un taux d’intérêt exonéré d’impôts'),
-(3, 'PEL', 'Plan Épargne Logement pour un projet immobilier');
-
-INSERT INTO Compte (idCompte, nomCompte, idType) VALUES
-(101, 'CompteCourantDurand', 1),
-(102, 'LivretAMoreau', 2),
-(103, 'PELPetit', 3);
+INSERT INTO Compte (nomTypeCompte, description) VALUES
+('Compte Courant', 'Pour les opérations quotidiennes'),
+('Livret A', 'Épargne réglementée avec un taux d’intérêt exonéré d’impôts'),
+('PEL', 'Plan Épargne Logement pour un projet immobilier');
 
 INSERT IGNORE INTO Client (numClient, nom, prenom, adresse, mail, numTel, situation, dateNaissance) VALUES
 (201, 'Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 'Célibataire', '1985-04-12'),
 (202, 'Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', 'Marié', '1978-08-23'),
 (203, 'Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', 'Divorcé', '1990-11-30');
 
-INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idCompte) VALUES
+INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idCompteClient) VALUES
 ('2024-01-01', 1500.00, 200.00, 201, 101),
 ('2024-02-01', 3000.00, 0.00, 202, 102),
 ('2024-03-01', 6000.00, 500.00, 203, 103);
 
-INSERT INTO Operation (montant, typeOp, idCompte) VALUES
+INSERT INTO Operation (montant, typeOp, idCompteClient) VALUES
 (150.00, 'Dépôt', 101),
 (200.00, 'Retrait', 102),
 (400.00, 'Dépôt', 103);
 
-INSERT INTO Contrat (nomContrat) VALUES
-('ContratBasique'),
-('ContratPremium'),
-('ContratEntreprise');
+INSERT INTO Contrat (nomTypeContrat, description) VALUES
+('ContratBasique', 'C est un contrat basique'),
+('ContratPremium','C est un contrat premium'),
+('ContratEntreprise','C est un contrat Entreprise');
 
 INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, numContrat) VALUES
 ('2024-04-01', 9.99, 201, 1),
