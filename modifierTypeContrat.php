@@ -25,7 +25,7 @@
 
             $sql = "UPDATE contrat SET nomContrat = ? WHERE numContrat = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomTypeContrat, $numContrat]);
+            $stmt->execute([$nomContrat, $numContrat]); // Correction ici
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
@@ -68,7 +68,7 @@
         <p>
             <label for="nomTypeContrat">Nom du Contrat:</label>
             <input type="text" id="nomTypeContrat" name="nomTypeContrat"
-                value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>">
+                value="<?php echo isset($contrat['nomContrat']) ? htmlspecialchars($contrat['nomContrat']) : ''; ?>"> <!-- Correction ici -->
         </p>
 
         <p>
