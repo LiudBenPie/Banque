@@ -57,6 +57,7 @@ try {
                     // Vérification de l'existence du contrat
                     $sql_contrat = "SELECT nomTypeContrat FROM Contrat WHERE nomTypeContrat = '$nomcon'";
                     $result_contrat = $conn->query($sql_contrat);
+                    
                     if ($result_contrat->rowCount() > 0) {
                         // Insertion des données dans la base de données
                         $req = "INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, numContrat) VALUES ('$datcon', '$tarcon', '$rowcli', '$rowcon')";
