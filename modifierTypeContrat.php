@@ -61,7 +61,6 @@
 
         <!-- Champs du formulaire avec les informations à jour du contrat -->
         <p>
-            <label for="num">ID Contrat :</label>
             <input type="hidden" name="numContrat"
                 value="<?php echo isset($contrat['numContrat']) ? htmlspecialchars($contrat['numContrat']) : ''; ?>">
         </p>
