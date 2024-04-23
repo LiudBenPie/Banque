@@ -8,7 +8,7 @@ $createSuccessful = false;
 if (isset($_POST['action']) && !empty($_POST['nomCompte'])) {
     $nomCompte = $_POST['nomCompte'];
     $description = $_POST['description'];
-    $sql = "INSERT INTO compte (nomType,description) VALUES (?,?)";
+    $sql = "INSERT INTO compte (nomTypeCompte,description) VALUES (?,?)";
     $res = $conn->prepare($sql);
     if ($res->execute([$nomCompte,$description])) {
         $createSuccessful = true;

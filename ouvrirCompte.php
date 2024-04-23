@@ -36,27 +36,21 @@ try {
             
 
             // Recherche du numéro du type de compte à partir du nom saisi
-            $sql = "SELECT idType FROM typecompte WHERE nomType LIKE '%$nomcom%'";
+            $sql = "SELECT idCompte FROM typecompte WHERE nomType LIKE '%$nomcom%'";
             $result2 = $conn->query($sql);
 
             if ($result2->rowCount() > 0) {
             // Récupération du numéro du type de compte
             $row = $result2->fetch(PDO::FETCH_ASSOC);
-            $rowcom = $row['idType'];
+            $rowcom = $row['idCompte'];
 
             
             // Vérification de l'existence du compte
-            $concat=$nomcom.$nomcli;
-            $sql_compte = "SELECT typecompte.idType FROM typecompte join compte on compte.idType=typecompte.idType WHERE nomType = '%$nomcom%'";
+            $sql_compte = "SELECT idCompte FROM compte WHERE nomTypeCompte LIKE '%$nomcom%'";
             $result_compte = $conn->query($sql_compte);
-            
-            if ($result_compte) {
-                // Insertion des données dans la base de données
-                $req ="INSERT INTO compte (nomCompte,idType) VALUE ($concat,$rowcom)";
-                // Le code ne lis pas $res et $res2 alors qu'il le devrait donc il n'execute pas les requêtes mais je ne comprends pas pourquoi
-                $res = $conn->query($req);
 
-                if($res){
+            if ($result_contrat->rowCount() > 0) {
+                // Insertion des données dans la base de données
                 $req2 = "INSERT INTO compteclient (dateOuverture, montantDecouvert, numClient, idCompte) VALUES ('$datcon', '$deccon', '$rowcli', '$rowcom')";
                 echo $req2;
                 $res2 = $conn->query($req2);
@@ -74,7 +68,7 @@ try {
         echo '<script> alert ("Aucun client trouvé avec le nom spécifié.");<script>';
     }
 }
-} catch (PDOException $e) {
+catch (PDOException $e) {
     $msg = 'ERREUR dans ' . $e->getFile() . 'Ligne' . $e->getLine() . ':' . $e->getMessage();
 }
 ?>
