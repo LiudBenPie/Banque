@@ -46,7 +46,7 @@ try {
                     $rowcli = $row['numClient'];
 
                 // Recherche du numéro de contrat à partir du nom saisi
-                $sql = "SELECT numContrat FROM contrat WHERE nomContrat LIKE '%$nomcon%'";
+                $sql = "SELECT numContrat FROM contrat WHERE nomTypeContrat LIKE '%$nomcon%'";
                 $result2 = $conn->query($sql);
 
                 if ($result2->rowCount() > 0) {
@@ -55,7 +55,7 @@ try {
                     $rowcon = $row['numContrat'];
 
                     // Vérification de l'existence du contrat
-                    $sql_contrat = "SELECT nomContrat FROM Contrat WHERE nomContrat = '$nomcon'";
+                    $sql_contrat = "SELECT nomTypeContrat FROM Contrat WHERE nomTypeContrat = '$nomcon'";
                     $result_contrat = $conn->query($sql_contrat);
                     if ($result_contrat->rowCount() > 0) {
                         // Insertion des données dans la base de données
@@ -63,16 +63,16 @@ try {
                         $res = $conn->query($req);
             
                         if($res) {
-                            echo '<script> alert "Le contrat client a été ajouté à la base de données."</script>';
+                            echo '<script> alert ("Le contrat client a été ajouté à la base de données.");</script>';
                         } else {
-                            echo '<script> alert"Une erreur est survenue lors de l\'ajout du contrat client."</script>';
+                            echo '<script> alert("Une erreur est survenue lors de l\'ajout du contrat client.");</script>';
                         }
                     }
                 } else {
-                    echo '<script> alert"Le contrat spécifié n\'existe pas."</script>';
+                    echo '<script> alert("Le contrat spécifié n\'existe pas.");</script>';
                 }
             } else {
-                echo '<script> alert "Aucun client trouvé avec le nom spécifié."</script>';
+                echo '<script> alert ("Aucun client trouvé avec le nom spécifié.");</script>';
             }}
     }
  catch(PDOException $e) {

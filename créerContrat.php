@@ -7,9 +7,10 @@ $createSuccessful = false;
 
 if (isset($_POST['action']) && !empty($_POST['nomContrat'])) {
     $nomContrat = $_POST['nomContrat'];
-    $sql = "INSERT INTO contrat (nomContrat) VALUES (?)";
+    $description= $_POST['description'];
+    $sql = "INSERT INTO contrat (nomTypeContrat,description) VALUES (?,?)";
     $res = $conn->prepare($sql);
-    if ($res->execute([$nomContrat])) {
+    if ($res->execute([$nomContrat,$description])) {
         $createSuccessful = true;
     }
 }
@@ -23,6 +24,10 @@ if ($createSuccessful) {
     <p>
         <label for="nom">Nom du contrat :</label>
         <input type="text" name="nomContrat" required>
+    </p>
+    <p>
+        <label for="description">Description : </label>
+        <input type="textarea" name="description" required>
     </p>
     <p>
         <a href="../">Page précédente</a>

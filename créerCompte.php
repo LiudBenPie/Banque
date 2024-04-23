@@ -8,7 +8,7 @@ $createSuccessful = false;
 if (isset($_POST['action']) && !empty($_POST['nomCompte'])) {
     $nomCompte = $_POST['nomCompte'];
     $description = $_POST['description'];
-    $sql = "INSERT INTO typecompte (nomType,description) VALUES (?,?)";
+    $sql = "INSERT INTO compte (nomTypeCompte,description) VALUES (?,?)";
     $res = $conn->prepare($sql);
     if ($res->execute([$nomCompte,$description])) {
         $createSuccessful = true;
@@ -25,8 +25,10 @@ if ($createSuccessful) {
         <label for="nom">Nom du type de compte :</label>
         <input type="text" name="nomCompte" required>
     </p>
+    <p>
         <label for="description">Description : </label>
         <input type="textarea" name="description" required>
+    </p>
     <p>
         <a href="../">Page précédente</a>
         <button type="submit" name="action" value="Créer">Créer</button>
