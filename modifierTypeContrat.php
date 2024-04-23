@@ -23,7 +23,7 @@
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $nomContrat = $_POST['nomTypeContrat'];
 
-            $sql = "UPDATE contrat SET nomTypeContrat = ? WHERE numContrat = ?";
+            $sql = "UPDATE contrat SET nomContrat = ? WHERE numContrat = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$nomContrat, $numContrat]);
 
