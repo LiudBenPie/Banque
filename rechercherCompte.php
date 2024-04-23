@@ -15,7 +15,7 @@ $compteClients = $stmt->fetchAll();
     <select name="idCompteClient" id="compteClient">
         <?php foreach ($compteClients as $compteClient) : ?>
             <option value="<?php echo $compteClient['idCompteClient']; ?>">
-                <?php echo "Client: " . $compteClient['nom'] . ' ' . $compteClient['prenom'] . ", N° Compte: " . $compteClient['idCompte']; ?>
+                <?php echo "Client: " . $compteClient['nom'] . ' ' . $compteClient['prenom'] . ", N° Compte: " . $compteClient['idCompteClient']; ?>
             </option>
         <?php endforeach; ?>
     </select>
