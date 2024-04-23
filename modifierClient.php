@@ -70,6 +70,10 @@ if ($updateSuccessful) {
             <input type="text" id="numTel" name="numTel" value="<?php echo htmlspecialchars($client['numTel'] ?? ''); ?>">
         </p>
         <p>
+            <label for="dateNaissance">Date de naissance :</label>
+            <input type="date" id="dateNaissance" name="dateNaissance" value="<?php echo htmlspecialchars($client['dateNaissance'] ?? ''); ?>">
+        </p>
+        <p>
             <label for="situation">Situation :</label>
             <select id="situations" name="situation">
             <?php
@@ -90,10 +94,6 @@ if ($updateSuccessful) {
             ?>
             </select>
             
-        </p>
-        <p>
-            <label for="dateNaissance">Date de naissance :</label>
-            <input type="date" id="dateNaissance" name="dateNaissance" value="<?php echo htmlspecialchars($client['dateNaissance'] ?? ''); ?>">
         </p>
         <p>
             <button><a href="../" class="link">Page précédente</a></button>
