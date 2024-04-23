@@ -11,7 +11,7 @@ $stmt->execute();
 $compteClients = $stmt->fetchAll();
 ?>
 <form action="realiserOperation.php" method="post">
-    <label for="compteClient">Sélectionnez le compte client à modifier :</label>
+    <label for="compteClient">Sélectionnez le compte client pour l'opération :</label>
     <select name="idCompteClient" id="compteClient">
         <?php foreach ($compteClients as $compteClient) : ?>
             <option value="<?php echo $compteClient['idCompteClient']; ?>">
@@ -19,5 +19,5 @@ $compteClients = $stmt->fetchAll();
             </option>
         <?php endforeach; ?>
     </select>
-    <button type="submit">Modifier</button>
+    <button type="submit">Réaliser l'opération</button>
 </form>
