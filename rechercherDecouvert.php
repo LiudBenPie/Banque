@@ -16,7 +16,7 @@ $comptes = $stmt->fetchAll();
         <select id="idCompte" name="idCompte">
             <?php foreach ($comptes as $compte): ?>
                 <option value="<?php echo $compte['idCompte']; ?>">
-                <?php echo "Compte ".$compte['idCompte']." (Solde: ".$compte['solde'].")"; ?>
+                <?php echo "Compte ".$compte['idCompte']." (Découvert autorisé : ".$compte['montantDecouvert'].")"; ?>
             </option>
             <?php endforeach; ?>
         </select>
