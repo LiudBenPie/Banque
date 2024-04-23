@@ -25,7 +25,7 @@
 
             $sql = "UPDATE contrat SET nomContrat = ? WHERE numContrat = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomContrat, $numContrat]);
+            $stmt->execute([$nomTypeContrat, $numContrat]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
