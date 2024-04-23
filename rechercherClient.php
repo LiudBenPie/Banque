@@ -3,7 +3,7 @@ require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
 // Récupération de la liste des clients
-$sql = "SELECT numClient, nom, prenom, adresse, mail, numtel, situation, dateNaissance FROM client";
+$sql = "SELECT numClient, nom, prenom, adresse, mail, numtel, idSituation, dateNaissance FROM client";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $clients = $stmt->fetchAll();
