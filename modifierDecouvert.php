@@ -20,8 +20,8 @@ if (isset($_POST['numClient'])) {
         $updateSuccessful = true; 
 
     } else {
-        // Requête pour récupérer les identifiants et les solde des comptes associés à ce client
-        $sqlComptes = "SELECT idCompte, solde FROM CompteClient WHERE numClient = ?";
+        // Requête pour récupérer les identifiants et les découverts des comptes associés à ce client
+        $sqlComptes = "SELECT idCompte, montantDecouvert FROM CompteClient WHERE numClient = ?";
         $stmtComptes = $conn->prepare($sqlComptes);
         $stmtComptes->execute([$numClient]);
         $comptes = $stmtComptes->fetchAll(PDO::FETCH_ASSOC);
@@ -35,8 +35,8 @@ if ($updateSuccessful) {
 ?>
 
 <form action="modifierDecouvert.php" method="post" name='monForm'>
-
     <input type="hidden" name="numClient" value="<?php echo isset($_POST['numClient']) ? htmlspecialchars($_POST['numClient']) : ''; ?>">
+    <input type="hidden" name="idCompte" value="<?php echo isset($_POST['idCompte']) ? htmlspecialchars($_POST['idCompte']) : ''; ?>">
 
     <p>
         <label for="nouveauDecouvert">Nouveau montant autorisé de découvert :</label>
@@ -48,4 +48,3 @@ if ($updateSuccessful) {
         <button type="submit" name="action" value="modifier">Modifier le découvert</button>
     </p>
 </form>
-
