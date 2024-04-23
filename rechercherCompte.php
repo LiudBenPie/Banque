@@ -8,7 +8,7 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $comptesClients = $stmt->fetchAll();
 ?>
-<form action="réaliserOpération.php" method="post">
+<form action="realiserOperation.php" method="post">
     <label for="compteClient">Sélectionnez le compte client pour l'opération :</label>
     <select name="idCompteClient" id="compteClient">
         <?php foreach ($comptesClients as $compteClient) : ?>
