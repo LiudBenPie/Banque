@@ -21,14 +21,15 @@
         $numContrat = $_POST['numContrat'];
 
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
-            $nomContrat = $_POST['nomTypeContrat'];
+            $nomTypeContrat = $_POST['nomTypeContrat'];
 
-            $sql = "UPDATE contrat SET nomContrat = ? WHERE numContrat = ?";
+            $sql = "UPDATE contrat SET nomTypeContrat = ? WHERE numContrat = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomContrat, $numContrat]); // Correction ici
+            $stmt->execute([$nomTypeContrat, $numContrat]); 
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
+
 
         } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
             $sql = "DELETE FROM contrat WHERE numContrat = ?";
@@ -68,7 +69,7 @@
         <p>
             <label for="nomTypeContrat">Nom du Contrat:</label>
             <input type="text" id="nomTypeContrat" name="nomTypeContrat"
-                value="<?php echo isset($contrat['nomContrat']) ? htmlspecialchars($contrat['nomContrat']) : ''; ?>"> <!-- Correction ici -->
+                value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>"> <!-- Correction ici -->
         </p>
 
         <p>
