@@ -14,7 +14,7 @@
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
     // Récupération de la liste des contrats
-    $sql = "SELECT numContrat, nomContrat FROM contrat";
+    $sql = "SELECT numContrat, nomTypeContrat FROM contrat";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $contrats = $stmt->fetchAll();
@@ -24,7 +24,7 @@
         <select name="numContrat" id="contrat">
             <?php foreach ($contrats as $contrat): ?>
                 <option value="<?php echo $contrat['numContrat']; ?>">
-                    <?php echo $contrat['nomContrat']; ?>
+                    <?php echo $contrat['nomTypeContrat']; ?>
                 </option>
             <?php endforeach; ?>
         </select>
