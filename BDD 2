@@ -9,10 +9,16 @@ DROP TABLE IF EXISTS CompteClient;
 DROP TABLE IF EXISTS Client;
 DROP TABLE IF EXISTS Compte;
 DROP TABLE IF EXISTS TypeCompte;
+DROP TABLE IF EXISTS Situation;
 
 -- Création des tables
+CREATE TABLE Situation (
+    idSituation INT PRIMARY KEY AUTO_INCREMENT,
+    description VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE Compte (
-    idType INT PRIMARY KEY AUTO_INCREMENT,
+    idCompte INT PRIMARY KEY AUTO_INCREMENT,
     nomTypeCompte VARCHAR(255),
     description VARCHAR(255)
 );
@@ -24,8 +30,9 @@ CREATE TABLE Client (
     adresse VARCHAR(255),
     mail VARCHAR(255),
     numTel VARCHAR(255),
-    situation VARCHAR(255),
-    dateNaissance DATE
+    dateNaissance DATE,
+    idSituation INT,
+    FOREIGN KEY (idSituation) REFERENCES Situation(idSituation)
 );
 
 CREATE TABLE CompteClient (
@@ -34,9 +41,9 @@ CREATE TABLE CompteClient (
     solde DECIMAL(10, 2),
     montantDecouvert DECIMAL(10, 2),
     numClient INT,
-    idType INT,
+    idCompte INT,
     FOREIGN KEY (numClient) REFERENCES Client(numClient),
-    FOREIGN KEY (idType) REFERENCES Compte(idType)
+    FOREIGN KEY (idCompte) REFERENCES Compte(idCompte)
 );
 
 CREATE TABLE Operation (
@@ -88,15 +95,27 @@ CREATE TABLE rdv (
 );
 
 -- Insertion des données
+INSERT INTO Situation (description) VALUES
+('Marié(e)'),
+('Célibataire'),
+('Veuf/Veuve'),
+('Divorcé(e)'),
+('En couple'),
+('En concubinage'),
+('Séparé(e)'),
+('Fiancé(e)'),
+('Pacsé(e)'),
+('En relation à distance');
+
 INSERT INTO Compte (nomTypeCompte, description) VALUES
 ('Compte Courant', 'Pour les opérations quotidiennes'),
 ('Livret A', 'Épargne réglementée avec un taux d’intérêt exonéré d’impôts'),
 ('PEL', 'Plan Épargne Logement pour un projet immobilier');
 
-INSERT IGNORE INTO Client (numClient, nom, prenom, adresse, mail, numTel, situation, dateNaissance) VALUES
-(201, 'Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 'Célibataire', '1985-04-12'),
-(202, 'Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', 'Marié', '1978-08-23'),
-(203, 'Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', 'Divorcé', '1990-11-30');
+INSERT IGNORE INTO Client (numClient, nom, prenom, adresse, mail, numTel, idSituation, dateNaissance) VALUES
+(201, 'Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 1, '1985-04-12'),
+(202, 'Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', 2, '1978-08-23'),
+(203, 'Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', 3, '1990-11-30');
 
 INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idCompteClient) VALUES
 ('2024-01-01', 1500.00, 200.00, 201, 101),
