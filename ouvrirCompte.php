@@ -10,6 +10,8 @@ try {
     <form action="ouvrirCompte.php" method="post">
     <label for="date">Date d\'ouverture :</label>
     <input type="date" id="date" name="date" required><br><br>
+    <label for="solde">Solde :</label>
+    <input type="solde" id="solde" name="solde" required><br><br>
     <label for="decou">Montant du découvert :</label>
     <input type="number" id="decou" name="decou" min="0" step="100" required><br><br>
     <label for="nomcli">Nom du client :</label>
@@ -21,6 +23,7 @@ try {
     if (isset($_POST['ventecom'], $_POST['date'], $_POST['decou'], $_POST['nomcli'], $_POST['nomcom'])) {
         // Récupération des données du formulaire
         $datcon = $_POST['date'];
+        $solde=$_POST['solde'];
         $deccon = $_POST['decou'];
         $nomcli = $_POST['nomcli'];
         $nomcom = $_POST['nomcom'];
@@ -34,9 +37,8 @@ try {
             $row = $result->fetch(PDO::FETCH_ASSOC);
             $rowcli = $row['numClient'];
             
-
             // Recherche du numéro du type de compte à partir du nom saisi
-            $sql = "SELECT idCompte FROM typecompte WHERE nomType LIKE '%$nomcom%'";
+            $sql = "SELECT idCompte FROM Compte WHERE nomTypeCompte LIKE '%$nomcom%'";
             $result2 = $conn->query($sql);
 
             if ($result2->rowCount() > 0) {
@@ -44,15 +46,13 @@ try {
             $row = $result2->fetch(PDO::FETCH_ASSOC);
             $rowcom = $row['idCompte'];
 
-            
             // Vérification de l'existence du compte
-            $sql_compte = "SELECT idCompte FROM compte WHERE nomTypeCompte LIKE '%$nomcom%'";
+            $sql_compte = "SELECT nomTypeCompte FROM Compte WHERE nomTypeCompte = '$nomcom'";
             $result_compte = $conn->query($sql_compte);
 
             if ($result_contrat->rowCount() > 0) {
                 // Insertion des données dans la base de données
-                $req2 = "INSERT INTO compteclient (dateOuverture, montantDecouvert, numClient, idCompte) VALUES ('$datcon', '$deccon', '$rowcli', '$rowcom')";
-                echo $req2;
+                $req2 = "INSERT INTO CompteClient (dateOuverture,solde, montantDecouvert, numClient, idCompte) VALUES ('$datcon','$solde', '$deccon', '$rowcli', '$rowcom')";
                 $res2 = $conn->query($req2);
                 
                 if ($res2){
