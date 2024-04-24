@@ -14,6 +14,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/créerEmploye.php">Créer les login et mot de passe des employés</a></li>
                         <li><a class="dropdown-item" href="/rechercherEmploye.php">Gérer les informations des employés</a></li>
+                        </ul>
                 </li>
                 <!--Gérer les contrats-->
                 <li class="nav-item dropdown">
