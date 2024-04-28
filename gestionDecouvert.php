@@ -55,7 +55,7 @@ try {
 </head>
 <body>
 
-<form action="modifierDecouvert.php" method="post">
+<form action="gestionDecouvert.php" method="post">
     <p>
         <!-- Sélection du compte à modifier -->
         <label for="idCompteClient">Sélectionnez un compte :</label>
