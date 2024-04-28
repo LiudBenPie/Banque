@@ -6,7 +6,7 @@ include VIEWS_DIR . '/menu.php'; // Inclut le fichier de menu
 
 try {
     // Récupération de la liste des découverts des comptes clients
-    $sql = "SELECT idCompte, montantDecouvert FROM CompteClient";
+    $sql = "SELECT idCompteClient, montantDecouvert FROM CompteClient";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $comptes = $stmt->fetchAll();
@@ -29,11 +29,11 @@ try {
 <form action="modifierDecouvert.php" method="post">
     <p>
         <!-- Sélection du compte à modifier -->
-        <label for="idCompte">Sélectionnez un compte :</label>
+        <label for="idCompteClient">Sélectionnez un compte :</label>
         <select id="idCompte" name="idCompte">
             <?php foreach ($comptes as $compte): ?>
-                <option value="<?php echo $compte['idCompte']; ?>">
-                    <?php echo "Compte " . $compte['idCompte'] . " (Découvert autorisé : " . $compte['montantDecouvert'] . ")"; ?>
+                <option value="<?php echo $compte['idCompteClient']; ?>">
+                    <?php echo "Compte " . $compte['idCompteClient'] . " (Découvert autorisé : " . $compte['montantDecouvert'] . ")"; ?>
                 </option>
             <?php endforeach; ?>
         </select>
