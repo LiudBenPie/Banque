@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCompteClient'])) {
             $stmtDelete->execute([$idCompteClient]);
 
             // Redirection vers une page de confirmation ou de gestion des comptes
-            header("Location: gestionComptes.php");
+            header("Location: supprimerCompteClient.php");
             exit;
         } catch (PDOException $e) {
             // En cas d'erreur SQL, afficher le message d'erreur
