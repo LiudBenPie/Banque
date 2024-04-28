@@ -1,32 +1,50 @@
 <?php
 require('init.php');
 checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 
-// Initialisation des variables pour le retour JSON
-$response = array('success' => false, 'message' => '');
+$deleteSuccessful = false;
 
-// Vérification de la méthode de requête et de la présence du paramètre
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numContrat'])) {
-    $idContratClient = $_POST['numContrat'];
+if (isset($_POST['numContrat']) && isset($_POST['action']) && $_POST['action'] === 'supprimer') {
+    $numContrat = $_POST['numContrat'];
 
-    try {
-        // Suppression du contrat client spécifié
-        $sqlDeleteContrat = "DELETE FROM ContratClient WHERE idContratClient = ?";
-        $stmtDeleteContrat = $conn->prepare($sqlDeleteContrat);
-        $stmtDeleteContrat->execute([$idContratClient]);
+    $sql = "DELETE FROM ContratClient WHERE idContratClient = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$numContrat]);
 
-        // Mise à jour de la réponse JSON
-        $response['success'] = true;
-        $response['message'] = "Le contrat client a été supprimé avec succès.";
-    } catch (PDOException $e) {
-        // En cas d'erreur SQL, afficher le message d'erreur
-        $response['message'] = "Erreur SQL lors de la suppression du contrat : " . $e->getMessage();
-    }
-} else {
-    // Si la méthode de requête est invalide ou le paramètre manquant
-    $response['message'] = "Paramètre invalide pour la suppression du contrat.";
+    $_SESSION['deleteSuccess'] = true;
+    $deleteSuccessful = true; 
+} elseif (isset($_POST['numContrat'])) {
+    $numContrat = $_POST['numContrat'];
+
+    $sql = "SELECT cc.idContratClient, c.nomTypeContrat, cl.nom, cl.prenom
+            FROM ContratClient cc
+            INNER JOIN Contrat c ON cc.numContrat = c.numContrat
+            INNER JOIN Client cl ON cc.numClient = cl.numClient
+            WHERE cc.idContratClient = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$numContrat]);
+    $contrat = $stmt->fetch();
 }
 
-// Conversion de la réponse en format JSON
-echo json_encode($response);
+// Affiche une alerte si la suppression a été réussie
+if ($deleteSuccessful) {
+    echo '<script>alert("Le contrat a été supprimé avec succès.");</script>';
+}
 ?>
+
+<!-- Formulaire pour la suppression du contrat -->
+<form action="supprimerContrat.php" method="post">
+
+    <!-- Champs du formulaire avec les informations du contrat à supprimer -->
+    <p>
+        <label for="numContrat">Êtes-vous sûr de vouloir supprimer le contrat :</label>
+        <input type="hidden" name="numContrat" value="<?php echo isset($contrat['idContratClient']) ? htmlspecialchars($contrat['idContratClient']) : ''; ?>">
+        <?php echo isset($contrat['idContratClient']) ? "Contrat n°" . htmlspecialchars($contrat['idContratClient']) . " - " . htmlspecialchars($contrat['nomTypeContrat']) . " pour " . htmlspecialchars($contrat['nom']) . ' ' . htmlspecialchars($contrat['prenom']) : ''; ?>
+    </p>
+
+    <p>
+        <a href="../">Page précédente</a>
+        <button type="submit" name="action" value="supprimer">Supprimer</button>
+    </p>
+</form>
