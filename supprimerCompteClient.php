@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCompteClient'])) {
             echo "Erreur SQL lors de la suppression du compte client : " . $e->getMessage();
         }
     } else {
-        echo "Impossible de supprimer le compte car le solde n'est pas nul.";
+        echo '<script>alert("Impossible de supprimer le compte car le solde n\'est pas nul.");</script>';
     }
 }
 ?>
