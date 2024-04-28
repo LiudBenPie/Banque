@@ -5,28 +5,24 @@ include VIEWS_DIR . '/menu.php';
 
 $updateSuccessful = false;
 
-if (isset($_POST['numClient'])) {
-    $numClient = $_POST['numClient'];
-
     if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
         // Traitement de la modification du découvert du compte sélectionné
-        $idCompte = $_POST['idCompte'];
+        $idCompteClient = $_POST['idCompteClient'];
         $nouveauDecouvert = $_POST['nouveauDecouvert'];
-        $sql = "UPDATE CompteClient SET montantDecouvert = ? WHERE numClient = ? AND idCompte = ?";
+        $sql = "UPDATE CompteClient SET montantDecouvert = ? WHERE idCompteClient = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$nouveauDecouvert, $numClient, $idCompte]);
+        $stmt->execute([$nouveauDecouvert, $idCompteClient]);
 
         $_SESSION['updateSuccess'] = true;
         $updateSuccessful = true; 
 
     } else {
         // Requête pour récupérer les identifiants et les découverts des comptes associés à ce client
-        $sqlComptes = "SELECT idCompte, montantDecouvert FROM CompteClient WHERE numClient = ?";
+        $sqlComptes = "SELECT idCompte, montantDecouvert FROM CompteClient WHERE idCompteClient = ?";
         $stmtComptes = $conn->prepare($sqlComptes);
-        $stmtComptes->execute([$numClient]);
+        $stmtComptes->execute([$idCompteClient]);
         $comptes = $stmtComptes->fetchAll(PDO::FETCH_ASSOC);
     }
-}
 
 // Affiche une alerte si la mise à jour a été réussie
 if ($updateSuccessful) {
@@ -35,8 +31,7 @@ if ($updateSuccessful) {
 ?>
 
 <form action="modifierDecouvert.php" method="post" name='monForm'>
-    <input type="hidden" name="numClient" value="<?php echo isset($_POST['numClient']) ? htmlspecialchars($_POST['numClient']) : ''; ?>">
-    <input type="hidden" name="idCompte" value="<?php echo isset($_POST['idCompte']) ? htmlspecialchars($_POST['idCompte']) : ''; ?>">
+    <input type="hidden" name="idCompteClient" value="<?php echo isset($_POST['idCompteClient']) ? htmlspecialchars($_POST['idCompteClient']) : ''; ?>">
 
     <p>
         <label for="nouveauDecouvert">Nouveau montant autorisé de découvert :</label>
