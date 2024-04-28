@@ -24,10 +24,6 @@ checkAcl('guest');
                     <label for="motDePasse" class="form-label">Mot de passe</label>
                     <input class="form-control" type="password" name="motDePasse" id="motDePasse" required>
                 </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
-                </div>
                 <button type="submit" class="btn btn-primary" style="background-color: #003580;">Connexion</button>
         </form>
     </div>

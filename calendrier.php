@@ -39,8 +39,8 @@ include VIEWS_DIR . '/menu.php';
 					</option>
 				<?php endforeach; ?>
 			</select>
-			<label for="mois">Sélectionnez le mois :</label>
 
+			<label for="mois">Sélectionnez le mois :</label>
 			<select name="mois" id="mois">
 				<?php for ($m = 1; $m <= 12; $m++) : ?>
 					<option value="<?= $m; ?>" <?= (int)$m === (int)$selectedMois ? 'selected' : ''; ?>>
