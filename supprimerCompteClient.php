@@ -34,15 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCompteClient'])) {
             $stmtDelete = $conn->prepare($sqlDelete);
             $stmtDelete->execute([$idCompteClient]);
 
-            // Redirection vers une page de confirmation ou de gestion des comptes
-            header("Location: supprimerCompteClient.php");
+            // Message de succès de la suppression
+            echo '<script>alert("Le compte client a été supprimé avec succès.");</script>';
             exit;
         } catch (PDOException $e) {
             // En cas d'erreur SQL, afficher le message d'erreur
             echo "Erreur SQL lors de la suppression du compte client : " . $e->getMessage();
         }
     } else {
-        echo "Impossible de supprimer le compte car le solde n'est pas nul.";
+        echo '<script>alert("Impossible de supprimer le compte car le solde n\'est pas nul.");</script>';
     }
 }
 ?>
