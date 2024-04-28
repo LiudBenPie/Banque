@@ -27,7 +27,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/vendreContrat.php">Vendre un contrat à un client</a></li>
-                        <li><a class="dropdown-item" href="">Résilier un contrat</a></li>
+                        <li><a class="dropdown-item" href="/rechercherContrat.php">Résilier un contrat</a></li>
                     </ul>
                 </li>
                 <!-- Gestion des comptes -->
@@ -37,12 +37,12 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/ouvrirCompte.php">Ouvrir un ou plusieurs comptes pour un client</a></li>
-                        <li><a class="dropdown-item" href="">Résilier un compte</a></li>
-                        <li><a class="dropdown-item" href="/rechercherDecouvert.php">Modifier la valeur d'un découvert</a></li>
+                        <li><a class="dropdown-item" href="/supprimerCompteClient.php">Résilier un compte</a></li>
+                        <li><a class="dropdown-item" href="/gestionDecouvert.php">Modifier la valeur d'un découvert</a></li>
                     </ul>
                 </li>
             </ul>
-            <a class="btn btn-outline-success" href="/logout.php">Deconnexion</a>
+            <a class="btn btn-primary" style="background-color: #003580;" href="/logout.php">Deconnexion</a>
         </div>
     </div>
 </nav>

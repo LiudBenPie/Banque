@@ -21,14 +21,15 @@
         $numContrat = $_POST['numContrat'];
 
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
-            $nomContrat = $_POST['nomContrat'];
+            $nomTypeContrat = $_POST['nomTypeContrat'];
 
-            $sql = "UPDATE contrat SET nomContrat = ? WHERE numContrat = ?";
+            $sql = "UPDATE contrat SET nomTypeContrat = ? WHERE numContrat = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomContrat, $numContrat]);
+            $stmt->execute([$nomTypeContrat, $numContrat]); 
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
+
 
         } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
             $sql = "DELETE FROM contrat WHERE numContrat = ?";
@@ -52,7 +53,7 @@
 
     // Affiche une alerte si la suppression a été réussie
     if ($deleteSuccessful) {
-        echo '<script>alert("Le contrat a été supprimé avec succès.");</script>';
+        echo '<script>alert("Le type de contrat a été supprimé avec succès.");</script>';
     }
     ?>
     <!-- Formulaire pour la mise à jour et la suppression des informations du contrat -->
@@ -60,22 +61,21 @@
 
         <!-- Champs du formulaire avec les informations à jour du contrat -->
         <p>
-            <label for="num">ID Contrat :</label>
             <input type="hidden" name="numContrat"
                 value="<?php echo isset($contrat['numContrat']) ? htmlspecialchars($contrat['numContrat']) : ''; ?>">
         </p>
 
         <p>
-            <label for="nomContrat">Nom du Contrat:</label>
-            <input type="text" id="nomContrat" name="nomContrat"
-                value="<?php echo isset($contrat['nomContrat']) ? htmlspecialchars($contrat['nomContrat']) : ''; ?>">
+            <label for="nomTypeContrat">Nom du Contrat:</label>
+            <input type="text" id="nomTypeContrat" name="nomTypeContrat"
+                value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>"> <!-- Correction ici -->
         </p>
 
         <p>
             <a href="../">Page précédente</a>
             <button type="submit" name="action" value="modifier">Mettre à jour</button>
             <button type="submit" name="action" value="supprimer"
-                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contrat ?')">Supprimer</button>
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de contrat ?')">Supprimer</button>
         </p>
     </form>
 </body>

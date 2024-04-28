@@ -23,14 +23,14 @@
     </li>
     <!-- Gestion des dépôts et des retraits -->
     <li class="nav-item">
-        <a class="nav-link" href="">Réaliser un dépôt ou un retrait</a>
+        <a class="nav-link" href="/rechercherCompte.php">Réaliser un dépôt ou un retrait</a>
     </li>
     <!-- Gestion des rdv -->
     <li class="nav-item">
         <a class="nav-link" href="/pages/newrdv.php">Prendre un rendez-vous pour un client</a>
     </li>
     </ul>
-    <a class="btn btn-outline-success" href="/logout.php">Deconnexion</a>
+    <a class="btn btn-primary" style="background-color: #003580;" href="/logout.php">Deconnexion</a>
 </div>
 </div>
 </nav>

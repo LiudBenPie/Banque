@@ -1,72 +1,81 @@
-<?php
-require('init.php');
-checkAcl('auth');
-include VIEWS_DIR . '/menu.php';
+<!DOCTYPE html>
+<html lang="fr">
 
-$updateSuccessful = false;
-$deleteSuccessful = false;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier Type Compte</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-if (isset($_POST['idType'])) {
-    $idType = $_POST['idType'];
+<body>
+    <?php
+    require ('init.php');
+    checkAcl('auth');
+    include VIEWS_DIR . '/menu.php';
 
-    if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
-        $nomType = $_POST['nomType'];
-        $description = $_POST['description'];
+    $updateSuccessful = false;
+    $deleteSuccessful = false;
 
-        $sql = "UPDATE TypeCompte SET nomType = ?, description = ? WHERE idType = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$nomType, $description, $idType]);
+    if (isset($_POST['idCompte'])) {
+        $idCompte = $_POST['idCompte'];
 
-        $_SESSION['updateSuccess'] = true;
-        $updateSuccessful = true; 
+        if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
+            $nomTypeCompte = $_POST['nomTypeCompte'];
 
-    } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
-        $sql = "DELETE FROM TypeCompte WHERE idType = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$idType]);
+            $sql = "UPDATE Compte SET nomTypeCompte = ? WHERE idCompte = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$nomTypeCompte, $idCompte]); 
 
-        $_SESSION['deleteSuccess'] = true;
-        $deleteSuccessful = true;
-    } else {
-        $sql = "SELECT * FROM TypeCompte WHERE idType = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$idType]);
-        $typeCompte = $stmt->fetch();
+            $_SESSION['updateSuccess'] = true;
+            $updateSuccessful = true;
+
+
+        } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
+            $sql = "DELETE FROM Compte WHERE idCompte = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$idCompte]);
+
+            $_SESSION['deleteSuccess'] = true;
+            $deleteSuccessful = true;
+        } else {
+            $sql = "SELECT * FROM Compte WHERE idCompte = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$idCompte]);
+            $compte = $stmt->fetch();
+        }
     }
-}
 
-// Affiche une alerte si la mise à jour a été réussie
-if ($updateSuccessful) {
-    echo '<script>alert("Les informations du type de compte ont été mises à jour avec succès.");</script>';
-}
+    // Affiche une alerte si la mise à jour a été réussie
+    if ($updateSuccessful) {
+        echo '<script>alert("Les informations du compte ont été mises à jour avec succès.");</script>';
+    }
 
-// Affiche une alerte si la suppression a été réussie
-if ($deleteSuccessful) {
-    echo '<script>alert("Le type de compte a été supprimé avec succès.");</script>';
-}
-?>
-<!-- Formulaire pour la mise à jour et la suppression des informations du type de compte -->
-<form action="modifierTypeCompte.php" method="post" name='monForm'>
+    // Affiche une alerte si la suppression a été réussie
+    if ($deleteSuccessful) {
+        echo '<script>alert("Le type de compte a été supprimé avec succès.");</script>';
+    }
+    ?>
+    <!-- Formulaire pour la mise à jour et la suppression des informations du compte -->
+    <form action="modifierTypeCompte.php" method="post" name='monForm'>
 
-    <!-- Champs du formulaire avec les informations à jour du type de compte -->
-    <p>
-        <label for="idType">ID Type de Compte :</label>
-        <input type="hidden" name="idType" value="<?php echo isset($typeCompte['idType']) ? htmlspecialchars($typeCompte['idType']) : ''; ?>">
-    </p>
+        <!-- Champs du formulaire avec les informations à jour du compte -->
+        <p>
+            <input type="hidden" name="idCompte"
+                value="<?php echo isset($compte['idCompte']) ? htmlspecialchars($compte['idCompte']) : ''; ?>">
+        </p>
 
-    <p>
-        <label for="nomType">Nom du Type de Compte :</label>
-        <input type="text" id="nomType" name="nomType" value="<?php echo isset($typeCompte['nomType']) ? htmlspecialchars($typeCompte['nomType']) : ''; ?>">
-    </p>
+        <p>
+            <label for="nomTypeCompte">Nom du Compte:</label>
+            <input type="text" id="nomTypeCompte" name="nomTypeCompte"
+                value="<?php echo isset($compte['nomTypeCompte']) ? htmlspecialchars($compte['nomTypeCompte']) : ''; ?>">
+        </p>
 
-    <p>
-        <label for="description">Description :</label>
-        <textarea id="description" name="description"><?php echo isset($typeCompte['description']) ? htmlspecialchars($typeCompte['description']) : ''; ?></textarea>
-    </p>
-    
-    <p>
-        <a href="../">Page précédente</a>
-        <button type="submit" name="action" value="modifier">Mettre à jour</button>
-        <button type="submit" name="action" value="supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de compte ?')">Supprimer</button>
-    </p>
-</form>
+        <p>
+            <a href="../">Page précédente</a>
+            <button type="submit" name="action" value="modifier">Mettre à jour</button>
+            <button type="submit" name="action" value="supprimer"
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de compte ?')">Supprimer</button>
+        </p>
+    </form>
+</body>

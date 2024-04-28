@@ -20,11 +20,11 @@ include VIEWS_DIR . '/menu.php';
                 <legend>Créer un Nouveau RDV</legend>
                 <p>
                     <label for="dateRdv">Date du RDV:</label>
-                    <input type="datetime-local" id="dateRdv" name="dateRdv" required>
+                    <input type="date" id="dateRdv" name="dateRdv" required>
                 </p>
                 <p>
-                    <label for="timeRdv">Durée de RDV (en minutes):</label>
-                    <input type="number" id="timeRdv" name="timeRdv" min="0" max="120" required>
+                    <label for="heureRdv">Heure de RDV :</label>
+                    <input type="number" id="heureRdv" name="heureRdv" min="7" max="19" required>
                 </p>
                 <p>
                     <label for="numEmploye">Numero du Conseiller :</label>

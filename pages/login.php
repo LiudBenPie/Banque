@@ -13,23 +13,24 @@ checkAcl('guest');
 </head>
 
 <body>
-    <div class="row">
-
-        <form action="/authentification.php" method="post" class="mx-auto col-3">
-            <h2>Connexion</h2>
-            <p>
-                <label class="form-label" for="">Identifiant :</label>
-                <input class="form-control" type="text" name="login" required>
-            </p>
-            <p>
-                <label class="form-label" for="">Mot de passe :</label>
-                <input class="form-control" type="password" name="motDePasse" required>
-            </p>
-            <p>
-                <input class="form-control" type="submit" value="Connexion">
-            </p>
+  <div class="container">
+        <form action="/authentification.php" method="post" >
+        <h2>Connexion</h2>
+                <div class="mb-3">
+                    <label class="form-label" for="login">Identifiant :</label>
+                    <input class="form-control" type="text" name="login" id="login" required>
+                </div>
+                <div class="mb-3">
+                    <label for="motDePasse" class="form-label">Mot de passe</label>
+                    <input class="form-control" type="password" name="motDePasse" id="motDePasse" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="background-color: #003580;">Connexion</button>
         </form>
     </div>
+
+    
+
+
 </body>
 
 </html>

@@ -7,7 +7,7 @@ checkAcl('auth');
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>dashbord</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="style_directeur.css">
 </head>
 <body>

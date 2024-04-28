@@ -13,13 +13,13 @@ if (isset($_POST['action']) && $_POST['action'] === 'modifier' && isset($_POST['
     $adresse = $_POST['adresse'];
     $mail = $_POST['mail'];
     $numTel = $_POST['numTel'];
-    $situation = $_POST['situation'];
+    $idSituation = $_POST['idSituation'];
     $dateNaissance = $_POST['dateNaissance'];
 
     // Prépare et exécute la requête SQL pour mettre à jour les informations du client
-    $sql = "UPDATE Client SET nom = ?, prenom = ?, adresse = ?, mail = ?, numTel = ?, situation = ?, dateNaissance = ? WHERE numClient = ?";
+    $sql = "UPDATE Client SET nom = ?, prenom = ?, adresse = ?, mail = ?, numTel = ?, idSituation = ?, dateNaissance = ? WHERE numClient = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->execute([$nom, $prenom, $adresse, $mail, $numTel, $situation, $dateNaissance, $numClient]);
+    $stmt->execute([$nom, $prenom, $adresse, $mail, $numTel, $idSituation, $dateNaissance, $numClient]);
 
     // Marque que la mise à jour a été réussie
     $updateSuccessful = true;
@@ -75,23 +75,19 @@ if ($updateSuccessful) {
         </p>
         <p>
             <label for="situation">Situation :</label>
-            <select id="situations" name="situation">
+            <select id="situation" name="idSituation">
             <?php
-                $sql = "SELECT numClient, situation FROM Client";
+                $sql = "SELECT idSituation, description FROM Situation ORDER BY description";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
-                $clients=$stmt->fetchAll();
-                foreach ($clients as $client) {
-                    $selected = '';
-                    if ($client['numClient']== $numClient) {
-                        $selected = 'selected';
-                    }
-    
-                    echo '<option ' . $selected .' value="' . $client['situation'] . '">' . $client['situation'].' </option>';
-                }               
-                         
+                $situations = $stmt->fetchAll();
+
+                foreach ($situations as $situation) {
+                    $selected = ($client['idSituation'] == $situation['idSituation']) ? 'selected' : '';
+                    echo "<option value=\"{$situation['idSituation']}\" {$selected}>{$situation['description']}</option>";
+                }                               
             ?>
-            </select>       
+            </select>
         </p>
         <p>
             <button><a href="../" class="link">Page précédente</a></button>
