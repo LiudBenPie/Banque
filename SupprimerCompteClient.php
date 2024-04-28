@@ -24,6 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCompteClient'])) {
     // Vérification du solde du compte avant suppression
     if ($solde == 0) {
         try {
+            // Suppression des opérations associées à ce compte client
+            $sqlDeleteOperations = "DELETE FROM Operation WHERE idCompteClient = ?";
+            $stmtDeleteOperations = $conn->prepare($sqlDeleteOperations);
+            $stmtDeleteOperations->execute([$idCompteClient]);
+
             // Requête pour supprimer le compte client spécifié
             $sqlDelete = "DELETE FROM CompteClient WHERE idCompteClient = ?";
             $stmtDelete = $conn->prepare($sqlDelete);
@@ -64,3 +69,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCompteClient'])) {
 
 </body>
 </html>
+
