@@ -1,5 +1,5 @@
 <?php
-require('init.php'); // Assurez-vous que ce fichier initialise la connexion à la base de données ($conn)
+require('init.php'); 
 checkAcl('auth'); // Vérifie les autorisations de l'utilisateur
 
 include VIEWS_DIR . '/menu.php'; // Inclut le fichier de menu
@@ -25,9 +25,9 @@ $comptes = $stmt->fetchAll();
         <!-- Sélection du compte à modifier -->
         <label for="idCompte">Sélectionnez un compte :</label>
         <select id="idCompte" name="idCompte">
-            <?php foreach ($comptes): ?>
-                <option value="<?php echo htmlspecialchars($comptes['idCompte']); ?>">
-                    <?php echo "Compte ".htmlspecialchars($comptes['idCompte'])." (Découvert autorisé : ".htmlspecialchars($comptes['montantDecouvert']).")"; ?>
+            <?php foreach ($comptes as $compte): ?>
+                <option value="<?php echo htmlspecialchars($compte['idCompte']); ?>">
+                    <?php echo "Compte ".htmlspecialchars($compte['idCompte'])." (Découvert autorisé : ".htmlspecialchars($compte['montantDecouvert']).")"; ?>
                 </option>
             <?php endforeach; ?>
         </select>
@@ -37,3 +37,4 @@ $comptes = $stmt->fetchAll();
 
 </body>
 </html>
+
