@@ -37,7 +37,7 @@ if ($updateSuccessful) {
 <body>
 
 <form action="modifierDecouvert.php" method="post">
-    <input type="hidden" name="idCompteClient" value="<?php echo isset($_POST['idCompteClient']) ? $_POST['idCompteClient'] : ''; ?>">
+    <input name="idCompteClient" value="<?php ($_POST['idCompteClient'])?>">
 
     <p>
         <label for="nouveauDecouvert">Nouveau montant autorisé de découvert :</label>
