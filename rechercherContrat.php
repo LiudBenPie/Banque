@@ -15,7 +15,7 @@
     include VIEWS_DIR . '/menu.php';
 
     // Récupération de la liste des contrats clients avec des informations détaillées
-    $sql = "SELECT cc.idContratClient, c.nomTypeContrat, c.description, cc.tarifMensuel, cl.nom, cl.prenom
+    $sql = "SELECT cc.idContratClient, c.nomTypeContrat, cl.nom, cl.prenom
             FROM ContratClient cc
             INNER JOIN Contrat c ON cc.numContrat = c.numContrat
             INNER JOIN Client cl ON cc.numClient = cl.numClient";
@@ -29,7 +29,7 @@
         <select name="numContrat" id="contrat">
             <?php foreach ($contrats as $contrat) : ?>
                 <option value="<?php echo $contrat['idContratClient']; ?>">
-                    <?php echo "Contrat n°" . $contrat['idContratClient'] . " - " . $contrat['nomTypeContrat'] . " (" . $contrat['description'] . ") - Client: " . $contrat['nom'] . ' ' . $contrat['prenom'] . " - Tarif mensuel: " . $contrat['tarifMensuel'] . " €"; ?>
+                    <?php echo "Contrat n°" . $contrat['idContratClient'] . " - " . $contrat['nomTypeContrat'] . " Client: " . $contrat['nom'] . ' ' . $contrat['prenom']; ?>
                 </option>
             <?php endforeach; ?>
         </select>
