@@ -26,7 +26,7 @@ checkAcl('guest');
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
                 </div>
                 <button type="submit" class="btn btn-primary" style="background-color: #483D8B;">Connexion</button>
         </form>

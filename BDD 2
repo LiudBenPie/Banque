@@ -86,8 +86,8 @@ CREATE TABLE Motif (
 
 CREATE TABLE rdv (
     numRdv INT PRIMARY KEY AUTO_INCREMENT,
-    dateRdv DATETIME NOT NULL,
-    timeRdv INT,
+    dateRdv DATE NOT NULL,
+    heureRdv INT,
     numEmploye INT,
     idMotif INT,
     FOREIGN KEY (numEmploye) REFERENCES Employe(numEmploye),
@@ -147,3 +147,8 @@ INSERT INTO Motif (libelleMotif, listePieces) VALUES
 ('compte type C', 'Pièce d’identité, Justificatif de domicile'),
 ('Demande de prêt', 'Avis d’imposition, Bulletins de salaire'),
 ('Clôture de compte', 'RIB, Lettre de clôture');
+
+INSERT INTO rdv (dateRdv, heureRdv, numEmploye, idMotif) VALUES
+('2024-07-10', 11, 1, 1),
+('2024-08-15', 12, 1, 2),
+('2024-09-20', 15, 4, 1);

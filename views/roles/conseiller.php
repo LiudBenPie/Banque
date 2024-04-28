@@ -42,7 +42,7 @@
                     </ul>
                 </li>
             </ul>
-            <a class="btn btn-outline-success" href="/logout.php">Deconnexion</a>
+            <a class="btn btn-primary" style="background-color: #483D8B;" href="/logout.php">Deconnexion</a>
         </div>
     </div>
 </nav>
