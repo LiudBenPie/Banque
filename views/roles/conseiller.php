@@ -37,7 +37,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/ouvrirCompte.php">Ouvrir un ou plusieurs comptes pour un client</a></li>
-                        <li><a class="dropdown-item" href="">Résilier un compte</a></li>
+                        <li><a class="dropdown-item" href="/supprimerCompteClient.php">Résilier un compte</a></li>
                         <li><a class="dropdown-item" href="/gestionDecouvert.php">Modifier la valeur d'un découvert</a></li>
                     </ul>
                 </li>
