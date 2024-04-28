@@ -25,9 +25,9 @@ $comptes = $stmt->fetchAll();
         <!-- Sélection du compte à modifier -->
         <label for="idCompte">Sélectionnez un compte :</label>
         <select id="idCompte" name="idCompte">
-            <?php foreach ($comptes as $compte): ?>
-                <option value="<?php echo htmlspecialchars($compte['idCompte']); ?>">
-                    <?php echo "Compte ".$compte['idCompte']." (Découvert autorisé : ".htmlspecialchars($compte['montantDecouvert']).")"; ?>
+            <?php foreach ($comptes): ?>
+                <option value="<?php echo htmlspecialchars($comptes['idCompte']); ?>">
+                    <?php echo "Compte ".htmlspecialchars($comptes['idCompte'])." (Découvert autorisé : ".htmlspecialchars($comptes['montantDecouvert']).")"; ?>
                 </option>
             <?php endforeach; ?>
         </select>
