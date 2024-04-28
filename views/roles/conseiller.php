@@ -27,7 +27,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/vendreContrat.php">Vendre un contrat à un client</a></li>
-                        <li><a class="dropdown-item" href="">Résilier un contrat</a></li>
+                        <li><a class="dropdown-item" href="/rechercherContrat.php">Résilier un contrat</a></li>
                     </ul>
                 </li>
                 <!-- Gestion des comptes -->
