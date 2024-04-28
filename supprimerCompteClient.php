@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCompteClient'])) {
             $stmtDelete = $conn->prepare($sqlDelete);
             $stmtDelete->execute([$idCompteClient]);
 
-            // Redirection vers une page de confirmation ou de gestion des comptes
-            header("Location: supprimerCompteClient.php");
+            // Message de succès de la suppression
+            echo '<script>alert("Le compte client a été supprimé avec succès.");</script>'
             exit;
         } catch (PDOException $e) {
             // En cas d'erreur SQL, afficher le message d'erreur
