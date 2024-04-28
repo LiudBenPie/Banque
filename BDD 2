@@ -90,8 +90,10 @@ CREATE TABLE rdv (
     heureRdv INT,
     numEmploye INT,
     idMotif INT,
+    numClient INT,
     FOREIGN KEY (numEmploye) REFERENCES Employe(numEmploye),
-    FOREIGN KEY (idMotif) REFERENCES Motif(idMotif)
+    FOREIGN KEY (idMotif) REFERENCES Motif(idMotif),
+    FOREIGN KEY (numClient) REFERENCES Client(numClient)
 );
 
 -- Insertion des données
@@ -112,15 +114,15 @@ INSERT INTO Compte (nomTypeCompte, description) VALUES
 ('Livret A', 'Épargne réglementée avec un taux d’intérêt exonéré d’impôts'),
 ('PEL', 'Plan Épargne Logement pour un projet immobilier');
 
-INSERT IGNORE INTO Client (numClient, nom, prenom, adresse, mail, numTel, idSituation, dateNaissance) VALUES
-(201, 'Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 1, '1985-04-12'),
-(202, 'Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', 2, '1978-08-23'),
-(203, 'Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', 3, '1990-11-30');
+INSERT INTO Client (nom, prenom, adresse, mail, numTel, idSituation, dateNaissance) VALUES
+('Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789', 1, '1985-04-12'),
+('Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', 2, '1978-08-23'),
+('Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', 3, '1990-11-30');
 
 INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idCompteClient) VALUES
-('2024-01-01', 1500.00, 200.00, 201, 101),
-('2024-02-01', 3000.00, 0.00, 202, 102),
-('2024-03-01', 6000.00, 500.00, 203, 103);
+('2024-01-01', 1500.00, 200.00, 1, 101),
+('2024-02-01', 3000.00, 0.00, 2, 102),
+('2024-03-01', 6000.00, 500.00, 3, 103);
 
 INSERT INTO Operation (montant, typeOp, idCompteClient) VALUES
 (150.00, 'Dépôt', 101),
@@ -133,9 +135,9 @@ INSERT INTO Contrat (nomTypeContrat, description) VALUES
 ('ContratEntreprise','C est un contrat Entreprise');
 
 INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, numContrat) VALUES
-('2024-04-01', 9.99, 201, 1),
-('2024-05-01', 19.99, 202, 2),
-('2024-06-01', 29.99, 203, 3);
+('2024-04-01', 9.99, 1, 1),
+('2024-05-01', 19.99, 2, 2),
+('2024-06-01', 29.99, 3, 3);
 
 INSERT INTO Employe (nom, login, motDePasse, categorie) VALUES
 ('Conseiller Y', 'Conseiller Y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller'),
@@ -148,7 +150,7 @@ INSERT INTO Motif (libelleMotif, listePieces) VALUES
 ('Demande de prêt', 'Avis d’imposition, Bulletins de salaire'),
 ('Clôture de compte', 'RIB, Lettre de clôture');
 
-INSERT INTO rdv (dateRdv, heureRdv, numEmploye, idMotif) VALUES
-('2024-07-10', 11, 1, 1),
-('2024-08-15', 12, 1, 2),
-('2024-09-20', 15, 4, 1);
+INSERT INTO rdv (dateRdv, heureRdv, numEmploye, idMotif, numClient) VALUES
+('2024-07-10', 11, 1, 1, 1),
+('2024-08-15', 12, 1, 2, 2),
+('2024-09-20', 15, 4, 1, 3);
