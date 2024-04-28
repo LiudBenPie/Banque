@@ -4,12 +4,18 @@ checkAcl('auth'); // Vérifie les autorisations de l'utilisateur
 
 include VIEWS_DIR . '/menu.php'; // Inclut le fichier de menu
 
-// Récupération de la liste des découverts des comptes clients
-$sql = "SELECT idCompte, montantDecouvert FROM CompteClient";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$comptes = $stmt->fetchAll();
+try {
+    // Récupération de la liste des découverts des comptes clients
+    $sql = "SELECT idCompte, montantDecouvert FROM CompteClient";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $comptes = $stmt->fetchAll();
 
+} catch (PDOException $e) {
+    // En cas d'erreur, afficher le message d'erreur SQL
+    echo "Erreur SQL : " . $e->getMessage();
+    exit; // Arrêter l'exécution du script en cas d'erreur
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +32,8 @@ $comptes = $stmt->fetchAll();
         <label for="idCompte">Sélectionnez un compte :</label>
         <select id="idCompte" name="idCompte">
             <?php foreach ($comptes as $compte): ?>
-                <option value="<?php echo htmlspecialchars($compte['idCompte']); ?>">
-                    <?php echo "Compte ".htmlspecialchars($compte['idCompte'])." (Découvert autorisé : ".htmlspecialchars($compte['montantDecouvert']).")"; ?>
+                <option value="<?php echo $compte['idCompte']; ?>">
+                    <?php echo "Compte " . $compte['idCompte'] . " (Découvert autorisé : " . $compte['montantDecouvert'] . ")"; ?>
                 </option>
             <?php endforeach; ?>
         </select>
@@ -37,4 +43,5 @@ $comptes = $stmt->fetchAll();
 
 </body>
 </html>
+
 
