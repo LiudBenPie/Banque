@@ -11,7 +11,7 @@ require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
 try{
-            if(isset($_POST['adcli'])&& !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['adresse']) && !empty($_POST['adressemail']) && !empty($_POST['numtel']) && !empty($_POST['datedenaissance'])){
+            if(isset($_POST['ajouterclient'])&& !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['adresse']) && !empty($_POST['adressemail']) && !empty($_POST['numtel']) && !empty($_POST['datedenaissance'])){
                 $nomemploye = $_POST['nomemploye'];
                 // Recherche du numéro de contrat à partir du nom du contrat
                 $sql = "SELECT numEmploye FROM employe WHERE nom = ?";
@@ -32,7 +32,7 @@ try{
                 $search4 = $_POST['datedenaissance'];
                 $sql = "SELECT * FROM client WHERE nom LIKE '%$search1%' AND prenom LIKE '%$search2%' AND numTel LIKE '%$search3%' AND dateNaissance LIKE '%$search4%'" ;
                 $result = $conn->query($sql);
-                    if (($result->rowCount() > 0)&& ($_POST['adcli'])) {
+                    if (($result->rowCount() > 0)&& ($_POST['ajouterclient'])) {
                     // Afficher les données trouvées
                         foreach ($result as $row) {
                         $rowcli=$row['numClient'];
@@ -42,7 +42,7 @@ try{
                         $rowma=$row['mail'];
                         $rownum=$row['numTel'];
                         $rowsitu=$row['situation'];
-                            if(isset($_POST['adcli'])&& (($_POST['nom'])==$rownom) || (($_POST['prenom'])==$rowpre) || (($_POST['adresse'])==$rowad) || (($_POST['adressemail'])==$rowma) || (($_POST['numtel'])==$rownum)){
+                            if(isset($_POST['ajouterclient'])&& (($_POST['nom'])==$rownom) || (($_POST['prenom'])==$rowpre) || (($_POST['adresse'])==$rowad) || (($_POST['adressemail'])==$rowma) || (($_POST['numtel'])==$rownum)){
                                 echo "Le client existe déjà dans la base de données";
                         }else{
                             $nomclient = $_POST['nom'];
@@ -126,7 +126,7 @@ catch(PDOException $e){
             </select>
             </p>
             <p>
-            <input type="submit" name="adcli" value="Ajouter un client">
+            <input type="submit" name="ajouterclient" value="Ajouter un client">
             <input type="reset" name="reset" value="Effacer les valeurs saisies">
             </p>
             </fieldset>
