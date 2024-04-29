@@ -1,19 +1,18 @@
 <?php
-// Inclusion du fichier d'initialisation pour établir la connexion PDO
-require('init.php');
-
-// Vérification des autorisations (ACL) si nécessaire
-// checkAcl('auth');
-
-// Vérification de l'existence de la connexion PDO
+require ('init.php');
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 if (!isset($pdo)) {
     die("La connexion à la base de données n'est pas disponible.");
 }
 
 // Requête SQL pour récupérer les données
-$sql = "SELECT nomTypeContrat, COUNT(*) AS nombre_contrats FROM ContratClient
-        INNER JOIN Contrat ON ContratClient.numContrat = Contrat.numContrat
-        GROUP BY Contrat.nomTypeContrat";
+    $sql = "SELECT nomTypeContrat, COUNT(*) AS nombre_contrats FROM ContratClient
+            INNER JOIN Contrat ON ContratClient.numContrat = Contrat.numContrat
+            GROUP BY Contrat.nomTypeContrat";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $typesCompte = $stmt->fetchAll();
 
 try {
     // Exécution de la requête
