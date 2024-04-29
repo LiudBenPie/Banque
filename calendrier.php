@@ -90,10 +90,33 @@ include VIEWS_DIR . '/menu.php';
 
     $nb_jours = cal_days_in_month(CAL_GREGORIAN, $mois, $annee);
 
+    // Récupérer les événements de la base de données
+    $sql = "SELECT rdv.dateRdv, rdv.heureRdv, Motif.libelleMotif, Client.nom AS nomClient, Client.prenom AS prenomClient FROM rdv JOIN Employe ON rdv.numEmploye = Employe.numEmploye JOIN Client ON Client.numClient = rdv.numClient JOIN Motif ON rdv.idMotif = Motif.idMotif WHERE YEAR(rdv.dateRdv) = :year AND MONTH(rdv.dateRdv) = :month AND Employe.nom = :nom";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['year' => $annee, 'month' => $mois, 'nom' => $nom]);
+    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $eventsByDay = [];
+    foreach ($events as $event) {
+        $day = (int)date('j', strtotime($event['dateRdv']));
+        $eventsByDay[$day][] = $event['heureRdv'] . ':00 ' . $event['libelleMotif'] . ' avec ' . $event['nomClient'] . ' ' . $event['prenomClient'];
+    }
+
     // Afficher les jours du mois
     for ($jour = 1; $jour <= $nb_jours; $jour++) {
         $date = sprintf("%04d-%02d-%02d", $annee, $mois, $jour);
-        echo "<td data-date='{$date}' class='date-cell'>$jour</td>";
+        echo "<td data-date='{$date}' class='date-cell'>$jour";
+
+        // Si un événement existe pour ce jour, afficher les détails
+        if (array_key_exists($jour, $eventsByDay)) {
+            echo "<ul class='event-list'>";
+            foreach ($eventsByDay[$jour] as $eventDetail) {
+                echo "<li class='event-item'>" . htmlspecialchars($eventDetail) . "</li>";
+            }
+            echo "</ul>";
+        }
+
+        echo "</td>";
         if (($jour + $jourDeLaSemaine - 1) % 7 == 0) {
             echo '</tr><tr>';
         }
