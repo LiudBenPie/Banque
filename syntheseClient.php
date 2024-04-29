@@ -3,69 +3,92 @@ require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
 
+// Vérifie si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
+    // Récupération du numéro de client sélectionné
     $numClient = $_POST['numClient'];
-    
-    // Récupération des informations du client sélectionné
-    $sql = "SELECT nom, prenom, adresse, mail, numtel, dateNaissance FROM client WHERE numClient = :numClient";
+
+    // Requête SQL pour récupérer les informations du client, ses comptes, contrats, opérations et rendez-vous
+    $sql = "SELECT c.numClient, c.nom, c.prenom, c.adresse, c.mail, c.numtel, s.description as situation, c.dateNaissance,
+            cc.idCompteClient, co.nomTypeCompte, cc.solde, cc.montantDecouvert,
+            ct.numContrat, ct.nomTypeContrat, ct.description as contratDescription,
+            o.numOp, o.montant, o.typeOp,
+            r.dateRdv, r.heureRdv, m.libelleMotif
+            FROM client c
+            LEFT JOIN situation s ON c.idSituation = s.idSituation
+            LEFT JOIN compteclient cc ON c.numClient = cc.numClient
+            LEFT JOIN compte co ON cc.idCompte = co.idCompte
+            LEFT JOIN contratclient cr ON c.numClient = cr.numClient
+            LEFT JOIN contrat ct ON cr.numContrat = ct.numContrat
+            LEFT JOIN operation o ON cc.idCompteClient = o.idCompteClient
+            LEFT JOIN rdv r ON c.numClient = r.numClient
+            LEFT JOIN motif m ON r.idMotif = m.idMotif
+            WHERE c.numClient = :numClient";
+
     $stmt = $conn->prepare($sql);
-    $stmt->bindValue(':numClient', $numClient, PDO::PARAM_INT);
+    $stmt->bindParam(':numClient', $numClient, PDO::PARAM_INT);
     $stmt->execute();
-    $clientInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$clientInfo) {
-        // Gérer le cas où le client n'est pas trouvé
-        echo "Client introuvable";
-        exit;
-    }
+    $clientInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Afficher les informations du client
-    echo "<h2>Synthèse du client : {$clientInfo['nom']} {$clientInfo['prenom']}</h2>";
-    echo "<p><strong>Adresse :</strong> {$clientInfo['adresse']}</p>";
-    echo "<p><strong>Email :</strong> {$clientInfo['mail']}</p>";
-    echo "<p><strong>Téléphone :</strong> {$clientInfo['numtel']}</p>";
-    echo "<p><strong>Date de naissance :</strong> {$clientInfo['dateNaissance']}</p>";
+    // Affichage des informations du client, de ses comptes, contrats, opérations et rendez-vous
+    if ($clientInfo) {
+        echo "<h2>Synthèse du client : {$clientInfo[0]['nom']} {$clientInfo[0]['prenom']}</h2>";
+        echo "<p><strong>Adresse :</strong> {$clientInfo[0]['adresse']}</p>";
+        echo "<p><strong>Email :</strong> {$clientInfo[0]['mail']}</p>";
+        echo "<p><strong>Téléphone :</strong> {$clientInfo[0]['numtel']}</p>";
+        echo "<p><strong>Situation :</strong> {$clientInfo[0]['situation']}</p>";
+        echo "<p><strong>Date de naissance :</strong> {$clientInfo[0]['dateNaissance']}</p>";
 
-    // Exemple de graphique avec Chart.js (à adapter selon vos besoins)
-    echo "<h3>Graphique des opérations</h3>";
-    echo "<canvas id='operationsChart' width='400' height='200'></canvas>";
+        // Affichage des détails pour chaque compte du client
+        echo "<h3>Comptes :</h3>";
+        foreach ($clientInfo as $info) {
+            echo "<h4>{$info['nomTypeCompte']}</h4>";
+            echo "<ul>";
+            echo "<li><strong>Solde :</strong> {$info['solde']} €</li>";
+            echo "<li><strong>Montant autorisé de découvert :</strong> {$info['montantDecouvert']} €</li>";
 
-    // JavaScript pour initialiser le graphique
-    echo "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>";
-    echo "<script>
-            var ctx = document.getElementById('operationsChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai'],
-                    datasets: [{
-                        label: 'Montant des opérations (en €)',
-                        data: [150, 200, 400, 0, 0], // Exemple de données à remplacer par les données réelles
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
+            // Affichage des opérations pour ce compte
+            echo "<li><strong>Opérations :</strong>";
+            echo "<ul>";
+            foreach ($clientInfo as $operation) {
+                if ($operation['idCompteClient'] === $info['idCompteClient'] && $operation['numOp']) {
+                    echo "<li>{$operation['typeOp']} de {$operation['montant']} €</li>";
                 }
-            });
-          </script>";
+            }
+            echo "</ul>";
+            echo "</li>";
+
+            echo "</ul>";
+        }
+
+        // Affichage des contrats du client
+        echo "<h3>Contrats :</h3>";
+        if ($clientInfo[0]['numContrat']) {
+            echo "<ul>";
+            echo "<li><strong>Type de contrat :</strong> {$clientInfo[0]['nomTypeContrat']}</li>";
+            echo "<li><strong>Description :</strong> {$clientInfo[0]['contratDescription']}</li>";
+            echo "</ul>";
+        } else {
+            echo "<p>Aucun contrat trouvé pour ce client.</p>";
+        }
+
+        // Affichage de l'historique des rendez-vous du client avec le motif
+        echo "<h3>Historique des Rendez-vous :</h3>";
+        if (!empty($clientInfo[0]['dateRdv'])) {
+            echo "<ul>";
+            foreach ($clientInfo as $rdv) {
+                echo "<li>Rendez-vous le {$rdv['dateRdv']} à {$rdv['heureRdv']}h, Motif : {$rdv['libelleMotif']}</li>";
+            }
+            echo "</ul>";
+        } else {
+            echo "<p>Aucun rendez-vous trouvé pour ce client.</p>";
+        }
+    } else {
+        echo "<p>Client non trouvé.</p>";
+    }
+} else {
+    // Redirection ou message d'erreur si le formulaire n'est pas soumis correctement
+    echo "<p>Une erreur s'est produite. Veuillez réessayer.</p>";
 }
 ?>
