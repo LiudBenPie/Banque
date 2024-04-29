@@ -10,8 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
 
     // Requête SQL pour récupérer les informations du client, ses comptes, contrats, opérations et rendez-vous
     $sql = "SELECT c.numClient, c.nom, c.prenom, c.adresse, c.mail, c.numtel, s.description as situation, c.dateNaissance,
-            cc.idCompteClient, co.nomTypeCompte, cc.solde, cc.montantDecouvert,
-            ct.numContrat, ct.nomTypeContrat, ct.description as contratDescription,
+            cc.idCompteClient, co.nomTypeCompte, cc.solde, cc.montantDecouvert, cc.dateOuverture,
+            ct.numContrat, ct.nomTypeContrat,
+            cr.tarifMensuel, cr.dateOuvertureContrat,
             o.numOp, o.montant, o.typeOp,
             r.dateRdv, r.heureRdv, m.libelleMotif
             FROM client c
@@ -45,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
             foreach ($clientInfo as $info) {
                 echo "<h4>{$info['nomTypeCompte']}</h4>";
                 echo "<ul>";
+                echo "<li><strong>Date d'ouverture :</strong> {$info['dateOuverture']}</li>";
                 echo "<li><strong>Solde :</strong> {$info['solde']} €</li>";
                 echo "<li><strong>Montant autorisé de découvert :</strong> {$info['montantDecouvert']} €</li>";
                 
@@ -64,13 +66,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
 
             // Affichage des contrats du client
             echo "<h3>Contrats :</h3>";
-            if ($clientInfo[0]['numContrat']) {
-                echo "<ul>";
-                echo "<li><strong>Type de contrat :</strong> {$clientInfo[0]['nomTypeContrat']}</li>";
-                echo "<li><strong>Description :</strong> {$clientInfo[0]['contratDescription']}</li>";
-                echo "</ul>";
-            } else {
-                echo "<p>Aucun contrat trouvé pour ce client.</p>";
+            foreach ($clientInfo as $info) {
+                if ($info['numContrat']) {
+                    echo "<ul>";
+                    echo "<li><strong>Type de contrat :</strong> {$info['nomTypeContrat']}</li>";
+                    echo "<li><strong>Tarif mensuel :</strong> {$info['tarifMensuel']} €</li>";
+                    echo "<li><strong>Date d'ouverture du contrat :</strong> {$info['dateOuvertureContrat']}</li>";
+                    echo "</ul>";
+                } else {
+                    echo "<p>Aucun contrat trouvé pour ce client.</p>";
+                }
             }
 
             // Affichage de l'historique des rendez-vous du client avec le motif
@@ -96,3 +101,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
     echo "<p>Une erreur s'est produite. Veuillez réessayer.</p>";
 }
 ?>
+
