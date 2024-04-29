@@ -42,7 +42,7 @@ catch (PDOException $e) {
     $msg = 'ERREUR dans ' . $e->getFile() . 'Ligne' . $e->getLine() . ':' . $e->getMessage();
 }
 ?>
-<h2>Formulaire de Vente de Contrat</h2>
+<h2>Formulaire d'ouverture de compte</h2>
     <form action="ouvrirCompte.php" method="post">
         <p>
             <label for="date">Date d'ouverture :</label>
