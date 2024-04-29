@@ -75,7 +75,7 @@ if ($updateSuccessful) {
         </p>
         <p>
             <label for="situation">Situation :</label>
-            <select id="situation" name="idSituation">
+            <select id="situation" name="idSituation" class="form-select">
             <?php
                 $sql = "SELECT idSituation, description FROM Situation ORDER BY description";
                 $stmt = $conn->prepare($sql);
