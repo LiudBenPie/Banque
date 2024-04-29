@@ -116,10 +116,10 @@ INSERT INTO Situation (description) VALUES
 
 -- Insertion des employés
 INSERT INTO Employe (nom, login, motDePasse, categorie) VALUES
-('Conseiller Y', 'conseiller_y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller'),
+('Conseiller Y', 'conseiller Y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller'),
 ('Directeur', 'directeur', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur'),
 ('Agent', 'agent', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent'),
-('Conseiller X', 'conseiller_x', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller');
+('Conseiller X', 'conseiller X', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller');
 
 -- Insertion des contrats
 INSERT INTO Contrat (nomTypeContrat, description) VALUES
