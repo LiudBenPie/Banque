@@ -19,7 +19,7 @@
     </li>
     <!-- Gestion des syntheses -->
     <li class="nav-item">
-        <a class="nav-link" href="">Consulter la synthèse d'un client</a>
+        <a class="nav-link" href="/rechercheSyntheseClient.php">Consulter la synthèse d'un client</a>
     </li>
     <!-- Gestion des dépôts et des retraits -->
     <li class="nav-item">
