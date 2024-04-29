@@ -43,6 +43,23 @@ include VIEWS_DIR . '/menu.php';
                         <?php endforeach; ?>
                     </select>
                 </p>
+                <p>
+                    <label for="numClient">Numero du Client :</label>
+                    <select name="numClient" id="numClient">
+                        <?php
+                        $sql = "SELECT numClient, nom, prenom FROM client";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $clients = $stmt->fetchAll();
+                        ?>
+                        <?php foreach ($clients as $client) : ?>
+                            <option value="<?php echo $client['numClient']; ?>">
+                                <?php echo $client['numClient'] . ' ' . $client['nom']. ' ' . $client['prenom'] ?>
+                            </option>
+
+                        <?php endforeach; ?>
+                    </select>
+                </p>
                 <div>
                     <label for="idMotif">Motif du RDV:</label>
                     <select id="idMotif" name="idMotif" required>
