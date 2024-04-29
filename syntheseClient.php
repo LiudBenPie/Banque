@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
     $numClient = $_POST['numClient'];
 
     // Requête SQL pour récupérer les informations du client
-    $sql = "SELECT c.numClient, c.nom, c.prenom, c.adresse, c.mail, c.numtel, s.description AS situation, c.dateNaissance, c.numEmploye, e.nom AS nomEmploye, e.prenom AS prenomEmploye
+    $sql = "SELECT c.numClient, c.nom, c.prenom, c.adresse, c.mail, c.numtel, s.description AS situation, c.dateNaissance, c.numEmploye, e.nom AS nomEmploye
             FROM client c
             LEFT JOIN situation s ON c.idSituation = s.idSituation
             LEFT JOIN employe e ON c.numEmploye = e.numEmploye
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
             echo "<p><strong>Date de naissance :</strong> {$clientInfo['dateNaissance']}</p>";
 
             // Affichage de l'employé en charge du dossier client
-            echo "<p><strong>Employé en charge :</strong> {$clientInfo['nomEmploye']} {$clientInfo['prenomEmploye']}</p>";
+            echo "<p><strong>Employé en charge :</strong> {$clientInfo['nomEmploye']}</p>";
 
             // Affichage des détails pour chaque compte du client
             $sql = "SELECT cc.idCompteClient, co.nomTypeCompte, cc.dateOuverture, cc.solde, cc.montantDecouvert
