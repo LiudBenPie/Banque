@@ -84,4 +84,4 @@ try {
         <p>
         <input type="submit" name="ventecon" value="Vendre un contrat">
         </p>
-    </form>'
+    </form>
