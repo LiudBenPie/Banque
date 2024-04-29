@@ -47,7 +47,7 @@ try {
         </p>
         <p>
         <label for="tarif">Tarif mensuel :</label>
-        <input type="number" id="tarif" name="tarif" min="0" step="5" required><br><br>
+        <input type="number" id="tarif" name="tarif" min="0" step="0.01" required><br><br>
         </p>
         <p>
         <label for="nomcli">Nom du client :</label>
