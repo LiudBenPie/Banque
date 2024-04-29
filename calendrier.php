@@ -1,5 +1,5 @@
 <?php
-require('init.php'); // Ensure init.php sets up PDO correctly
+require('init.php');
 include VIEWS_DIR . '/menu.php';
 ?>
 
@@ -20,6 +20,12 @@ include VIEWS_DIR . '/menu.php';
 			5 => 'Mai', 6 => 'Juin', 7 => 'Juillet', 8 => 'Août',
 			9 => 'Septembre', 10 => 'Octobre', 11 => 'Novembre', 12 => 'Décembre'
 		];
+
+		$joursFrancais = [
+			1 => 'Lun', 2 => 'Mar', 3 => 'Mer', 4 => 'Jeu',
+			5 => 'Ven', 6 => 'Sam', 7 => 'Dim'
+		];
+
 		$sql = "SELECT DISTINCT nom FROM rdv JOIN motif ON motif.idMotif = rdv.idMotif JOIN employe ON rdv.numEmploye = employe.numEmploye WHERE categorie = 'Conseiller'";
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();
@@ -63,21 +69,28 @@ include VIEWS_DIR . '/menu.php';
 	</div>
 
 	<?php
-	echo '<table><tr><th colspan="7">CALENDRIER</th></tr><tr><tr>
-	<th class="jour">Lun</th> <!-- Lundi -->
-	<th class="jour">Mar</th> <!-- Mardi -->
-	<th class="jour">Mer</th> <!-- Mercredi -->
-	<th class="jour">Jeu</th> <!-- Jeudi -->
-	<th class="jour">Ven</th> <!-- Vendredi -->
-	<th class="jour">Sam</th> <!-- Samedi -->
-	<th class="jour">Dim</th> <!-- Dimanche -->
-	</tr>';
-	$nom = $_GET['nom'] ?? '';  // Prevent undefined index notice
-	$mois = $_GET['mois'] ?? date('m');  // Default to current month
-	$annee = $_GET['annee'] ?? date('Y');  // Default to current year
+	$nom = $_GET['nom'] ?? '';  // Éviter l'avis d'indice non défini
+	$mois = $_GET['mois'] ?? date('m');  // Par défaut, utiliser le mois en cours
+	$annee = $_GET['annee'] ?? date('Y');  // Par défaut, utiliser l'année en cours
+
+	// Trouver le jour de la semaine du premier jour du mois
+	$premierJourTimestamp = strtotime("$annee-$mois-01");
+	$jourDeLaSemaine = date('N', $premierJourTimestamp);
+
+	echo '<table><tr><th colspan="7">CALENDRIER</th></tr><tr>';
+	foreach ($joursFrancais as $jour) {
+		echo "<th class='jour'>$jour</th>";
+	}
+	echo '</tr><tr>';
+
+	// Ajoutez des cellules vides pour les jours précédant le premier jour du mois
+	for ($i = 1; $i < $jourDeLaSemaine; $i++) {
+		echo '<td></td>';
+	}
 
 	$nb_jours = cal_days_in_month(CAL_GREGORIAN, $mois, $annee);
 
+	// Récupérer les événements de la base de données
 	$sql = "SELECT rdv.dateRdv, rdv.heureRdv, Motif.libelleMotif, Client.nom AS nomClient, Client.prenom AS prenomClient FROM rdv JOIN Employe ON rdv.numEmploye = Employe.numEmploye JOIN Client ON Client.numClient = rdv.numClient JOIN Motif ON rdv.idMotif = Motif.idMotif WHERE YEAR(rdv.dateRdv) = :year AND MONTH(rdv.dateRdv) = :month AND Employe.nom = :nom";
 	$stmt = $conn->prepare($sql);
 	$stmt->execute(['year' => $annee, 'month' => $mois, 'nom' => $nom]);
@@ -85,30 +98,37 @@ include VIEWS_DIR . '/menu.php';
 
 	$eventsByDay = [];
 	foreach ($events as $event) {
-		$day = (int)substr($event['dateRdv'], 8, 2);
+		$day = (int)date('j', strtotime($event['dateRdv']));
 		$eventsByDay[$day][] = $event['heureRdv'] . ':00 ' . $event['libelleMotif'] . ' avec ' . $event['nomClient'] . ' ' . $event['prenomClient'];
 	}
 
-	for ($i = 1; $i <= 35; $i++) {
-		if ($i <= $nb_jours) {
-			$date = sprintf("%04d-%02d-%02d", $annee, $mois, $i);
-			echo "<td data-date='{$date}' class='date-cell'>";
-			echo $i;
+	// Afficher les jours du mois
+	for ($jour = 1; $jour <= $nb_jours; $jour++) {
+		$date = sprintf("%04d-%02d-%02d", $annee, $mois, $jour);
+		echo "<td data-date='{$date}' class='date-cell'>$jour";
 
-			if (array_key_exists($i, $eventsByDay)) {
-				echo "<ul class='event-list'>";
-				foreach ($eventsByDay[$i] as $eventDetail) {
-					echo "<li class='event-item'>" . htmlspecialchars($eventDetail) . "</li>";
-				}
-				echo "</ul>";
+		// Si un événement existe pour ce jour, afficher les détails
+		if (array_key_exists($jour, $eventsByDay)) {
+			echo "<ul class='event-list'>";
+			foreach ($eventsByDay[$jour] as $eventDetail) {
+				echo "<li class='event-item'>" . htmlspecialchars($eventDetail) . "</li>";
 			}
+			echo "</ul>";
+		}
 
-			echo "</td>";
-			if ($i % 7 == 0) echo '</tr><tr>';
-		} else {
-			echo '<td></td>';
+		echo "</td>";
+		if (($jour + $jourDeLaSemaine - 1) % 7 == 0) {
+			echo '</tr><tr>';
 		}
 	}
+
+	// Ajoutez des cellules vides pour compléter la dernière semaine
+	$dernierJourTimestamp = strtotime("$annee-$mois-$nb_jours");
+	$dernierJourDeLaSemaine = date('N', $dernierJourTimestamp);
+	for ($i = $dernierJourDeLaSemaine + 1; $i <= 7; $i++) {
+		echo '<td></td>';
+	}
+
 	echo '</tr></table>';
 	?>
 </body>

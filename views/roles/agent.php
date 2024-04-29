@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
 <div class="container-fluid">
-<a class="navbar-brand" href="/">Banque</a>
+<a class="navbar-brand" href="/"><img src="/favicon.ico" width="50" alt="icon"></a>
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
 </button>
@@ -19,7 +19,7 @@
     </li>
     <!-- Gestion des syntheses -->
     <li class="nav-item">
-        <a class="nav-link" href="">Consulter la synthèse d'un client</a>
+        <a class="nav-link" href="/rechercheSyntheseClient.php">Consulter la synthèse d'un client</a>
     </li>
     <!-- Gestion des dépôts et des retraits -->
     <li class="nav-item">
@@ -27,7 +27,7 @@
     </li>
     <!-- Gestion des rdv -->
     <li class="nav-item">
-        <a class="nav-link" href="/pages/newrdv.php">Prendre un rendez-vous pour un client</a>
+        <a class="nav-link" href="/pages/creerRDV.php">Prendre un rendez-vous pour un client</a>
     </li>
     </ul>
     <a class="btn btn-primary" style="background-color: #003580;" href="/logout.php">Deconnexion</a>

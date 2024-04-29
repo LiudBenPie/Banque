@@ -13,7 +13,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/calendrier.php">Visualiser le calendrier</a></li>
-                        <li><a class="dropdown-item" href="/pages/newrdv.php">Prendre un rendez-vous pour un client</a></li>
+                        <li><a class="dropdown-item" href="/pages/creerRDV.php">Prendre un rendez-vous pour un client</a></li>
                     </ul>
                 </li>
                 <!-- Gestion des clients -->
