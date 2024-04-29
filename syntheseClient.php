@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
     $sql = "SELECT c.numClient, c.nom, c.prenom, c.adresse, c.mail, c.numtel, s.description AS situation, c.dateNaissance,
             cc.idCompteClient, co.idCompte, co.nomTypeCompte, cc.solde, cc.montantDecouvert, cc.dateOuverture,
             ct.numContrat, ct.nomTypeContrat,
+            cr.tarifMensuel, cr.dateOuvertureContrat,
             o.numOp, o.montant, o.typeOp,
             r.dateRdv, r.heureRdv, m.libelleMotif
             FROM client c
@@ -41,45 +42,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
             echo "<p><strong>Situation :</strong> {$clientInfo[0]['situation']}</p>";
             echo "<p><strong>Date de naissance :</strong> {$clientInfo[0]['dateNaissance']}</p>";
 
-            // Stocker les informations des comptes dans un tableau associatif pour les traiter
-            $comptes = [];
-            foreach ($clientInfo as $info) {
-                $idCompteClient = $info['idCompteClient'];
-                if (!isset($comptes[$idCompteClient])) {
-                    $comptes[$idCompteClient] = [
-                        'nomTypeCompte' => $info['nomTypeCompte'],
-                        'idCompteClient' => $idCompteClient,
-                        'dateOuverture' => $info['dateOuverture'],
-                        'solde' => $info['solde'],
-                        'montantDecouvert' => $info['montantDecouvert'],
-                        'operations' => [] // Initialiser un tableau pour stocker les opérations
-                    ];
-                }
-
-                // Ajouter les opérations associées à ce compte
-                if (!empty($info['numOp'])) {
-                    $comptes[$idCompteClient]['operations'][] = [
-                        'typeOp' => $info['typeOp'],
-                        'montant' => $info['montant']
-                    ];
-                }
-            }
-
             // Affichage des détails pour chaque compte du client
             echo "<h3>Comptes :</h3>";
-            foreach ($comptes as $compte) {
-                echo "<h4>{$compte['nomTypeCompte']}</h4>";
+            foreach ($clientInfo as $info) {
+                echo "<h4>{$info['nomTypeCompte']}</h4>";
                 echo "<ul>";
-                echo "<li><strong>IdCompte :</strong> {$compte['idCompteClient']}</li>";
-                echo "<li><strong>Date d'ouverture :</strong> {$compte['dateOuverture']}</li>";
-                echo "<li><strong>Solde :</strong> {$compte['solde']} €</li>";
-                echo "<li><strong>Montant autorisé de découvert :</strong> {$compte['montantDecouvert']} €</li>";
+                echo "<li><strong>IdCompte :</strong> {$info['idCompteClient']}</li>";
+                echo "<li><strong>Date d'ouverture :</strong> {$info['dateOuverture']}</li>";
+                echo "<li><strong>Solde :</strong> {$info['solde']} €</li>";
+                echo "<li><strong>Montant autorisé de découvert :</strong> {$info['montantDecouvert']} €</li>";
 
                 // Affichage des opérations pour ce compte
                 echo "<li><strong>Opérations :</strong>";
                 echo "<ul>";
-                foreach ($compte['operations'] as $operation) {
-                    echo "<li>{$operation['typeOp']} de {$operation['montant']} €</li>";
+                foreach ($clientInfo as $operation) {
+                    if ($operation['idCompteClient'] === $info['idCompteClient'] && $operation['numOp']) {
+                        echo "<li>{$operation['typeOp']} de {$operation['montant']} €</li>";
+                    }
                 }
                 echo "</ul>";
                 echo "</li>";
@@ -125,4 +104,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
     echo "<p>Une erreur s'est produite. Veuillez réessayer.</p>";
 }
 ?>
-
