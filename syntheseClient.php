@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
             foreach ($clientInfo as $info) {
                 echo "<h4>{$info['nomTypeCompte']}</h4>";
                 echo "<ul>";
-                echo "<li><strong>IdCompte :</strong> {$info['idCompte']}</li>";
+                echo "<li><strong>IdCompte :</strong> {$info['idCompteClient']}</li>";
                 echo "<li><strong>Date d'ouverture :</strong> {$info['dateOuverture']}</li>";
                 echo "<li><strong>Solde :</strong> {$info['solde']} €</li>";
                 echo "<li><strong>Montant autorisé de découvert :</strong> {$info['montantDecouvert']} €</li>";
