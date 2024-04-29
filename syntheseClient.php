@@ -48,6 +48,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
                 echo "<li><strong>Date d'ouverture :</strong> {$compte['dateOuverture']}</li>";
                 echo "<li><strong>Solde :</strong> {$compte['solde']} €</li>";
                 echo "<li><strong>Montant autorisé de découvert :</strong> {$compte['montantDecouvert']} €</li>";
+
+                // Affichage de l'historique des opérations pour ce compte
+                $sql_operations = "SELECT numOp, montant, dateOperation, typeOp
+                                   FROM operation
+                                   WHERE idCompteClient = :idCompteClient";
+                $stmt_operations = $conn->prepare($sql_operations);
+                $stmt_operations->bindParam(':idCompteClient', $compte['idCompteClient'], PDO::PARAM_INT);
+                $stmt_operations->execute();
+                $operations = $stmt_operations->fetchAll(PDO::FETCH_ASSOC);
+
+                echo "<li><strong>Historique des opérations :</strong>";
+                echo "<ul>";
+                foreach ($operations as $operation) {
+                    echo "<li>Opération {$operation['numOp']} - {$operation['typeOp']} de {$operation['montant']} € le {$operation['dateOperation']}</li>";
+                }
+                echo "</ul></li>";
+
                 echo "</ul>";
             }
 
