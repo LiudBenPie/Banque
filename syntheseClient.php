@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthèse client</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <?php
 require('init.php');
 checkAcl('auth');
@@ -45,6 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
             $comptes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             echo "<h3>Comptes :</h3>";
+
+            // Récupération des soldes pour le graphique
+            $labels = [];
+            $data = [];
+
             foreach ($comptes as $compte) {
                 echo "<h4>{$compte['nomTypeCompte']}</h4>";
                 echo "<ul>";
@@ -53,21 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
                 echo "<li><strong>Solde :</strong> {$compte['solde']} €</li>";
                 echo "<li><strong>Montant autorisé de découvert :</strong> {$compte['montantDecouvert']} €</li>";
 
-                // Affichage de l'historique des opérations pour ce compte
-                $sql_operations = "SELECT numOp, montant, dateOperation, typeOp
-                                   FROM operation
-                                   WHERE idCompteClient = :idCompteClient";
-                $stmt_operations = $conn->prepare($sql_operations);
-                $stmt_operations->bindParam(':idCompteClient', $compte['idCompteClient'], PDO::PARAM_INT);
-                $stmt_operations->execute();
-                $operations = $stmt_operations->fetchAll(PDO::FETCH_ASSOC);
-
-                echo "<li><strong>Historique des opérations :</strong>";
-                echo "<ul>";
-                foreach ($operations as $operation) {
-                    echo "<li>Opération {$operation['numOp']} - {$operation['typeOp']} de {$operation['montant']} € le {$operation['dateOperation']}</li>";
-                }
-                echo "</ul></li>";
+                // Ajouter les données pour le graphique en camembert
+                $labels[] = $compte['nomTypeCompte'];
+                $data[] = $compte['solde'];
 
                 echo "</ul>";
             }
@@ -112,6 +115,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
             } else {
                 echo "<p>Aucun rendez-vous trouvé pour ce client.</p>";
             }
+
+            // Affichage du graphique en camembert
+            echo "<h3>Soldes des Comptes :</h3>";
+            echo '<canvas id="comptesChart" width="400" height="400"></canvas>';
+            echo "<script>";
+            echo "var ctx = document.getElementById('comptesChart').getContext('2d');";
+            echo "var comptesChart = new Chart(ctx, {";
+            echo "    type: 'pie',";
+            echo "    data: {";
+            echo "        labels: " . json_encode($labels) . ",";
+            echo "        datasets: [{";
+            echo "            label: 'Solde des Comptes',";
+            echo "            data: " . json_encode($data) . ",";
+            echo "            backgroundColor: [";
+            // Ajoutez ici les couleurs de fond pour chaque segment du graphique
+            echo "                'rgba(255, 99, 132, 0.8)',";
+            echo "                'rgba(54, 162, 235, 0.8)',";
+            echo "                'rgba(255, 206, 86, 0.8)',";
+            echo "                'rgba(75, 192, 192, 0.8)',";
+            echo "                'rgba(153, 102, 255, 0.8)'";
+            echo "            ],";
+            echo "            borderWidth: 1";
+            echo "        }]";
+            echo "    },";
+            echo "    options: {";
+            echo "        responsive: true,";
+            echo "        maintainAspectRatio: false";
+            echo "    }";
+            echo "});";
+            echo "</script>";
         } else {
             echo "<p>Client non trouvé.</p>";
         }
@@ -124,3 +157,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
     echo "<p>Une erreur s'est produite. Veuillez réessayer.</p>";
 }
 ?>
+
