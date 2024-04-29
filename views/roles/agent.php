@@ -27,7 +27,7 @@
     </li>
     <!-- Gestion des rdv -->
     <li class="nav-item">
-        <a class="nav-link" href="/pages/.creerRDV.php">Prendre un rendez-vous pour un client</a>
+        <a class="nav-link" href="/pages/creerRDV.php">Prendre un rendez-vous pour un client</a>
     </li>
     </ul>
     <a class="btn btn-primary" style="background-color: #003580;" href="/logout.php">Deconnexion</a>
