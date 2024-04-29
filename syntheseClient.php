@@ -9,9 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
     $numClient = $_POST['numClient'];
 
     // Requête SQL pour récupérer les informations du client, ses comptes, contrats, opérations et rendez-vous
-    $sql = "SELECT c.numClient AS IdClient, c.nom, c.prenom, c.adresse, c.mail, c.numtel, s.description AS situation, c.dateNaissance,
-            cc.idCompteClient, co.idCompte AS IdCompte, co.nomTypeCompte, cc.solde, cc.montantDecouvert, cc.dateOuverture,
-            ct.numContrat AS IdContrat, ct.nomTypeContrat,
+    $sql = "SELECT c.numClient, c.nom, c.prenom, c.adresse, c.mail, c.numtel, s.description AS situation, c.dateNaissance,
+            cc.idCompteClient, co.idCompte, co.nomTypeCompte, cc.solde, cc.montantDecouvert, cc.dateOuverture,
+            ct.numContrat, ct.nomTypeContrat,
             cr.tarifMensuel, cr.dateOuvertureContrat,
             o.numOp, o.montant, o.typeOp,
             r.dateRdv, r.heureRdv, m.libelleMotif
@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
 
         if ($clientInfo) {
             echo "<h2>Synthèse du client : {$clientInfo[0]['nom']} {$clientInfo[0]['prenom']}</h2>";
+            echo "<p><strong>IdClient :</strong> {$clientInfo[0]['numClient']}</p>";
             echo "<p><strong>Adresse :</strong> {$clientInfo[0]['adresse']}</p>";
             echo "<p><strong>Email :</strong> {$clientInfo[0]['mail']}</p>";
             echo "<p><strong>Téléphone :</strong> {$clientInfo[0]['numtel']}</p>";
@@ -46,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
             foreach ($clientInfo as $info) {
                 echo "<h4>{$info['nomTypeCompte']}</h4>";
                 echo "<ul>";
-                echo "<li><strong>IdCompte :</strong> {$info['IdCompte']}</li>";
+                echo "<li><strong>IdCompte :</strong> {$info['idCompte']}</li>";
                 echo "<li><strong>Date d'ouverture :</strong> {$info['dateOuverture']}</li>";
                 echo "<li><strong>Solde :</strong> {$info['solde']} €</li>";
                 echo "<li><strong>Montant autorisé de découvert :</strong> {$info['montantDecouvert']} €</li>";
@@ -68,9 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
             // Affichage des contrats du client
             echo "<h3>Contrats :</h3>";
             foreach ($clientInfo as $info) {
-                if ($info['IdContrat']) {
+                if ($info['numContrat']) {
                     echo "<ul>";
-                    echo "<li><strong>IdContrat :</strong> {$info['IdContrat']}</li>";
+                    echo "<li><strong>IdContrat :</strong> {$info['numContrat']}</li>";
                     echo "<li><strong>Type de contrat :</strong> {$info['nomTypeContrat']}</li>";
                     echo "<li><strong>Tarif mensuel :</strong> {$info['tarifMensuel']} €</li>";
                     echo "<li><strong>Date d'ouverture du contrat :</strong> {$info['dateOuvertureContrat']}</li>";
