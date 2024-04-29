@@ -12,7 +12,7 @@
                         Employés
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/créerEmploye.php">Créer les login et mot de passe des employés</a></li>
+                        <li><a class="dropdown-item" href="/creerEmploye.php">Créer les login et mot de passe des employés</a></li>
                         <li><a class="dropdown-item" href="/rechercherEmploye.php">Gérer les informations des employés</a></li>
                         </ul>
                 </li>
@@ -22,7 +22,7 @@
                         Contrats
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/créerContrat.php">Créer la liste des contrats</a></li>
+                        <li><a class="dropdown-item" href="/creerContrat.php">Créer la liste des contrats</a></li>
                         <li><a class="dropdown-item" href="/rechercherTypeContrat.php">Gérer la liste des contrats existants</a></li>
                     </ul>
                 </li>
@@ -32,7 +32,7 @@
                         Comptes
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/créerCompte.php">Créer la liste des comptes</a></li>
+                        <li><a class="dropdown-item" href="/creerCompte.php">Créer la liste des comptes</a></li>
                         <li><a class="dropdown-item" href="/rechercherTypeCompte.php">Gérer la liste des comptes existants</a></li>
                     </ul>
                 </li>
@@ -42,7 +42,7 @@
                         Pièces à fournir
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="">Créer la liste des pièces à fournir</a></li>
+                        <li><a class="dropdown-item" href="/creerMotif.php">Créer la liste des pièces à fournir</a></li>
                         <li><a class="dropdown-item" href="/rechercherPiece.php">Modifier la liste des pièces à fournir</a></li>
                         <li><a class="dropdown-item" href="">Supprimer la liste des pièces à fournir</a></li>
                     </ul>

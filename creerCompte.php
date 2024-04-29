@@ -20,7 +20,7 @@ if ($createSuccessful) {
 }
 ?>
 <!-- Formulaire pour la création du contrat -->
-<form action="créerCompte.php" method="post" name='monForm'>
+<form action="creerCompte.php" method="post" name='monForm'>
     <p>
         <label for="nom">Nom du type de compte :</label>
         <input type="text" name="nomCompte" required>

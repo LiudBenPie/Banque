@@ -20,7 +20,7 @@ if ($createSuccessful) {
 }
 ?>
 <!-- Formulaire pour la création du contrat -->
-<form action="créerContrat.php" method="post" name='monForm'>
+<form action="creerContrat.php" method="post" name='monForm'>
     <p>
         <label for="nom">Nom du contrat :</label>
         <input type="text" name="nomContrat" required>

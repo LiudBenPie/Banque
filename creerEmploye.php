@@ -23,7 +23,7 @@ if ($createSuccessful) {
 }
 ?>
 <!-- Formulaire pour la création de l'employé -->
-<form action="créerEmploye.php" method="post" name='monForm'>
+<form action="creerEmploye.php" method="post" name='monForm'>
     <p>
         <label for="nomEmploye">Nom de l'employé :</label>
         <input type="text" name="nomEmploye" id="nomEmploye" required>
