@@ -1,5 +1,5 @@
 <?php
-require('init.php'); // Assurez-vous que ce fichier contient la configuration de connexion à la base de données
+require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
 
