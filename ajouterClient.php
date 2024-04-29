@@ -101,7 +101,7 @@ try {
 
                 foreach ($nomconseillers as $nomconseiller) {
                     $selected = ($rowemploye['nom'] == $nomconseiller['nom']) ? 'selected' : '';
-                    echo "<option value=\{$nomconseiller['nom']}\ $selected>{$nomconseiller['nom']}</option>";
+                    echo "<option value=\"{$nomconseiller['nom']}\" $selected>{$nomconseiller['nom']}</option>";
                 }
                 ?>
             </select>
@@ -117,7 +117,8 @@ try {
 
                 foreach ($nomsituations as $nomsituation) {
                     $selected = ($rowemploye['description'] == $nomsituation['description']) ? 'selected' : '';
-                    echo "<option value=\{$nomsituation['description']}\ $selected>{$nomsituation['description']}</option>";}
+                    echo "<option value=\"{$nomsituation['description']}\" $selected>{$nomsituation['description']}</option>";
+                }
                 ?>
             </select>
         </p>
