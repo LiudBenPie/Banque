@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Supprimer un compte client</title>
+</head>
+<body>
 <?php
 require('init.php');
 checkAcl('auth');
@@ -46,15 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCompteClient'])) {
     }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Supprimer un compte client</title>
-</head>
-<body>
-
 <form action="supprimerCompteClient.php" method="post">
     <label for="compteClient">Sélectionnez le compte client à supprimer :</label>
     <select name="idCompteClient" id="compteClient">
