@@ -3,7 +3,7 @@
 require('init.php');
 
 // Vérification des autorisations (ACL) si nécessaire
-// checkAcl('auth');
+checkAcl('auth');
 
 // Vérification de l'existence de la connexion PDO
 if (!isset($pdo)) {
