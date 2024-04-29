@@ -10,61 +10,58 @@
 require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
-try{
-            if(isset($_POST['ajouterclient'])&& !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['adresse']) && !empty($_POST['adressemail']) && !empty($_POST['numtel']) && !empty($_POST['datedenaissance'])){
-                $nomemploye = $_POST['nomemploye'];
-                // Recherche du numéro de contrat à partir du nom du contrat
-                $sql = "SELECT numEmploye FROM employe WHERE nom = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute([$nomemploye]);
-                $rowemploye = $stmt->fetch(PDO::FETCH_ASSOC);
+try {
+    if (isset($_POST['ajouterclient']) && !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['adresse']) && !empty($_POST['adressemail']) && !empty($_POST['numtel']) && !empty($_POST['datedenaissance'])) {
+        $nomemploye = $_POST['nomemploye'];
 
-                $situation = $_POST['situation'];
-                // Recherche du numéro de contrat à partir du nom du contrat
-                $sql2 = "SELECT idSituation FROM situation WHERE description = ?";
-                $stmt = $conn->prepare($sql2);
-                $stmt->execute([$situation]);
-                $rowsituation = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-                $search1 = $_POST['nom'];
-                $search2 = $_POST['prenom'];
-                $search3 = $_POST['numtel'];
-                $search4 = $_POST['datedenaissance'];
-                $sql = "SELECT * FROM client WHERE nom LIKE '%$search1%' AND prenom LIKE '%$search2%' AND numTel LIKE '%$search3%' AND dateNaissance LIKE '%$search4%'" ;
-                $result = $conn->query($sql);
-                    if (($result->rowCount() > 0)&& ($_POST['ajouterclient'])) {
-                    // Afficher les données trouvées
-                        foreach ($result as $row) {
-                        $rowcli=$row['numClient'];
-                        $rownom=$row['nom'];
-                        $rowpre=$row['prenom'];
-                        $rowad=$row['adresse'];
-                        $rowma=$row['mail'];
-                        $rownum=$row['numTel'];
-                        $rowsitu=$row['situation'];
-                            if(isset($_POST['ajouterclient'])&& (($_POST['nom'])==$rownom) || (($_POST['prenom'])==$rowpre) || (($_POST['adresse'])==$rowad) || (($_POST['adressemail'])==$rowma) || (($_POST['numtel'])==$rownum)){
-                                echo "Le client existe déjà dans la base de données";
-                        }else{
-                            $nomclient = $_POST['nom'];
-                            $prenomclient = $_POST['prenom'];
-                            $adresseclient = $_POST['adresse'];
-                            $adressemailclient = $_POST['adressemail'];
-                            $numerotelclient = $_POST['numtel'];
-                            $datedenaissance = $_POST['datedenaissance'];
-                            $situation = $_POST['situation'];
-                            $nomemploye = $_POST['nomemploye'];
-                            $sql = "INSERT INTO client (nom, prenom, adresse, mail, numTel,dateNaissance, idSituation, numEmploye) VALUES (?, ?, ?, ?,?, ?, ?, ?)";
-                            echo $sql;
-                            $stmt = $connexion->prepare($sql);
-                            if ($stmt->execute([$nomclient, $prenomclient, $adresseclient, $adressemailclient,$numerotelclient,$datedenaissance, $rowsituation['situation'], $rowemploye['nomemploye']])) {
-                                echo '<script>alert("Le client a été ajouté à la base de données.");</script>';
-                            } else {
-                                echo '<script>alert("Une erreur est survenue lors de l\'ajout du client.");</script>';
-                            }
-                }}}}}
-catch(PDOException $e){
-    $msg='ERREUR dans '.$e->getFile().'Ligne'.$e->getLine().':'.$e->getMessage();
+        // Recherche du numéro de l'employé à partir de son nom
+        $sqlEmploye = "SELECT numEmploye FROM employe WHERE nom = ?";
+        $stmtEmploye = $conn->prepare($sqlEmploye);
+        $stmtEmploye->execute([$nomemploye]);
+        $rowEmploye = $stmtEmploye->fetch(PDO::FETCH_ASSOC);
+
+        $situation = $_POST['situation'];
+        
+        // Recherche de l'ID de la situation à partir de sa description
+        $sqlSituation = "SELECT idSituation FROM situation WHERE description = ?";
+        $stmtSituation = $conn->prepare($sqlSituation);
+        $stmtSituation->execute([$situation]);
+        $rowSituation = $stmtSituation->fetch(PDO::FETCH_ASSOC);
+
+        $search1 = $_POST['nom'];
+        $search2 = $_POST['prenom'];
+        $search3 = $_POST['numtel'];
+        $search4 = $_POST['datedenaissance'];
+
+        // Vérification si le client existe déjà dans la base de données
+        $sqlCheckClient = "SELECT * FROM client WHERE nom LIKE ? AND prenom LIKE ? AND numTel LIKE ? AND dateNaissance LIKE ?";
+        $stmtCheckClient = $conn->prepare($sqlCheckClient);
+        $stmtCheckClient->execute(["%$search1%", "%$search2%", "%$search3%", "%$search4%"]);
+
+        if ($stmtCheckClient->rowCount() > 0) {
+            echo "Le client existe déjà dans la base de données";
+        } else {
+            $nomclient = $_POST['nom'];
+            $prenomclient = $_POST['prenom'];
+            $adresseclient = $_POST['adresse'];
+            $adressemailclient = $_POST['adressemail'];
+            $numerotelclient = $_POST['numtel'];
+            $datedenaissance = $_POST['datedenaissance'];
+
+            // Insertion du client dans la base de données
+            $sqlInsertClient = "INSERT INTO client (nom, prenom, adresse, mail, numTel, dateNaissance, idSituation, numEmploye) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmtInsertClient = $conn->prepare($sqlInsertClient);
+
+            if ($stmtInsertClient->execute([$nomclient, $prenomclient, $adresseclient, $adressemailclient, $numerotelclient, $datedenaissance, $rowSituation['idSituation'], $rowEmploye['numEmploye']])) {
+                echo '<script>alert("Le client a été ajouté à la base de données.");</script>';
+            } else {
+                echo '<script>alert("Une erreur est survenue lors de l\'ajout du client.");</script>';
+            }
+        }
     }
+} catch (PDOException $e) {
+    $msg = 'ERREUR dans ' . $e->getFile() . 'Ligne' . $e->getLine() . ':' . $e->getMessage();
+}
 ?>
     <form action="ajouterClient.php" method="post">
             <fieldset>
