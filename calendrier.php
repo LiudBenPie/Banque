@@ -1,5 +1,5 @@
 <?php
-require('init.php'); // Assurez-vous que init.php configure correctement PDO
+require('init.php');
 include VIEWS_DIR . '/menu.php';
 ?>
 
