@@ -149,7 +149,7 @@ INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idC
 ('2019-07-01', 600.00, 200.00, 2, 1),
 -- Comptes Client 3
 ('2021-02-01', 600.00, 800.00, 3, 1),
-('2022-01-15', 1000.00, 500.00, 3, 2),
+('2022-01-15', 1000.00, 500.00, 3, 2);
 
 -- Insertion des opérations
 INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES
@@ -188,7 +188,7 @@ INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES
 (200.00, '2020-02-15', 'Retrait', 6),
 (200.00, '2020-03-20', 'Dépôt', 6),
 (200.00, '2020-05-10', 'Retrait', 6),
-(200.00, '2020-08-01', 'Dépôt', 6),
+(200.00, '2020-08-01', 'Dépôt', 6);
 
 -- Insertion des motifs
 INSERT INTO Motif (libelleMotif, listePieces) VALUES
