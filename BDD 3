@@ -219,4 +219,3 @@ INSERT INTO rdv (dateRdv, heureRdv, numEmploye, idMotif, numClient) VALUES
 ('2024-07-10', 11, 1, 1, 1),
 ('2024-08-15', 12, 1, 2, 2),
 ('2024-09-20', 15, 4, 1, 3);
-
