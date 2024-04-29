@@ -5,9 +5,6 @@ require('init.php');
 // Vérification des autorisations (ACL)
 checkAcl('auth');
 
-// Inclusion de l'élément de vue du menu
-include VIEWS_DIR . '/menu.php';
-
 // Requête SQL pour récupérer les données
 $sql = "SELECT nomTypeContrat, COUNT(*) AS nombre_contrats FROM ContratClient
         INNER JOIN Contrat ON ContratClient.numContrat = Contrat.numContrat
@@ -28,6 +25,5 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 }
 
 // Retourner les données au format JSON
-header('Content-Type: application/json');
 echo json_encode($data);
 ?>
