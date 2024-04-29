@@ -17,8 +17,15 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Utilisation d'AJAX pour récupérer les données depuis PHP
             fetch('statContrat.php')
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erreur lors de la récupération des données : ' + response.statusText);
+                    }
+                    return response.json();
+                })
                 .then(data => {
+                    console.log('Données récupérées :', data); // Afficher les données pour débogage
+                    
                     // Récupérer les labels et les valeurs depuis les données JSON
                     const labels = data.labels;
                     const values = data.values;
@@ -45,7 +52,9 @@
                         }
                     });
                 })
-                .catch(error => console.error('Erreur lors de la récupération des données :', error));
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des données :', error);
+                });
         });
     </script>
 </body>
