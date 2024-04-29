@@ -50,11 +50,11 @@ catch (PDOException $e) {
         </p>
         <p>
             <label for="solde">Solde :</label>
-            <input type="solde" id="solde" name="solde" required>
+            <input type="text" id="solde" name="solde" required>
         </p>
         <p>
         <label for="decouvert">Montant du découvert :</label>
-        <input type="number" id="decouvert" name="decouvert" min="0" step="100" required>
+        <input type="text" id="decouvert" name="decouvert" required>
         </p>
         <p>
             <label for="nomclient">Nom du client :</label>
