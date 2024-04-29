@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <title>Création d'un client</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="accueil.css"/>
+    <link rel="stylesheet" href="accueil.css">
 </head>
 <body>
 <?php
@@ -63,37 +63,37 @@ try {
     $msg = 'ERREUR dans ' . $e->getFile() . 'Ligne' . $e->getLine() . ':' . $e->getMessage();
 }
 ?>
-    <form action="ajouterClient.php" method="post">
-            <fieldset>
-            <legend>Création du client</legend>
-            <p>
-            <label for="Nom">Nom</label>
-            <input type="text" name="nom" value="" id="nom" size="12" maxlength="25" required>
-            </p>
-            <p>
-            <label for="Prenom">Prénom</label>
-            <input type="text" name="prenom" value="" id="prenom" size="12" maxlength="25" required>
-            </p>
-            <p>
+<form action="ajouterClient.php" method="post">
+    <fieldset>
+        <legend>Création du client</legend>
+        <p>
+            <label for="nom">Nom</label>
+            <input type="text" name="nom" id="nom" size="12" maxlength="25" required>
+        </p>
+        <p>
+            <label for="prenom">Prénom</label>
+            <input type="text" name="prenom" id="prenom" size="12" maxlength="25" required>
+        </p>
+        <p>
             <label for="adresse">Adresse</label>
-            <input type="text" name="adresse" value="" id="adresse" size="12" maxlength="25" required>
-            </p>
-            <p>
+            <input type="text" name="adresse" id="adresse" size="12" maxlength="25" required>
+        </p>
+        <p>
             <label for="adressemail">Adresse email</label>
-            <input type="text" name="adressemail" value="" id="adressemail" size="50" maxlength="50" required></br>
-            </p>
-            <p>
+            <input type="text" name="adressemail" id="adressemail" size="50" maxlength="50" required>
+        </p>
+        <p>
             <label for="numtel">Numéro de téléphone</label>
-            <input type="text" name="numtel" value="" id="numtel" size="10" maxlength="25" required></br>
-            </p>
-            <p>
+            <input type="text" name="numtel" id="numtel" size="10" maxlength="25" required>
+        </p>
+        <p>
             <label for="datedenaissance">Date de naissance : </label>
-            <input type="date" name="datedenaissance" value="" id="datedenaissance" required></br>
-            </p>
-            <p>
+            <input type="date" name="datedenaissance" id="datedenaissance" required>
+        </p>
+        <p>
             <label for="nomemploye">Nom du conseiller</label>
             <select id="nomemploye" name="nomemploye">
-            <?php
+                <?php
                 $sql = "SELECT nom FROM employe WHERE categorie='Conseiller'";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
@@ -101,15 +101,15 @@ try {
 
                 foreach ($nomconseillers as $nomconseiller) {
                     $selected = ($rowemploye['nom'] == $nomconseiller['nom']) ? 'selected' : '';
-                    echo "<option value=\"{$nomconseiller['nom']}\" $selected>{$nomconseiller['nom']}</option>";
+                    echo "<option value=\{$nomconseiller['nom']}\ $selected>{$nomconseiller['nom']}</option>";
                 }
                 ?>
             </select>
-            </p>
-            <p>
+        </p>
+        <p>
             <label for="situation">Situation</label>
             <select id="situation" name="situation">
-            <?php
+                <?php
                 $sql = "SELECT description FROM situation";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
@@ -117,14 +117,15 @@ try {
 
                 foreach ($nomsituations as $nomsituation) {
                     $selected = ($rowemploye['description'] == $nomsituation['description']) ? 'selected' : '';
-                    echo "<option value=\"{$nomsituation['description']}\" $selected>{$nomsituation['description']}</option>";
-                }
+                    echo "<option value=\{$nomsituation['description']}\ $selected>{$nomsituation['description']}</option>";}
                 ?>
             </select>
-            </p>
-            <p>
+        </p>
+        <p>
             <input type="submit" name="ajouterclient" value="Ajouter un client">
             <input type="reset" name="reset" value="Effacer les valeurs saisies">
-            </p>
-            </fieldset>
-            </form>
+        </p>
+    </fieldset>
+</form>
+</body>
+</html>
