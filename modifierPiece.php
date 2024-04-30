@@ -38,7 +38,7 @@
             $_SESSION['deleteSuccess'] = true;
             $deleteSuccessful = true;
         } else {
-            $sql = "SELECT * FROM motif, listePieces WHERE idMotif = ?";
+            $sql = "SELECT * FROM motif WHERE idMotif = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$idMotif]);
             $motif = $stmt->fetch();
