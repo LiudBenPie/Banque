@@ -161,7 +161,7 @@ INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idC
 ('2023-07-15', 3100.00, 800.00, 6, 1),
 ('2024-05-09', 2800.00, 700.00, 6, 2),
 ('2022-10-25', 6000.00, 1400.00, 6, 3);
-
+ 
 -- Insertion des opérations
 INSERT INTO Operation (montant,  dateOperation, typeOp, idCompteClient) VALUES
 -- Compte 1 (Client 1)
