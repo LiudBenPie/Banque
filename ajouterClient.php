@@ -59,7 +59,7 @@
                         $sql = "INSERT INTO client (nom, prenom, adresse, mail, numTel,dateNaissance, idSituation, numEmploye) VALUES (?, ?, ?, ?,?, ?, ?, ?)";
 
                         echo $sql;
-                        $stmt = $connexion->prepare($sql);
+                        $stmt = $conn->prepare($sql);
                         if ($stmt->execute([$nomclient, $prenomclient, $adresseclient, $adressemailclient, $numerotelclient, $datedenaissance, $rowsituation['situation'], $rowemploye['nomemploye']])) {
                             echo '<script>alert("Le client a été ajouté à la base de données.");</script>';
                         } else {

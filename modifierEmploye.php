@@ -61,6 +61,10 @@ if ($deleteSuccessful) {
 
     <!-- Champs du formulaire avec les informations à jour de l'employé -->
     <p>
+            <input type="hidden" name="numEmploye"
+                value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
+        </p>
+    <p>
         <label for="nom">Nom:</label>
         <input type="text" id="nom" name="nom" value="<?php echo isset($employe['nom']) ? htmlspecialchars($employe['nom']) : ''; ?>">
     </p>
