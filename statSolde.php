@@ -12,8 +12,21 @@ checkAcl('auth'); // Vérification des autorisations (ACL)
 include VIEWS_DIR . '/menu.php'; // Inclusion du menu (si nécessaire)
 
 try {
-    // Requête SQL pour récupérer les données
-    $sql = "SELECT nom, COUNT(*) AS nombre_rdv FROM rdv JOIN employe on rdv.NumEmploye=employe.Numemploye GROUP BY nom";
+    // Requête SQL pour récupérer la somme des soldes
+    $sql = "SELECT SUM(solde) AS somme_solde FROM compteclient";
+    
+    // Préparation et exécution de la requête SQL avec PDO
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    
+    // Récupération du résultat
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    // Affichage de la somme des soldes
+    echo "La somme des soldes des comptes clients est de : " . $result['somme_solde'];
+    
+    // Requête SQL pour récupérer les soldes des clients
+    $sql = "SELECT SUM(solde) AS solde_client, nom, prenom FROM compteclient JOIN client ON client.Numclient = compteclient.Numclient GROUP BY nom, prenom";
     
     // Préparation et exécution de la requête SQL avec PDO
     $stmt = $conn->prepare($sql);
@@ -28,8 +41,8 @@ try {
 
     // Formatage des résultats pour le graphique
     foreach ($typesCompte as $row) {
-        $labels[] = $row['nom'];
-        $values[] = (int) $row['nombre_rdv'];
+        $labels[] = $row['nom'] . ' ' . $row['prenom'];
+        $values[] = (int) $row['solde_client'];
     }
 
     // Données au format JSON pour le graphique
@@ -50,7 +63,7 @@ try {
         data: {
             labels: ' . json_encode($data['labels']) . ',
             datasets: [{
-                label: "Nombre de contrats",
+                label: "Solde des clients",
                 data: ' . json_encode($data['values']) . ',
                 backgroundColor: [
                     "rgba(75, 0, 130, 0.8)", // Indigo foncé
@@ -75,7 +88,7 @@ try {
             plugins: {
                 title: {
                     display: true,
-                    text: "Répartition des rendez-vous par conseiller"
+                    text: "répartion des soldes des clients"
                 }
             },
         }
@@ -83,7 +96,7 @@ try {
     </script></div>';
 } catch (PDOException $e) {
     // Gestion des erreurs PDO
-    die("Erreur lors de l'exécution de la requête : " . $e->getMessage());
+    echo "Erreur lors de l'exécution de la requête : " . $e->getMessage();
 }
 ?>
 </body>
