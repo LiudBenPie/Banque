@@ -50,9 +50,9 @@ try {
 </head>
 <body>
     <h2>Ajouter une nouvelle opération</h2>
-    <form method="post" action="">
+    <form method="post" action="rechercheCompte.php">
         <label for="montant">Montant :</label>
-        <input type="text" id="montant" name="montant" required><br><br>
+        <input type="number" id="montant" name="montant" required><br><br>
 
         <label for="date_operation">Date de l'opération :</label>
         <input type="date" id="date_operation" name="date_operation" required><br><br>
@@ -61,7 +61,7 @@ try {
         <input type="text" id="type_operation" name="type_operation" required><br><br>
 
         <label for="id_compte_client">Identifiant du compte client :</label>
-        <input type="text" id="id_compte_client" name="id_compte_client" required><br><br>
+        <input type="number" id="id_compte_client" name="id_compte_client" required><br><br>
 
         <button type="submit">Ajouter Opération</button>
     </form>
