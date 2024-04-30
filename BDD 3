@@ -137,7 +137,6 @@ INSERT INTO Client (nom, prenom, adresse, mail, numTel, dateNaissance, idSituati
 
 -- Insertion des comptes clients
 INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idCompte) VALUES
-<<<<<<< HEAD
 -- Compte 1 (Client 1)
 ('2020-01-01', 2000.00, 500.00, 1, 1),
 ('2021-03-15', 1000.00, 0.00, 1, 2),
@@ -165,17 +164,6 @@ INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idC
 -- Insertion des opérations
 INSERT INTO Operation (montant,  dateOperation, typeOp, idCompteClient) VALUES
 -- Compte 1 (Client 1)
-=======
-('2020-01-01', 1000.00, 500.00, 1, 1),
-('2021-03-15', 650.00, 0.00, 1, 2),
-('2022-06-20', 4000.00, 1000.00, 1, 3),
-('2019-07-01', 600.00, 200.00, 2, 1),
-('2021-02-01', 600.00, 800.00, 3, 1),
-('2022-01-15', 1000.00, 500.00, 3, 2);
-
--- Insertion des opérations
-INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES
->>>>>>> c2e87215dd49030675014108b63a346acd39c72a
 (500.00, '2020-01-02', 'Dépôt', 1),
 (300.00, '2020-02-15', 'Retrait', 1),
 (200.00, '2020-03-20', 'Dépôt', 1),
@@ -191,7 +179,6 @@ INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES
 (2000.00, '2022-08-20', 'Dépôt', 3),
 (1500.00, '2022-10-05', 'Retrait', 3),
 (3000.00, '2022-12-01', 'Dépôt', 3),
-<<<<<<< HEAD
 -- Compte 4 (Client 1)
 (800.00, '2023-04-15', 'Dépôt', 4),
 (400.00, '2023-05-20', 'Retrait', 4),
@@ -205,23 +192,6 @@ INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES
 -- Compte 6 (Client 1)
 (1800.00, '2024-08-10', 'Dépôt', 6),
 (1300.00, '2024-10-05', 'Retrait', 6);
-=======
-(500.00, '2020-01-02', 'Dépôt', 4),
-(300.00, '2020-02-15', 'Retrait', 4),
-(300.00, '2020-03-20', 'Dépôt', 4),
-(200.00, '2020-05-10', 'Retrait', 4),
-(300.00, '2020-08-01', 'Dépôt', 4),
-(1000.00, '2020-01-02', 'Dépôt', 5),
-(500.00, '2020-02-15', 'Retrait', 5),
-(200.00, '2020-03-20', 'Dépôt', 5),
-(200.00, '2020-05-10', 'Retrait', 5),
-(100.00, '2020-08-01', 'Dépôt', 5),
-(1000.00, '2020-01-02', 'Dépôt', 6),
-(200.00, '2020-02-15', 'Retrait', 6),
-(200.00, '2020-03-20', 'Dépôt', 6),
-(200.00, '2020-05-10', 'Retrait', 6),
-(200.00, '2020-08-01', 'Dépôt', 6);
->>>>>>> c2e87215dd49030675014108b63a346acd39c72a
 
 -- Insertion des contrats
 INSERT INTO Contrat (nomTypeContrat, description) VALUES
