@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <?php
 require('init.php'); // Inclure le fichier d'initialisation pour établir la connexion PDO
 checkAcl('auth'); // Vérification des autorisations (ACL)
@@ -36,7 +44,7 @@ try {
     echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>';
 
     // Script JavaScript pour générer le graphique circulaire
-    echo '<canvas id="myChart" width="200" height="200"></canvas>
+    echo '<div style="width: 30%; margin: 0 auto;"><canvas id="myChart"></canvas>
     <script>
     var ctx = document.getElementById("myChart").getContext("2d");
     var myChart = new Chart(ctx, {
@@ -74,9 +82,11 @@ try {
             },
         }
     });
-    </script>';
+    </script></div>';
 } catch (PDOException $e) {
     // Gestion des erreurs PDO
     die("Erreur lors de l'exécution de la requête : " . $e->getMessage());
 }
 ?>
+</body>
+</html>
