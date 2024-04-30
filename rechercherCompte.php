@@ -14,26 +14,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type_operation = $_POST['type_operation'];
     $id_compte_client = $_POST['id_compte_client'];
 
-    try {
-        // Préparation de la requête SQL avec des paramètres nommés
-        $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES (:montant, :date_operation, :type_operation, :id_compte_client)";
-        $stmt = $conn->prepare($sql);
+    // Connexion à la base de données (à adapter avec vos paramètres de connexion)
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "banque";
 
-        // Liaison des valeurs aux paramètres
-        $stmt->bindParam(':montant', $montant);
-        $stmt->bindParam(':date_operation', $date_operation);
-        $stmt->bindParam(':type_operation', $type_operation);
-        $stmt->bindParam(':id_compte_client', $id_compte_client);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Exécution de la requête
+    // Vérifier la connexion
+    if ($conn->connect_error) {
+        die("Connexion échouée : " . $conn->connect_error);
+    }
+
+    // Requête d'insertion
+    $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+
+    // Vérifier si la préparation de la requête a réussi
+    if ($stmt) {
+        // Binder les valeurs et exécuter la requête
+        $stmt->bind_param("dsss", $montant, $date_operation, $type_operation, $id_compte_client);
         if ($stmt->execute()) {
             $createSuccessful = true;
         } else {
-            echo "Erreur lors de l'ajout de l'opération : " . $stmt->errorInfo()[2];
+            echo "Erreur lors de l'ajout de l'opération : " . $stmt->error;
         }
-    } catch (PDOException $e) {
-        echo "Erreur PDO : " . $e->getMessage();
+    } else {
+        echo "Erreur lors de la préparation de la requête : " . $conn->error;
     }
+
+    // Fermer la connexion
+    $conn->close();
 }
 
 // Afficher une alerte si la création a été réussie
@@ -67,7 +79,6 @@ if ($createSuccessful) {
         <button type="submit" name="action" value="Ajouter">Ajouter l'opération</button>
     </p>
 </form>
-
 
 
 
