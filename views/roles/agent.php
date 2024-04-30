@@ -38,7 +38,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/rechercherClient.php">Modifier les informations du client</a></li>
-                            <li><a class="dropdown-item" href="/creerClient.php">Inscrire un nouveau client</a></li>
+                            <li><a class="dropdown-item" href="/ajouterClient.php">Inscrire un nouveau client</a></li>
                         </ul>
                     </li>
                     <!-- Gestion des syntheses -->
