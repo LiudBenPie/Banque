@@ -29,7 +29,7 @@
                 <select name="numClient" id="client" class="form-control">
                     <?php foreach ($clients as $client) : ?>
                         <option value="<?php echo $client['numClient']; ?>">
-                            <?php echo $client['nom'] . ' ' . $client['prenom'] . ' <span class="part">' . $client['dateNaissance'] . '</span>'; ?>
+                            <?php echo $client['nom'] . ' ' . $client['prenom'] . ' ' . $client['dateNaissance']; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

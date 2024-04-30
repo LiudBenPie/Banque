@@ -18,7 +18,7 @@
                 </li>
                 <!-- Gestion des clients -->
                 <li class="nav-item">
-                    <a class="nav-link" href="/ajouterClient.php">Inscrire un nouveau client</a>
+                    <a class="nav-link" href="/creerClient.php">Inscrire un nouveau client</a>
                 </li>
                 <!-- Gestion des contrats -->
                 <li class="nav-item dropdown">

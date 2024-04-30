@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Création d'un client</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="accueil.css" />
+    <link rel="stylesheet" href="formstyle.css" />
 </head>
 
 <body>
@@ -14,7 +14,7 @@
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
     try {
-        if (isset($_POST['ajouterclient']) && !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['adresse']) && !empty($_POST['adressemail']) && !empty($_POST['numtel']) && !empty($_POST['datedenaissance'])) {
+        if (isset($_POST['creerclient']) && !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['adresse']) && !empty($_POST['adressemail']) && !empty($_POST['numtel']) && !empty($_POST['datedenaissance'])) {
             $nomemploye = $_POST['nomemploye'];
             // Recherche du numéro de contrat à partir du nom du contrat
             $sql = "SELECT numEmploye FROM employe WHERE nom = ?";
@@ -35,7 +35,7 @@
             $search4 = $_POST['datedenaissance'];
             $sql = "SELECT * FROM client WHERE nom LIKE '%$search1%' AND prenom LIKE '%$search2%' AND numTel LIKE '%$search3%' AND dateNaissance LIKE '%$search4%'";
             $result = $conn->query($sql);
-            if (($result->rowCount() > 0) && ($_POST['ajouterclient'])) {
+            if (($result->rowCount() > 0) && ($_POST['creerclient'])) {
                 // Afficher les données trouvées
                 foreach ($result as $row) {
                     $rowcli = $row['numClient'];
@@ -45,7 +45,7 @@
                     $rowma = $row['mail'];
                     $rownum = $row['numTel'];
                     $rowsitu = $row['situation'];
-                    if (isset($_POST['ajouterclient']) && (($_POST['nom']) == $rownom) || (($_POST['prenom']) == $rowpre) || (($_POST['adresse']) == $rowad) || (($_POST['adressemail']) == $rowma) || (($_POST['numtel']) == $rownum)) {
+                    if (isset($_POST['creerclient']) && (($_POST['nom']) == $rownom) || (($_POST['prenom']) == $rowpre) || (($_POST['adresse']) == $rowad) || (($_POST['adressemail']) == $rowma) || (($_POST['numtel']) == $rownum)) {
                         echo "Le client existe déjà dans la base de données";
                     } else {
                         $nomclient = $_POST['nom'];
@@ -73,36 +73,36 @@
         $msg = 'ERREUR dans ' . $e->getFile() . 'Ligne' . $e->getLine() . ':' . $e->getMessage();
     }
     ?>
-    <form action="ajouterClient.php" method="post">
-        <fieldset>
+    <div class="container mt-5" style="max-width: 700px;">
+        <form action="creerClient.php" method="post" class="row g-3 rounded shadow">
             <legend>Création du client</legend>
-            <p>
-                <label for="Nom">Nom</label>
-                <input type="text" name="nom" value="" id="nom" size="12" maxlength="25" required>
-            </p>
-            <p>
-                <label for="Prenom">Prénom</label>
-                <input type="text" name="prenom" value="" id="prenom" size="12" maxlength="25" required>
-            </p>
-            <p>
-                <label for="adresse">Adresse</label>
-                <input type="text" name="adresse" value="" id="adresse" size="12" maxlength="25" required>
-            </p>
-            <p>
-                <label for="adressemail">Adresse email</label>
-                <input type="text" name="adressemail" value="" id="adressemail" size="50" maxlength="50" required></br>
-            </p>
-            <p>
-                <label for="numtel">Numéro de téléphone</label>
-                <input type="text" name="numtel" value="" id="numtel" size="10" maxlength="25" required></br>
-            </p>
-            <p>
-                <label for="datedenaissance">Date de naissance : </label>
-                <input type="date" name="datedenaissance" value="" id="datedenaissance" required></br>
-            </p>
-            <p>
-                <label for="nomemploye">Nom du conseiller</label>
-                <select id="nomemploye" name="nomemploye">
+            <div class="form-group col-md-6">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" name="nom" class="form-control" value="" id="nom" size="12" maxlength="25" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" name="prenom" class="form-control" value="" id="prenom" size="12" maxlength="25" required>
+            </div>
+            <div class="form-group">
+                <label for="adresse" class="form-label">Adresse</label>
+                <input type="text" name="adresse" class="form-control" value="" id="adresse" size="12" maxlength="25" required>
+            </div>
+            <div class="form-group">
+                <label for="adressemail" class="form-label">Adresse email</label>
+                <input type="text" name="adressemail" class="form-control" value="" id="adressemail" size="50" maxlength="50" required></br>
+            </div>
+            <div class="form-group">
+                <label for="numtel" class="form-label">Numéro de téléphone</label>
+                <input type="text" name="numtel" class="form-control" value="" id="numtel" size="10" maxlength="25" required></br>
+            </div>
+            <div class="form-group">
+                <label for="datedenaissance" class="form-label">Date de naissance : </label>
+                <input type="date" name="datedenaissance" class="form-control" value="" id="datedenaissance" required></br>
+            </div>
+            <div class="form-group">
+                <label for="nomemploye" class="form-label">Nom du conseiller</label>
+                <select id="nomemploye" name="nomemploye" class="form-control">
                     <?php
                     $sql = "SELECT nom FROM employe WHERE categorie='Conseiller'";
                     $stmt = $conn->prepare($sql);
@@ -115,10 +115,10 @@
                     }
                     ?>
                 </select>
-            </p>
-            <p>
-                <label for="situation">Situation</label>
-                <select id="situation" name="situation">
+            </div>
+            <div class="form-group">
+                <label for="situation" class="form-label">Situation</label>
+                <select id="situation" name="situation" class="form-control">
                     <?php
                     $sql = "SELECT description FROM situation";
                     $stmt = $conn->prepare($sql);
@@ -131,10 +131,10 @@
                     }
                     ?>
                 </select>
-            </p>
-            <p>
-                <input type="submit" name="ajouterclient" value="Ajouter un client">
+            </div>
+            <div>
+                <input type="submit" name="creerclient" class="btn" value="Ajouter un client">
                 <input type="reset" name="reset" value="Effacer les valeurs saisies">
-            </p>
-        </fieldset>
-    </form>
+            </div>
+        </form>
+    </div>
