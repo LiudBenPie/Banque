@@ -103,33 +103,41 @@ try {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Ajouter une opération</title>
+    <link rel="stylesheet" href="formstyle.css">
 </head>
+
 <body>
-    <h2>Ajouter une nouvelle opération</h2>
-    <form method="post" action="rechercherCompte.php">
-        <label for="montant">Montant :</label>
-        <input type="number" id="montant" name="montant" required><br><br>
-
-        <label for="date_operation">Date de l'opération :</label>
-        <input type="date" id="date_operation" name="date_operation" required><br><br>
-
-        <label for="type_operation">Type d'opération :</label>
-        <input type="text" id="type_operation" name="type_operation" required><br><br>
-
-        <label for="id_compte_client">Identifiant du compte client :</label>
-        <input type="number" id="id_compte_client" name="id_compte_client" required><br><br>
-
-        <button type="submit">Ajouter Opération</button>
-    </form>
+    <div class="container mt-5" style="max-width: 700px;">
+        <form method="post" action="rechercherCompte.php" class="row g-3 rounded shadow">
+            <legend>Ajouter une nouvelle opération</legend>
+            <div class="form-group">
+                <label for="montant" class="form-label">Montant :</label>
+                <input type="number" class="form-control" id="montant" name="montant" required>
+            </div>
+            <div class="form-group">
+                <label for="date_operation" class="form-label">Date de l'opération :</label>
+                <input type="date" class="form-control" id="date_operation" name="date_operation" required>
+            </div>
+            <div class="form-group">
+                <label for="type_operation" class="form-label">Type d'opération :</label>
+                <input type="text" class="form-control" id="type_operation" name="type_operation" required>
+            </div>
+            <div class="form-group">
+                <label for="id_compte_client" class="form-label">Identifiant du compte client :</label>
+                <input type="number" class="form-control" id="id_compte_client" name="id_compte_client" required>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn">Ajouter Opération</button>
+            </div>
+        </form>
 </body>
+
+<<<<<<< HEAD
 </html>
-
-
-
-
-
-
+=======
 >>>>>>> 25a357fe533bc7a44b2a7539741d2cead6d31241
+>>>>>>> 3c023c2328b57e1ab0dd5d3af80c60a891064a01
