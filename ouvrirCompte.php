@@ -50,7 +50,7 @@ catch (PDOException $e) {
         </p>
         <p>
             <label for="solde">Solde :</label>
-            <input type="text" id="solde" name="solde" required>
+            <input type="text" id="solde" name="solde" value="0" readonly>
         </p>
         <p>
         <label for="decouvert">Montant du découvert :</label>
