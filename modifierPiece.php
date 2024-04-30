@@ -10,7 +10,7 @@
 
 <body>
     <?php
-    require ('init.php');
+    require('init.php'); // Assurez-vous que init.php inclut la configuration de la base de données ($conn)
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
 
@@ -22,11 +22,11 @@
 
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $libelleMotif = $_POST['libelleMotif'];
-            $listepieces =$_POST['listepieces'];
+            $listepieces = $_POST['listepieces'];
 
-            $sql = "UPDATE motif SET libelleMotif = ? , listepieces = ? WHERE idMotif = ?";
+            $sql = "UPDATE motif SET libelleMotif = ?, listepieces = ? WHERE idMotif = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$libelleMotif, $idMotif, $listepieces]);
+            $stmt->execute([$libelleMotif, $listepieces, $idMotif]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
@@ -38,12 +38,13 @@
 
             $_SESSION['deleteSuccess'] = true;
             $deleteSuccessful = true;
-        } else {
-            $sql = "SELECT * FROM motif WHERE idMotif = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$idMotif]);
-            $motif = $stmt->fetch();
         }
+
+        // Sélectionner à nouveau le motif après la mise à jour ou la suppression
+        $sql = "SELECT * FROM motif WHERE idMotif = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$idMotif]);
+        $motif = $stmt->fetch();
     }
 
     // Affiche une alerte si la mise à jour a été réussie
@@ -71,7 +72,7 @@
                 value="<?php echo isset($motif['libelleMotif']) ? htmlspecialchars($motif['libelleMotif']) : ''; ?>">
         </p>
         <p>
-            <label for="listepieces">liste des Pièces:</label>
+            <label for="listepieces">Liste des Pièces:</label>
             <input type="text" id="listepieces" name="listepieces"
                 value="<?php echo isset($motif['listepieces']) ? htmlspecialchars($motif['listepieces']) : ''; ?>">
         </p>
@@ -84,4 +85,5 @@
         </p>
     </form>
 </body>
+
 </html>
