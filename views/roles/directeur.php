@@ -42,9 +42,8 @@
                         Pièces à fournir
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/creerMotif.php">Créer la liste des pièces à fournir</a></li>
-                        <li><a class="dropdown-item" href="/rechercherPiece.php">Modifier la liste des pièces à fournir</a></li>
-                        <li><a class="dropdown-item" href="">Supprimer la liste des pièces à fournir</a></li>
+                        <li><a class="dropdown-item" href="/creerMotif.php">Créer un motif avec la liste des pièces à fournir</a></li>
+                        <li><a class="dropdown-item" href="/rechercherPiece.php">Gérer les motifs existants</a></li>
                     </ul>
                 </li>
                 <!-- Visualiser les statistiques de la banque -->

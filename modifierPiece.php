@@ -10,7 +10,7 @@
 
 <body>
     <?php
-    require ('init.php');
+    require('init.php'); // Assurez-vous que init.php inclut la configuration de la base de données ($conn)
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
 
@@ -22,10 +22,11 @@
 
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $libelleMotif = $_POST['libelleMotif'];
+            $listePieces = $_POST['listePieces'];
 
-            $sql = "UPDATE motif SET libelleMotif = ? WHERE idMotif = ?";
+            $sql = "UPDATE motif SET libelleMotif = ?, listePieces = ? WHERE idMotif = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$libelleMotif, $idMotif]);
+            $stmt->execute([$libelleMotif, $listePieces, $idMotif]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
@@ -37,12 +38,13 @@
 
             $_SESSION['deleteSuccess'] = true;
             $deleteSuccessful = true;
-        } else {
-            $sql = "SELECT * FROM motif WHERE idMotif = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$idMotif]);
-            $motif = $stmt->fetch();
         }
+
+        // Sélectionner à nouveau le motif après la mise à jour ou la suppression
+        $sql = "SELECT * FROM motif WHERE idMotif = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$idMotif]);
+        $motif = $stmt->fetch();
     }
 
     // Affiche une alerte si la mise à jour a été réussie
@@ -56,7 +58,7 @@
     }
     ?>
     <!-- Formulaire pour la mise à jour et la suppression des informations du motif -->
-    <form action="modifierMotif.php" method="post" name='monForm'>
+    <form action="modifierPiece.php" method="post" name='monForm'>
 
         <!-- Champs du formulaire avec les informations à jour du motif -->
         <p>
@@ -69,6 +71,11 @@
             <input type="text" id="libelleMotif" name="libelleMotif"
                 value="<?php echo isset($motif['libelleMotif']) ? htmlspecialchars($motif['libelleMotif']) : ''; ?>">
         </p>
+        <p>
+            <label for="listePieces">Liste des Pièces:</label>
+            <input type="text" id="listePieces" name="listePieces"
+                value="<?php echo isset($motif['listePieces']) ? htmlspecialchars($motif['listePieces']) : ''; ?>">
+        </p>
 
         <p>
             <a href="../">Page précédente</a>
@@ -78,4 +85,5 @@
         </p>
     </form>
 </body>
+
 </html>

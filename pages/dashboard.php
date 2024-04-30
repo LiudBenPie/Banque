@@ -8,7 +8,6 @@ checkAcl('auth');
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="style_directeur.css">
 </head>
 <body>
     <?php
