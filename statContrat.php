@@ -32,48 +32,48 @@ try {
     ];
 
     // Inclure la bibliothèque Chart.js
-    echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>';
+echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>';
 
-    // Script JavaScript pour générer le graphique circulaire
-    echo '<canvas id="myChart" width="400" height="400"></canvas>
-    <script>
-    var ctx = document.getElementById("myChart").getContext("2d");
-    var myChart = new Chart(ctx, {
-        type: "doughnut",
-        data: {
-            labels: ' . json_encode($data['labels']) . ',
-            datasets: [{
-                label: "Nombre de contrats",
-                data: ' . json_encode($data['values']) . ',
-                backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 206, 86, 0.2)",
-                    "rgba(75, 192, 192, 0.2)",
-                    "rgba(153, 102, 255, 0.2)",
-                    "rgba(255, 159, 64, 0.2)"
-                ],
-                borderColor: [
-                    "rgba(255, 99, 132, 1)",
-                    "rgba(54, 162, 235, 1)",
-                    "rgba(255, 206, 86, 1)",
-                    "rgba(75, 192, 192, 1)",
-                    "rgba(153, 102, 255, 1)",
-                    "rgba(255, 159, 64, 1)"
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: "Répartition des types de contrats"
-                }
+// Script JavaScript pour générer le graphique circulaire
+echo '<canvas id="myChart" width="100" height="100"></canvas>
+<script>
+var ctx = document.getElementById("myChart").getContext("2d");
+var myChart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+        labels: ' . json_encode($data['labels']) . ',
+        datasets: [{
+            label: "Nombre de contrats",
+            data: ' . json_encode($data['values']) . ',
+            backgroundColor: [
+                "rgba(75, 0, 130, 0.2)", // Indigo foncé
+                "rgba(0, 0, 128, 0.2)", // Bleu marine foncé
+                "rgba(0, 100, 0, 0.2)", // Vert foncé
+                "rgba(139, 0, 139, 0.2)", // Violet foncé
+                "rgba(165, 42, 42, 0.2)", // Brun foncé
+                "rgba(128, 0, 0, 0.2)" // Rouge foncé
+            ],
+            borderColor: [
+                "rgba(75, 0, 130, 1)",
+                "rgba(0, 0, 128, 1)",
+                "rgba(0, 100, 0, 1)",
+                "rgba(139, 0, 139, 1)",
+                "rgba(165, 42, 42, 1)",
+                "rgba(128, 0, 0, 1)"
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: "Répartition des types de contrats"
             }
-        }
-    });
-    </script>';
+        },
+    }
+});
+</script>';
 } catch (PDOException $e) {
     // Gestion des erreurs PDO
     die("Erreur lors de l'exécution de la requête : " . $e->getMessage());
