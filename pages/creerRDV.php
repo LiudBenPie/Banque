@@ -1,19 +1,17 @@
-<?php
-require('../init.php');
-checkAcl('auth');
-include VIEWS_DIR . '/menu.php';
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <title>rdv</title>
-    <link rel="stylesheet" href="style_directeur.css">
+    <link rel="stylesheet" href="formstyle.css">
 </head>
-
 <body>
+<?php
+require('../init.php');
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
+?>
     <div class="container mt-5" style="max-width: 700px;">
         <form action="/sauvegarderRdv.php" method="post" class="row g-3 rounded shadow">
             <legend>Créer un Nouveau RDV</legend>
