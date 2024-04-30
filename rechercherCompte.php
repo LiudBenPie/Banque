@@ -1,67 +1,82 @@
-<?php
-require('init.php'); // Inclut le script d'initialisation de la base de données
-checkAcl('auth'); // Vérifie les autorisations d'accès
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une opération</title>
+</head>
+<body>
+    <h2>Ajouter une opération</h2>
 
-// Vérifie si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Vérifie si les champs requis ont été fournis
-    if (isset($_POST['idCompteClient'], $_POST['montant'], $_POST['dateOperation'], $_POST['typeOp'])) {
-        $idCompteClient = $_POST['idCompteClient'];
+    <?php
+    // Inclure le fichier d'initialisation et vérifier les autorisations d'accès
+    require('init.php');
+    checkAcl('auth');
+
+    // Inclure le menu
+    include VIEWS_DIR . '/menu.php';
+
+    $createSuccessful = false;
+
+    // Vérifier si le formulaire a été soumis
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Récupérer les données du formulaire
         $montant = $_POST['montant'];
-        $dateOperation = $_POST['dateOperation'];
-        $typeOp = $_POST['typeOp'];
-        
-        try {
-            // Insertion de l'opération dans la base de données
-            $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) 
-                    VALUES (:montant, :dateOperation, :typeOp, :idCompteClient)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':montant', $montant);
-            $stmt->bindParam(':dateOperation', $dateOperation);
-            $stmt->bindParam(':typeOp', $typeOp);
-            $stmt->bindParam(':idCompteClient', $idCompteClient);
-            
-            // Exécute la requête d'insertion
-            if ($stmt->execute()) {
-                echo "L'opération a été enregistrée avec succès.";
-            } else {
-                throw new Exception("Une erreur s'est produite lors de l'enregistrement de l'opération.");
-            }
-        } catch (Exception $e) {
-            echo "Erreur : " . $e->getMessage();
+        $date_operation = $_POST['date_operation'];
+        $type_operation = $_POST['type_operation'];
+        $id_compte_client = $_POST['id_compte_client'];
+
+        // Requête d'insertion
+        $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient)
+                VALUES ('$montant', '$date_operation', '$type_operation', '$id_compte_client')";
+
+        // Exécuter la requête d'insertion
+        if ($conn->query($sql) === TRUE) {
+            $createSuccessful = true;
+        } else {
+            echo "Erreur lors de l'ajout de l'opération : " . $conn->error;
         }
-    } else {
-        echo "Tous les champs sont requis.";
     }
-}
 
-include VIEWS_DIR . '/menu.php';
+    // Récupérer les idCompteClient de la table CompteClient
+    $sqlCompteClients = "SELECT idCompteClient FROM CompteClient";
+    $resultCompteClients = $conn->query($sqlCompteClients);
+    ?>
 
-// Récupération de la liste des comptes clients avec les informations sur le client
-$sql = "SELECT CompteClient.idCompteClient, CompteClient.numClient, Client.nom, Client.prenom, CompteClient.idCompteClient 
-        FROM CompteClient 
-        INNER JOIN Client ON CompteClient.numClient = Client.numClient";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$compteClients = $stmt->fetchAll();
-?>
+    <?php
+    // Afficher un message de succès si l'opération a été ajoutée avec succès
+    if ($createSuccessful) {
+        echo "Opération ajoutée avec succès.";
+    }
+    ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-    <label for="compteClient">Sélectionnez le compte client pour l'opération :</label>
-    <select name="idCompteClient" id="compteClient">
-        <?php foreach ($compteClients as $compteClient) : ?>
-            <option value="<?php echo htmlspecialchars($compteClient['idCompteClient']); ?>">
-                <?php echo "Client: " . htmlspecialchars($compteClient['nom']) . ' ' . htmlspecialchars($compteClient['prenom']) . ", N° Compte: " . htmlspecialchars($compteClient['idCompteClient']); ?>
-            </option>
-        <?php endforeach; ?>
-    </select><br><br>
-    <label for="montant">Montant :</label>
-    <input type="text" name="montant" id="montant" required><br><br>
-    <label for="dateOperation">Date de l'opération :</label>
-    <input type="date" name="dateOperation" id="dateOperation" required><br><br>
-    <label for="typeOp">Type d'opération :</label>
-    <input type="text" name="typeOp" id="typeOp" required><br><br>
-    <button type="submit">Réaliser l'opération</button>
-</form>
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <label for="montant">Montant :</label>
+        <input type="text" name="montant" id="montant" required><br><br>
+        
+        <label for="date_operation">Date de l'opération :</label>
+        <input type="date" name="date_operation" id="date_operation" required><br><br>
+        
+        <label for="type_operation">Type d'opération :</label>
+        <select name="type_operation" id="type_operation" required>
+            <option value="Dépôt">Dépôt</option>
+            <option value="Retrait">Retrait</option>
+        </select><br><br>
+        
+        <label for="id_compte_client">ID du compte client :</label>
+        <select name="id_compte_client" id="id_compte_client" required>
+            <?php
+            // Afficher les options pour chaque idCompteClient disponible
+            if ($resultCompteClients->num_rows > 0) {
+                while ($row = $resultCompteClients->fetch_assoc()) {
+                    echo "<option value=\"" . $row["idCompteClient"] . "\">" . $row["idCompteClient"] . "</option>";
+                }
+            }
+            ?>
+        </select><br><br>
+        
+        <input type="submit" value="Ajouter l'opération">
+    </form>
+</body>
+</html>
 
 
