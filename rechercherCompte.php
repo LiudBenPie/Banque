@@ -50,7 +50,7 @@ try {
 </head>
 <body>
     <h2>Ajouter une nouvelle opération</h2>
-    <form method="post" action="rechercheCompte.php">
+    <form method="post" action="rechercherCompte.php">
         <label for="montant">Montant :</label>
         <input type="number" id="montant" name="montant" required><br><br>
 
