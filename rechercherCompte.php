@@ -1,66 +1,101 @@
 <?php
-require('init.php');
+require('init.php'); 
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
 
-// Récupération de la liste des comptes clients avec les informations sur le client
-$sql = "SELECT CompteClient.idCompteClient, CompteClient.numClient, Client.nom, Client.prenom, CompteClient.idCompte 
-        FROM CompteClient 
-        INNER JOIN Client ON CompteClient.numClient = Client.numClient";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$compteClients = $stmt->fetchAll();
+try {
+    if (isset($_POST['ventecon'], $_POST['date'], $_POST['tarif'], $_POST['nomcli'], $_POST['nomcon'])) {
+        // Récupération des données du formulaire
+        $datcon = $_POST['date'];
+        $tarcon = $_POST['tarif'];
+        $nomcli = $_POST['nomcli'];
+        $nomcon = $_POST['nomcon'];
 
-// Traitement du formulaire de sélection du compte client ou de réalisation de l'opération
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Si le formulaire de sélection du compte client est soumis
-    if (isset($_POST['idCompteClient'])) {
-        $idCompteClient = $_POST['idCompteClient'];
-        echo '<h2>Réaliser une opération pour le compte sélectionné</h2>';
-        echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post">';
-        echo '<input type="hidden" name="idCompteClient" value="' . $idCompteClient . '">';
-
-        echo '<label for="montant">Montant :</label>';
-        echo '<input type="number" name="montant" step="0.01" required>';
-
-        echo '<label for="typeOp">Type d\'opération :</label>';
-        echo '<select name="typeOp" required>';
-        echo '<option value="Dépôt">Dépôt</option>';
-        echo '<option value="Retrait">Retrait</option>';
-        echo '</select>';
-
-        echo '<button type="submit">Réaliser l\'opération</button>';
-        echo '</form>';
-    } 
-    // Si le formulaire de réalisation de l'opération est soumis
-    elseif (isset($_POST['idCompteClient'], $_POST['montant'], $_POST['typeOp'])) {
-        $idCompteClient = $_POST['idCompteClient'];
-        $montant = $_POST['montant'];
-        $typeOp = $_POST['typeOp'];
-
-        // Insertion de l'opération dans la table Operation
-        $sql = "INSERT INTO Operation (montant, typeOp, dateOperation, idCompteClient) VALUES (?, ?, NOW(), ?)";
+        // Recherche du numéro de client à partir du nom du client
+        $sql = "SELECT numClient FROM Client WHERE nom = ?";
         $stmt = $conn->prepare($sql);
-        if ($stmt->execute([$montant, $typeOp, $idCompteClient])) {
-            echo '<script>alert("L\'opération a été réalisée avec succès.");</script>';
+        $stmt->execute([$nomcli]);
+        $rowcli = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($rowcli) {
+            // Insertion du contrat client dans la table ContratClient
+            $sql = "INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, numContrat) VALUES (?, ?, ?, (SELECT numContrat FROM Contrat WHERE nomTypeContrat = ?))";
+            $stmt = $conn->prepare($sql);
+            if ($stmt->execute([$datcon, $tarcon, $rowcli['numClient'], $nomcon])) {
+                // Récupération de l'ID du Compte Client associé au Client
+                $sql = "SELECT idCompteClient FROM CompteClient WHERE numClient = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$rowcli['numClient']]);
+                $rowCompteClient = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($rowCompteClient) {
+                    // Insertion de l'opération dans la table Operation
+                    $montant = floatval($tarcon); // Conversion en float
+                    $typeOp = 'Vente Contrat'; // Type d'opération pour une vente de contrat
+                    $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
+                    $stmt = $conn->prepare($sql);
+                    if ($stmt->execute([$montant, $datcon, $typeOp, $rowCompteClient['idCompteClient']])) {
+                        echo '<script>alert("L\'opération a été réalisée avec succès.");</script>';
+                    } else {
+                        echo '<script>alert("Une erreur est survenue lors de l\'ajout de l\'opération.");</script>';
+                    }
+                } else {
+                    echo '<script>alert("Aucun compte client trouvé pour ce client.");</script>';
+                }
+            } else {
+                echo '<script>alert("Une erreur est survenue lors de l\'ajout du contrat client.");</script>';
+            }
         } else {
-            echo '<script>alert("Erreur lors de la réalisation de l\'opération. Veuillez réessayer.");</script>';
+            echo '<script>alert("Le client spécifié n\'existe pas.");</script>';
         }
     }
+} catch (PDOException $e) {
+    echo 'ERREUR dans ' . $e->getFile() . ' Ligne ' . $e->getLine() . ': ' . $e->getMessage();
 }
 ?>
 
-<h2>Sélectionnez le compte client pour réaliser une opération</h2>
-
+<h2>Formulaire de Vente de Contrat</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-    <label for="compteClient">Sélectionnez le compte client :</label>
-    <select name="idCompteClient" id="compteClient">
-        <?php foreach ($compteClients as $compteClient) : ?>
-            <option value="<?php echo $compteClient['idCompteClient']; ?>">
-                <?php echo "Client: " . $compteClient['nom'] . ' ' . $compteClient['prenom'] . ", N° Compte: " . $compteClient['idCompte']; ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-    <button type="submit">Sélectionner le compte</button>
+    <p>
+        <label for="date">Date d'ouverture :</label>
+        <input type="date" id="date" name="date" required><br><br>
+    </p>
+    <p>
+        <label for="tarif">Tarif mensuel :</label>
+        <input type="text" id="tarif" name="tarif" required><br><br>
+    </p>
+    <p>
+        <label for="nomcli">Nom du client :</label>
+        <select id="nomcli" name="nomcli">
+            <?php
+            $sql = "SELECT nom FROM Client";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $nomclients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($nomclients as $nomclient) {
+                echo "<option value=\"{$nomclient['nom']}\">{$nomclient['nom']}</option>";
+            }
+            ?>
+        </select>
+    </p>
+    <p>
+        <label for="nomcon">Nom du contrat :</label>
+        <select id="nomcon" name="nomcon">
+            <?php
+            $sql = "SELECT nomTypeContrat FROM Contrat";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $nomtypecontrats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($nomtypecontrats as $nomtypecontrat) {
+                echo "<option value=\"{$nomtypecontrat['nomTypeContrat']}\">{$nomtypecontrat['nomTypeContrat']}</option>";
+            }
+            ?>
+        </select>
+    </p>
+    <p>
+        <input type="submit" name="ventecon" value="Vendre un contrat">
+    </p>
 </form>
 
