@@ -11,9 +11,9 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $compteClients = $stmt->fetchAll();
 
-// Vérification de l'étape de l'interaction utilisateur
+// Traitement du formulaire de sélection du compte client ou de réalisation de l'opération
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Étape 1 : L'utilisateur a sélectionné un compte client
+    // Si le formulaire de sélection du compte client est soumis
     if (isset($_POST['idCompteClient'])) {
         $idCompteClient = $_POST['idCompteClient'];
         echo '<h2>Réaliser une opération pour le compte sélectionné</h2>';
@@ -31,8 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         echo '<button type="submit">Réaliser l\'opération</button>';
         echo '</form>';
-    }
-    // Étape 2 : L'utilisateur a soumis le formulaire d'opération
+    } 
+    // Si le formulaire de réalisation de l'opération est soumis
     elseif (isset($_POST['idCompteClient'], $_POST['montant'], $_POST['typeOp'])) {
         $idCompteClient = $_POST['idCompteClient'];
         $montant = $_POST['montant'];
@@ -63,3 +63,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </select>
     <button type="submit">Sélectionner le compte</button>
 </form>
+
