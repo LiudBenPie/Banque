@@ -45,3 +45,13 @@ select {
     font-weight: bold;
     color: black;
 }
+
+body {
+    background-image: url('/image/image.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container{
+    background: rgb(229, 229, 218);
+}

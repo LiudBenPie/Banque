@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>rdv</title>
-    <link rel="stylesheet" href="formstyle.css">
+    <link rel="stylesheet" href="/formstyle.css">
 </head>
 <body>
 <?php

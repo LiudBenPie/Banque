@@ -6,8 +6,8 @@
     <title>Document</title>
     <style>
         li:hover {
-            background-color: #005841;
-            color: #CCB33B;
+            background-color: black;
+            color: yellow;
         }
 
         .btn {
@@ -17,13 +17,12 @@
 
         .btn:hover {
             font-weight: bold;
-            color: black;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #003924;">
+    <nav class="navbar navbar-expand-lg" style="background-color: #191F1D;">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/image/cochon.png" width="80" alt="icon"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
