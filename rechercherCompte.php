@@ -1,7 +1,17 @@
 <?php
-require('init.php'); // Inclusion du fichier d'initialisation de la base de données
-checkAcl('auth'); // Vérification des autorisations (fonction non définie dans l'extrait)
-include VIEWS_DIR . '/menu.php'; // Inclusion du fichier de menu (constante VIEWS_DIR non définie dans l'extrait)
+// Inclusion du fichier d'initialisation de la base de données
+require('init.php');
+
+// Vérification des autorisations (fonction non définie dans l'extrait)
+checkAcl('auth');
+
+// Inclusion du fichier de menu (constante VIEWS_DIR non définie dans l'extrait)
+include VIEWS_DIR . '/menu.php';
+
+// Activation de l'affichage des erreurs PHP
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,14 +26,18 @@ try {
             // Insertion des données dans la table Operation
             $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
+
+            // Exécution de la requête d'insertion avec gestion des erreurs PDO
             if ($stmt->execute([$montant, $dateOperation, $typeOperation, $idCompteClient])) {
                 echo '<script> alert ("L\'opération a été ajoutée à la base de données.");</script>';
             } else {
-                echo '<script> alert("Une erreur est survenue lors de l\'ajout de l\'opération.");</script>';
+                // Affichage d'une alerte JavaScript avec le message d'erreur PDO
+                echo '<script> alert("Une erreur est survenue lors de l\'ajout de l\'opération : ' . $stmt->errorInfo()[2] . '");</script>';
             }
         }
     }
 } catch (PDOException $e) {
+    // Gestion des erreurs PDO
     $msg = 'ERREUR dans ' . $e->getFile() . 'Ligne' . $e->getLine() . ':' . $e->getMessage();
 }
 ?>
@@ -53,7 +67,6 @@ try {
     </form>
 </body>
 </html>
-
 
 
 
