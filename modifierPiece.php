@@ -22,10 +22,11 @@
 
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $libelleMotif = $_POST['libelleMotif'];
+            $listepieces =$_POST['listepieces'];
 
-            $sql = "UPDATE motif SET libelleMotif = ? , listePieces = ? WHERE idMotif = ?";
+            $sql = "UPDATE motif SET libelleMotif = ? , listepieces = ? WHERE idMotif = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$libelleMotif, $idMotif]);
+            $stmt->execute([$libelleMotif, $idMotif, $listepieces]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
@@ -70,9 +71,9 @@
                 value="<?php echo isset($motif['libelleMotif']) ? htmlspecialchars($motif['libelleMotif']) : ''; ?>">
         </p>
         <p>
-            <label for="listePieces">liste des Pièces:</label>
-            <input type="text" id="listePieces" name="listePieces"
-                value="<?php echo isset($motif['listePieces']) ? htmlspecialchars($motif['listePieces']) : ''; ?>">
+            <label for="listepieces">liste des Pièces:</label>
+            <input type="text" id="listepieces" name="listepieces"
+                value="<?php echo isset($motif['listepieces']) ? htmlspecialchars($motif['listepieces']) : ''; ?>">
         </p>
 
         <p>
