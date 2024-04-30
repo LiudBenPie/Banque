@@ -36,10 +36,6 @@
             echo "Erreur lors de l'ajout de l'opération : " . $conn->error;
         }
     }
-
-    // Récupérer les idCompteClient de la table CompteClient
-    $sqlCompteClients = "SELECT idCompteClient FROM CompteClient";
-    $resultCompteClients = $conn->query($sqlCompteClients);
     ?>
 
     <?php
@@ -63,21 +59,13 @@
         </select><br><br>
         
         <label for="id_compte_client">ID du compte client :</label>
-        <select name="id_compte_client" id="id_compte_client" required>
-            <?php
-            // Afficher les options pour chaque idCompteClient disponible
-            if ($resultCompteClients->num_rows > 0) {
-                while ($row = $resultCompteClients->fetch_assoc()) {
-                    echo "<option value=\"" . $row["idCompteClient"] . "\">" . $row["idCompteClient"] . "</option>";
-                }
-            }
-            ?>
-        </select><br><br>
+        <input type="text" name="id_compte_client" id="id_compte_client" required><br><br>
         
         <input type="submit" value="Ajouter l'opération">
     </form>
 </body>
 </html>
+
 
 
 
