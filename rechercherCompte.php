@@ -4,6 +4,28 @@ require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
 
+// Fonction pour insérer une opération dans la base de données
+function insertOperation($conn, $montant, $date_operation, $type_operation, $id_compte_client) {
+    // Requête d'insertion
+    $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
+    
+    // Préparation de la requête
+    $stmt = $conn->prepare($sql);
+    
+    // Vérifier si la préparation de la requête a réussi
+    if ($stmt) {
+        // Binder les valeurs et exécuter la requête
+        $stmt->bind_param("dsss", $montant, $date_operation, $type_operation, $id_compte_client);
+        if ($stmt->execute()) {
+            return true; // Opération ajoutée avec succès
+        } else {
+            return false; // Erreur lors de l'exécution de la requête
+        }
+    } else {
+        return false; // Erreur lors de la préparation de la requête
+    }
+}
+
 $createSuccessful = false;
 
 // Vérifier si le formulaire a été soumis
@@ -14,43 +36,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type_operation = $_POST['type_operation'];
     $id_compte_client = $_POST['id_compte_client'];
 
-    // Connexion à la base de données (à adapter avec vos paramètres de connexion)
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "banque";
+    // Utiliser la connexion à la base de données existante depuis init.php
+    global $conn;
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Insérer l'opération dans la base de données en utilisant la fonction définie
+    $createSuccessful = insertOperation($conn, $montant, $date_operation, $type_operation, $id_compte_client);
 
-    // Vérifier la connexion
-    if ($conn->connect_error) {
-        die("Connexion échouée : " . $conn->connect_error);
-    }
-
-    // Requête d'insertion
-    $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-
-    // Vérifier si la préparation de la requête a réussi
-    if ($stmt) {
-        // Binder les valeurs et exécuter la requête
-        $stmt->bind_param("dsss", $montant, $date_operation, $type_operation, $id_compte_client);
-        if ($stmt->execute()) {
-            $createSuccessful = true;
-        } else {
-            echo "Erreur lors de l'ajout de l'opération : " . $stmt->error;
-        }
+    // Afficher une alerte si l'opération a été ajoutée avec succès
+    if ($createSuccessful) {
+        echo '<script>alert("L\'opération a été ajoutée avec succès.");</script>';
     } else {
-        echo "Erreur lors de la préparation de la requête : " . $conn->error;
+        echo '<script>alert("Erreur lors de l\'ajout de l\'opération. Veuillez réessayer.");</script>';
     }
-
-    // Fermer la connexion
-    $conn->close();
-}
-
-// Afficher une alerte si la création a été réussie
-if ($createSuccessful) {
-    echo '<script>alert("L\'opération a été ajoutée avec succès.");</script>';
 }
 ?>
 
@@ -79,6 +76,7 @@ if ($createSuccessful) {
         <button type="submit" name="action" value="Ajouter">Ajouter l'opération</button>
     </p>
 </form>
+
 
 
 
