@@ -75,7 +75,7 @@ try {
             plugins: {
                 title: {
                     display: true,
-                    text: "Répartition des types de contrats"
+                    text: "Répartition des rendez-vous par conseiller"
                 }
             },
         }

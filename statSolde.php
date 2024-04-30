@@ -88,7 +88,7 @@ try {
             plugins: {
                 title: {
                     display: true,
-                    text: "Solde des clients"
+                    text: "répartion des soldes des clients"
                 }
             },
         }
