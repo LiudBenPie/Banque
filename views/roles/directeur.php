@@ -54,8 +54,8 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/statContrat.php">Visualiser les statistiques des contrats souscris</a></li>
                         <li><a class="dropdown-item" href="/statRdv.php">Visualiser les statistiques des rdv pris</a></li>
-                        <li><a class="dropdown-item" href="">Visualiser le nombre total de clients de la banque</a></li>
-                        <li><a class="dropdown-item" href="">Visualiser le solde total de tous les clients</a></li>
+                        <li><a class="dropdown-item" href="/statClient.php">Visualiser le nombre total de clients de la banque</a></li>
+                        <li><a class="dropdown-item" href="/statSolde.php">Visualiser le solde total de tous les clients</a></li>
                     </ul>
                 </li>
             </ul>
