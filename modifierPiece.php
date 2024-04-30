@@ -23,7 +23,7 @@
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $libelleMotif = $_POST['libelleMotif'];
 
-            $sql = "UPDATE motif SET libelleMotif = ? WHERE idMotif = ?";
+            $sql = "UPDATE motif SET libelleMotif = ? , listePieces = ? WHERE idMotif = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$libelleMotif, $idMotif]);
 
@@ -38,7 +38,7 @@
             $_SESSION['deleteSuccess'] = true;
             $deleteSuccessful = true;
         } else {
-            $sql = "SELECT * FROM motif WHERE idMotif = ?";
+            $sql = "SELECT * FROM motif, listePieces WHERE idMotif = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$idMotif]);
             $motif = $stmt->fetch();
@@ -56,7 +56,7 @@
     }
     ?>
     <!-- Formulaire pour la mise à jour et la suppression des informations du motif -->
-    <form action="modifierMotif.php" method="post" name='monForm'>
+    <form action="modifierPiece.php" method="post" name='monForm'>
 
         <!-- Champs du formulaire avec les informations à jour du motif -->
         <p>
@@ -68,6 +68,11 @@
             <label for="libelleMotif">Libellé du Motif:</label>
             <input type="text" id="libelleMotif" name="libelleMotif"
                 value="<?php echo isset($motif['libelleMotif']) ? htmlspecialchars($motif['libelleMotif']) : ''; ?>">
+        </p>
+        <p>
+            <label for="listePieces">liste des Pièces:</label>
+            <input type="text" id="listePieces" name="listePieces"
+                value="<?php echo isset($motif['listePieces']) ? htmlspecialchars($motif['listePieces']) : ''; ?>">
         </p>
 
         <p>
