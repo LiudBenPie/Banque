@@ -7,28 +7,32 @@ include VIEWS_DIR . '/menu.php';
 $createSuccessful = false;
 
 // Vérifier si le formulaire a été soumis
-if (isset($_POST['action']) && !empty($_POST['montant']) && !empty($_POST['date_operation']) && !empty($_POST['type_operation']) && !empty($_POST['id_compte_client'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer les données du formulaire
     $montant = $_POST['montant'];
     $date_operation = $_POST['date_operation'];
     $type_operation = $_POST['type_operation'];
     $id_compte_client = $_POST['id_compte_client'];
 
-    // Requête d'insertion
-    $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+    try {
+        // Préparation de la requête SQL avec des paramètres nommés
+        $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES (:montant, :date_operation, :type_operation, :id_compte_client)";
+        $stmt = $conn->prepare($sql);
 
-    // Vérifier si la préparation de la requête a réussi
-    if ($stmt) {
-        // Binder les valeurs et exécuter la requête
-        $stmt->bind_param("dsss", $montant, $date_operation, $type_operation, $id_compte_client);
+        // Liaison des valeurs aux paramètres
+        $stmt->bindParam(':montant', $montant);
+        $stmt->bindParam(':date_operation', $date_operation);
+        $stmt->bindParam(':type_operation', $type_operation);
+        $stmt->bindParam(':id_compte_client', $id_compte_client);
+
+        // Exécution de la requête
         if ($stmt->execute()) {
             $createSuccessful = true;
         } else {
-            echo "Erreur lors de l'ajout de l'opération : " . $stmt->error;
+            echo "Erreur lors de l'ajout de l'opération : " . $stmt->errorInfo()[2];
         }
-    } else {
-        echo "Erreur lors de la préparation de la requête : " . $conn->error;
+    } catch (PDOException $e) {
+        echo "Erreur PDO : " . $e->getMessage();
     }
 }
 
@@ -39,7 +43,7 @@ if ($createSuccessful) {
 ?>
 
 <!-- Formulaire pour l'ajout d'une opération -->
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <p>
         <label for="montant">Montant :</label>
         <input type="text" name="montant" required>
@@ -60,10 +64,10 @@ if ($createSuccessful) {
         <input type="text" name="id_compte_client" required>
     </p>
     <p>
-        <a href="../">Page précédente</a>
         <button type="submit" name="action" value="Ajouter">Ajouter l'opération</button>
     </p>
 </form>
+
 
 
 
