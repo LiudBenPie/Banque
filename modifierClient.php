@@ -59,7 +59,7 @@
             <!-- Champs du formulaire avec les informations à jour du client -->
             <div class="form-group">
                 <label for="numClient" class="form-label">ID Client : </label>
-                <input type="text" name="numClient" id="numClient" class="form-control" value="<?php echo htmlspecialchars($client['numClient'] ?? ''); ?>" readonly>
+                <input type="text" id="numClient" name="numClient" class="form-control" value="<?php echo htmlspecialchars($client['numClient'] ?? ''); ?>" readonly>
             </div>
             <div class="form-group col-md-6">
                 <label for="nom" class="form-label">Nom : </label>
