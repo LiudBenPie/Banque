@@ -9,7 +9,7 @@ include VIEWS_DIR . '/menu.php';
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="style.css">
-	<title>Calendrier des examens</title>
+	<title>Calendrier</title>
 </head>
 
 <body>

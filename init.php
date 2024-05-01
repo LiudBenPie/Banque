@@ -1,7 +1,7 @@
 <?php
-//записуємо в рут дір змінну нашу головну папкуб будемо використовувати як інпутитемо файли щоб не вписувати за кожним разом
-//__DIR__ це наша папка
-//ROOT_DIR constanta в яку ми зберіг нашу папку
+// Définir la variable ROOT_DIR pour notre répertoire racine, qui sera utilisée comme un chemin d'entrée pour les fichiers afin de ne pas le spécifier à chaque fois
+// __DIR__ représente notre répertoire actuel
+// ROOT_DIR est une constante dans laquelle nous stockons notre répertoire
 define('ROOT_DIR', __DIR__ .'/' );
 define('VIEWS_DIR', __DIR__ .'/views/' );
 require('connect.php');
@@ -10,27 +10,27 @@ session_start();
 
 $auth = new Auth($conn);
 
-// access control list
+// Liste de contrôle d'accès
 
 function checkAcl($acl = null) {
     global $auth; 
-    // Define paths for redirection
+    // Définir les chemins pour la redirection
     $loginPath = '/pages/login.php';
     $dashboardPath = '/pages/dashboard.php';
 
-    // Define a function to handle redirection
+    // Définir une fonction pour gérer la redirection
     $redirect = function ($path) {
         header("Location: $path");
         exit;
     };
 
-    // Handle authentication based on ACL
+    // Gérer l'authentification en fonction de la liste de contrôle d'accès (ACL)
     if ($acl === 'guest' && $auth->isLoggedIn()) {
         $redirect($dashboardPath);
     } elseif ($acl === 'auth' && !$auth->isLoggedIn()) {
         $redirect($loginPath);
     } elseif ($acl !== 'guest' && $acl !== 'auth') {
-        // Default behavior for unrecognized roles or no role specified
+        // Comportement par défaut pour les rôles non reconnus ou non spécifiés
         $auth->isLoggedIn() ? $redirect($dashboardPath) : $redirect($loginPath);
     }
 }

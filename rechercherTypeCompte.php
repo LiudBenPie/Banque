@@ -10,7 +10,7 @@
 
 <body>
     <?php
-    require ('init.php');
+    require('init.php');
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
     // Récupération de la liste des types de compte
@@ -19,16 +19,25 @@
     $stmt->execute();
     $typesCompte = $stmt->fetchAll();
     ?>
-    <form action="modifierTypeCompte.php" method="post">
-        <label for="typeCompte">Choisir un type de compte à modifier :</label>
-        <select name="idCompte" id="typeCompte">
-            <?php foreach ($typesCompte as $typeCompte): ?>
-                <option value="<?php echo $typeCompte['idCompte']; ?>">
-                    <?php echo $typeCompte['nomTypeCompte']; ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <button type="submit">Modifier</button>
-    </form>
+    <div class="container">
+        <h2>Rechercher Type Compte</h2>
+        <form action="modifierTypeCompte.php" method="post">
+            <div class="form-group">
+                <label for="typeCompte">Choisir un type de compte à modifier :</label>
+                <select name="idCompte" id="typeCompte">
+                    <?php foreach ($typesCompte as $typeCompte) : ?>
+                        <option value="<?php echo $typeCompte['idCompte']; ?>">
+                            <?php echo $typeCompte['nomTypeCompte']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Modifier</button>
+            </div>
+        </form>
+    </div>
 </body>
+
+</html>
 

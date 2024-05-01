@@ -10,7 +10,7 @@
 
 <body>
     <?php
-    require ('init.php');
+    require('init.php');
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
     // Récupération de la liste des contrats
@@ -19,15 +19,24 @@
     $stmt->execute();
     $contrats = $stmt->fetchAll();
     ?>
-    <form action="modifierTypeContrat.php" method="post">
-        <label for="contrat">Choisir un contrat à modifier :</label>
-        <select name="numContrat" id="contrat">
-            <?php foreach ($contrats as $contrat): ?>
-                <option value="<?php echo $contrat['numContrat']; ?>">
-                    <?php echo $contrat['nomTypeContrat']; ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <button type="submit">Modifier</button>
-    </form>
+    <div class="container">
+        <h2>Rechercher Type Contrat</h2>
+        <form action="modifierTypeContrat.php" method="post">
+            <div class="form-group">
+                <label for="contrat">Choisir un contrat à modifier :</label>
+                <select name="numContrat" id="contrat">
+                    <?php foreach ($contrats as $contrat) : ?>
+                        <option value="<?php echo $contrat['numContrat']; ?>">
+                            <?php echo $contrat['nomTypeContrat']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Modifier</button>
+            </div>
+        </form>
+    </div>
 </body>
+
+</html>

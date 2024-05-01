@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'ouverture de compte</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
 <?php
 require('init.php');
 checkAcl('auth');
@@ -42,7 +52,9 @@ catch (PDOException $e) {
     $msg = 'ERREUR dans ' . $e->getFile() . 'Ligne' . $e->getLine() . ':' . $e->getMessage();
 }
 ?>
-<h2>Formulaire d'ouverture de compte</h2>
+
+<body>
+    <h2>Formulaire d'ouverture de compte</h2>
     <form action="ouvrirCompte.php" method="post">
         <p>
             <label for="date">Date d'ouverture :</label>
@@ -53,8 +65,8 @@ catch (PDOException $e) {
             <input type="text" id="solde" name="solde" value="0" readonly>
         </p>
         <p>
-        <label for="decouvert">Montant du découvert :</label>
-        <input type="text" id="decouvert" name="decouvert" required>
+            <label for="decouvert">Montant du découvert :</label>
+            <input type="text" id="decouvert" name="decouvert" required>
         </p>
         <p>
             <label for="nomclient">Nom du client :</label>
@@ -92,3 +104,6 @@ catch (PDOException $e) {
             <input type="submit" name="ventecom" value="Vendre un compte">
         </p>
     </form>
+</body>
+
+</html>

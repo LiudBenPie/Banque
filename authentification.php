@@ -1,15 +1,25 @@
-<?php
-require('init.php');  // Inclure le fichier init.php qui configure la connexion à la base de données
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Authentification</title>
+</head>
 
-$login = $_POST['login'];  // Récupérer le login depuis le formulaire
-$password = $_POST['motDePasse'];  // Récupérer le mot de passe depuis le formulaire
+<body>
+    <?php
+    require('init.php');  // Inclure le fichier init.php qui configure la connexion à la base de données
 
-// Création d'une instance de la classe Auth
-$auth = new Auth($conn);
+    $login = $_POST['login'];  // Récupérer le login depuis le formulaire
+    $password = $_POST['motDePasse'];  // Récupérer le mot de passe depuis le formulaire
 
-// Utiliser la méthode login de la classe Auth
-$auth->login($login, $password);
+    // Création d'une instance de la classe Auth
+    $auth = new Auth($conn);
 
-// Rediriger vers la page d'accueil
-header("Location: /");
+    // Utiliser la méthode login de la classe Auth
+    $auth->login($login, $password);
 
+    // Rediriger vers la page d'accueil
+    header("Location: /");
+    ?>
+</body>
+</html>

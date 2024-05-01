@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier Type Contrat</title>
+    <title>Modifier le type  du contrat</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -79,3 +79,4 @@
         </p>
     </form>
 </body>
+</html>

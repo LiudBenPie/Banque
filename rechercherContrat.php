@@ -24,17 +24,24 @@
     $contrats = $stmt->fetchAll();
     ?>
 
-    <form action="supprimerContrat.php" method="post">
-        <label for="contrat">Choisir un contrat à supprimer :</label>
-        <select name="numContrat" id="contrat">
-            <?php foreach ($contrats as $contrat) : ?>
-                <option value="<?php echo $contrat['idContratClient']; ?>">
-                    <?php echo "Contrat n°" . $contrat['idContratClient'] . " - " . $contrat['nomTypeContrat'] . " Client: " . $contrat['nom'] . ' ' . $contrat['prenom']; ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <button type="submit">Supprimer</button>
-    </form>
+    <div class="container">
+        <h2>Supprimer un Contrat</h2>
+        <form action="supprimerContrat.php" method="post">
+            <div class="form-group">
+                <label for="contrat">Choisir un contrat à supprimer :</label>
+                <select name="numContrat" id="contrat">
+                    <?php foreach ($contrats as $contrat) : ?>
+                        <option value="<?php echo $contrat['idContratClient']; ?>">
+                            <?php echo "Contrat n°" . $contrat['idContratClient'] . " - " . $contrat['nomTypeContrat'] . " Client: " . $contrat['nom'] . ' ' . $contrat['prenom']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Supprimer</button>
+            </div>
+        </form>
+    </div>
 
 </body>
 

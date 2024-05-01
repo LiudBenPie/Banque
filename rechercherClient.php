@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <?php
     require('init.php');
     checkAcl('auth');
@@ -28,8 +27,8 @@
                 <label for="client" class="form-label">Sélectionnez le client à modifier :</label>
                 <select name="numClient" id="client" class="form-control">
                     <?php foreach ($clients as $client) : ?>
-                        <option value="<?php echo $client['numClient']; ?>">
-                            <?php echo $client['nom'] . ' ' . $client['prenom'] . ' ' . $client['dateNaissance']; ?>
+                        <option value="<?php echo htmlspecialchars($client['numClient']); ?>">
+                            <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

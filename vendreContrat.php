@@ -1,5 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Vente de Contrat</title>
+</head>
+
+<body>
 <?php
-require('init.php'); 
+require('init.php');
 checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
 try {
@@ -85,3 +95,6 @@ try {
         <input type="submit" name="ventecon" value="Vendre un contrat">
         </p>
     </form>
+</body>
+
+</html>

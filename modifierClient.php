@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modification du client</title>
     <link rel="stylesheet" href="formstyle.css">
-  </head>
+</head>
 
 <body>
 
@@ -57,53 +57,53 @@
         <form action="modifierClient.php" method="post" class="row g-3 rounded shadow">
             <legend>INFORMATION DU CLIENT</legend>
             <!-- Champs du formulaire avec les informations à jour du client -->
-                <div class="form-group">
-                    <label for="numClient" class="form-label">ID Client : </label>
-                    <input type="text" name="numClient" class="form-control" value="<?php echo htmlspecialchars($client['numClient'] ?? ''); ?>"readonly>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="nom" class="form-label">Nom : </label>
-                    <input type="text" id="nom" name="nom" class="form-control" value="<?php echo htmlspecialchars($client['nom'] ?? ''); ?>">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="prenom" class="form-label">Prénom : </label>
-                    <input type="text" id="prenom" name="prenom" class="form-control" value="<?php echo htmlspecialchars($client['prenom'] ?? ''); ?>">
-                </div>
-                <div class="form-group">
-                    <label for="adresse" class="form-label">Adresse : </label>
-                    <input type="text" id="adresse" name="adresse" class="form-control" value="<?php echo htmlspecialchars($client['adresse'] ?? ''); ?>">
-                </div>
-                <div class="form-group">
-                    <label for="mail" class="form-label">Mail : </label>
-                    <input type="email" id="mail" name="mail" class="form-control" value="<?php echo htmlspecialchars($client['mail'] ?? ''); ?>">
-                </div>
-                <div class="form-group">
-                    <label for="numTel" class="form-label">Numéro de Téléphone : </label>
-                    <input type="text" id="numTel" name="numTel" class="form-control" value="<?php echo htmlspecialchars($client['numTel'] ?? ''); ?>">
-                </div>
-                <div class="form-group">
-                    <label for="dateNaissance" class="form-label">Date de naissance : </label>
-                    <input type="date" id="dateNaissance" name="dateNaissance" class="form-control" value="<?php echo htmlspecialchars($client['dateNaissance'] ?? ''); ?>">
-                </div>
-                <div class="form-group">
-                    <label for="situation" class="form-label">Situation : </label>
-                    <select id="situation" name="idSituation" class="form-control">
-                        <?php
-                        $sql = "SELECT idSituation, description FROM Situation ORDER BY description";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute();
-                        $situations = $stmt->fetchAll();
+            <div class="form-group">
+                <label for="numClient" class="form-label">ID Client : </label>
+                <input type="text" name="numClient" id="numClient" class="form-control" value="<?php echo htmlspecialchars($client['numClient'] ?? ''); ?>" readonly>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="nom" class="form-label">Nom : </label>
+                <input type="text" id="nom" name="nom" class="form-control" value="<?php echo htmlspecialchars($client['nom'] ?? ''); ?>">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="prenom" class="form-label">Prénom : </label>
+                <input type="text" id="prenom" name="prenom" class="form-control" value="<?php echo htmlspecialchars($client['prenom'] ?? ''); ?>">
+            </div>
+            <div class="form-group">
+                <label for="adresse" class="form-label">Adresse : </label>
+                <input type="text" id="adresse" name="adresse" class="form-control" value="<?php echo htmlspecialchars($client['adresse'] ?? ''); ?>">
+            </div>
+            <div class="form-group">
+                <label for="mail" class="form-label">Mail : </label>
+                <input type="email" id="mail" name="mail" class="form-control" value="<?php echo htmlspecialchars($client['mail'] ?? ''); ?>">
+            </div>
+            <div class="form-group">
+                <label for="numTel" class="form-label">Numéro de Téléphone : </label>
+                <input type="text" id="numTel" name="numTel" class="form-control" value="<?php echo htmlspecialchars($client['numTel'] ?? ''); ?>">
+            </div>
+            <div class="form-group">
+                <label for="dateNaissance" class="form-label">Date de naissance : </label>
+                <input type="date" id="dateNaissance" name="dateNaissance" class="form-control" value="<?php echo htmlspecialchars($client['dateNaissance'] ?? ''); ?>">
+            </div>
+            <div class="form-group">
+                <label for="situation" class="form-label">Situation : </label>
+                <select id="situation" name="idSituation" class="form-control">
+                    <?php
+                    $sql = "SELECT idSituation, description FROM Situation ORDER BY description";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $situations = $stmt->fetchAll();
 
-                        foreach ($situations as $situation) {
-                            $selected = ($client['idSituation'] == $situation['idSituation']) ? 'selected' : '';
-                            echo "<option value=\"{$situation['idSituation']}\" {$selected}>{$situation['description']}</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
-                </div>
+                    foreach ($situations as $situation) {
+                        $selected = ($client['idSituation'] == $situation['idSituation']) ? 'selected' : '';
+                        echo "<option value=\"{$situation['idSituation']}\" {$selected}>{$situation['description']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+            </div>
         </form>
     </div>
 </body>

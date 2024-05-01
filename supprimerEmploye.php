@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Supprimer un employé</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
 <?php
 require('init.php');
 checkAcl('auth');
@@ -28,32 +36,38 @@ if ($deleteSuccessful) {
     echo '<script>alert("L\'employé a été supprimé avec succès.");</script>';
 }
 ?>
-<!-- Formulaire pour la suppression de l'employé -->
-<form action="supprimerEmploye.php" method="post" name='monForm'>
+<body>
+    <div class="container">
+        <h1>Supprimer un employé</h1>
+        <!-- Formulaire pour la suppression de l'employé -->
+        <form action="supprimerEmploye.php" method="post" name='monForm'>
 
-    <!-- Champs du formulaire avec les informations de l'employé à supprimer -->
-    <p>
-        <label for="num">Etes-vous sur de vouloir supprimer :</label>
-        <input type="hidden" name="numEmploye" value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
-    </p>
+            <!-- Champs du formulaire avec les informations de l'employé à supprimer -->
+            <div class="form-group">
+                <label for="num">Etes-vous sur de vouloir supprimer :</label>
+                <input type="hidden" name="numEmploye" value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
+            </div>
 
-    <p>
-        <label for="nom">Nom:</label>
-        <input type="text" id="nom" name="nom" value="<?php echo isset($employe['nom']) ? htmlspecialchars($employe['nom']) : ''; ?>" readonly>
-    </p>
+            <div class="form-group">
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" name="nom" value="<?php echo isset($employe['nom']) ? htmlspecialchars($employe['nom']) : ''; ?>" readonly>
+            </div>
 
-    <p>
-        <label for="login">Login:</label>
-        <input type="text" id="login" name="login" value="<?php echo isset($employe['login']) ? htmlspecialchars($employe['login']) : ''; ?>" readonly>
-    </p>
-    
-    <p>
-        <label for="categorie">Catégorie:</label>
-        <input type="text" id="categorie" name="categorie" value="<?php echo isset($employe['categorie']) ? htmlspecialchars($employe['categorie']) : ''; ?>" readonly>
-    </p>
-    
-    <p>
-        <a href="../">Page précédente</a>
-        <button type="submit" name="action" value="supprimer">Supprimer</button>
-    </p>
-</form>
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login" value="<?php echo isset($employe['login']) ? htmlspecialchars($employe['login']) : ''; ?>" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="categorie">Catégorie:</label>
+                <input type="text" id="categorie" name="categorie" value="<?php echo isset($employe['categorie']) ? htmlspecialchars($employe['categorie']) : ''; ?>" readonly>
+            </div>
+            
+            <div class="form-group">
+                <a href="../" class="btn btn-secondary">Page précédente</a>
+                <button type="submit" name="action" value="supprimer" class="btn btn-danger">Supprimer</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
