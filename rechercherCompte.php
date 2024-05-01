@@ -1,51 +1,51 @@
 <?php
-require('init.php'); // Inclut le script d'initialisation de la base de données
-checkAcl('auth'); // Vérifie les autorisations d'accès
+require('init.php');
+checkAcl('auth');
 include VIEWS_DIR . '/menu.php';
 
-try {
-    // Vérifie si les champs requis ont été fournis
-    if (isset($_POST['realiseroperation'], $_POST['compteClient'], $_POST['montant'], $_POST['dateOperation'], $_POST['typeOp'])) {
-        // Récupération des données du formulaire
-        $idCompteClient = $_POST['compteClient'];
-        $montant = $_POST['montant'];
-        $dateOperation = $_POST['dateOperation'];
-        $typeOp = $_POST['typeOp'];
-        
-        // Insertion de l'opération dans la base de données
-        $sql = "INSERT INTO Operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        if ($stmt->execute([$montant, $dateOperation, $typeOp, $idCompteClient])) {
-            echo "L'opération a été enregistrée avec succès.";
-        } else {
-            echo "Une erreur s'est produite lors de l'enregistrement de l'opération.";
-        }
+$createSuccessful = false;
+
+if (isset($_POST['action'])) {
+    $numOp = $_POST['numOp'];
+    $montant= $_POST['montant'];
+    $dateOperation= $_POST['dateOperation'];
+    $typeOp= $_POST['typeOp'];
+    $idCompteClient= $_POST['idCompteClient'];
+    $sql = "INSERT INTO operation (numOp,montant,dateOperation,typeOp,idCompteClient) VALUES (?,?,?,?,?)";
+    $res = $conn->prepare($sql);
+    if ($res->execute([$numOp,$montant,$dateOperation,$typeOp,$idCompteClient])) {
+        $createSuccessful = true;
     }
-} catch (PDOException $e) {
-    echo "Erreur : " . $e->getMessage();
+}
+// Affiche une alerte si la création a été réussie
+if ($createSuccessful) {
+    echo '<script>alert("L\'opération a été crée avec succès.");</script>';
 }
 ?>
-
-<form action="rechercherCompte.php" method="post">
-    <label for="compteClient">Sélectionnez le compte client pour l'opération :</label>
-    <select name="compteClient" id="compteClient" required>
-        <?php
-        // Récupération de la liste des comptes clients avec les informations sur le client
-        $sql = "SELECT cc.idCompteClient, c.nom, c.prenom FROM CompteClient AS cc JOIN Client AS c ON cc.numClient = c.numClient";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $compteClients = $stmt->fetchAll();
-
-        foreach ($compteClients as $compteClient) {
-            echo "<option value=\"{$compteClient['idCompteClient']}\">{$compteClient['nom']} {$compteClient['prenom']}</option>";
-        }
-        ?>
-    </select><br><br>
-    <label for="montant">Montant :</label>
-    <input type="number" name="montant" id="montant" required><br><br>
-    <label for="dateOperation">Date de l'opération :</label>
-    <input type="date" name="dateOperation" id="dateOperation" required><br><br>
-    <label for="typeOp">Type d'opération :</label>
-    <input type="text" name="typeOp" id="typeOp" required><br><br>
-    <button type="submit" name="realiseroperation">Réaliser l'opération</button>
+<!-- Formulaire pour la création du contrat -->
+<form action="rechercherCompte.php" method="post" name='monForm'>
+    <p>
+        <label for="numOp">Numéro Opération :</label>
+        <input type="int" name="numOp" required>
+    </p>
+    <p>
+        <label for="montant">Montant : </label>
+        <input type="number" name="montant" required>
+    </p>
+    <p>
+        <label for="dateOperation">Date de l'opération : </label>
+        <input type="date" name="dateOperation" required>
+    </p>
+    <p>
+        <label for="typeOp">Type de l'opération : </label>
+        <input type="text" name="typeOp" required>
+    </p>
+    <p>
+        <label for="idCompteClient">Id du compte client: </label>
+        <input type="text" name="idCompteClient" required>
+    </p>
+    <p>
+        <a href="../">Page précédente</a>
+        <button type="submit" name="action" value="Créer">Créer</button>
+    </p>
 </form>
