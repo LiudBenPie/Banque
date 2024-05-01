@@ -6,28 +6,27 @@ include VIEWS_DIR . '/menu.php';
 $createSuccessful = false;
 
 if (isset($_POST['action'])) {
-    $numOp = $_POST['numOp'];
-    $montant= $_POST['montant'];
-    $dateOperation= $_POST['dateOperation'];
-    $typeOp= $_POST['typeOp'];
-    $idCompteClient= $_POST['idCompteClient'];
-    $sql = "INSERT INTO operation (numOp,montant,dateOperation,typeOp,idCompteClient) VALUES (?,?,?,?,?)";
+    $montant = $_POST['montant'];
+    $dateOperation = $_POST['dateOperation'];
+    $typeOp = $_POST['typeOp'];
+    $idCompteClient = $_POST['idCompteClient'];
+
+    // Vérifiez si numOp est unique ou utilisez AUTO_INCREMENT
+    $sql = "INSERT INTO operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
     $res = $conn->prepare($sql);
-    if ($res->execute([$numOp,$montant,$dateOperation,$typeOp,$idCompteClient])) {
+    
+    if ($res->execute([$montant, $dateOperation, $typeOp, $idCompteClient])) {
         $createSuccessful = true;
     }
 }
+
 // Affiche une alerte si la création a été réussie
 if ($createSuccessful) {
-    echo '<script>alert("L\'opération a été crée avec succès.");</script>';
+    echo '<script>alert("L\'opération a été créée avec succès.");</script>';
 }
 ?>
 <!-- Formulaire pour la création du contrat -->
 <form action="rechercherCompte.php" method="post" name='monForm'>
-    <p>
-        <label for="numOp">Numéro Opération :</label>
-        <input type="int" name="numOp" required>
-    </p>
     <p>
         <label for="montant">Montant : </label>
         <input type="number" name="montant" required>
