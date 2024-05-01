@@ -14,10 +14,8 @@ if (isset($_POST['action'])) {
     // Vérifiez si numOp est unique ou utilisez AUTO_INCREMENT
     $sql = "INSERT INTO operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
     $res = $conn->prepare($sql);
-    
-    if ($res->execute([$montant, $dateOperation, $typeOp, $idCompteClient])) {
-        $createSuccessful = true;
-    }
+    $res->execute([$montant, $dateOperation, $typeOp, $idCompteClient]);
+    $createSuccessful = true;
 }
 
 // Affiche une alerte si la création a été réussie
