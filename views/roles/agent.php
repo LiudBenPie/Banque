@@ -8,7 +8,10 @@
         li:hover {
             background-color: black;
             color: yellow;
+            text-decoration: underline;
+            text-decoration-color: #9f9c92;
         }
+
 
         .btn {
             background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #3a2c0f 78%);
