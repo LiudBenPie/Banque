@@ -27,7 +27,7 @@
 <body>
     <nav class="navbar navbar-expand-lg" style="background-color: #191F1D;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="/image/cochon.png" width="80" alt="icon"></a>
+            <a class="navbar-brand" href="/"><img src="/static/images/cochon.png" width="80" alt="icon"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -39,24 +39,24 @@
                             Gestion des clients
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/rechercherClient.php">Modifier les informations du client</a></li>
-                            <li><a class="dropdown-item" href="/ajouterClient.php">Inscrire un nouveau client</a></li>
+                            <li><a class="dropdown-item" href="/clients/rechercherClient.php">Modifier les informations du client</a></li>
+                            <li><a class="dropdown-item" href="/clients/ajouterClient.php">Inscrire un nouveau client</a></li>
                         </ul>
                     </li>
                     <!-- Gestion des syntheses -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/rechercheSyntheseClient.php" style="color: white;">Consulter la synthèse d'un client</a>
+                        <a class="nav-link" href="/clients/rechercheSyntheseClient.php" style="color: white;">Consulter la synthèse d'un client</a>
                     </li>
                     <!-- Gestion des dépôts et des retraits -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/rechercherCompte.php" style="color: white;">Réaliser un dépôt ou un retrait</a>
+                        <a class="nav-link" href="/comptes/rechercherCompte.php" style="color: white;">Réaliser un dépôt ou un retrait</a>
                     </li>
                     <!-- Gestion des rdv -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/pages/creerRDV.php" style="color: white;">Prendre un rendez-vous pour un client</a>
+                        <a class="nav-link" href="/rendez-vous/creerRDV.php" style="color: white;">Prendre un rendez-vous pour un client</a>
                     </li>
                 </ul>
-                <a class="btn" href="/logout.php">Deconnexion</a>
+                <a class="btn" href="/utilisateurs/deconnexion.php">Deconnexion</a>
             </div>
         </div>
     </nav>
