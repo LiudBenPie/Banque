@@ -7,6 +7,7 @@
     <title>Modifier Rendez-vous</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <?php
     require('../../init.php');
@@ -17,22 +18,26 @@
     $deleteSuccessful = false;
 
     // Récupération de la liste des motifs
-    $sql = "SELECT idMotif, libelleMotif FROM motif";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $motifs = $stmt->fetchAll();
+    try {
+        $sql = "SELECT idMotif, libelleMotif FROM motif";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $motifs = $stmt->fetchAll();
 
-    // Récupération de la liste des employés
-    $sql = "SELECT numEmploye, nom FROM employe";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $employes = $stmt->fetchAll();
+        // Récupération de la liste des employés
+        $sql = "SELECT numEmploye, nom FROM employe";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $employes = $stmt->fetchAll();
 
-    // Récupération de la liste des clients
-    $sql = "SELECT numClient, nom, prenom, dateNaissance FROM client";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $clients = $stmt->fetchAll();
+        // Récupération de la liste des clients
+        $sql = "SELECT numClient, nom, prenom, dateNaissance FROM client";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $clients = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        echo "Erreur lors de la récupération des données : " . $e->getMessage();
+    }
 
     if (isset($_POST['numRdv'])) {
         $numRdv = $_POST['numRdv'];
@@ -44,29 +49,49 @@
             $idMotif = $_POST['idMotif'];
             $numClient = $_POST['numClient'];
 
-            // Mise à jour du rendez-vous
-            $sql = "UPDATE rdv SET dateRdv = ?, heureRdv = ?, numEmploye = ?, idMotif = ?, numClient = ? WHERE numRdv = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$dateRdv, $heureRdv, $numEmploye, $idMotif, $numClient, $numRdv]); // Ajoutez $numRdv à la fin
+            try {
+                // Vérifier si le rendez-vous existe déjà pour le même conseiller, date et heure.
+                $stmt = $conn->prepare("SELECT COUNT(*) FROM rdv WHERE dateRdv = ? AND heureRdv = ? AND numEmploye = ?");
+                $stmt->execute([$dateRdv, $heureRdv, $numEmploye]);
+                $count = $stmt->fetchColumn();
 
-            $_SESSION['updateSuccess'] = true;
-            $updateSuccessful = true;
+                if ($count == 0) {
+                    // Mise à jour du rendez-vous
+                    $sql = "UPDATE rdv SET dateRdv = ?, heureRdv = ?, numEmploye = ?, idMotif = ?, numClient = ? WHERE numRdv = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute([$dateRdv, $heureRdv, $numEmploye, $idMotif, $numClient, $numRdv]); // Ajoutez $numRdv à la fin
 
+                    $_SESSION['updateSuccess'] = true;
+                    $updateSuccessful = true;
+                } else {
+                    echo "Un rendez-vous existe déjà pour cette date, cette heure et ce conseiller.";
+                }
+            } catch (PDOException $e) {
+                echo "Erreur lors de la mise à jour du rendez-vous : " . $e->getMessage();
+            }
         } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
-            // Suppression du rendez-vous
-            $sql = "DELETE FROM rdv WHERE numRdv = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$numRdv]); // Assurez-vous que $numRdv est correctement défini
+            try {
+                // Suppression du rendez-vous
+                $sql = "DELETE FROM rdv WHERE numRdv = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$numRdv]); // Assurez-vous que $numRdv est correctement défini
 
-            $_SESSION['deleteSuccess'] = true;
-            $deleteSuccessful = true;
+                $_SESSION['deleteSuccess'] = true;
+                $deleteSuccessful = true;
+            } catch (PDOException $e) {
+                echo "Erreur lors de la suppression du rendez-vous : " . $e->getMessage();
+            }
         }
 
         // Sélectionner à nouveau le rendez-vous après la mise à jour ou la suppression
-        $sql = "SELECT * FROM rdv WHERE numRdv = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$numRdv]);
-        $Rdv = $stmt->fetch();
+        try {
+            $sql = "SELECT * FROM rdv WHERE numRdv = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$numRdv]);
+            $Rdv = $stmt->fetch();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la sélection du rendez-vous : " . $e->getMessage();
+        }
     }
 
     // Affiche une alerte si la mise à jour a été réussie
@@ -98,7 +123,7 @@
         <p>
             <label for="employe">Choisir un employé pour le rendez-vous :</label>
             <select name="numEmploye" id="numEmploye">
-                <?php foreach ($employes as $employe): ?>
+                <?php foreach ($employes as $employe) : ?>
                     <option value="<?php echo $employe['numEmploye']; ?>">
                         <?php echo $employe['nom']; ?>
                     </option>
@@ -116,14 +141,14 @@
             </select>
         </p>
         <p>
-        <label for="client" class="form-label">Sélectionnez le client pour le rendez-vous :</label>
-                <select name="numClient" id="numClient">
-                    <?php foreach ($clients as $client) : ?>
-                        <option value="<?php echo $client['numClient']; ?>">
-                            <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+            <label for="client" class="form-label">Sélectionnez le client pour le rendez-vous :</label>
+            <select name="numClient" id="numClient">
+                <?php foreach ($clients as $client) : ?>
+                    <option value="<?php echo $client['numClient']; ?>">
+                        <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </p>
         <p>
             <a href="../..">Page précédente</a>
