@@ -33,7 +33,7 @@
             $updateSuccessful = true;
 
         } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
-            $sql = "DELETE FROM motif WHERE idMotif = ?";
+            $sql = "DELETE FROM rdv WHERE numRdv = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$idMotif]);
 
