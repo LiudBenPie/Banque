@@ -15,6 +15,13 @@
 
     $updateSuccessful = false;
     $deleteSuccessful = false;
+
+    // Récupération de la liste des motifs
+    $sql = "SELECT idMotif, libelleMotif, listePieces FROM motif";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $motifs = $stmt->fetchAll();
+
     if (isset($_POST['numRdv'])) {
         $numRdv = $_POST['numRdv'];
 
@@ -83,9 +90,14 @@
                 value="<?php echo isset($Rdv['numEmploye']) ? htmlspecialchars($Rdv['numEmploye']) : ''; ?>">
         </p>
         <p>
-            <label for="idMotif">Motif du rendez-vous :</label>
-            <input type="number" id="idMotif" name="idMotif"
-                value="<?php echo isset($Rdv['idMotif']) ? htmlspecialchars($Rdv['idMotif']) : ''; ?>">
+            <label for="motif">Sélectionnez le motif à modifier :</label>
+            <select name="idMotif" id="motif">
+                <?php foreach ($motifs as $motif) : ?>
+                    <option value="<?php echo $motif['idMotif']; ?>">
+                        <?php echo $motif['libelleMotif'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </p>
         <p>
             <label for="numClient">Client du rendez-vous :</label>
