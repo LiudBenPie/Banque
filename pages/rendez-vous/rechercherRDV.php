@@ -5,7 +5,7 @@ include VIEWS_DIR . '/menu.php';
 // Récupération de la liste des pieces
 $sql = "SELECT numRdv, dateRdv, heureRdv, client.nom, client.prenom,
         FROM rdv
-        INNER JOIN client on client.numClient = rdv.numclient";
+        INNER JOIN client on rdv.numclient = client.numClient";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $Rdv = $stmt->fetchAll();
