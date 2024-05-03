@@ -116,8 +116,8 @@
             </select>
         </p>
         <p>
-        <label for="client" class="form-label">Sélectionnez le client à modifier :</label>
-                <select name="numClient" id="numClient" class="form-control">
+        <label for="client" class="form-label">Sélectionnez le client pour le rendez-vous :</label>
+                <select name="numClient" id="numClient">
                     <?php foreach ($clients as $client) : ?>
                         <option value="<?php echo $client['numClient']; ?>">
                             <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
