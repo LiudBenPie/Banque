@@ -1,8 +1,3 @@
-<?php
-require('../../init.php');
-include VIEWS_DIR . '/menu.php';
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,6 +8,13 @@ include VIEWS_DIR . '/menu.php';
 </head>
 
 <body>
+	
+<?php
+require('../../init.php');
+include VIEWS_DIR . '/menu.php';
+?>
+
+
 	<div class="container">
 		<?php
 		$moisFrancais = [

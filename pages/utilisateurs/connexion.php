@@ -1,9 +1,3 @@
-<?php
-require('../../init.php');
-checkAcl('guest');
-//echo password_hash('password', PASSWORD_DEFAULT);
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -14,6 +8,13 @@ checkAcl('guest');
 </head>
 
 <body>
+
+<?php
+require('../../init.php');
+checkAcl('guest');
+//echo password_hash('password', PASSWORD_DEFAULT);
+?>
+
   <div class="container">
         <form action="/utilisateurs/authentification.php" method="post" >
         <h2>Connexion</h2>

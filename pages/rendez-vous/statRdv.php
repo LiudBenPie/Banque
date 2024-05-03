@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Statistique de nombre de rendez-vous par conseiller</title>
 </head>
 <body>
 <?php

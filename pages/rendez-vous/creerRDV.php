@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>rdv</title>
+    <title>Créer un rrendez-vous</title>
     <link rel="stylesheet" href="/static/css/formstyle.css">
 </head>
 <body>
