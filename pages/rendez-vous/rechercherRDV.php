@@ -17,7 +17,7 @@ $Rdv = $stmt->fetchAll();
     <select name="numRdv" id="numRdv">
         <?php foreach ($Rdv as $RDV) : ?>
             <option value="<?php echo $RDV['numRdv']; ?>">
-                <?php echo "RDV du " . $RDV['dateRdv'] . " à " . $RDV['heureRdv'] . " avec " . $RDV['client_nom'] . " " . $RDV['client_prenom']; ?>
+                <?php echo "RDV du " . $RDV['dateRdv'] . " à " . $RDV['heureRdv'] . "h avec " . $RDV['client_nom'] . " " . $RDV['client_prenom']; ?>
             </option>
         <?php endforeach; ?>
     </select>
