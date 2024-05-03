@@ -81,7 +81,7 @@
         </p>
         <p>
             <label for="heureRdv">Heure du rendez-vous :</label>
-            <input type="time" id="heureRdv" name="heureRdv" value="<?php echo isset($Rdv['heureRdv']) ? htmlspecialchars($Rdv['heureRdv']) : ''; ?>">
+            <input type="number" id="heureRdv" name="heureRdv" value="<?php echo isset($Rdv['heureRdv']) ? htmlspecialchars($Rdv['heureRdv']) : ''; ?>">
         </p>
         <p>
             <label for="numEmploye">Employé pour le rendez-vous :</label>
