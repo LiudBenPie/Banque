@@ -60,7 +60,7 @@
                             Rendez-vous
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="/rendez-vous/creerRDV.php" style="color: white;">Prendre un rendez-vous pour un client</a></li>
+                            <li><a class="nav-link" href="/rendez-vous/creerRDV.php">Prendre un rendez-vous pour un client</a></li>
                             <li><a class="dropdown-item" href="/rendez-vous/rechercherRDV.php">Gérer un rendez-vous pour un client</a></li>
                             <li><a class="dropdown-item" href="/rendez-vous/calendrier.php">Visualiser le calendrier</a></li>
                         </ul>
