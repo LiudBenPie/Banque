@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php
-    require('../../init.php'); // Assurez-vous que init.php inclut la configuration de la base de données ($conn)
+    require('../../init.php');
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
 
@@ -35,7 +35,7 @@
         } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
             $sql = "DELETE FROM rdv WHERE numRdv = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$idMotif]);
+            $stmt->execute([$numRdv]);
 
             $_SESSION['deleteSuccess'] = true;
             $deleteSuccessful = true;
@@ -44,7 +44,7 @@
         // Sélectionner à nouveau le motif après la mise à jour ou la suppression
         $sql = "SELECT * FROM rdv WHERE numRdv = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$idMotif]);
+        $stmt->execute([$numRdv]);
         $Rdv = $stmt->fetch();
     }
 
