@@ -55,8 +55,15 @@
                         <a class="nav-link" href="/comptes/rechercherCompte.php" style="color: white;">Réaliser un dépôt ou un retrait</a>
                     </li>
                     <!-- Gestion des rdv -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/rendez-vous/creerRDV.php" style="color: white;">Prendre un rendez-vous pour un client</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Rendez-vous
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="/rendez-vous/creerRDV.php" style="color: white;">Prendre un rendez-vous pour un client</a></li>
+                            <li><a class="dropdown-item" href="/rendez-vous/rechercherRDV.php">Gérer un rendez-vous pour un client</a></li>
+                            <li><a class="dropdown-item" href="/rendez-vous/calendrier.php">Visualiser le calendrier</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <a class="btn" href="/utilisateurs/deconnexion.php">Deconnexion</a> <!-- Bouton de déconnexion -->
