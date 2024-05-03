@@ -78,17 +78,17 @@
                 value="<?php echo isset($Rdv['heureRdv']) ? htmlspecialchars($Rdv['heureRdv']) : ''; ?>">
         </p>
         <p>
-            <label for="numEmploye">Heure du rendez-vous :</label>
+            <label for="numEmploye">Employe pour le rendez-vous :</label>
             <input type="number" id="numEmploye" name="numEmploye"
                 value="<?php echo isset($Rdv['numEmploye']) ? htmlspecialchars($Rdv['numEmploye']) : ''; ?>">
         </p>
         <p>
-            <label for="idMotif">Heure du rendez-vous :</label>
+            <label for="idMotif">Motif du rendez-vous :</label>
             <input type="number" id="idMotif" name="idMotif"
                 value="<?php echo isset($Rdv['idMotif']) ? htmlspecialchars($Rdv['idMotif']) : ''; ?>">
         </p>
         <p>
-            <label for="numClient">Heure du rendez-vous :</label>
+            <label for="numClient">Client du rendez-vous :</label>
             <input type="number" id="numClient" name="numClient"
                 value="<?php echo isset($Rdv['numClient']) ? htmlspecialchars($Rdv['numClient']) : ''; ?>">
         </p>
