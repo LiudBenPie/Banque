@@ -22,6 +22,18 @@
     $stmt->execute();
     $motifs = $stmt->fetchAll();
 
+    // Récupération de la liste des employés
+    $sql = "SELECT numEmploye, nom FROM employe";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $employes = $stmt->fetchAll();
+
+    // Récupération de la liste des clients
+    $sql = "SELECT numClient, nom, prenom, dateNaissance FROM client";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $clients = $stmt->fetchAll();
+
     if (isset($_POST['numRdv'])) {
         $numRdv = $_POST['numRdv'];
 
@@ -84,8 +96,14 @@
             <input type="number" id="heureRdv" name="heureRdv" value="<?php echo isset($Rdv['heureRdv']) ? htmlspecialchars($Rdv['heureRdv']) : ''; ?>">
         </p>
         <p>
-            <label for="numEmploye">Employé pour le rendez-vous :</label>
-            <input type="number" id="numEmploye" name="numEmploye" value="<?php echo isset($Rdv['numEmploye']) ? htmlspecialchars($Rdv['numEmploye']) : ''; ?>">
+            <label for="employe">Choisir un employé pour le rendez-vous :</label>
+            <select name="employe" id="employe">
+                <?php foreach ($employes as $employe): ?>
+                    <option value="<?php echo $employe['numEmploye']; ?>">
+                        <?php echo $employe['nom']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </p>
         <p>
             <label for="idMotif">Sélectionnez le motif :</label>
@@ -98,8 +116,14 @@
             </select>
         </p>
         <p>
-            <label for="numClient">Client du rendez-vous :</label>
-            <input type="number" id="numClient" name="numClient" value="<?php echo isset($Rdv['numClient']) ? htmlspecialchars($Rdv['numClient']) : ''; ?>">
+        <label for="client" class="form-label">Sélectionnez le client à modifier :</label>
+                <select name="numClient" id="client" class="form-control">
+                    <?php foreach ($clients as $client) : ?>
+                        <option value="<?php echo $client['numClient']; ?>">
+                            <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
         </p>
         <p>
             <a href="../..">Page précédente</a>
