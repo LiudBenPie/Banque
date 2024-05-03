@@ -29,7 +29,7 @@
                         $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         foreach ($clients as $client) {
-                            echo "<option value=\"{$client['numClient']}\">{$client['nom']} {$client['prenom']} (né(e) le {$client['dateNaissance']})</option>";
+                            echo "<option value=\"" . htmlspecialchars($client['numClient']) . "\">" . htmlspecialchars($client['nom']) . " " . htmlspecialchars($client['prenom']) . " (né(e) le " . htmlspecialchars($client['dateNaissance']) . ")</option>";
                         }
                     } catch (PDOException $e) {
                         echo "Erreur de base de données : " . $e->getMessage();

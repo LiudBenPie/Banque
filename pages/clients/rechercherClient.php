@@ -14,7 +14,7 @@
     require('../../init.php');
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
-    // Récupération de la liste des client
+    // Récupération de la liste des clients
     $sql = "SELECT numClient, nom, prenom, adresse, mail, numtel, idSituation, dateNaissance FROM client";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -29,7 +29,7 @@
                 <select name="numClient" id="client" class="form-control">
                     <?php foreach ($clients as $client) : ?>
                         <option value="<?php echo $client['numClient']; ?>">
-                            <?php echo $client['nom'] . ' ' . $client['prenom'] . ' ' . $client['dateNaissance']; ?>
+                            <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

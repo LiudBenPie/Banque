@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier Type Contrat</title>
+    <title>Modifier le type du contrat</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -25,12 +25,10 @@
 
             $sql = "UPDATE contrat SET nomTypeContrat = ? WHERE numContrat = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomTypeContrat, $numContrat]); 
+            $stmt->execute([$nomTypeContrat, $numContrat]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
-
-
         } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
             $sql = "DELETE FROM contrat WHERE numContrat = ?";
             $stmt = $conn->prepare($sql);
@@ -68,7 +66,7 @@
         <p>
             <label for="nomTypeContrat">Nom du Contrat:</label>
             <input type="text" id="nomTypeContrat" name="nomTypeContrat"
-                value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>"> <!-- Correction ici -->
+                value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>">
         </p>
 
         <p>
@@ -79,3 +77,4 @@
         </p>
     </form>
 </body>
+</html>

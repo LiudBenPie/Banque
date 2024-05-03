@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rechercher Type Contrat</title>
+    <title>Rechercher un type de contrat</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -13,7 +13,7 @@
     require('../../init.php');
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
-    // Récupération de la liste des contrat
+    // Récupération de la liste des contrats
     $sql = "SELECT numContrat, nomTypeContrat FROM contrat";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -21,7 +21,7 @@
     ?>
     <form action="modifierTypeContrat.php" method="post">
         <label for="contrat">Choisir un contrat à modifier :</label>
-        <select name="numContrat" id="contrat">
+        <select name="contrat" id="contrat">
             <?php foreach ($contrats as $contrat): ?>
                 <option value="<?php echo $contrat['numContrat']; ?>">
                     <?php echo $contrat['nomTypeContrat']; ?>
@@ -31,3 +31,5 @@
         <button type="submit">Modifier</button>
     </form>
 </body>
+
+</html>

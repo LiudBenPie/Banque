@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Statistique des types de contrats</title>
 </head>
-<body>
-<?php
-require('../../init.php'); // Inclure le fichier d'initialisation pour établir la connexion PDO
-checkAcl('auth'); // Vérification des autorisations (ACL)
-include VIEWS_DIR . '/menu.php'; // Inclusion du menu (si nécessaire)
 
-try {
-    // Requête SQL pour récupérer les données
-    $sql = "SELECT nomTypeContrat, COUNT(*) AS nombre_contrats FROM ContratClient
+<body>
+    <?php
+    require('../../init.php'); // Inclure le fichier d'initialisation pour établir la connexion PDO
+    checkAcl('auth'); // Vérification des autorisations (ACL)
+    include VIEWS_DIR . '/menu.php'; // Inclusion du menu (si nécessaire)
+
+    try {
+        // Requête SQL pour récupérer les données
+        $sql = "SELECT nomTypeContrat, COUNT(*) AS nombre_contrats FROM ContratClient
             INNER JOIN Contrat ON ContratClient.numContrat = Contrat.numContrat
             GROUP BY Contrat.nomTypeContrat";
-    
-    // Préparation et exécution de la requête SQL avec PDO
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    
-    // Récupération des résultats de la requête
-    $typesCompte = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Préparation des données pour le graphique
-    $labels = [];
-    $values = [];
+        // Préparation et exécution de la requête SQL avec PDO
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
 
-    // Formatage des résultats pour le graphique
-    foreach ($typesCompte as $row) {
-        $labels[] = $row['nomTypeContrat'];
-        $values[] = (int) $row['nombre_contrats'];
-    }
+        // Récupération des résultats de la requête
+        $typesContrat = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Données au format JSON pour le graphique
-    $data = [
-        'labels' => $labels,
-        'values' => $values
-    ];
+        // Préparation des données pour le graphique
+        $labels = [];
+        $values = [];
 
-    // Inclure la bibliothèque Chart.js
-    echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>';
+        // Formatage des résultats pour le graphique
+        foreach ($typesContrat as $row) {
+            $labels[] = $row['nomTypeContrat'];
+            $values[] = (int) $row['nombre_contrats'];
+        }
 
-    // Script JavaScript pour générer le graphique circulaire
-    echo '<div style="width: 30%; margin: 0 auto;"><canvas id="myChart"></canvas>
+        // Données au format JSON pour le graphique
+        $data = [
+            'labels' => $labels,
+            'values' => $values
+        ];
+
+        // Inclure la bibliothèque Chart.js
+        echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>';
+
+        // Script JavaScript pour générer le graphique circulaire
+        echo '<div style="width: 30%; margin: 0 auto;"><canvas id="myChart"></canvas>
     <script>
     var ctx = document.getElementById("myChart").getContext("2d");
     var myChart = new Chart(ctx, {
@@ -83,10 +85,11 @@ try {
         }
     });
     </script></div>';
-} catch (PDOException $e) {
-    // Gestion des erreurs PDO
-    die("Erreur lors de l'exécution de la requête : " . $e->getMessage());
-}
-?>
+    } catch (PDOException $e) {
+        // Gestion des erreurs PDO
+        die("Erreur lors de l'exécution de la requête : " . $e->getMessage());
+    }
+    ?>
 </body>
+
 </html>

@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Création d'opération</title>
+</head>
+
+<body>
+
 <?php
 require('../../init.php');
 checkAcl('auth');
@@ -11,7 +21,6 @@ if (isset($_POST['action'])) {
     $typeOp = $_POST['typeOp'];
     $idCompteClient = $_POST['idCompteClient'];
 
-    
     $sql = "INSERT INTO operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
     $res = $conn->prepare($sql);
     $res->execute([$montant, $dateOperation, $typeOp, $idCompteClient]);
@@ -23,26 +32,30 @@ if ($createSuccessful) {
     echo '<script>alert("L\'opération a été créée avec succès.");</script>';
 }
 ?>
-<!-- Formulaire pour la création du contrat -->
-<form action="rechercherCompte.php" method="post" name='monForm'>
-    <p>
-        <label for="montant">Montant : </label>
-        <input type="number" name="montant" required>
-    </p>
-    <p>
-        <label for="dateOperation">Date de l'opération : </label>
-        <input type="date" name="dateOperation" required>
-    </p>
-    <p>
-        <label for="typeOp">Type de l'opération : </label>
-        <input type="text" name="typeOp" required>
-    </p>
-    <p>
-        <label for="idCompteClient">Id du compte client: </label>
-        <input type="text" name="idCompteClient" required>
-    </p>
-    <p>
-        <a href="../..">Page précédente</a>
-        <button type="submit" name="action" value="Créer">Créer</button>
-    </p>
-</form>
+
+    <!-- Formulaire pour la création du contrat -->
+    <form action="rechercherCompte.php" method="post" name='monForm'>
+        <p>
+            <label for="montant">Montant :</label>
+            <input type="number" name="montant" id="montant" required>
+        </p>
+        <p>
+            <label for="dateOperation">Date de l'opération :</label>
+            <input type="date" name="dateOperation" id="dateOperation" required>
+        </p>
+        <p>
+            <label for="typeOp">Type de l'opération :</label>
+            <input type="text" name="typeOp" id="typeOp" required>
+        </p>
+        <p>
+            <label for="idCompteClient">Id du compte client :</label>
+            <input type="text" name="idCompteClient" id="idCompteClient" required>
+        </p>
+        <p>
+            <a href="../..">Page précédente</a>
+            <button type="submit" name="action" value="Créer">Créer</button>
+        </p>
+    </form>
+</body>
+
+</html>

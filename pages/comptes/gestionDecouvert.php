@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier le découvert</title>
+</head>
+<body>
+
 <?php
 require('../../init.php');
 checkAcl('auth');
@@ -47,19 +55,11 @@ try {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Modifier le découvert</title>
-</head>
-<body>
-
 <form action="gestionDecouvert.php" method="post">
     <p>
         <!-- Sélection du compte à modifier -->
         <label for="idCompteClient">Sélectionnez un compte :</label>
-        <select id="idCompte" name="idCompteClient">
+        <select id="idCompteClient" name="idCompteClient" >
             <?php foreach ($comptes as $compte): ?>
                 <option value="<?php echo htmlspecialchars($compte['idCompteClient']); ?>">
                     <?php echo "Compte " . htmlspecialchars($compte['idCompteClient']) . " (Découvert autorisé : " . htmlspecialchars($compte['montantDecouvert']) . ")"; ?>

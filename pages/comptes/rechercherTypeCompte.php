@@ -20,8 +20,8 @@
     $typesCompte = $stmt->fetchAll();
     ?>
     <form action="modifierTypeCompte.php" method="post">
-        <label for="typeCompte">Choisir un type de compte à modifier :</label>
-        <select name="idCompte" id="typeCompte">
+        <label for="idCompte">Choisir un type de compte à modifier :</label>
+        <select name="idCompte" id="idCompte">
             <?php foreach ($typesCompte as $typeCompte): ?>
                 <option value="<?php echo $typeCompte['idCompte']; ?>">
                     <?php echo $typeCompte['nomTypeCompte']; ?>
@@ -31,4 +31,6 @@
         <button type="submit">Modifier</button>
     </form>
 </body>
+
+</html>
 

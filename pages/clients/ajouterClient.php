@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Création d'un client</title>
-    <meta charset="utf-8">
     <link rel="stylesheet" href="accueil.css" />
 </head>
 <body>
