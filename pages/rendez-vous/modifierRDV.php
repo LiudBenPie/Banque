@@ -97,7 +97,7 @@
         </p>
         <p>
             <label for="employe">Choisir un employé pour le rendez-vous :</label>
-            <select name="employe" id="employe">
+            <select name="numEmploye" id="numEmploye">
                 <?php foreach ($employes as $employe): ?>
                     <option value="<?php echo $employe['numEmploye']; ?>">
                         <?php echo $employe['nom']; ?>
@@ -117,7 +117,7 @@
         </p>
         <p>
         <label for="client" class="form-label">Sélectionnez le client à modifier :</label>
-                <select name="numClient" id="client" class="form-control">
+                <select name="numClient" id="numClient" class="form-control">
                     <?php foreach ($clients as $client) : ?>
                         <option value="<?php echo $client['numClient']; ?>">
                             <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
