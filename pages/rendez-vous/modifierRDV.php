@@ -84,7 +84,7 @@
 
         <!-- Champs du formulaire avec les informations à jour du rendez-vous -->
         <p>
-            <input type="hidden" name="numRdv" value="<?php echo isset($Rdv['numRdv']) ? htmlspecialchars($Rdv['numRdv']) : ''; ?>">
+            <input type="hidden" name="numRdv" id="numRdv" value="<?php echo isset($Rdv['numRdv']) ? htmlspecialchars($Rdv['numRdv']) : ''; ?>">
         </p>
 
         <p>
