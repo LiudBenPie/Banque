@@ -15,7 +15,6 @@
     include VIEWS_DIR . '/menu.php';
 
     $updateSuccessful = false;
-    $deleteSuccessful = false;
 
     if (isset($_POST['numEmploye'])) {
         $numEmploye = $_POST['numEmploye'];
@@ -25,9 +24,10 @@
             $login = $_POST['login'];
             $motDePasse = $_POST['motDePasse'];
             $categorie = $_POST['categorie'];
+            $actif = $_POST['actif'];
 
             if (!empty($motDePasse)) {
-                $hashedPassword = password_hash($motDePasse, PASSWORD_DEFAULT); // Considérez l'utilisation d'un algorithme de hachage plus sécurisé
+                $hashedPassword = password_hash($motDePasse, PASSWORD_DEFAULT);
             } else {
                 $sql = "SELECT motDePasse FROM employe WHERE numEmploye = ?";
                 $stmt = $conn->prepare($sql);
@@ -35,25 +35,18 @@
                 $hashedPassword = $stmt->fetchColumn();
             }
 
-            $sql = "UPDATE employe SET nom = ?, login = ?, motDePasse = ?, categorie = ? WHERE numEmploye = ?";
+            $sql = "UPDATE employe SET nom = ?, login = ?, motDePasse = ?, categorie = ?, actif = ? WHERE numEmploye = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nom, $login, $hashedPassword, $categorie, $numEmploye]);
+            $stmt->execute([$nom, $login, $hashedPassword, $categorie, $numEmploye, $actif]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
-        } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
-            $sql = "DELETE FROM employe WHERE numEmploye = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$numEmploye]);
-
-            $_SESSION['deleteSuccess'] = true;
-            $deleteSuccessful = true;
-        } else {
-            $sql = "SELECT * FROM employe WHERE numEmploye = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$numEmploye]);
-            $employe = $stmt->fetch();
         }
+        //récupération des infos de l'employé
+    $sql = "SELECT * FROM employe WHERE numEmploye = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$numEmploye]);
+    $employe = $stmt->fetch();
     }
 
     // Affiche une alerte si la mise à jour a été réussie
@@ -61,10 +54,6 @@
         echo '<script>alert("Les informations de l\'employé ont été mises à jour avec succès.");</script>';
     }
 
-    // Affiche une alerte si la suppression a été réussie
-    if ($deleteSuccessful) {
-        echo '<script>alert("L\'employé a été supprimé avec succès.");</script>';
-    }
     ?>
     <!-- Formulaire pour la mise à jour et la suppression des informations de l'employé -->
     <div class="container mt-5" style="max-width: 700px;">
@@ -94,12 +83,14 @@
                     <option value="Directeur" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Directeur') ? 'selected' : ''; ?>>Directeur</option>
                 </select>
             </div>
+            <div class="form-group col-md-6">
+                <label for="actif" class="form-label">L'employé est-il en poste :</label>
+                <input type="booleen" class="form-control" id="actif" name="actif" value="<?php echo isset($employe['actif']) ? htmlspecialchars($employe['actif']) : ''; ?>">
+            </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <!-- Bouton pour supprimer l'employé avec confirmation -->
-                <button type="submit" name="action" value="supprimer" class="btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet employé ?')">Supprimer</button>
             </div>
     </div>
     </form>
