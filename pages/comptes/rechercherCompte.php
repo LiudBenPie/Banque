@@ -94,20 +94,6 @@ if ($createSuccessful) {
                 $comptes = $stmt->fetchAll();
                 ?>
                 <div class="form-group">
-<<<<<<< HEAD
-                    <label for="idCompteClient" class="form-label">Id du compte client :</label>
-                    <select name="idCompteClient" id="idCompteClient" class="form-control">
-                        <?php foreach ($comptes as $compte) : ?>
-                            <option value="<?php echo $compte['idCompteClient']; ?>">
-                                <?php echo "Compte n°" . $compte['idCompteClient'] . " - " . " Client: " . $compte['nom'] . ' ' . $compte['prenom']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" name="action" value="Créer" class="btn">Créer</button>
-                </div>
-=======
                 <label for="idCompteClient" class="form-label">Id du compte client :</label>
                 <select name="idCompteClient" id="idCompteClient" class="form-control" required>
                     <?php foreach ($comptes as $compte) : ?>
@@ -120,7 +106,6 @@ if ($createSuccessful) {
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" name="action" value="Créer" class="btn">Créer</button>
             </div>
->>>>>>> d5a0c64b4a5cd0e9f4f07a8088a757d6720a3970
         </form>
 </body>
 
