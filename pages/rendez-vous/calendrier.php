@@ -93,7 +93,7 @@ include VIEWS_DIR . '/menu.php';
 	$nb_jours = cal_days_in_month(CAL_GREGORIAN, $mois, $annee);
 
 	// Récupérer les événements de la base de données
-	$sql = "SELECT rdv.dateRdv, rdv.heureRdv, Motif.libelleMotif, Client.nom AS nomClient, Client.prenom AS prenomClient FROM rdv JOIN Employe ON rdv.numEmploye = Employe.numEmploye JOIN Client ON Client.numClient = rdv.numClient JOIN Motif ON rdv.idMotif = Motif.idMotif WHERE YEAR(rdv.dateRdv) = :year AND MONTH(rdv.dateRdv) = :month AND Employe.nom = :nom";
+	$sql = "SELECT rdv.dateRdv, rdv.heureRdv, Motif.libelleMotif, Client.nom AS nomClient, Client.prenom AS prenomClient FROM rdv JOIN Employe ON rdv.numEmploye = Employe.numEmploye JOIN Client ON Client.numClient = rdv.numClient JOIN Motif ON rdv.idMotif = Motif.idMotif WHERE YEAR(rdv.dateRdv) = :year AND MONTH(rdv.dateRdv) = :month AND Employe.nom = :nom ORDER BY rdv.heureRdv";
 	$stmt = $conn->prepare($sql);
 	$stmt->execute(['year' => $annee, 'month' => $mois, 'nom' => $nom]);
 	$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
