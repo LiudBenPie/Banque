@@ -15,9 +15,9 @@
     include VIEWS_DIR . '/menu.php';
 
     $updateSuccessful = false;
-
+    $numEmploye = $_POST['numEmploye'];
+    
     if (isset($_POST['numEmploye'])) {
-        $numEmploye = $_POST['numEmploye'];
 
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $nom = $_POST['nom'];
