@@ -22,7 +22,7 @@ CREATE TABLE Comptes (
     description VARCHAR(255)
 );
 
-CREATE TABLE Employes (
+CREATE TABLE Employe (
     numEmploye INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
     login VARCHAR(255),
@@ -31,7 +31,7 @@ CREATE TABLE Employes (
     actif INT
 );
 
-CREATE TABLE Clients (
+CREATE TABLE Client (
     numClient INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
     prenom VARCHAR(255),
