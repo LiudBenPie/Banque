@@ -22,9 +22,10 @@
         $motDePasse = $_POST['motDePasse'];
         $hashedPassword = password_hash($motDePasse, PASSWORD_DEFAULT);
         $categorie = $_POST['categorie'];
-        $sql = "INSERT INTO employe (`nom`, `login`, `motDePasse`, `categorie`) VALUES (?, ?, ?, ?)";
+        $actif =$_POST ['actif'];
+        $sql = "INSERT INTO employe (`nom`, `login`, `motDePasse`, `categorie`, `actif`) VALUES (?, ?, ?, ?, ?)";
         $res = $conn->prepare($sql);
-        if ($res->execute([$nomEmploye, $login, $hashedPassword, $categorie])) {
+        if ($res->execute([$nomEmploye, $login, $hashedPassword, $categorie, $actif])) {
             $createSuccessful = true;
         }
     }
@@ -56,6 +57,9 @@
                     <option value="Agent">Agent</option>
                     <option value="Conseiller">Conseiller</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="actif" value="1" ?>">
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" name="action" value="Créer" class="btn">Créer</button>

@@ -24,7 +24,7 @@
             <legend>Les contrats de la banque</legend>
             <div class="form-group">
                 <label for="contrat">Choisir un contrat à modifier :</label>
-                <select name="contrat" id="contrat" class="form-control">
+                <select name="numContrat" id="numContrat" class="form-control">
                     <?php foreach ($contrats as $contrat) : ?>
                         <option value="<?php echo $contrat['numContrat']; ?>">
                             <?php echo $contrat['nomTypeContrat']; ?>

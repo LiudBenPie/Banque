@@ -18,7 +18,6 @@
 
     if (isset($_POST['numEmploye'])) {
         $numEmploye = $_POST['numEmploye'];
-
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $nom = $_POST['nom'];
             $login = $_POST['login'];
@@ -41,16 +40,17 @@
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
+        }else{
+            //récupération des infos de l'employé
+        $sql = "SELECT * FROM employe WHERE numEmploye = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$numEmploye]);
+        $employe = $stmt->fetch();
         }
-        //récupération des infos de l'employé
-    $sql = "SELECT * FROM employe WHERE numEmploye = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$numEmploye]);
-    $employe = $stmt->fetch();
     }
 
     // Affiche une alerte si la mise à jour a été réussie
-    if ($updateSuccessful) {
+    if ($updateSuccessful == true) {
         echo '<script>alert("Les informations de l\'employé ont été mises à jour avec succès.");</script>';
     }
 
