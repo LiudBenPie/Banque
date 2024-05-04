@@ -60,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label for="tarif" class="form-label">Tarif mensuel :</label>
-                <input type="text" id="tarif" name="tarif" class="form-control" required>
+                <input type="text" id="tarif" name="tarif" class="form-control" required min="0">
             </div>
             <div class="form-group">
                 <label for="nomcli" class="form-label">Nom du client :</label>
