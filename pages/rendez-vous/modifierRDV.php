@@ -64,7 +64,7 @@
                     $_SESSION['updateSuccess'] = true;
                     $updateSuccessful = true;
                 } else {
-                    echo "Un rendez-vous existe déjà pour cette date, cette heure et ce conseiller.";
+                    echo '<script>alert("Un rendez-vous existe déjà pour cette date, cette heure et ce conseiller.");</script>';
                 }
             } catch (PDOException $e) {
                 echo "Erreur lors de la mise à jour du rendez-vous : " . $e->getMessage();

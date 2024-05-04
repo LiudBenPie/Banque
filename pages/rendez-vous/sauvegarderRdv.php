@@ -39,7 +39,7 @@
                 echo "Erreur : " . $e->getMessage();
             }
         } else {
-            echo "Un rendez-vous existe déjà pour cette date, cette heure et ce conseiller.";
+            echo '<script>alert("Un rendez-vous existe déjà pour cette date, cette heure et ce conseiller.");</script>';
         }
     }
     ?>
