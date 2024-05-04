@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier le type du contrat</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/css/formstyle.css">
 </head>
 
 <body>
@@ -55,26 +55,29 @@
     }
     ?>
     <!-- Formulaire pour la mise à jour et la suppression des informations du contrat -->
-    <form action="modifierTypeContrat.php" method="post" name='monForm'>
+    <div class="container mt-5" style="max-width: 700px;">
+        <form action="modifierTypeContrat.php" method="post" name="monForm" class="row g-3 rounded shadow">
+            <legend>MODIFICATION DU TYPE DE CONTRAT</legend>
 
-        <!-- Champs du formulaire avec les informations à jour du contrat -->
-        <p>
-            <input type="hidden" name="numContrat"
-                value="<?php echo isset($contrat['numContrat']) ? htmlspecialchars($contrat['numContrat']) : ''; ?>">
-        </p>
+            <!-- Champs du formulaire avec les informations à jour du contrat -->
+            <div class="form-group">
+                <input type="hidden" name="numContrat" value="<?php echo isset($contrat['numContrat']) ? htmlspecialchars($contrat['numContrat']) : ''; ?>">
+            </div>
 
-        <p>
-            <label for="nomTypeContrat">Nom du Contrat:</label>
-            <input type="text" id="nomTypeContrat" name="nomTypeContrat"
-                value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>">
-        </p>
+            <div class="form-group">
+                <label for="nomTypeContrat">Nom du Contrat:</label>
+                <input type="text" id="nomTypeContrat" name="nomTypeContrat" value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>">
+            </div>
 
-        <p>
-            <a href="../..">Page précédente</a>
-            <button type="submit" name="action" value="modifier">Mettre à jour</button>
-            <button type="submit" name="action" value="supprimer"
-                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de contrat ?')">Supprimer</button>
-        </p>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="supprimer" class="btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de contrat ?')">Supprimer</button>
+            </div>
+    </div>
     </form>
+    </div>
 </body>
+
 </html>

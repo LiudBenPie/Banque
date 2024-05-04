@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier Rendez-vous</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/css/formstyle.css">
 </head>
 
 <body>
@@ -105,57 +105,61 @@
     }
     ?>
     <!-- Formulaire pour la mise à jour et la suppression des informations du rendez-vous -->
-    <form action="modifierRDV.php" method="post" name='monForm'>
+    <div class="container mt-5" style="max-width: 700px;">
+        <form action="modifierRDV.php" method="post" name="monForm" class="row g-3 rounded shadow">
+        <legend>MODIFICATION DU RDV</legend>
 
-        <!-- Champs du formulaire avec les informations à jour du rendez-vous -->
-        <p>
-            <input type="hidden" name="numRdv" id="numRdv" value="<?php echo isset($Rdv['numRdv']) ? htmlspecialchars($Rdv['numRdv']) : ''; ?>">
-        </p>
+            <!-- Champs du formulaire avec les informations à jour du rendez-vous -->
+            <div class="form-group">
+                <input type="hidden" class="form-control" name="numRdv" id="numRdv" value="<?php echo isset($Rdv['numRdv']) ? htmlspecialchars($Rdv['numRdv']) : ''; ?>">
+            </div>
 
-        <p>
-            <label for="dateRdv">Date du rendez-vous :</label>
-            <input type="date" id="dateRdv" name="dateRdv" value="<?php echo isset($Rdv['dateRdv']) ? htmlspecialchars($Rdv['dateRdv']) : ''; ?>">
-        </p>
-        <p>
-            <label for="heureRdv">Heure du rendez-vous :</label>
-            <input type="number" id="heureRdv" name="heureRdv" value="<?php echo isset($Rdv['heureRdv']) ? htmlspecialchars($Rdv['heureRdv']) : ''; ?>">
-        </p>
-        <p>
-            <label for="employe">Choisir un employé pour le rendez-vous :</label>
-            <select name="numEmploye" id="numEmploye">
-                <?php foreach ($employes as $employe) : ?>
-                    <option value="<?php echo $employe['numEmploye']; ?>">
-                        <?php echo $employe['nom']; ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </p>
-        <p>
-            <label for="idMotif">Sélectionnez le motif :</label>
-            <select name="idMotif" id="idMotif">
-                <?php foreach ($motifs as $motif) : ?>
-                    <option value="<?php echo $motif['idMotif']; ?>" <?php if (isset($Rdv['idMotif']) && $Rdv['idMotif'] == $motif['idMotif']) echo 'selected'; ?>>
-                        <?php echo $motif['libelleMotif'] ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </p>
-        <p>
-            <label for="client" class="form-label">Sélectionnez le client pour le rendez-vous :</label>
-            <select name="numClient" id="numClient">
-                <?php foreach ($clients as $client) : ?>
-                    <option value="<?php echo $client['numClient']; ?>">
-                        <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </p>
-        <p>
-            <a href="../..">Page précédente</a>
-            <button type="submit" name="action" value="modifier">Mettre à jour</button>
-            <button type="submit" name="action" value="supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">Supprimer</button>
-        </p>
-    </form>
+            <div class="form-group">
+                <label for="dateRdv" class="form-label">Date du rendez-vous :</label>
+                <input type="date" class="form-control" id="dateRdv" name="dateRdv" value="<?php echo isset($Rdv['dateRdv']) ? htmlspecialchars($Rdv['dateRdv']) : ''; ?>">
+            </div>
+            <div class="form-group">
+                <label for="heureRdv" class="form-label">Heure du rendez-vous :</label>
+                <input type="number" class="form-control" id="heureRdv" name="heureRdv" value="<?php echo isset($Rdv['heureRdv']) ? htmlspecialchars($Rdv['heureRdv']) : ''; ?>">
+            </div>
+            <div class="form-group">
+                <label for="employe" class="form-label">Choisir un employé pour le rendez-vous :</label>
+                <select name="numEmploye" class="form-control" id="numEmploye">
+                    <?php foreach ($employes as $employe) : ?>
+                        <option value="<?php echo $employe['numEmploye']; ?>">
+                            <?php echo $employe['nom']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="idMotif" class="form-label">Sélectionnez le motif :</label>
+                <select name="idMotif" id="idMotif" class="form-control">
+                    <?php foreach ($motifs as $motif) : ?>
+                        <option value="<?php echo $motif['idMotif']; ?>" <?php if (isset($Rdv['idMotif']) && $Rdv['idMotif'] == $motif['idMotif']) echo 'selected'; ?>>
+                            <?php echo $motif['libelleMotif'] ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="client" class="form-label">Sélectionnez le client pour le rendez-vous :</label>
+                <select name="numClient" id="numClient" class="form-control">
+                    <?php foreach ($clients as $client) : ?>
+                        <option value="<?php echo $client['numClient']; ?>">
+                            <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="supprimer" class="btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">Supprimer</button>
+            </div>
+        </form>
 </body>
+</div>
 
 </html>

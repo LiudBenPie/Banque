@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supprimer un contrat</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/css/formstyle.css">
 </head>
 
 <body>
@@ -45,21 +45,20 @@
     ?>
 
     <!-- Formulaire pour la suppression du contrat -->
-    <form action="supprimerContrat.php" method="post">
-
-        <!-- Champs du formulaire avec les informations du contrat à supprimer -->
-        <p>
-            <label for="numContrat">Êtes-vous sûr de vouloir supprimer le contrat :</label>
-            <input type="hidden" name="numContrat" id="numContrat" value="<?php echo isset($contrat['idContratClient']) ? htmlspecialchars($contrat['idContratClient']) : ''; ?>">
-            <?php echo isset($contrat['idContratClient']) ? "Contrat n°" . htmlspecialchars($contrat['idContratClient']) . " - " . htmlspecialchars($contrat['nomTypeContrat']) . " pour " . htmlspecialchars($contrat['nom']) . ' ' . htmlspecialchars($contrat['prenom']) : ''; ?>
-        </p>
-
-        <p>
-            <a href="../..">Page précédente</a>
-            <button type="submit" name="action" value="supprimer">Supprimer</button>
-        </p>
-    </form>
-
+    <div class="container mt-5" style="max-width: 700px;">
+        <form action="supprimerContrat.php" method="post" class="row g-3 rounded shadow">
+            <legend>Les contrats de la banque</legend>
+            <!-- Champs du formulaire avec les informations du contrat à supprimer -->
+            <div class="form-group">
+                <label for="numContrat" class="form-label">Êtes-vous sûr de vouloir supprimer le contrat ?</label>
+                <input type="hidden" class="form-control" name="numContrat" id="numContrat" value="<?php echo isset($contrat['idContratClient']) ? htmlspecialchars($contrat['idContratClient']) : ''; ?>">
+                <?php echo isset($contrat['idContratClient']) ? "Contrat n°" . htmlspecialchars($contrat['idContratClient']) . " - " . htmlspecialchars($contrat['nomTypeContrat']) . " pour " . htmlspecialchars($contrat['nom']) . ' ' . htmlspecialchars($contrat['prenom']) : ''; ?>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="supprimer" class="btn">Supprimer</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

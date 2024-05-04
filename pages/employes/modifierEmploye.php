@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier ou supprimer un employé</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/css/formstyle.css">
 </head>
 
 <body>
@@ -41,7 +41,6 @@
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
-
         } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
             $sql = "DELETE FROM employe WHERE numEmploye = ?";
             $stmt = $conn->prepare($sql);
@@ -68,45 +67,43 @@
     }
     ?>
     <!-- Formulaire pour la mise à jour et la suppression des informations de l'employé -->
-    <form action="modifierEmploye.php" method="post" name='monForm'>
-
-        <!-- Champs du formulaire avec les informations à jour de l'employé -->
-        <p>
-            <input type="hidden" name="numEmploye"
-                value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
-        </p>
-        <p>
-            <label for="nom">Nom:</label>
-            <input type="text" id="nom" name="nom" value="<?php echo isset($employe['nom']) ? htmlspecialchars($employe['nom']) : ''; ?>">
-        </p>
-
-        <p>
-            <label for="login">Login:</label>
-            <input type="text" id="login" name="login" value="<?php echo isset($employe['login']) ? htmlspecialchars($employe['login']) : ''; ?>">
-        </p>
-
-
-        <p>
-            <label for="motDePasse">Mot de Passe (laissez vide si inchangé):</label>
-            <input type="password" id="motDePasse" name="motDePasse">
-        </p>
-
-        <p>
-            <label for="categorie">Catégorie:</label>
-            <select id="categorie" name="categorie">
-                <option value="Conseiller" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Conseiller') ? 'selected' : ''; ?>>Conseiller</option>
-                <option value="Agent" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Agent') ? 'selected' : ''; ?>>Agent</option>
-                <option value="Directeur" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Directeur') ? 'selected' : ''; ?>>Directeur</option>
-            </select>
-        </p>
-
-        <p>
-            <a href="../..">Page précédente</a>
-            <button type="submit" name="action" value="modifier">Mettre à jour</button>
-            <!-- Bouton pour supprimer l'employé avec confirmation -->
-            <button type="submit" name="action" value="supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet employé ?')">Supprimer</button>
-        </p>
+    <div class="container mt-5" style="max-width: 700px;">
+        <form action="modifierEmploye.php" method="post" name="monForm" class="row g-3 rounded shadow">
+            <legend>INFORMATION DE L'EMPLOYE</legend>
+            <!-- Champs du formulaire avec les informations à jour de l'employé -->
+            <div class="form-group">
+                <input type="hidden" class="form-control" name="numEmploye" value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
+            </div>
+            <div class="form-group">
+                <label for="nom" class="form-label">Nom:</label>
+                <input type="text" class="form-control" id="nom" name="nom" value="<?php echo isset($employe['nom']) ? htmlspecialchars($employe['nom']) : ''; ?>">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="login" class="form-label">Login:</label>
+                <input type="text" class="form-control" id="login" name="login" value="<?php echo isset($employe['login']) ? htmlspecialchars($employe['login']) : ''; ?>">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="motDePasse" class="form-label">Mot de Passe (laissez vide si inchangé):</label>
+                <input type="password" class="form-control" id="motDePasse" name="motDePasse">
+            </div>
+            <div class="form-group">
+                <label for="categorie" class="form-label">Catégorie:</label>
+                <select id="categorie" name="categorie" class="form-control">
+                    <option value="Conseiller" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Conseiller') ? 'selected' : ''; ?>>Conseiller</option>
+                    <option value="Agent" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Agent') ? 'selected' : ''; ?>>Agent</option>
+                    <option value="Directeur" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Directeur') ? 'selected' : ''; ?>>Directeur</option>
+                </select>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <!-- Bouton pour supprimer l'employé avec confirmation -->
+                <button type="submit" name="action" value="supprimer" class="btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet employé ?')">Supprimer</button>
+            </div>
+    </div>
     </form>
+    </div>
 </body>
 
 </html>

@@ -1,9 +1,10 @@
-<!DOCTYPE html> 
-<html lang="fr"> 
+<!DOCTYPE html>
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <title>Créer un motif</title>
+    <link rel="stylesheet" href="/static/css/formstyle.css">
 </head>
 
 <body>
@@ -30,19 +31,22 @@
     ?>
 
     <!-- Formulaire pour la création du motif -->
-    <form action="creerMotif.php" method="post" name='monForm'>
-        <p>
-            <label for="libellemotif">Libellé du motif :</label>
-            <input type="text" name="libellemotif" required>
-        </p>
-        <p>
-            <label for="listepiece">Liste des pièces : </label>
-            <textarea name="listepiece" required></textarea>
-        </p>
-        <p>
-            <button type="submit" name="action" value="Créer">Créer le motif</button>
-        </p>
-    </form>
+    <div class="container mt-5" style="max-width: 700px;">
+        <form action="creerMotif.php" method="post" name="monForm" class="row g-3 rounded shadow">
+            <legend>Les motifs du rdv</legend>
+            <div class="form-group">
+                <label for="libellemotif" class="form-label">Libellé du motif :</label>
+                <input type="text" name="libellemotif" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="listepiece" class="form-label">Liste des pièces : </label>
+                <textarea name="listepiece" class="form-control" required></textarea>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="Créer" class="btn">Créer le motif</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
