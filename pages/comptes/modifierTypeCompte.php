@@ -72,7 +72,7 @@
                 value="<?php echo isset($compte['nomTypeCompte']) ? htmlspecialchars($compte['nomTypeCompte']) : ''; ?>">
         </p>
         <p>
-            <label for="description">Nom du Compte:</label>
+            <label for="description">Description du Compte:</label>
             <input type="text" id="description" name="description"
                 value="<?php echo isset($compte['description']) ? htmlspecialchars($compte['description']) : ''; ?>">
         </p>

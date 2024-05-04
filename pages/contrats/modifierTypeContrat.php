@@ -22,10 +22,11 @@
 
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $nomTypeContrat = $_POST['nomTypeContrat'];
+            $description = $_POST['description'];
 
-            $sql = "UPDATE contrat SET nomTypeContrat = ? WHERE numContrat = ?";
+            $sql = "UPDATE contrat SET nomTypeContrat = ?, description = ? WHERE numContrat = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomTypeContrat, $numContrat]);
+            $stmt->execute([$nomTypeContrat, $description, $numContrat]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
@@ -68,7 +69,11 @@
                 <label for="nomTypeContrat">Nom du Contrat:</label>
                 <input type="text" id="nomTypeContrat" name="nomTypeContrat" value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>">
             </div>
-
+            <div class="form-group">
+            <label for="description">Description du Contrat:</label>
+            <input type="text" id="description" name="description"
+                value="<?php echo isset($contrat['description']) ? htmlspecialchars($contrat['description']) : ''; ?>">
+            </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
             </div>
