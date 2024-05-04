@@ -79,8 +79,8 @@
 
         <p>
             <a href="../..">Page précédente</a>
-            <button type="submit" name="action" value="modifier">Mettre à jour</button>
-            <button type="submit" name="action" value="supprimer"
+            <button type="submit" class="btn btn-outline-warning" name="action" value="modifier">Mettre à jour</button>
+            <button type="submit" class="btn btn-outline-warning" name="action" value="supprimer"
                 onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de compte ?')">Supprimer</button>
         </p>
     </form>

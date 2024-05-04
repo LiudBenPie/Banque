@@ -55,7 +55,7 @@
     <!-- Formulaire pour la mise à jour des informations du client -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierClient.php" method="post" class="row g-3 rounded shadow">
-            <legend>INFORMATION DU CLIENT</legend>
+            <legend class="text-warning">INFORMATION DU CLIENT</legend>
             <!-- Champs du formulaire avec les informations à jour du client -->
                 <div class="form-group">
                     <label for="numClient" class="form-label">ID Client : </label>
@@ -102,7 +102,7 @@
                     </select>
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+                    <button type="submit" name="action" value="modifier" class="btn btn-outline-warning">Mettre à jour</button>
                 </div>
         </form>
     </div>

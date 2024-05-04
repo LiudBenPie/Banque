@@ -5,27 +5,9 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Méta-informations pour la mise en page sur les appareils mobiles -->
     <title>Page du directeur</title> 
-    <style>
-        
-        li:hover {
-            background-color: black; 
-            color: yellow; 
-            text-decoration: underline; 
-            text-decoration-color: #9f9c92; 
-        }
-
-        .btn {
-            background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #3a2c0f 78%); 
-            text-transform: uppercase; 
-        }
-
-        .btn:hover {
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #191F1D;">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/static/images/favicon.ico" width="60" alt="icon"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,7 +72,7 @@
                 <?php
                 include VIEWS_DIR . '/themeswitcher.php';
                 ?>
-                <a class="btn btn-primary" href="/utilisateurs/deconnexion.php">Déconnexion</a>
+                <a type="button" class="btn btn-outline-warning" href="/utilisateurs/deconnexion.php">Déconnexion</a>
             </div>
         </div>
     </nav>

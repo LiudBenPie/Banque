@@ -2,9 +2,8 @@ legend{
     text-align: center;
     text-transform: uppercase;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #AF9500;
     text-decoration: underline;
-    text-decoration-color: #9f9c92;
+    text-decoration-color: #ac9750;
 
 }
 
@@ -14,44 +13,35 @@ label{
 }
 
 /* input */
-
 input[readonly] {
-    background-color: #f6f9ee;
+    background-color: #b5b8a8;
     background-image: url('../images/readonly.png');
     background-size: 15px;
     background-position: right 15px center;
     background-repeat: no-repeat;
     font-weight: bold;
-    color: #005841;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* select */
-select {
-    background-image: url('path_to_your_arrow_icon.png');
-    border: #CCC 1px solid;
-}
 .part {
-    color: #AF9500;
+    color: #a07400;
 }
 
-/* button */
-.btn {
-    background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #ad8d4c 78%);
-    text-transform: uppercase;
-}
+/* background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #ad8d4c 78%); */
 
-.btn:hover {
-    font-weight: bold;
-    color: black;
-}
-
-body {
-    background-image: url('/static/images/image.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
 
 .container{
-    background: rgb(229, 229, 218);
+    /* background: rgb(229, 229, 218); */
+}
+
+li:hover {
+    /* background-color: black;
+    color: yellow;
+    text-decoration: underline;
+    text-decoration-color: #9f9c92; */
+}
+
+.custom-dropdown .dropdown-menu {
+    background-color: white; /* Couleur de fond blanche */
 }

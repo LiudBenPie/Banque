@@ -26,7 +26,7 @@ checkAcl('guest');
                     <label for="motDePasse" class="form-label">Mot de passe</label>
                     <input type="password" class="form-control" name="motDePasse" id="motDePasse" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="background-color: black;">Connexion</button>
+                <button type="submit" class="btn btn-dark">Connexion</button>
         </form>
     </div>
 </body>

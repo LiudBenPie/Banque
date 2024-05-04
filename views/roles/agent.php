@@ -6,21 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Méta-informations pour la mise en page sur les appareils mobiles -->
     <title>Page de l'agent</title>
     <link rel="stylesheet" href="/static/css/formstyle.css">
-    <style>
-        li:hover {
-            background-color: black;
-            color: yellow;
-            text-decoration: underline;
-            text-decoration-color: #9f9c92;
-        }
-
-    </style>
 </head>
 
 <body>
 
 
-    <nav class="navbar navbar-expand-lg" style="background-color: #191F1D;">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/static/images/cochon.png" width="80" alt="icon"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +22,7 @@
                     <!-- Liste des éléments de navigation -->
                     <!-- Gestion des clients -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Gestion des clients
                         </a>
                         <ul class="dropdown-menu">
@@ -41,15 +32,15 @@
                     </li>
                     <!-- Gestion des syntheses -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/clients/rechercheSyntheseClient.php" style="color: white;">Consulter la synthèse d'un client</a>
+                        <a class="nav-link" href="/clients/rechercheSyntheseClient.php">Consulter la synthèse d'un client</a>
                     </li>
                     <!-- Gestion des dépôts et des retraits -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/comptes/rechercherCompte.php" style="color: white;">Réaliser un dépôt ou un retrait</a>
+                        <a class="nav-link" href="/comptes/rechercherCompte.php">Réaliser un dépôt ou un retrait</a>
                     </li>
                     <!-- Gestion des rdv -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Rendez-vous
                         </a>
                         <ul class="dropdown-menu">
@@ -62,7 +53,7 @@
                 <?php
                 include VIEWS_DIR . '/themeswitcher.php';
                 ?>
-                <a class="btn btn-primary" href="/utilisateurs/deconnexion.php">Deconnexion</a>
+                <a type="button" class="btn btn-outline-warning" href="/utilisateurs/deconnexion.php">Deconnexion</a>
             </div>
         </div>
     </nav>

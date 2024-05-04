@@ -35,7 +35,7 @@
             <svg class="bi my-1 me-2 theme-icon-active" style="height: 16px; width: 16px;">
                 <use href="#circle-half"></use>
             </svg>
-            <span class="ms-2" id="bd-theme-text"></span>
+            <span class="ms-2" id="bd-theme-text">Thèmes</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme" style="--bs-dropdown-min-width: 8rem;">
             <li>

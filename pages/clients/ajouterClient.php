@@ -67,7 +67,7 @@
     ?>
     <div class="container mt-5" style="max-width: 700px;">
         <form action="ajouterClient.php" method="post" class="row g-3 rounded shadow">
-            <legend>Les clients de la banque</legend>
+            <legend class="text-warning">Les clients de la banque</legend>
             <div class="form-group col-md-6">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" class="form-control" name="nom" id="nom" size="12" maxlength="25" required>
@@ -125,10 +125,10 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="reset" name="reset" value="Effacer les valeurs saisies" class="btn">Effacer les valeurs saisies</button>
+                <button type="reset" name="reset" value="Effacer les valeurs saisies" class="btn btn-outline-warning">Effacer les valeurs saisies</button>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="ajouterclient" value="Ajouter un client" class="btn">Ajouter un client</button>
+                <button type="submit" name="ajouterclient" value="Ajouter un client" class="btn btn-outline-warning">Ajouter un client</button>
             </div>
         </form>
     </div>
