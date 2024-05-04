@@ -25,8 +25,8 @@
         <form action="modifierEmploye.php" method="post" class="row g-3 rounded shadow">
             <legend>Les employes de la banque</legend>
             <div class="form-group">
-                <label for="numEmploye" class="form-label">Choisir un employé à modifier :</label>
-                <select name="employe" id="employe" class="form-control">
+                <label for="employe" class="form-label">Choisir un employé à modifier :</label>
+                <select name="numEmploye" id="employe" class="form-control">
                     <?php foreach ($employes as $employe) : ?>
                         <option value="<?php echo $employe['numEmploye']; ?>">
                             <?php echo $employe['nom']; ?>
