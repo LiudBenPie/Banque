@@ -16,7 +16,7 @@ CREATE TABLE Situation (
     description VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Comptes (
+CREATE TABLE Compte (
     idCompte INT PRIMARY KEY AUTO_INCREMENT,
     nomTypeCompte VARCHAR(255),
     description VARCHAR(255)
@@ -65,7 +65,7 @@ CREATE TABLE Operation (
     FOREIGN KEY (idCompteClient) REFERENCES CompteClient(idCompteClient)
 );
 
-CREATE TABLE Contrats (
+CREATE TABLE Contrat (
     numContrat INT PRIMARY KEY AUTO_INCREMENT,
     nomTypeContrat VARCHAR(25),
     description VARCHAR(255) 
