@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de Vente de Contrat</title>
+    <link rel="stylesheet" href="/static/css/formstyle.css">
 </head>
 
 <body>
@@ -50,51 +51,52 @@
         $msg = 'ERREUR dans ' . $e->getFile() . ' Ligne ' . $e->getLine() . ' : ' . $e->getMessage();
     }
     ?>
+    <div class="container mt-5" style="max-width: 700px;">
+        <form action="vendreContrat.php" method="post" class="row g-3 rounded shadow">
+            <legend>Formulaire de Vente de Contrat</legend>
+            <div class="form-group">
+                <label for="date" class="form-label">Date d'ouverture :</label>
+                <input type="date" id="date" name="date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="tarif" class="form-label">Tarif mensuel :</label>
+                <input type="text" id="tarif" name="tarif" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nomcli" class="form-label">Nom du client :</label>
+                <select id="nomcli" name="nomcli" class="form-control">
+                    <?php
+                    $sql = "SELECT nom FROM Client";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $nomclients = $stmt->fetchAll();
 
-    <h2>Formulaire de Vente de Contrat</h2>
-    <form action="vendreContrat.php" method="post">
-        <p>
-            <label for="date">Date d'ouverture :</label>
-            <input type="date" id="date" name="date" required><br><br>
-        </p>
-        <p>
-            <label for="tarif">Tarif mensuel :</label>
-            <input type="text" id="tarif" name="tarif" required><br><br>
-        </p>
-        <p>
-            <label for="nomcli">Nom du client :</label>
-            <select id="nomcli" name="nomcli">
-                <?php
-                $sql = "SELECT nom FROM Client";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
-                $nomclients = $stmt->fetchAll();
+                    foreach ($nomclients as $nomclient) {
+                        echo "<option value=\"{$nomclient['nom']}\">{$nomclient['nom']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nomcon" class="form-label">Nom du contrat :</label>
+                <select id="nomcon" name="nomcon" class="form-control">
+                    <?php
+                    $sql = "SELECT nomTypeContrat FROM contrat";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $nomtypecontrats = $stmt->fetchAll();
 
-                foreach ($nomclients as $nomclient) {
-                    echo "<option value=\"{$nomclient['nom']}\">{$nomclient['nom']}</option>";
-                }
-                ?>
-            </select>
-        </p>
-        <p>
-            <label for="nomcon">Nom du contrat :</label>
-            <select id="nomcon" name="nomcon">
-                <?php
-                $sql = "SELECT nomTypeContrat FROM contrat";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
-                $nomtypecontrats = $stmt->fetchAll();
-
-                foreach ($nomtypecontrats as $nomtypecontrat) {
-                    echo "<option value=\"{$nomtypecontrat['nomTypeContrat']}\">{$nomtypecontrat['nomTypeContrat']}</option>";
-                }
-                ?>
-            </select>
-        </p>
-        <p>
-            <input type="submit" name="ventecon" value="Vendre un contrat">
-        </p>
-    </form>
+                    foreach ($nomtypecontrats as $nomtypecontrat) {
+                        echo "<option value=\"{$nomtypecontrat['nomTypeContrat']}\">{$nomtypecontrat['nomTypeContrat']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="ventecon" value="Vendre un contrat" class="btn">Vendre un contrat</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un employé</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/css/formstyle.css">
 </head>
 
 <body>
@@ -34,32 +34,33 @@
     }
     ?>
     <!-- Formulaire pour la création de l'employé -->
-    <form action="creerEmploye.php" method="post" name='monForm'>
-        <p>
-            <label for="nomEmploye">Nom de l'employé :</label>
-            <input type="text" name="nomEmploye" id="nomEmploye" required>
-        </p>
-        <p>
-            <label for="login">Login :</label>
-            <input type="text" name="login" id="login" required>
-        </p>
-        <p>
-            <label for="motDePasse">Mot de passe :</label>
-            <input type="password" name="motDePasse" id="motDePasse" required>
-        </p>
-
-        <p>
-            <label for="categorie">Catégorie : </label>
-            <select id="categorie" name="categorie"  required>
-                <option value="Directeur">Directeur</option>
-                <option value="Agent">Agent</option>
-                <option value="Conseiller">Conseiller</option>
-            </select>
-        </p>
-        <p>
-            <button type="submit" name="action" value="Créer">Créer</button>
-        </p>
-    </form>
+    <div class="container mt-5" style="max-width: 700px;">
+        <form action="creerEmploye.php" method="post" name="monForm" class="row g-3 rounded shadow">
+            <legend>Créer un nouveau employé</legend>
+            <div class="form-group">
+                <label for="nomEmploye" class="form-label">Nom de l'employé :</label>
+                <input type="text" name="nomEmploye" id="nomEmploye" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="login" class="form-label">Login :</label>
+                <input type="text" name="login" id="login" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="motDePasse" class="form-label">Mot de passe :</label>
+                <input type="password" name="motDePasse" id="motDePasse" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="categorie" class="form-label">Catégorie : </label>
+                <select id="categorie" name="categorie" required>
+                    <option value="Directeur">Directeur</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Conseiller">Conseiller</option>
+                </select>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="Créer" class="btn">Créer</button>
+            </div>
+        </form>
 </body>
 
 </html>

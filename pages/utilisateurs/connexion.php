@@ -15,18 +15,18 @@ checkAcl('guest');
 //echo password_hash('password', PASSWORD_DEFAULT);
 ?>
 
-  <div class="container">
+<div class="container mt-5" style="max-width: 500px;">
         <form action="/utilisateurs/authentification.php" method="post" >
         <h2>Connexion</h2>
                 <div class="mb-3">
-                    <label class="form-label" for="login">Identifiant :</label>
-                    <input class="form-control" type="text" name="login" id="login" required>
+                    <label for="login" class="form-label">Identifiant :</label>
+                    <input type="text" class="form-control" name="login" id="login" required>
                 </div>
                 <div class="mb-3">
                     <label for="motDePasse" class="form-label">Mot de passe</label>
-                    <input class="form-control" type="password" name="motDePasse" id="motDePasse" required>
+                    <input type="password" class="form-control" name="motDePasse" id="motDePasse" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="background-color: #003580;">Connexion</button>
+                <button type="submit" class="btn btn-primary" style="background-color: black;">Connexion</button>
         </form>
     </div>
 </body>

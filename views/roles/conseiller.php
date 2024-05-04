@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votre titre ici</title>
-    <!-- Liens vers vos fichiers CSS -->
-    <link rel="stylesheet" href="chemin/vers/votre/style.css">
-    <!-- Liens vers les bibliothèques Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Page du conseiller</title>
+    <style>
+        
+        li:hover {
+            background-color: black; 
+            color: yellow; 
+            text-decoration: underline; 
+            text-decoration-color: #9f9c92; 
+        }
+
+        .btn {
+            background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #3a2c0f 78%); 
+            text-transform: uppercase; 
+        }
+
+        .btn:hover {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar-expand-lg" style="background-color: #191F1D;">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/static/images/favicon.ico" width="60" alt="icon"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +35,7 @@
                     <!-- Liste des éléments de navigation -->
                     <!-- Gestion du planning -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                             RDV
                         </a>
                         <ul class="dropdown-menu">
@@ -32,11 +46,11 @@
                     </li>
                     <!-- Gestion des clients -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/clients/ajouterClient.php">Inscrire un nouveau client</a>
+                        <a class="nav-link" href="/clients/ajouterClient.php" style="color: white;">Inscrire un nouveau client</a>
                     </li>
                     <!-- Gestion des contrats -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                             Contrats
                         </a>
                         <ul class="dropdown-menu">
@@ -46,7 +60,7 @@
                     </li>
                     <!-- Gestion des comptes -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                             Comptes
                         </a>
                         <ul class="dropdown-menu">
@@ -56,7 +70,7 @@
                         </ul>
                     </li>
                 </ul>
-                <a class="btn btn-primary" style="background-color: #003580;" href="/utilisateurs/deconnexion.php">Déconnexion</a>
+                <a class="btn" style="background-color: #003580;" href="/utilisateurs/deconnexion.php">Déconnexion</a>
             </div>
         </div>
     </nav>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Créer un type de Contrat</title>
+    <link rel="stylesheet" href="/static/css/formstyle.css">
 </head>
 
 <body>
@@ -29,19 +30,22 @@
     }
     ?>
     <!-- Formulaire pour la création du contrat -->
-    <form action="creerContrat.php" method="post" name='monForm'>
-        <p>
-            <label for="nomContrat">Nom du contrat :</label>
-            <input type="text" name="nomContrat" id="nomContrat" required>
-        </p>
-        <p>
-            <label for="description">Description :</label>
-            <textarea name="description" id="description" required></textarea>
-        </p>
-        <p>
-            <a href="../..">Page précédente</a>
-            <button type="submit" name="action" value="Créer">Créer</button>
-        </p>
-    </form>
+    <div class="container mt-5" style="max-width: 700px;">
+        <form action="creerContrat.php" method="post" name="monForm" class="row g-3 rounded shadow">
+            <legend>Création du contrat</legend>
+            <div class="form-group">
+                <label for="nomContrat" class="form-label">Nom du contrat :</label>
+                <input type="text" name="nomContrat" id="nomContrat" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="description" class="form-label">Description :</label>
+                <textarea name="description" id="description" class="form-control" required></textarea>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="Créer" class="btn">Créer</button>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>
