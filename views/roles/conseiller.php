@@ -70,6 +70,9 @@
                         </ul>
                     </li>
                 </ul>
+                <?php
+                include VIEWS_DIR . '/themeswitcher.php';
+                ?>
                 <a class="btn" style="background-color: #003580;" href="/utilisateurs/deconnexion.php">Déconnexion</a>
             </div>
         </div>

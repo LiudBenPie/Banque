@@ -10,6 +10,7 @@
 </head>
 <body>
     <?php
+    // get the variable from init.php
     global $auth;
     if ($auth->checkRole('Directeur')) {
         include VIEWS_DIR . '/roles/directeur.php';

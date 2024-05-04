@@ -87,6 +87,9 @@
                         </ul>
                     </li>
                 </ul>
+                <?php
+                include VIEWS_DIR . '/themeswitcher.php';
+                ?>
                 <a class="btn" href="/utilisateurs/deconnexion.php">Déconnexion</a>
             </div>
         </div>
