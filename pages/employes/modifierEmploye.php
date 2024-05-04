@@ -36,7 +36,7 @@
 
             $sql = "UPDATE employe SET nom = ?, login = ?, motDePasse = ?, categorie = ?, actif = ? WHERE numEmploye = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nom, $login, $hashedPassword, $categorie, $numEmploye, $actif]);
+            $stmt->execute([$nom, $login, $hashedPassword, $categorie, $actif, $numEmploye]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
@@ -85,7 +85,10 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="actif" class="form-label">L'employé est-il en poste :</label>
-                <input type="booleen" class="form-control" id="actif" name="actif" value="<?php echo isset($employe['actif']) ? htmlspecialchars($employe['actif']) : ''; ?>">
+                <select class="form-control" id="actif" name="actif">
+                    <option value="1" <?php echo (isset($employe['actif']) && $employe['actif'] == 1) ? 'selected' : ''; ?>>Oui</option>
+                    <option value="0" <?php echo (isset($employe['actif']) && $employe['actif'] == 0) ? 'selected' : ''; ?>>Non</option>
+                </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
