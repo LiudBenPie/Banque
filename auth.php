@@ -15,7 +15,7 @@ class Auth {
     }
 
     public function login($username, $password) {
-        $stmt = $this->pdo->prepare("SELECT * FROM employe WHERE login = ?");
+        $stmt = $this->pdo->prepare("SELECT * FROM employe WHERE login = ? AND actif = 1");
         // $username is the field login 
         $stmt->execute([$username]);
         $user = $stmt->fetch();
