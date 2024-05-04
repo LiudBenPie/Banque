@@ -22,7 +22,7 @@ if (isset($_POST['action'])) {
     $typeOp = $_POST['typeOp'];
     $idCompteClient = $_POST['idCompteClient'];
 
-    if ($typeOp == 'Retrait') { // Utilisez == pour la comparaison
+    if ($typeOp == 'Retrait') { 
         // Récupérer le solde du compte et du découvert autorisé
         $sql = "SELECT solde, montantDecouvert FROM CompteClient WHERE idCompteClient = ?";
         $stmt = $conn->prepare($sql);
@@ -32,7 +32,7 @@ if (isset($_POST['action'])) {
         $montantDecouvert = $resultat['montantDecouvert'];
 
         // Vérification du respect du découvert
-        if ($soldeDuCompte - $montant >= (-$montantDecouvert)) { // Utilisez >= pour la comparaison
+        if ($soldeDuCompte - $montant >= (-$montantDecouvert)) {
             // Opération de retrait autorisée
             $sql = "INSERT INTO operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
             $res = $conn->prepare($sql);
@@ -53,23 +53,11 @@ if (isset($_POST['action'])) {
         $res = $conn->prepare($sql);
         $res->execute([$montant, $dateOperation, $typeOp, $idCompteClient]);
         $createSuccessful = true;
-<<<<<<< HEAD
-        $sql = "UPDATE banque.compteclient SET solde = solde + ? WHERE idCompteClient = ?";
-        $res = $conn->prepare($sql);
-        $res->execute([$montant, $idCompteClient]);
-        $createSuccessful = true;
-    }
-
-    // Affiche une alerte si la création a été réussie
-    if ($createSuccessful) {
-        echo '<script>alert("L\'opération a été créée avec succès.");</script>';
-=======
 
         // Mise à jour du solde
         $sql = "UPDATE CompteClient SET solde = solde + ? WHERE idCompteClient = ?";
         $res = $conn->prepare($sql);
         $res->execute([$montant, $idCompteClient]);
->>>>>>> d5a0c64b4a5cd0e9f4f07a8088a757d6720a3970
     }
 }
 
