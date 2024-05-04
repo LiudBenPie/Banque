@@ -25,7 +25,7 @@ if (isset($_POST['action'])) {
     if ($typeOp == 'Retrait') { // Utilisez == pour la comparaison
         // Récupérer le solde du compte et du découvert autorisé
         $sql = "SELECT solde, montantDecouvert FROM CompteClient WHERE idCompteClient = ?";
-        $stmt = $pdo->prepare($sql);
+        $stmt = $conn->prepare($sql);
         $stmt->execute([$idCompteClient]);
         $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
         $soldeDuCompte = $resultat['solde'];
@@ -35,13 +35,13 @@ if (isset($_POST['action'])) {
         if ($soldeDuCompte - $montant >= (-$montantDecouvert)) { // Utilisez >= pour la comparaison
             // Opération de retrait autorisée
             $sql = "INSERT INTO operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
-            $res = $pdo->prepare($sql);
+            $res = $conn->prepare($sql);
             $res->execute([$montant, $dateOperation, $typeOp, $idCompteClient]);
             $createSuccessful = true;
 
             // Mise à jour du solde
             $sql = "UPDATE CompteClient SET solde = solde - ? WHERE idCompteClient = ?";
-            $res = $pdo->prepare($sql);
+            $res = $conn->prepare($sql);
             $res->execute([$montant, $idCompteClient]);
         } else {
             // Opération non autorisée en raison d'un découvert dépassé
@@ -50,13 +50,13 @@ if (isset($_POST['action'])) {
     } else {
         // Réaliser l'opération de dépôt
         $sql = "INSERT INTO operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
-        $res = $pdo->prepare($sql);
+        $res = $conn->prepare($sql);
         $res->execute([$montant, $dateOperation, $typeOp, $idCompteClient]);
         $createSuccessful = true;
 
         // Mise à jour du solde
         $sql = "UPDATE CompteClient SET solde = solde + ? WHERE idCompteClient = ?";
-        $res = $pdo->prepare($sql);
+        $res = $conn->prepare($sql);
         $res->execute([$montant, $idCompteClient]);
     }
 }
