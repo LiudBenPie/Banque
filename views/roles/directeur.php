@@ -76,15 +76,9 @@
                     </li>
                     <!-- Visualiser les statistiques de la banque -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="/contrats/statistique.php" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                             Statistiques
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/contrats/statContrat.php">Visualiser les statistiques des contrats souscris</a></li>
-                            <li><a class="dropdown-item" href="/rendez-vous/statRdv.php">Visualiser les statistiques des rdv pris</a></li>
-                            <li><a class="dropdown-item" href="/clients/statClient.php">Visualiser le nombre total de clients de la banque</a></li>
-                            <li><a class="dropdown-item" href="/comptes/statSolde.php">Visualiser le solde total de tous les clients</a></li>
-                        </ul>
                     </li>
                 </ul>
                 <a class="btn" href="/utilisateurs/deconnexion.php">Déconnexion</a>
@@ -97,4 +91,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
