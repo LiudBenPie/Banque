@@ -22,10 +22,11 @@
 
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $nomTypeCompte = $_POST['nomTypeCompte'];
+            $description = $_POST ['description'];
 
-            $sql = "UPDATE Compte SET nomTypeCompte = ? WHERE idCompte = ?";
+            $sql = "UPDATE Compte SET nomTypeCompte = ? , description = ? WHERE idCompte = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomTypeCompte, $idCompte]); 
+            $stmt->execute([$nomTypeCompte, $description, $idCompte]); 
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
@@ -69,6 +70,11 @@
             <label for="nomTypeCompte">Nom du Compte:</label>
             <input type="text" id="nomTypeCompte" name="nomTypeCompte"
                 value="<?php echo isset($compte['nomTypeCompte']) ? htmlspecialchars($compte['nomTypeCompte']) : ''; ?>">
+        </p>
+        <p>
+            <label for="description">Nom du Compte:</label>
+            <input type="text" id="description" name="description"
+                value="<?php echo isset($compte['description']) ? htmlspecialchars($compte['description']) : ''; ?>">
         </p>
 
         <p>
