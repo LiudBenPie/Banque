@@ -49,11 +49,7 @@
                     </li>
                     <!-- Visualiser les statistiques de la banque -->
                     <li class="nav-item dropdown">
-<<<<<<< HEAD
                         <a class="nav-link dropdown-toggle" href="/contrats/statistique.php" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-=======
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
->>>>>>> b26e906490f2895705a97d46e18a342fae1412c8
                             Statistiques
                         </a>
                     </li>
