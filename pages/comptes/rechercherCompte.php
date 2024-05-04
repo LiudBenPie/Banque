@@ -26,12 +26,11 @@
         $res = $conn->prepare($sql);
         $res->execute([$montant, $dateOperation, $typeOp, $idCompteClient]);
         $createSuccessful = true;
+        $sql = "UPDATE banque.compteclient SET solde = solde + ? WHERE idCompteClient = ?";
+        $res = $conn->prepare($sql);
+        $res->execute([$montant, $idCompteClient]);
+        $createSuccessful = true;
     }
-
-    $sql = "UPDATE banque.compteclient SET solde = solde + ? WHERE idCompteClient = ?"; 
-    $res = $conn->prepare($sql);
-    $res->execute([$montant, $idCompteClient]);
-    $createSuccessful = true;
 
     // Affiche une alerte si la création a été réussie
     if ($createSuccessful) {
@@ -66,18 +65,18 @@
                 $comptes = $stmt->fetchAll();
                 ?>
                 <div class="form-group">
-                <label for="idCompteClient" class="form-label">Id du compte client :</label>
-                <select name="idCompteClient" id="idCompteClient" class="form-control">
-                    <?php foreach ($comptes as $compte) : ?>
-                        <option value="<?php echo $compte['idCompteClient']; ?>">
-                            <?php echo "Compte n°" . $compte['idCompteClient'] . " - " . " Client: " . $compte['nom'] . ' ' . $compte['prenom']; ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="Créer" class="btn">Créer</button>
-            </div>
+                    <label for="idCompteClient" class="form-label">Id du compte client :</label>
+                    <select name="idCompteClient" id="idCompteClient" class="form-control">
+                        <?php foreach ($comptes as $compte) : ?>
+                            <option value="<?php echo $compte['idCompteClient']; ?>">
+                                <?php echo "Compte n°" . $compte['idCompteClient'] . " - " . " Client: " . $compte['nom'] . ' ' . $compte['prenom']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" name="action" value="Créer" class="btn">Créer</button>
+                </div>
         </form>
 </body>
 
