@@ -121,11 +121,11 @@ INSERT INTO Compte (nomTypeCompte, description) VALUES
 ('PEL', 'Plan Épargne Logement pour un projet immobilier');
 
 -- Insertion des employés
-INSERT INTO Employe (nom, login, motDePasse, categorie) VALUES
-('Conseiller Y', 'Conseiller Y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller','1'),
-('Directeur', 'Directeur', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur','1'),
-('Agent', 'Agent', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent','1'),
-('Conseiller X', 'Conseiller X', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller','1');
+INSERT INTO Employe (nom, login, motDePasse, categorie, actif) VALUES
+('Conseiller Y', 'Conseiller Y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
+('Directeur', 'Directeur', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur', 1),
+('Agent', 'Agent', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent', 1),
+('Conseiller X', 'Conseiller X', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1);
 
 -- Insertion des clients
 INSERT INTO Client (nom, prenom, adresse, mail, numTel, dateNaissance, idSituation, numEmploye) VALUES
