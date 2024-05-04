@@ -45,7 +45,7 @@
             <legend>Realisation d'un depot ou d'un retrait</legend>
             <div class="form-group">
                 <label for="montant" class="form-label">Montant :</label>
-                <input type="number" class="form-control" name="montant" id="montant" required>
+                <input type="number" class="form-control" name="montant" id="montant" required min="0">
             </div>
             <div class="form-group">
                 <label for="dateOperation" class="form-label">Date de l'opération :</label>
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label for="typeOp" class="form-label">Type de l'opération :</label>
-                <select name="typeOp" id="typeOp" class="form-control">
+                <select name="typeOp" id="typeOp" class="form-control" required>
                     <option value="Dépôt">Dépôt</option>
                     <option value="Retrait">Retrait</option>
                 </select>
@@ -67,7 +67,7 @@
                 ?>
                 <div class="form-group">
                 <label for="idCompteClient" class="form-label">Id du compte client :</label>
-                <select name="idCompteClient" id="idCompteClient" class="form-control">
+                <select name="idCompteClient" id="idCompteClient" class="form-control" required>
                     <?php foreach ($comptes as $compte) : ?>
                         <option value="<?php echo $compte['idCompteClient']; ?>">
                             <?php echo "Compte n°" . $compte['idCompteClient'] . " - " . " Client: " . $compte['nom'] . ' ' . $compte['prenom']; ?>
