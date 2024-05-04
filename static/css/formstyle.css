@@ -37,7 +37,7 @@ select {
 
 /* button */
 .btn {
-    background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #3a2c0f 78%);
+    background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #ad8d4c 78%);
     text-transform: uppercase;
 }
 
