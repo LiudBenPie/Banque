@@ -23,7 +23,7 @@
 
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierClient.php" method="post" class="row g-3 rounded shadow">
-            <legend>Les clients de la banque</legend>
+            <legend class="text-warning">Les clients de la banque</legend>
             <div class="form-group">
                 <label for="client" class="form-label">Sélectionnez le client à modifier :</label>
                 <select name="numClient" id="client" class="form-control">
@@ -35,7 +35,7 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn">Modifier</button>
+                <button type="submit" class="btn btn-outline-warning">Modifier</button>
             </div>
         </form>
     </div>

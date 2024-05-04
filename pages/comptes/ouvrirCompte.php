@@ -97,7 +97,7 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="ventecom" value="Vendre un compte" class="btn">Vendre un compte</button>
+                <button type="submit" name="ventecom" value="Vendre un compte" class="btn btn-outline-warning">Vendre un compte</button>
             </div>
         </form>
     </div>

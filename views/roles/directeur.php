@@ -1,31 +1,4 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-
-<head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Méta-informations pour la mise en page sur les appareils mobiles -->
-    <title>Page du directeur</title> 
-    <style>
-        
-        li:hover {
-            background-color: black; 
-            color: yellow; 
-            text-decoration: underline; 
-            text-decoration-color: #9f9c92; 
-        }
-
-        .btn {
-            background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #3a2c0f 78%); 
-            text-transform: uppercase; 
-        }
-
-        .btn:hover {
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #191F1D;">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/static/images/favicon.ico" width="60" alt="icon"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +9,7 @@
                     <!-- Liste des éléments de navigation -->
                     <!-- Gérer les employés -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Employés
                         </a>
                         <ul class="dropdown-menu">
@@ -46,7 +19,7 @@
                     </li>
                     <!-- Gérer les contrats -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Contrats
                         </a>
                         <ul class="dropdown-menu">
@@ -56,7 +29,7 @@
                     </li>
                     <!-- Gérer les comptes bancaires -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Comptes
                         </a>
                         <ul class="dropdown-menu">
@@ -66,7 +39,7 @@
                     </li>
                     <!-- Gérer les pièces à fournir -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Pièces à fournir
                         </a>
                         <ul class="dropdown-menu">
@@ -76,12 +49,19 @@
                     </li>
                     <!-- Visualiser les statistiques de la banque -->
                     <li class="nav-item dropdown">
+<<<<<<< HEAD
                         <a class="nav-link dropdown-toggle" href="/contrats/statistique.php" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+=======
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+>>>>>>> b26e906490f2895705a97d46e18a342fae1412c8
                             Statistiques
                         </a>
                     </li>
                 </ul>
-                <a class="btn" href="/utilisateurs/deconnexion.php">Déconnexion</a>
+                <?php
+                include VIEWS_DIR . '/themeswitcher.php';
+                ?>
+                <a type="button" class="btn btn-outline-warning" href="/utilisateurs/deconnexion.php">Déconnexion</a>
             </div>
         </div>
     </nav>

@@ -81,7 +81,7 @@
             <?php endif; ?>
 
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="modifier" class="btn">Modifier le découvert</button>
+                <button type="submit" name="action" value="modifier" class="btn btn-outline-warning">Modifier le découvert</button>
             </div>
         </form>
     </div>

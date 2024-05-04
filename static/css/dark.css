@@ -1,0 +1,16 @@
+/* Hide the dark mode button by default */
+.light {
+    display: none;
+}
+
+
+/* [data-bs-theme="dark"] form {
+    background-color: rgba(6, 5, 5, 0.274);
+} */
+
+[data-bs-theme="dark"] .btn{
+
+
+}
+
+

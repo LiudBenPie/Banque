@@ -17,7 +17,7 @@
 
     <div class="container mt-5" style="max-width: 700px;">
         <form action="syntheseClient.php" method="post" class="row g-3 rounded shadow">
-            <legend>Les clients de la banque</legend>
+            <legend class="text-warning">Les clients de la banque</legend>
             <div class="form-group">
                 <label for="numClient" class="form-label">Sélectionnez le client :</label>
                 <select name="numClient" id="numClient" class="form-control">
@@ -38,7 +38,7 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn">Afficher la synthèse du client</button>
+                <button type="submit" class="btn btn-outline-warning">Afficher la synthèse du client</button>
             </div>
         </form>
     </div>

@@ -43,7 +43,7 @@
                 <textarea name="description" id="description" class="form-control" required></textarea>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="Créer" class="btn">Créer</button>
+                <button type="submit" name="action" value="Créer" class="btn btn-outline-warning">Créer</button>
             </div>
         </form>
     </div>
