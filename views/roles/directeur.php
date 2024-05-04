@@ -1,12 +1,3 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-
-<head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Méta-informations pour la mise en page sur les appareils mobiles -->
-    <title>Page du directeur</title> 
-</head>
-<body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/static/images/favicon.ico" width="60" alt="icon"></a>
@@ -18,7 +9,7 @@
                     <!-- Liste des éléments de navigation -->
                     <!-- Gérer les employés -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Employés
                         </a>
                         <ul class="dropdown-menu">
@@ -28,7 +19,7 @@
                     </li>
                     <!-- Gérer les contrats -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Contrats
                         </a>
                         <ul class="dropdown-menu">
@@ -38,7 +29,7 @@
                     </li>
                     <!-- Gérer les comptes bancaires -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Comptes
                         </a>
                         <ul class="dropdown-menu">
@@ -48,7 +39,7 @@
                     </li>
                     <!-- Gérer les pièces à fournir -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Pièces à fournir
                         </a>
                         <ul class="dropdown-menu">
@@ -58,15 +49,9 @@
                     </li>
                     <!-- Visualiser les statistiques de la banque -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <a class="nav-link dropdown-toggle" href="/contrats/statistique.php" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                             Statistiques
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/contrats/statContrat.php">Visualiser les statistiques des contrats souscris</a></li>
-                            <li><a class="dropdown-item" href="/rendez-vous/statRdv.php">Visualiser les statistiques des rdv pris</a></li>
-                            <li><a class="dropdown-item" href="/clients/statClient.php">Visualiser le nombre total de clients de la banque</a></li>
-                            <li><a class="dropdown-item" href="/comptes/statSolde.php">Visualiser le solde total de tous les clients</a></li>
-                        </ul>
                     </li>
                 </ul>
                 <?php
@@ -82,4 +67,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

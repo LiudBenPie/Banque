@@ -28,6 +28,7 @@ input[readonly] {
     color: #a07400;
 }
 
+
 /* background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #ad8d4c 78%); */
 
 
@@ -44,4 +45,11 @@ li:hover {
 
 .custom-dropdown .dropdown-menu {
     background-color: white; /* Couleur de fond blanche */
+}
+
+[data-bs-theme="light"] .btn-outline-warning{
+    color: rgb(0, 0, 0);
+    border-color: rgb(255, 191, 0);
+    background-color: rgb(232, 181, 70);
+
 }
