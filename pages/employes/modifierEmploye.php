@@ -58,7 +58,7 @@
     <!-- Formulaire pour la mise à jour et la suppression des informations de l'employé -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierEmploye.php" method="post" name="monForm" class="row g-3 rounded shadow">
-            <legend>INFORMATION DE L'EMPLOYE</legend>
+            <legend class="text-warning">INFORMATION DE L'EMPLOYE</legend>
             <!-- Champs du formulaire avec les informations à jour de l'employé -->
             <div class="form-group">
                 <input type="hidden" class="form-control" name="numEmploye" value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
@@ -91,7 +91,7 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+                <button type="submit" name="action" value="modifier" class="btn btn-outline-warning">Mettre à jour</button>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
             </div>

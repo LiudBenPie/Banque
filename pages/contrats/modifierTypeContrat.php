@@ -58,7 +58,7 @@
     <!-- Formulaire pour la mise à jour et la suppression des informations du contrat -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierTypeContrat.php" method="post" name="monForm" class="row g-3 rounded shadow">
-            <legend>MODIFICATION DU TYPE DE CONTRAT</legend>
+            <legend class="text-warning">MODIFICATION DU TYPE DE CONTRAT</legend>
 
             <!-- Champs du formulaire avec les informations à jour du contrat -->
             <div class="form-group">
@@ -75,10 +75,10 @@
                 value="<?php echo isset($contrat['description']) ? htmlspecialchars($contrat['description']) : ''; ?>">
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+                <button type="submit" name="action" value="modifier" class="btn btn-outline-warning">Mettre à jour</button>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="supprimer" class="btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de contrat ?')">Supprimer</button>
+                <button type="submit" name="action" value="supprimer" class="btn btn-outline-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de contrat ?')">Supprimer</button>
             </div>
     </div>
     </form>

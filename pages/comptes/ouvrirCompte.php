@@ -54,7 +54,7 @@
     ?>
     <div class="container mt-5" style="max-width: 700px;">
         <form action="ouvrirCompte.php" method="post" class="row g-3 rounded shadow">
-            <legend>Formulaire d'ouverture de compte</legend>
+            <legend class="text-warning">Formulaire d'ouverture de compte</legend>
             <div class="form-group">
                 <label for="date" class="form-label">Date d'ouverture :</label>
                 <input type="date" class="form-control" id="date" name="date" required>

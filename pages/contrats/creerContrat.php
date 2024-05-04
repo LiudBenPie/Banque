@@ -32,7 +32,7 @@
     <!-- Formulaire pour la création du contrat -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="creerContrat.php" method="post" name="monForm" class="row g-3 rounded shadow">
-            <legend>Création du contrat</legend>
+            <legend class="text-warning">Création du contrat</legend>
             <div class="form-group">
                 <label for="nomContrat" class="form-label">Nom du contrat :</label>
                 <input type="text" name="nomContrat" id="nomContrat" class="form-control" required>
@@ -42,7 +42,7 @@
                 <textarea name="description" id="description" class="form-control" required></textarea>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="Créer" class="btn">Créer</button>
+                <button type="submit" name="action" value="Créer" class="btn btn-outline-warning">Créer</button>
             </div>
         </form>
     </div>

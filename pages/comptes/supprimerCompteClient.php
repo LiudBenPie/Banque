@@ -58,7 +58,7 @@
     ?>
     <div class="container mt-5" style="max-width: 700px;">
         <form action="supprimerCompteClient.php" method="post" class="row g-3 rounded shadow">
-            <legend>Les comptes existants</legend>
+            <legend class="text-warning">Les comptes existants</legend>
             <div class="form-group">
                 <label for="compteClient" class="form-label">Sélectionnez le compte client à supprimer :</label>
                 <select name="idCompteClient" class="form-control" id="compteClient">
@@ -70,7 +70,7 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn">Supprimer le compte</button>
+                <button type="submit" class="btn btn-outline-warning">Supprimer le compte</button>
             </div>
         </form>
         </div>

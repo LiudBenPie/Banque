@@ -47,7 +47,7 @@
     <!-- Formulaire pour la suppression du contrat -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="supprimerContrat.php" method="post" class="row g-3 rounded shadow">
-            <legend>Les contrats de la banque</legend>
+            <legend class="text-warning">Les contrats de la banque</legend>
             <!-- Champs du formulaire avec les informations du contrat à supprimer -->
             <div class="form-group">
                 <label for="numContrat" class="form-label">Êtes-vous sûr de vouloir supprimer le contrat ?</label>
@@ -55,7 +55,7 @@
                 <?php echo isset($contrat['idContratClient']) ? "Contrat n°" . htmlspecialchars($contrat['idContratClient']) . " - " . htmlspecialchars($contrat['nomTypeContrat']) . " pour " . htmlspecialchars($contrat['nom']) . ' ' . htmlspecialchars($contrat['prenom']) : ''; ?>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="supprimer" class="btn">Supprimer</button>
+                <button type="submit" name="action" value="supprimer" class="btn btn-outline-warning">Supprimer</button>
             </div>
         </form>
     </div>

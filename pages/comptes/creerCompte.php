@@ -33,7 +33,7 @@
     <!-- Formulaire pour la création du contrat -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="creerCompte.php" method="post" name='monForm' class="row g-3 rounded shadow">
-            <legend>Création d'un type de compte</legend>
+            <legend class="text-warning">Création d'un type de compte</legend>
             <div class="form-group">
                 <label for="nomcompte">Nom du type de compte :</label>
                 <input type="text" name="nomcompte" id="nomcompte" class="form-control" required>

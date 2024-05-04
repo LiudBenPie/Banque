@@ -37,7 +37,7 @@
     <!-- Formulaire pour la création de l'employé -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="creerEmploye.php" method="post" name="monForm" class="row g-3 rounded shadow">
-            <legend>Créer un nouveau employé</legend>
+            <legend class="text-warning">Créer un nouveau employé</legend>
             <div class="form-group">
                 <label for="nomEmploye" class="form-label">Nom de l'employé :</label>
                 <input type="text" name="nomEmploye" id="nomEmploye" class="form-control" required>
@@ -62,7 +62,7 @@
                 <input type="hidden" name="actif" value="1">
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="Créer" class="btn">Créer</button>
+                <button type="submit" name="action" value="Créer" class="btn btn-outline-warning">Créer</button>
             </div>
         </form>
 </body>

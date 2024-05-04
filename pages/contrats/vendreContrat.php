@@ -53,7 +53,7 @@
     ?>
     <div class="container mt-5" style="max-width: 700px;">
         <form action="vendreContrat.php" method="post" class="row g-3 rounded shadow">
-            <legend>Formulaire de Vente de Contrat</legend>
+            <legend class="text-warning">Formulaire de Vente de Contrat</legend>
             <div class="form-group">
                 <label for="date" class="form-label">Date d'ouverture :</label>
                 <input type="date" id="date" name="date" class="form-control" required>
@@ -93,7 +93,7 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="ventecon" value="Vendre un contrat" class="btn">Vendre un contrat</button>
+                <button type="submit" name="ventecon" value="Vendre un contrat" class="btn btn-outline-warning">Vendre un contrat</button>
             </div>
         </form>
     </div>

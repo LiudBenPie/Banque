@@ -20,7 +20,7 @@
     ?>
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierPiece.php" method="post" class="row g-3 rounded shadow">
-            <legend>Les motifs du rdv</legend>
+            <legend class="text-warning">Les motifs du rdv</legend>
             <label for="motif">Sélectionnez le motif à modifier :</label>
             <div class="form-group">
                 <select name="idMotif" id="motif" class="form-control">
@@ -32,7 +32,7 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn">Modifier</button>
+                <button type="submit" class="btn btn-outline-warning">Modifier</button>
             </div>
         </form>
     </div>

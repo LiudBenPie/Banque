@@ -107,7 +107,7 @@
     <!-- Formulaire pour la mise à jour et la suppression des informations du rendez-vous -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierRDV.php" method="post" name="monForm" class="row g-3 rounded shadow">
-        <legend>MODIFICATION DU RDV</legend>
+        <legend class="text-warning">MODIFICATION DU RDV</legend>
 
             <!-- Champs du formulaire avec les informations à jour du rendez-vous -->
             <div class="form-group">
@@ -153,10 +153,10 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+                <button type="submit" name="action" value="modifier" class="btn btn-outline-warning">Mettre à jour</button>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="supprimer" class="btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">Supprimer</button>
+                <button type="submit" name="action" value="supprimer" class="btn btn-outline-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">Supprimer</button>
             </div>
         </form>
 </body>
