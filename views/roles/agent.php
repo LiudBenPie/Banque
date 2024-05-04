@@ -62,7 +62,7 @@
                 <?php
                 include VIEWS_DIR . '/themeswitcher.php';
                 ?>
-                <a class="btn" href="/utilisateurs/deconnexion.php">Deconnexion</a>
+                <a class="btn btn-primary" href="/utilisateurs/deconnexion.php">Deconnexion</a>
             </div>
         </div>
     </nav>
