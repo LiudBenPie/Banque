@@ -9,40 +9,68 @@
 
 <body>
 
-    <?php
-    require('../../init.php');
-    checkAcl('auth');
-    include VIEWS_DIR . '/menu.php';
+<?php
+require('../../init.php');
+checkAcl('auth');
+include VIEWS_DIR . '/menu.php';
 
-    $createSuccessful = false;
+$createSuccessful = false;
 
-    if (isset($_POST['action'])) {
-        $montant = $_POST['montant'];
-        $dateOperation = $_POST['dateOperation'];
-        $typeOp = $_POST['typeOp'];
-        $idCompteClient = $_POST['idCompteClient'];
+if (isset($_POST['action'])) {
+    $montant = $_POST['montant'];
+    $dateOperation = $_POST['dateOperation'];
+    $typeOp = $_POST['typeOp'];
+    $idCompteClient = $_POST['idCompteClient'];
 
+    if ($typeOp == 'Retrait') { // Utilisez == pour la comparaison
+        // Récupérer le solde du compte et du découvert autorisé
+        $sql = "SELECT solde, montantDecouvert FROM CompteClient WHERE idCompteClient = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$idCompteClient]);
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        $soldeDuCompte = $resultat['solde'];
+        $montantDecouvert = $resultat['montantDecouvert'];
+
+        // Vérification du respect du découvert
+        if ($soldeDuCompte - $montant >= (-$montantDecouvert)) { // Utilisez >= pour la comparaison
+            // Opération de retrait autorisée
+            $sql = "INSERT INTO operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
+            $res = $pdo->prepare($sql);
+            $res->execute([$montant, $dateOperation, $typeOp, $idCompteClient]);
+            $createSuccessful = true;
+
+            // Mise à jour du solde
+            $sql = "UPDATE CompteClient SET solde = solde - ? WHERE idCompteClient = ?";
+            $res = $pdo->prepare($sql);
+            $res->execute([$montant, $idCompteClient]);
+        } else {
+            // Opération non autorisée en raison d'un découvert dépassé
+            echo '<script>alert("L\'opération n\'est pas autorisée car le découvert est dépassé !");</script>';
+        }
+    } else {
+        // Réaliser l'opération de dépôt
         $sql = "INSERT INTO operation (montant, dateOperation, typeOp, idCompteClient) VALUES (?, ?, ?, ?)";
-        $res = $conn->prepare($sql);
+        $res = $pdo->prepare($sql);
         $res->execute([$montant, $dateOperation, $typeOp, $idCompteClient]);
         $createSuccessful = true;
-    }
 
-    $sql = "UPDATE banque.compteclient SET solde = solde + ? WHERE idCompteClient = ?"; 
-    $res = $conn->prepare($sql);
-    $res->execute([$montant, $idCompteClient]);
-    $createSuccessful = true;
-
-    // Affiche une alerte si la création a été réussie
-    if ($createSuccessful) {
-        echo '<script>alert("L\'opération a été créée avec succès.");</script>';
+        // Mise à jour du solde
+        $sql = "UPDATE CompteClient SET solde = solde + ? WHERE idCompteClient = ?";
+        $res = $pdo->prepare($sql);
+        $res->execute([$montant, $idCompteClient]);
     }
-    ?>
+}
+
+// Affiche une alerte si la création a été réussie
+if ($createSuccessful) {
+    echo '<script>alert("L\'opération a été créée avec succès.");</script>';
+}
+?>
 
     <!-- Formulaire pour la création du contrat -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="rechercherCompte.php" method="post" name="monForm" class="row g-3 rounded shadow">
-            <legend>Realisation d'un depot ou d'un retrait</legend>
+            <legend>Réalisation d'un dépot ou d'un retrait</legend>
             <div class="form-group">
                 <label for="montant" class="form-label">Montant :</label>
                 <input type="number" class="form-control" name="montant" id="montant" required min="0">
