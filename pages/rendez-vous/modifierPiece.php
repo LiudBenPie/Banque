@@ -31,6 +31,12 @@
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
         } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
+            //transfert des motifs sur les anciens RDV
+            $idtransfert = $_POST['idtransfert'];
+            $sql = "UPDATE rdv SET idMotif= ? WHERE idMotif = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$idtransfert, $idMotif]);
+            
             $sql = "DELETE FROM motif WHERE idMotif = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$idMotif]);
@@ -53,7 +59,7 @@
 
     // Affiche une alerte si la suppression a été réussie
     if ($deleteSuccessful) {
-        echo '<script>alert("Le motif a été supprimé avec succès.");</script>';
+        echo '<script>alert("Le transfert de motifs des rendez-vous et la suppression du motif a été effectuée avec succès.");</script>';
     }
     ?>
     <!-- Formulaire pour la mise à jour et la suppression des informations du motif -->
@@ -73,14 +79,18 @@
                 <label for="listePieces" class="form-label">Liste des Pièces:</label>
                 <input type="text" class="form-control" id="listePieces" name="listePieces" value="<?php echo isset($motif['listePieces']) ? htmlspecialchars($motif['listePieces']) : ''; ?>">
             </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-outline-warning" name="action" value="modifier">Mettre à jour</button>
+            </div>
             <?php
-            // Récupération de la liste des motifs
-            $sql = "SELECT idMotif, libelleMotif FROM motif";
+            // Récupération de la liste des motifs sauf le motif actuel
+            $sql = "SELECT idMotif, libelleMotif FROM motif WHERE idMotif<>?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute();
+            $stmt->execute([$idMotif]);
             $idtransfert = $stmt->fetchAll();
-            ?>
+
             //liste déroulante du nouveau motif à afficher pour les rendez-vous archiver
+            ?>
             <div class="container mt-5" style="max-width: 700px;">
                 <label for="idtransfert">Sélectionnez le nouveau motif à afficher (pour la suppression du motif actuel) :</label>
                 <div class="form-group">
@@ -92,9 +102,6 @@
                     <?php endforeach; ?>
                 </select>
                 </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn btn-outline-warning" name="action" value="modifier">Mettre à jour</button>
-            </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" class="btn btn-outline-warning" name="action" value="supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce motif ?')">Supprimer</button>
             </div>
