@@ -9,7 +9,7 @@
                    <!-- Liste des éléments de navigation -->
                    <!-- Gestion du planning -->
                    <li class="nav-item dropdown">
-                       <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            RDV
                        </a>
                        <ul class="dropdown-menu">
@@ -19,12 +19,12 @@
                        </ul>
                    </li>
                    <!-- Gestion des clients -->
-                   <li class="nav-item">
+                   <li class="nav-item text-white">
                        <a class="nav-link" href="/clients/ajouterClient.php">Inscrire un nouveau client</a>
                    </li>
                    <!-- Gestion des contrats -->
                    <li class="nav-item dropdown">
-                       <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Contrats
                        </a>
                        <ul class="dropdown-menu">
@@ -34,7 +34,7 @@
                    </li>
                    <!-- Gestion des comptes -->
                    <li class="nav-item dropdown">
-                       <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Comptes
                        </a>
                        <ul class="dropdown-menu">
