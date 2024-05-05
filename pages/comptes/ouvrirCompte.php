@@ -68,16 +68,26 @@
                 <input type="text" class="form-control" id="decouvert" name="decouvert" required>
             </div>
             <div class="form-group">
-                <label for="nomclient" class="form-label">Nom du client :</label>
+                <label for="nomclient" class="form-label">Information du client :</label>
                 <select id="nomclient" class="form-control" name="nomclient">
                     <?php
-                    $sql = "SELECT nom FROM Client";
+                    $sql = "SELECT nom,prenom,dateNaissance FROM Client";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
-                    $nomclients = $stmt->fetchAll();
-                    foreach ($nomclients as $nomclient) {
-                        echo "<option value=\"{$nomclient['nom']}\">{$nomclient['nom']}</option>";
+                    $clients = $stmt->fetchAll();
+
+                    foreach ($clients as $client) {
+                        // Formatage de la date de naissance pour l'affichage
+                        $dateNaissance = new DateTime($client['datenaissance']);
+                        $dateFormatted = $dateNaissance->format('d/m/Y');
+                    
+                        // Création de la valeur pour chaque option
+                        $optionValue = htmlspecialchars($client['nom']) . ';' . htmlspecialchars($client['prenom']) . ';' . $dateFormatted;
+                        
+                        // Affichage de chaque option du menu déroulant
+                        echo "<option value=\"{$optionValue}\">{$client['nom']} {$client['prenom']} - né le {$dateFormatted}</option>";
                     }
+                    echo '</select>';
                     ?>
                 </select>
             </div>
