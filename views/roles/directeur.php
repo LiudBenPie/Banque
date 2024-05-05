@@ -1,4 +1,4 @@
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg bg-black">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/static/images/favicon.ico" width="60" alt="icon"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
                     <!-- Liste des éléments de navigation -->
                     <!-- Gérer les employés -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Employés
                         </a>
                         <ul class="dropdown-menu">
@@ -19,7 +19,7 @@
                     </li>
                     <!-- Gérer les contrats -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Contrats
                         </a>
                         <ul class="dropdown-menu">
@@ -29,7 +29,7 @@
                     </li>
                     <!-- Gérer les comptes bancaires -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Comptes
                         </a>
                         <ul class="dropdown-menu">
@@ -39,7 +39,7 @@
                     </li>
                     <!-- Gérer les pièces à fournir -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Pièces à fournir
                         </a>
                         <ul class="dropdown-menu">
@@ -49,7 +49,7 @@
                     </li>
                     <!-- Visualiser les statistiques de la banque -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/contrats/statistique.php"> Statistiques</a>
+                        <a class="nav-link text-white" href="/contrats/statistique.php"> Statistiques</a>
                     </li>
                 </ul>
                 <?php 
