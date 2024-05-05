@@ -36,6 +36,9 @@
                         <li><a class="dropdown-item" href="/rendez-vous/calendrier.php">Visualiser le calendrier</a></li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/comptes/gestionDecouvert.php">Modifier la valeur d'un découvert</a>
+                </li>
             </ul>
             <?php
             include VIEWS_DIR . '/themeswitcher.php';

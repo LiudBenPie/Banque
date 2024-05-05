@@ -12,9 +12,9 @@ body {
 
 .selection-form {
     display: flex; 
-    align-items: center; /* Alignez les éléments du formulaire verticalement */
-    justify-content: space-between; /* Répartissez de l'espace entre les éléments */
-    width: 100%; /* Assurez-vous que le formulaire prend toute la largeur */
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; 
     flex-wrap: wrap; /* Permet aux éléments de passer à la ligne suivante sur les petits écrans */
 }
 
@@ -54,7 +54,7 @@ table {
 
 /* Calendar header */
 table th {
-    background-color:  #000000; /* A dark blue background */
+    background-color:  #000000;
     color: white;
     padding: 10px 0;
     text-align: center;
@@ -63,15 +63,14 @@ table th {
 }
 
 .jour {
-    background-color: rgb(200, 200, 202); /* Or any color you prefer */
+    background-color: rgb(200, 200, 202); 
     color: black;
     padding: 10px;
     text-align: center;
     font-size: 16;
-    border: 1px solid #ddd; /* Optional, if you want to have borders */
+    border: 1px solid #ddd;
 }
 
-/* Calendar rows and cells */
 table td {
     width: 14%; /* Diviser équitablement la largeur entre 7 jours de la semaine */
     height: 100px; /* Hauteur fixe pour chaque cellule */
@@ -94,7 +93,7 @@ table {
     border-collapse: collapse;
 }
 .date-cell {
-    border: 1px solid #ddd; /* couleur de bordure grise claire */
+    border: 1px solid #ddd; /* Couleur de bordure grise claire */
     padding: 5px;
     box-sizing: border-box;
 }
@@ -108,7 +107,7 @@ table {
 }
 
 .date-cell ul li {
-    background: #e9e9e9; /* A light gray background */
+    background: #e9e9e9;
     margin-bottom: 5px;
     padding: 5px;
     border-radius: 4px;
@@ -144,7 +143,7 @@ table {
 
 /* Styles par défaut pour les écrans très petits: n'afficher que l'heure */
 .heure-rdv {
-    display: block; /* ou 'inline' selon votre layout */
+    display: block; 
 }
 .libelle-motif, .details-client {
     display: none; /* caché sur les petits écrans */
@@ -153,7 +152,7 @@ table {
 /* Afficher l'heure et le libellé du motif sur les tablettes et petits écrans */
 @media (min-width: 600px) {
     .libelle-motif {
-        display: block; /* ou 'inline' selon votre layout */
+        display: block;
     }
 }
 

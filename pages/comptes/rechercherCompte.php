@@ -88,7 +88,7 @@ if ($createSuccessful) {
             </div>
             <div class="form-group">
                 <?php
-                $sql = "SELECT idCompteClient, prenom, nom FROM client JOIN compteclient ON client.numClient = compteclient.numClient";
+                $sql = "SELECT idCompteClient, prenom, nom, nomTypeCompte FROM client JOIN compteclient ON client.numClient = compteclient.numClient JOIN compte ON CompteClient.idCompte=compte.idCompte";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
                 $comptes = $stmt->fetchAll();
@@ -98,7 +98,7 @@ if ($createSuccessful) {
                 <select name="idCompteClient" id="idCompteClient" class="form-control" required>
                     <?php foreach ($comptes as $compte) : ?>
                         <option value="<?php echo $compte['idCompteClient']; ?>">
-                            <?php echo "Compte n°" . $compte['idCompteClient'] . " - " . " Client: " . $compte['nom'] . ' ' . $compte['prenom']; ?>
+                            <?php echo "Compte n°" . $compte['idCompteClient'] . " de type ". $compte['nomTypeCompte'] . " - " . " Client: " . $compte['nom'] . ' ' . $compte['prenom']; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

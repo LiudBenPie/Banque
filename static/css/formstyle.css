@@ -32,18 +32,10 @@ label{
 }
 
 
-/* background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #ad8d4c 78%); */
-
 .container{
     justify-content: center;
 }
 
-li:hover {
-    /* background-color: black;
-    color: yellow;
-    text-decoration: underline;
-    text-decoration-color: #9f9c92; */
-}
 
 .custom-dropdown .dropdown-menu {
     background-color: white; /* Couleur de fond blanche */

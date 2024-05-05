@@ -46,7 +46,7 @@
 
     try {
         // Récupération de la liste des découverts des compte client
-        $sql = "SELECT idCompteClient, montantDecouvert FROM CompteClient";
+        $sql = "SELECT idCompteClient, montantDecouvert, nomTypeCompte FROM CompteClient JOIN compte ON CompteClient.idCompte=compte.idCompte";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $comptes = $stmt->fetchAll();
@@ -66,7 +66,7 @@
                 <select id="idCompteClient" name="idCompteClient" class="form-control">
                     <?php foreach ($comptes as $compte) : ?>
                         <option value="<?php echo htmlspecialchars($compte['idCompteClient']); ?>">
-                            <?php echo "Compte " . htmlspecialchars($compte['idCompteClient']) . " (Découvert autorisé : " . htmlspecialchars($compte['montantDecouvert']) . ")"; ?>
+                            <?php echo "Compte " . htmlspecialchars($compte['idCompteClient']) ." de type ". htmlspecialchars($compte['nomTypeCompte']) . " (Découvert autorisé : " . htmlspecialchars($compte['montantDecouvert']) . ")"; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
