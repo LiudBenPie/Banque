@@ -25,7 +25,7 @@
         $motifs = $stmt->fetchAll();
 
         // Récupération de la liste des employés
-        $sql = "SELECT numEmploye, nom FROM employe";
+        $sql = "SELECT numEmploye, nom FROM employe WHERE categorie = 'Conseiller' AND actif=1";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $employes = $stmt->fetchAll();
