@@ -33,7 +33,7 @@ input[readonly] {
 
 
 .container{
-    /* background: rgb(229, 229, 218); */
+    justify-content: center;
 }
 
 li:hover {
