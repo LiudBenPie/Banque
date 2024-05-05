@@ -35,6 +35,7 @@
                 $datefin = $_POST['datefin'];
 
                 // La statistique du contrat
+                //NOmbre de contrat ouvert
                 $sql = "SELECT COUNT(DISTINCT contratClient.idContratClient) AS nombre_contrat
                 FROM contratclient
                 WHERE dateOuverturecontrat BETWEEN '$datedebut' AND '$datefin'";
@@ -75,6 +76,7 @@
                 }
 
                 // Inclure la bibliothèque Chart.js
+                //Diagramme circulaire de la répartion de contrat ouvert
                 echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>';
                 echo '<canvas id="myChart"></canvas>';
                 echo "<script>
@@ -135,6 +137,7 @@
             </script></div>";
 
                 // La statistique des rdv
+                //Nombre de rendez-vous pris
                 $sql = "SELECT COUNT(DISTINCT rdv.numRdv) AS nombre_rdv
                 FROM rdv
                 WHERE dateRdv BETWEEN '$datedebut' AND '$datefin'";
@@ -208,6 +211,7 @@
                 ];
 
                 // JavaScript script to generate the pie chart
+                //Diagramme circulaire de répartition des rdv par conseiller
                 echo '<canvas id="myChartPie"></canvas>
                 <script>
                 var ctxPie = document.getElementById("myChartPie").getContext("2d");
@@ -258,6 +262,7 @@
                 ];
 
                 // JavaScript script to generate the bar chart
+                //Histogramme du nombre total de rdv par conseiller
                 echo '<canvas id="myChartBar" ></canvas>
         <script>
         var ctxBar = document.getElementById("myChartBar").getContext("2d");
@@ -295,6 +300,7 @@
                 //Le graphique de solde
 
                 // Requête SQL pour récupérer la somme des soldes des comptes clients ouverts dans la période spécifiée
+                // Somme total du solde
                 $sql = "SELECT SUM(solde) AS somme_solde 
                 FROM CompteClient 
                 WHERE dateOuverture BETWEEN '$datedebut' AND '$datefin'";
@@ -337,6 +343,7 @@
                 echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>';
 
                 // Script JavaScript pour générer le graphique circulaire
+                //Diagramme circulaire de la répartion des soldes par client
                 echo '
                 <canvas id="pieChart"></canvas>
                 <script>
@@ -397,6 +404,7 @@
                 </script>';
 
                 // Script JavaScript pour générer le graphique en histogramme
+                //Histogramme des soldes par client
                 echo '<canvas id="barChart"></canvas>
                 <script>
                 var ctxBar = document.getElementById("barChart").getContext("2d");
@@ -429,6 +437,7 @@
                 </script></div>';
 
                 //Statistique client 
+                //Nombre de nouveau client
                 $sql = "SELECT COUNT(DISTINCT Client.numClient) AS nombre_client
                 FROM Client
                 LEFT JOIN CompteClient ON Client.numClient = CompteClient.numClient
@@ -445,7 +454,7 @@
                 // Affichage du nombre de clients ayant un compte ou un contrat à la date spécifiée
                 echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique des clients</h3><p>Nombre de clients ayant un compte ou un contrat <br> entre le " . $datedebut . " et le " . $datefin . " est de : " . $result['nombre_client'] . "</p>";
 
-                // Histogramme des clients par mois
+                // Histogramme des arrivée des clients par mois
                 // Préparer la requête SQL
                 $sql = "SELECT YEAR(MinDate) AS year, MONTH(MinDate) AS month, COUNT(DISTINCT numClient) AS nombre_client
                 FROM (
