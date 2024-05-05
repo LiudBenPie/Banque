@@ -73,6 +73,25 @@
                 <label for="listePieces" class="form-label">Liste des Pièces:</label>
                 <input type="text" class="form-control" id="listePieces" name="listePieces" value="<?php echo isset($motif['listePieces']) ? htmlspecialchars($motif['listePieces']) : ''; ?>">
             </div>
+            <?php
+            // Récupération de la liste des motifs
+            $sql = "SELECT idMotif, libelleMotif FROM motif";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $idtransfert = $stmt->fetchAll();
+            ?>
+            //liste déroulante du nouveau motif à afficher pour les rendez-vous archiver
+            <div class="container mt-5" style="max-width: 700px;">
+                <label for="idtransfert">Sélectionnez le nouveau motif à afficher (pour la suppression du motif actuel) :</label>
+                <div class="form-group">
+                <select name="idtransfert" id="idtransfert" class="form-control">
+                    <?php foreach ($idtransfert as $idtransferts) : ?>
+                        <option value="<?php echo $idtransferts['idMotif']; ?>">
+                            <?php echo $idtransferts['libelleMotif']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" class="btn btn-outline-warning" name="action" value="modifier">Mettre à jour</button>
             </div>
