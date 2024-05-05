@@ -31,7 +31,9 @@
         if ($res->execute([$nomContrat, $description])) {
             $createSuccessful = true;
         }
-    }
+    }else {
+        // Le nom du contrat existe déjà
+        echo "<script>alert ('Le nom du contrat existe déjà dans la base de données.')</script>";}
     // Affiche une alerte si la création a été réussie
     if ($createSuccessful) {
         echo '<script>alert("Le type de contrat a été créé avec succès.");</script>';

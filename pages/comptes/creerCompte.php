@@ -32,7 +32,9 @@
         if ($res->execute([$nomcompte,$description])) {
             $createSuccessful = true;
         }
-    }
+    }else {
+        // Le nom du compte existe déjà
+        echo "<script>alert ('Le nom du compte existe déjà dans la base de données.')</script>";}
     // Affiche une alerte si la création a été réussie
     if ($createSuccessful) {
         echo '<script>alert("Le type de compte a été créé avec succès.");</script>';
