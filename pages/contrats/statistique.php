@@ -48,7 +48,7 @@
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Affichage de la somme des soldes des comptes clients ouverts dans la période spécifiée
-                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique des contrats</h3><p>Nombre de contrats ouverts <br> entre $datedebut et $datefin : " . $result['nombre_contrat'] . '</p>';
+                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique des contrats</h3><p>Nombre de contrats ouverts <br> sur cette période : " . $result['nombre_contrat'] . '</p>';
 
                 // Requête SQL pour récupérer les données entre deux dates
                 $sqlcontrat = "SELECT nomTypeContrat, COUNT(*) AS nombre_contrats FROM ContratClient
@@ -129,7 +129,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Répartition des types de contrat entre " . $datedebut . " et " . $datefin . "'
+                            text: 'Répartition des types de contrat'
                         }
                     }
                 }
@@ -150,7 +150,7 @@
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Affichage de la somme des soldes des comptes clients ouverts dans la période spécifiée
-                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center;box-shadow: 0 4px 8px rgba(0,0,0,0.1);  '><h3 style='text-align: center'>Statistique des rendez-vous</h3><p>Nombre de rdv pris <br> entre $datedebut et $datefin : " . $result['nombre_rdv'] . '</p>';
+                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center;box-shadow: 0 4px 8px rgba(0,0,0,0.1);  '><h3 style='text-align: center'>Statistique des rendez-vous</h3><p>Nombre de rdv pris <br> sur cette période : " . $result['nombre_rdv'] . '</p>';
 
                 // Requête SQL pour récupérer les données
                 $sql = "SELECT nom, MONTH(dateRdv) AS mois, COUNT(*) AS nombre_rdv FROM rdv 
@@ -313,7 +313,7 @@
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Affichage de la somme des soldes des comptes clients ouverts dans la période spécifiée
-                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique du solde</h3><p>Somme des soldes des comptes clients ouverts <br> entre $datedebut et $datefin : " . $result['somme_solde'] . '</p>';
+                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique du solde</h3><p>Somme des soldes des comptes clients ouverts <br> sur cette période : " . $result['somme_solde'] . '</p>';
 
                 // Requête SQL pour récupérer les soldes des clients
                 $sql = "SELECT SUM(solde) AS solde_client, nom, prenom 
@@ -438,21 +438,29 @@
 
                 //Statistique client 
                 //Nombre de nouveau client
-                $sql = "SELECT COUNT(DISTINCT Client.numClient) AS nombre_client
-                FROM Client
-                LEFT JOIN CompteClient ON Client.numClient = CompteClient.numClient
-                LEFT JOIN ContratClient ON Client.numClient = ContratClient.numClient
-                WHERE (CompteClient.dateOuverture BETWEEN ? AND ? OR ContratClient.dateOuvertureContrat BETWEEN ? AND ?)";
+                $sql = "SELECT COUNT(DISTINCT numClient) AS nombre_client
+                FROM (
+                    SELECT numClient, MIN(dateInscription) AS MinDate
+                    FROM (
+                        SELECT numClient, dateOuverture AS dateInscription
+                        FROM CompteClient
+                        UNION ALL
+                        SELECT numClient, dateOuvertureContrat AS dateInscription
+                        FROM ContratClient
+                    ) AS DatesInscription
+                    GROUP BY numClient
+                ) AS FirstAppearance
+                WHERE MinDate BETWEEN ? AND ?;";
 
                 // Préparation et exécution de la requête SQL avec PDO
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$datedebut, $datefin, $datedebut, $datefin]);
+                $stmt->execute([$datedebut, $datefin]);
 
                 // Récupération du résultat
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Affichage du nombre de clients ayant un compte ou un contrat à la date spécifiée
-                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique des clients</h3><p>Nombre de clients ayant un compte ou un contrat <br> entre le " . $datedebut . " et le " . $datefin . " est de : " . $result['nombre_client'] . "</p>";
+                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique des clients</h3><p>Nombre de clients ayant un compte ou un contrat <br> sur cette période : " . $result['nombre_client'] . "</p>";
 
                 // Histogramme des arrivée des clients par mois
                 // Préparer la requête SQL
