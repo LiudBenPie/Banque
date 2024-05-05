@@ -125,12 +125,12 @@ INSERT INTO Compte (nomTypeCompte, description) VALUES
 
 -- Insertion des employés
 INSERT INTO Employe (nom, login, motDePasse, categorie, actif) VALUES
-('Conseiller Y', 'Conseiller Y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
-('Directeur', 'Directeur', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur', 1),
-('Agent', 'Agent', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent', 1),
-('Conseiller X', 'Conseiller X', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 0),
+('Benoit', 'Benoit', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
+('Liudmyla', 'Liudmyla', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur', 1),
+('Marc', 'Marc', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent', 1),
+('Oleg', 'COleg', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 0),
 ('Pierre', 'Pierre', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
-('Max', 'Max', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur', 0),
+('Max', 'Max', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
 ('Natalie', 'Natalie', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent', 0),
 ('Clelia', 'Clelia', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 0);
 
@@ -266,12 +266,12 @@ INSERT INTO Motif (libelleMotif, listePieces) VALUES
 
 -- Insertion des rendez-vous
 INSERT INTO rdv (dateRdv, heureRdv, numEmploye, idMotif, numClient) VALUES
-('2024-07-10', 11, 1, 1, 1),
+('2024-07-10', 11, 6, 1, 1),
 ('2024-08-15', 12, 1, 2, 2),
-('2024-09-20', 15, 5, 3, 3),
+('2024-09-20', 15, 6, 3, 3),
 ('2024-02-10', 17, 5, 4, 4),
 ('2024-03-15', 18, 1, 6, 5),
-('2024-04-20', 10, 1, 5, 6),
+('2024-04-20', 10, 6, 5, 6),
 ('2024-05-25', 19, 1, 3, 6),
 ('2024-05-25', 13, 1, 7, 5),
 ('2024-07-05', 16, 5, 1, 3),
