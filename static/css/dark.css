@@ -1,16 +1,10 @@
-/* Hide the dark mode button by default */
-.light {
-    display: none;
-}
-
-
-/* [data-bs-theme="dark"] form {
-    background-color: rgba(6, 5, 5, 0.274);
-} */
-
-[data-bs-theme="dark"] .btn{
-
-
-}
-
-
+[data-bs-theme="dark"]
+    input[readonly] {
+        background-color: #4a4a4a;
+        background-image: url('../images/readonly.png');
+        background-size: 15px;
+        background-position: right 15px center;
+        background-repeat: no-repeat;
+        font-weight: bold;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }

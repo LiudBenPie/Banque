@@ -66,7 +66,7 @@ include VIEWS_DIR . '/menu.php';
 				<?php endfor; ?>
 			</select>
 
-			<button type="submit">Modifier</button>
+			<button type="submit" class="btn btn-outline-warning">Modifier</button>
 		</form>
 	</div>
 
@@ -107,7 +107,7 @@ include VIEWS_DIR . '/menu.php';
 	// Afficher les jours du mois
 	for ($jour = 1; $jour <= $nb_jours; $jour++) {
 		$date = sprintf("%04d-%02d-%02d", $annee, $mois, $jour);
-		echo "<td data-date='{$date}' class='date-cell'>$jour";
+		echo "<td data-date='{$date}' class='date-cell' style='color:black'>$jour";
 
 		// Si un événement existe pour ce jour, afficher les détails
 		if (array_key_exists($jour, $eventsByDay)) {
