@@ -19,7 +19,9 @@
             // Récupération des données du formulaire
             $datcon = $_POST['date'];
             $tarcon = $_POST['tarif'];
-            $nomcli = $_POST['nomcli'];
+            $nomClientValue = $_POST['nomcli'];
+            $nomClientParts = explode(';', $nomClientValue);
+            $numClient = $nomClientParts[0];
             $nomcon = $_POST['nomcon'];
 
             // Recherche du numéro de client à partir du nom du client
@@ -34,11 +36,11 @@
             $stmt->execute([$nomcon]);
             $rowcon = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($rowcli && $rowcon) {
+            if ($numClient && $rowcon) {
                 // Insertion des données dans la base de données
                 $sql = "INSERT INTO ContratClient (dateOuvertureContrat, tarifMensuel, numClient, numContrat) VALUES (?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
-                if ($stmt->execute([$datcon, $tarcon, $rowcli['numClient'], $rowcon['numContrat']])) {
+                if ($stmt->execute([$datcon, $tarcon, $numClient, $rowcon['numContrat']])) {
                     echo '<script>alert("Le contrat client a été ajouté à la base de données.");</script>';
                 } else {
                     echo '<script>alert("Une erreur est survenue lors de l\'ajout du contrat client.");</script>';
@@ -65,24 +67,23 @@
             <div class="form-group">
                 <label for="nomcli" class="form-label">Information du client :</label>
                 <select id="nomcli" name="nomcli" class="form-control">
-                    <?php
-                    $sql = "SELECT nom,prenom,datenaissance FROM Client";
+                <?php
+                    $sql = "SELECT numClient, nom, prenom, dateNaissance FROM Client";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $clients = $stmt->fetchAll();
-
+    
                     foreach ($clients as $client) {
                         // Formatage de la date de naissance pour l'affichage
-                        $dateNaissance = new DateTime($client['datenaissance']);
+                        $dateNaissance = new DateTime($client['dateNaissance']);
                         $dateFormatted = $dateNaissance->format('d/m/Y');
-                    
+    
                         // Création de la valeur pour chaque option
-                        $optionValue = htmlspecialchars($client['nom']) . ';' . htmlspecialchars($client['prenom']) . ';' . $dateFormatted;
-                        
+                        $optionValue = htmlspecialchars($client['numClient']) . ';' . htmlspecialchars($client['nom']) . ';' . htmlspecialchars($client['prenom']) . ';' . $dateFormatted;
+    
                         // Affichage de chaque option du menu déroulant
-                        echo "<option value=\"{$optionValue}\">{$client['nom']} {$client['prenom']} - né le {$dateFormatted}</option>";
+                        echo "<option value=\"{$optionValue}\">{$client['numClient']} {$client['nom']} {$client['prenom']} - né le {$dateFormatted}</option>";
                     }
-                    echo '</select>';
                     ?>
                 </select>
             </div>
