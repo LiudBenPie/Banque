@@ -96,7 +96,7 @@
                 <label for="nomemploye" class="form-label">Nom du conseiller</label>
                 <select id="nomemploye" name="nomemploye" class="form-control">
                     <?php
-                    $sql = "SELECT nom FROM employe WHERE categorie='Conseiller'";
+                    $sql = "SELECT nom FROM employe WHERE categorie='Conseiller' AND actif = 1";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $nomconseillers = $stmt->fetchAll();
