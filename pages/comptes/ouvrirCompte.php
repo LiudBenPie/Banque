@@ -20,36 +20,32 @@
             $datcompte = $_POST['date'];
             $soldecompte = $_POST['solde'];
             $decouvertcompte = $_POST['decouvert'];
-            $nomclient = $_POST['nomclient'];
+            $nomClientValue = $_POST['nomclient'];
+            $nomClientParts = explode(';', $nomClientValue);
+            $numClient = $nomClientParts[0];
             $nomcompte = $_POST['nomcompte'];
-
-            // Recherche du numéro de client à partir du nom
-            $sql = "SELECT numClient FROM client WHERE nom = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomclient]);
-            $rowclient = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    
             // Recherche du numéro de compte à partir du nom du compte
             $sql = "SELECT idCompte FROM compte WHERE nomTypeCompte = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$nomcompte]);
             $rowcompte = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($rowclient && $rowcompte) {
+    
+            if ($rowcompte && $numClient) {
                 // Insertion des données dans la base de données
                 $sql = "INSERT INTO Compteclient (dateouverture, solde, montantDecouvert, numClient, idCompte) VALUES (?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
-                if ($stmt->execute([$datcompte, $soldecompte, $decouvertcompte, $rowclient['numClient'], $rowcompte['idCompte']])) {
-                    echo '<script> alert ("Le compte client a été ajouté à la base de données.");</script>';
+                if ($stmt->execute([$datcompte, $soldecompte, $decouvertcompte, $numClient, $rowcompte['idCompte']])) {
+                    echo '<script>alert("Le compte client a été ajouté à la base de données.");</script>';
                 } else {
-                    echo '<script> alert("Une erreur est survenue lors de l\'ajout du compte client.");</script>';
+                    echo '<script>alert("Une erreur est survenue lors de l\'ajout du compte client.");</script>';
                 }
             } else {
-                echo '<script> alert("Le client ou le compte spécifié n\'existe pas.");</script>';
+                echo '<script>alert("Le client ou le compte spécifié n\'existe pas.");</script>';
             }
         }
     } catch (PDOException $e) {
-        $msg = 'ERREUR dans ' . $e->getFile() . 'Ligne' . $e->getLine() . ':' . $e->getMessage();
+        $msg = 'ERREUR dans ' . $e->getFile() . ' Ligne ' . $e->getLine() . ' : ' . $e->getMessage();
     }
     ?>
     <div class="container mt-5" style="max-width: 700px;">
@@ -71,23 +67,22 @@
                 <label for="nomclient" class="form-label">Information du client :</label>
                 <select id="nomclient" class="form-control" name="nomclient">
                     <?php
-                    $sql = "SELECT nom,prenom,dateNaissance FROM Client";
+                    $sql = "SELECT numClient, nom, prenom, dateNaissance FROM Client";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $clients = $stmt->fetchAll();
-
+    
                     foreach ($clients as $client) {
                         // Formatage de la date de naissance pour l'affichage
-                        $dateNaissance = new DateTime($client['datenaissance']);
+                        $dateNaissance = new DateTime($client['dateNaissance']);
                         $dateFormatted = $dateNaissance->format('d/m/Y');
-                    
+    
                         // Création de la valeur pour chaque option
-                        $optionValue = htmlspecialchars($client['nom']) . ';' . htmlspecialchars($client['prenom']) . ';' . $dateFormatted;
-                        
+                        $optionValue = htmlspecialchars($client['numClient']) . ';' . htmlspecialchars($client['nom']) . ';' . htmlspecialchars($client['prenom']) . ';' . $dateFormatted;
+    
                         // Affichage de chaque option du menu déroulant
-                        echo "<option value=\"{$optionValue}\">{$client['nom']} {$client['prenom']} - né le {$dateFormatted}</option>";
+                        echo "<option value=\"{$optionValue}\">{$client['numClient']} {$client['nom']} {$client['prenom']} - né le {$dateFormatted}</option>";
                     }
-                    echo '</select>';
                     ?>
                 </select>
             </div>
@@ -99,7 +94,7 @@
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $nomtypecomptes = $stmt->fetchAll();
-
+    
                     foreach ($nomtypecomptes as $nomtypecompte) {
                         echo "<option value=\"{$nomtypecompte['nomTypeCompte']}\">{$nomtypecompte['nomTypeCompte']}</option>";
                     }
@@ -111,6 +106,7 @@
             </div>
         </form>
     </div>
-</body>
+    </body>
+    
 
 </html>
