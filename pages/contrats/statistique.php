@@ -438,15 +438,23 @@
 
                 //Statistique client 
                 //Nombre de nouveau client
-                $sql = "SELECT COUNT(DISTINCT Client.numClient) AS nombre_client
-                FROM Client
-                LEFT JOIN CompteClient ON Client.numClient = CompteClient.numClient
-                LEFT JOIN ContratClient ON Client.numClient = ContratClient.numClient
-                WHERE (CompteClient.dateOuverture BETWEEN ? AND ? OR ContratClient.dateOuvertureContrat BETWEEN ? AND ?)";
+                $sql = "SELECT COUNT(DISTINCT numClient) AS nombre_client
+                FROM (
+                    SELECT numClient, MIN(dateInscription) AS MinDate
+                    FROM (
+                        SELECT numClient, dateOuverture AS dateInscription
+                        FROM CompteClient
+                        UNION ALL
+                        SELECT numClient, dateOuvertureContrat AS dateInscription
+                        FROM ContratClient
+                    ) AS DatesInscription
+                    GROUP BY numClient
+                ) AS FirstAppearance
+                WHERE MinDate BETWEEN ? AND ?;";
 
                 // Préparation et exécution de la requête SQL avec PDO
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$datedebut, $datefin, $datedebut, $datefin]);
+                $stmt->execute([$datedebut, $datefin]);
 
                 // Récupération du résultat
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
