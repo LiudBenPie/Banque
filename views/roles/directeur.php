@@ -49,7 +49,7 @@
                     </li>
                     <!-- Visualiser les statistiques de la banque -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/contrats/statistique.php"> Statistiques</a>
+                        <a class="nav-link text-white" href="/contrats/statistique.php"> Statistiques</a>
                     </li>
                 </ul>
                 <?php 
