@@ -15,6 +15,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/clients/rechercherClient.php">Modifier les informations du client</a></li>
                         <li><a class="dropdown-item" href="/clients/ajouterClient.php">Inscrire un nouveau client</a></li>
+                        <li><a class="dropdown-item" href="/comptes/gestionDecouvert.php">Modifier la valeur d'un découvert</a></li>
                     </ul>
                 </li>
                 <!-- Gestion des syntheses -->
@@ -35,9 +36,6 @@
                         <li><a class="dropdown-item" href="/rendez-vous/rechercherRDV.php">Gérer un rendez-vous pour un client</a></li>
                         <li><a class="dropdown-item" href="/rendez-vous/calendrier.php">Visualiser le calendrier</a></li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/comptes/gestionDecouvert.php">Modifier la valeur d'un découvert</a>
                 </li>
             </ul>
             <?php
