@@ -52,7 +52,7 @@
                         <a class="nav-link" href="/contrats/statistique.php"> Statistiques</a>
                     </li>
                 </ul>
-                <?php
+                <?php 
                 include VIEWS_DIR . '/themeswitcher.php';
                 ?>
                 <a type="button" class="btn btn-outline-warning" href="/utilisateurs/deconnexion.php">Déconnexion</a>
