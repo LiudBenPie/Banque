@@ -27,7 +27,7 @@
         <input type="date" name="datefin" id="datefin" value="<?php echo isset($_POST['datefin']) ? $_POST['datefin'] : ''; ?>" required>
         <button type="submit">Voir</button>
     </form>
-    <div style="height: 80%;">
+    <div style="height: 100%;">
         <?php
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -447,16 +447,20 @@
 
                 // Histogramme des clients par mois
                 // Préparer la requête SQL
-                $sql = "SELECT YEAR(dateInscription) AS year, MONTH(dateInscription) AS month, COUNT(DISTINCT numClient) AS nombre_client , Count(DISTINCT idCompte) AS nombre_compte, count(DISTINCT numcontrat) As nombre_contrat
+                $sql = "SELECT YEAR(MinDate) AS year, MONTH(MinDate) AS month, COUNT(DISTINCT numClient) AS nombre_client
                 FROM (
-                    SELECT numClient, dateOuverture AS dateInscription
-                    FROM CompteClient
-                    UNION ALL
-                    SELECT numClient, dateOuvertureContrat AS dateInscription
-                    FROM ContratClient
-                ) AS DatesInscription
-                WHERE dateInscription BETWEEN ? AND ?
-                GROUP BY YEAR(dateInscription), MONTH(dateInscription)
+                    SELECT numClient, MIN(dateInscription) AS MinDate
+                    FROM (
+                        SELECT numClient, dateOuverture AS dateInscription
+                        FROM CompteClient
+                        UNION ALL
+                        SELECT numClient, dateOuvertureContrat AS dateInscription
+                        FROM ContratClient
+                    ) AS DatesInscription
+                    GROUP BY numClient
+                ) AS FirstAppearance
+                WHERE MinDate BETWEEN ? AND ?
+                GROUP BY YEAR(MinDate), MONTH(MinDate)
                 ORDER BY year, month;";
 
                 // Préparer et exécuter la déclaration SQL
@@ -491,10 +495,10 @@
                 'datasets' => $datasetsBar
                 ];
                 
-                echo '<canvas id="myChartBar"></canvas>
+                echo '<canvas id="myChartBar2"></canvas>
                 <script>
-                var ctxBar = document.getElementById("myChartBar").getContext("2d");
-                var myChartBar = new Chart(ctxBar, {
+                var ctxBar = document.getElementById("myChartBar2").getContext("2d");
+                var myChartBar2 = new Chart(ctxBar, {
                 type: "bar",
                 data: ' . json_encode($dataBar) . ',
                 options: {
