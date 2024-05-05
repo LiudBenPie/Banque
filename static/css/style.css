@@ -153,6 +153,7 @@ form button:hover {
     list-style-type: none;
     padding: 0;
     margin: 10px 0 0 0;
+    color: #000000;
 }
 
 /* Élément individuel de l'événement */
@@ -165,7 +166,9 @@ form button:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; /* Empêche le texte de passer à la ligne suivante */
+    color: #000000;
 }
+
 
 [data-bs-theme="light"] .btn-outline-warning{
     color: rgb(0, 0, 0);
