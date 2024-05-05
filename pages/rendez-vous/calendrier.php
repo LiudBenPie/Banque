@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="/static/css/style.css">
+	<link rel="stylesheet" href="/static/css/calendrierstyle.css">
 	<title>Calendrier des examens</title>
 </head>
 
@@ -101,7 +101,7 @@ include VIEWS_DIR . '/menu.php';
 	$eventsByDay = [];
 	foreach ($events as $event) {
 		$day = (int)date('j', strtotime($event['dateRdv']));
-		$eventsByDay[$day][] = $event['heureRdv'] . ':00 ' . $event['libelleMotif'] . ' <br>avec ' . $event['nomClient'] . ' ' . $event['prenomClient'];
+		$eventsByDay[$day][] = $event['heureRdv'] . ':00 ' . $event['libelleMotif'] . ' avec ' . $event['nomClient'] . ' ' . $event['prenomClient'];
 	}
 
 	// Afficher les jours du mois

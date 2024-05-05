@@ -9,15 +9,15 @@
 
 <body>
 
-<?php
-require('../../init.php');
-checkAcl('guest');
-//echo password_hash('password', PASSWORD_DEFAULT);
-?>
-
-<div class="container mt-5" style="max-width: 500px;">
-        <form action="/utilisateurs/authentification.php" method="post" >
-        <h2>Connexion</h2>
+    <?php
+    require('../../init.php');
+    checkAcl('guest');
+    //echo password_hash('password', PASSWORD_DEFAULT);
+    ?>
+    <div class="container mt-5" style="max-width: 500px;">
+        <div style="border: 2px dashed black; padding: 20px; border-radius: 5px;">
+            <form action="/utilisateurs/authentification.php" method="post">
+                <h2>Connexion</h2>
                 <div class="mb-3">
                     <label for="login" class="form-label">Identifiant :</label>
                     <input type="text" class="form-control" name="login" id="login" required>
@@ -27,7 +27,9 @@ checkAcl('guest');
                     <input type="password" class="form-control" name="motDePasse" id="motDePasse" required>
                 </div>
                 <button type="submit" class="btn btn-dark">Connexion</button>
-        </form>
+            </form>
+        </div>
     </div>
 </body>
+
 </html>
