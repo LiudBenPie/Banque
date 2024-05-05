@@ -69,11 +69,11 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="login" class="form-label">Login:</label>
-                <input type="text" class="form-control" id="login" name="login" value="<?php echo isset($employe['login']) ? htmlspecialchars($employe['login']) : ''; ?>">
+                <input type="text" class="form-control" id="login" name="login" minlength="6" maxlength="20" value="<?php echo isset($employe['login']) ? htmlspecialchars($employe['login']) : ''; ?>">
             </div>
             <div class="form-group col-md-6">
                 <label for="motDePasse" class="form-label">Mot de Passe (laissez vide si inchangé):</label>
-                <input type="password" class="form-control" id="motDePasse" name="motDePasse">
+                <input type="password" class="form-control" id="motDePasse" name="motDePasse" minlength="6" maxlength="20">
             </div>
             <div class="form-group">
                 <label for="categorie" class="form-label">Catégorie:</label>

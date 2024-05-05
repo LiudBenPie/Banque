@@ -41,7 +41,7 @@
             $stmtCheckClient->execute(["%$search1%", "%$search2%", "%$search3%", "%$search4%"]);
 
             if ($stmtCheckClient->rowCount() > 0) {
-                echo "Le client existe déjà dans la base de données";
+                echo "<script>alert('Le client existe déjà dans la base de données')</script>";
             } else {
                 $nomclient = $_POST['nom'];
                 $prenomclient = $_POST['prenom'];
@@ -70,23 +70,47 @@
             <legend class="text-warning">Les clients de la banque</legend>
             <div class="form-group col-md-6">
                 <label for="nom" class="form-label">Nom</label>
-                <input type="text" class="form-control" name="nom" id="nom" size="12" maxlength="25" required>
+                <input type="text" class="form-control" name="nom" id="nom"  maxlength="25" required>
+                <script>
+            document.getElementById('nom').addEventListener('keypress', function(event) {
+            // Bloque tout ce qui n'est pas une lettre ou un tiret
+            if (!/[a-zA-Z- ]/.test(event.key)) {
+                event.preventDefault(); // Empêche la saisie de caractères non autorisés
+            }
+                });
+            </script>
             </div>
             <div class="form-group col-md-6">
                 <label for="prenom" class="form-label">Prénom</label>
-                <input type="text" class="form-control" name="prenom" id="prenom" size="12" maxlength="25" required>
+                <input type="text" class="form-control" name="prenom" id="prenom" maxlength="25" required>
+                <script>
+            document.getElementById('prenom').addEventListener('keypress', function(event) {
+            // Bloque tout ce qui n'est pas une lettre, un tiret ou un espace
+            if (!/[a-zA-Z-]/.test(event.key)) {
+                event.preventDefault(); // Empêche la saisie de caractères non autorisés
+            }
+                });
+            </script>  
             </div>
             <div class="form-group">
                 <label for="adresse" class="form-label">Adresse</label>
-                <input type="text" class="form-control" name="adresse" id="adresse" size="12" maxlength="25" required>
+                <input type="text" class="form-control" name="adresse" id="adresse"  maxlength="25" required>
             </div>
             <div class="form-group">
                 <label for="adressemail" class="form-label">Adresse email</label>
-                <input type="text" class="form-control" name="adressemail" id="adressemail" size="50" maxlength="50" required>
+                <input type="text" class="form-control" name="adressemail" id="adressemail" maxlength="50" required>
             </div>
             <div class="form-group">
                 <label for="numtel" class="form-label">Numéro de téléphone</label>
-                <input type="text" class="form-control" name="numtel" id="numtel" size="10" maxlength="25" required>
+                <input type="tel" class="form-control" name="numtel" id="numtel"  maxlength="10" required>
+                <script>
+            document.getElementById('numtel').addEventListener('keypress', function(event) {
+            // Bloque tout ce qui n'est pas un nombre
+            if (!/[0-9]/.test(event.key)) {
+                event.preventDefault(); // Empêche la saisie de caractères non autorisés
+            }
+                });
+            </script>
             </div>
             <div class="form-group">
                 <label for="datedenaissance" class="form-label">Date de naissance : </label>
