@@ -148,11 +148,7 @@
                 <label for="client" class="form-label">Sélectionnez le client pour le rendez-vous :</label>
                 <select name="numClient" id="numClient" class="form-control">
                     <?php foreach ($clients as $client) : ?>
-                        <?php
-                        // Vérifier si l'ID du client correspond à $numClient pour définir l'option par défaut
-                        $selected = ($client['numClient'] == $numClient) ? 'selected' : '';
-                        ?>
-                        <option value="<?php echo $client['numClient']; ?>" <?php echo $selected; ?>>
+                        <option value="<?php echo $client['numClient']; ?>">
                             <?php echo htmlspecialchars($client['nom']) . ' ' . htmlspecialchars($client['prenom']) . ' ' . htmlspecialchars($client['dateNaissance']); ?>
                         </option>
                     <?php endforeach; ?>
@@ -165,10 +161,7 @@
                 <button type="submit" name="action" value="supprimer" class="btn btn-outline-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">Supprimer</button>
             </div>
         </form>
-    </div>
 </body>
-
-</html>
-
+</div>
 
 </html>
