@@ -83,7 +83,7 @@
                     <option value="Directeur" <?php echo (isset($employe['categorie']) && $employe['categorie'] == 'Directeur') ? 'selected' : ''; ?>>Directeur</option>
                 </select>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group">
                 <label for="actif" class="form-label">L'employé est-il en poste :</label>
                 <select class="form-control" id="actif" name="actif">
                     <option value="1" <?php echo (isset($employe['actif']) && $employe['actif'] == 1) ? 'selected' : ''; ?>>Oui</option>
@@ -92,8 +92,6 @@
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" name="action" value="modifier" class="btn btn-outline-warning">Mettre à jour</button>
-            </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
             </div>
     </div>
     </form>

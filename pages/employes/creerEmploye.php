@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label for="categorie" class="form-label">Catégorie : </label>
-                <select id="categorie" name="categorie" required>
+                <select class="form-control" id="categorie" name="categorie" required>
                     <option value="Directeur">Directeur</option>
                     <option value="Agent">Agent</option>
                     <option value="Conseiller">Conseiller</option>

@@ -66,12 +66,12 @@
             </div>
 
             <div class="form-group">
-                <label for="nomTypeContrat">Nom du Contrat:</label>
-                <input type="text" id="nomTypeContrat" name="nomTypeContrat" value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>">
+                <label for="nomTypeContrat" class="form-label">Nom du Contrat:</label>
+                <input type="text" class="form-control" id="nomTypeContrat" name="nomTypeContrat" value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>">
             </div>
             <div class="form-group">
-            <label for="description">Description du Contrat:</label>
-            <input type="text" id="description" name="description"
+            <label for="description" class="form-label">Description du Contrat:</label>
+            <input type="text" class="form-control" id="description" name="description"
                 value="<?php echo isset($contrat['description']) ? htmlspecialchars($contrat['description']) : ''; ?>">
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
