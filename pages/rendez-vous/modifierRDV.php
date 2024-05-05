@@ -55,7 +55,9 @@
                 $stmt->execute([$dateRdv, $heureRdv, $numEmploye]);
                 $count = $stmt->fetchColumn();
 
-                if ($count == 0) {
+                if (strtotime($dateRdv) < strtotime(date('Y-m-d'))) {
+                    echo '<script>alert("La date du rendez-vous ne peut pas être dans le passé.");</script>';
+                } else if ($count == 0) {
                     // Mise à jour du rendez-vous
                     $sql = "UPDATE rdv SET dateRdv = ?, heureRdv = ?, numEmploye = ?, idMotif = ?, numClient = ? WHERE numRdv = ?";
                     $stmt = $conn->prepare($sql);
@@ -107,7 +109,7 @@
     <!-- Formulaire pour la mise à jour et la suppression des informations du rendez-vous -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierRDV.php" method="post" name="monForm" class="row g-3 rounded shadow">
-        <legend class="text-warning">MODIFICATION DU RDV</legend>
+            <legend class="text-warning">MODIFICATION DU RDV</legend>
 
             <!-- Champs du formulaire avec les informations à jour du rendez-vous -->
             <div class="form-group">

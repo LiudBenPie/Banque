@@ -53,7 +53,6 @@ include VIEWS_DIR . '/menu.php';
                         <option value="<?php echo $client['numClient']; ?>">
                             <?php echo $client['numClient'] . ' ' . $client['nom'] . ' ' . $client['prenom'] ?>
                         </option>
-
                     <?php endforeach; ?>
                 </select>
             </div>
