@@ -18,16 +18,26 @@
     if (isset($_POST['action']) && !empty($_POST['nomContrat'])) {
         $nomContrat = $_POST['nomContrat'];
         $description = $_POST['description'];
+
+        // Vérifier si le nom du contrat n'existe pas déjà
+    $sql_check = "SELECT COUNT(*) AS count FROM contrat WHERE nomTypeContrat = ?";
+    $res_check = $conn->prepare($sql_check);
+    $res_check->execute([$nomContrat]);
+    $row = $res_check->fetch(PDO::FETCH_ASSOC);
+    
+    if ($row['count'] == 0) {
         $sql = "INSERT INTO contrat (nomTypeContrat, description) VALUES (?, ?)";
         $res = $conn->prepare($sql);
         if ($res->execute([$nomContrat, $description])) {
             $createSuccessful = true;
         }
-    }
+    }else {
+        // Le nom du contrat existe déjà
+        echo "<script>alert ('Le nom du contrat existe déjà dans la base de données.')</script>";}
     // Affiche une alerte si la création a été réussie
     if ($createSuccessful) {
         echo '<script>alert("Le type de contrat a été créé avec succès.");</script>';
-    }
+    }}
     ?>
     <!-- Formulaire pour la création du contrat -->
     <div class="container mt-5" style="max-width: 700px;">
