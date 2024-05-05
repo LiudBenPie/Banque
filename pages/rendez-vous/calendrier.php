@@ -93,7 +93,7 @@ include VIEWS_DIR . '/menu.php';
 	$nb_jours = cal_days_in_month(CAL_GREGORIAN, $mois, $annee);
 
 	// Récupérer les événements de la base de données
-	$sql = "SELECT rdv.dateRdv, rdv.heureRdv, Motif.libelleMotif, Client.nom AS nomClient, Client.prenom AS prenomClient FROM rdv JOIN Employe ON rdv.numEmploye = Employe.numEmploye JOIN Client ON Client.numClient = rdv.numClient JOIN Motif ON rdv.idMotif = Motif.idMotif WHERE YEAR(rdv.dateRdv) = :year AND MONTH(rdv.dateRdv) = :month AND Employe.nom = :nom ORDER BY rdv.heureRdv";
+	$sql = "SELECT client.numClient, rdv.dateRdv, rdv.heureRdv, Motif.libelleMotif, Client.nom AS nomClient, Client.prenom AS prenomClient FROM rdv JOIN Employe ON rdv.numEmploye = Employe.numEmploye JOIN Client ON Client.numClient = rdv.numClient JOIN Motif ON rdv.idMotif = Motif.idMotif WHERE YEAR(rdv.dateRdv) = :year AND MONTH(rdv.dateRdv) = :month AND Employe.nom = :nom ORDER BY rdv.heureRdv";
 	$stmt = $conn->prepare($sql);
 	$stmt->execute(['year' => $annee, 'month' => $mois, 'nom' => $nom]);
 	$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -101,7 +101,10 @@ include VIEWS_DIR . '/menu.php';
 	$eventsByDay = [];
 	foreach ($events as $event) {
 		$day = (int)date('j', strtotime($event['dateRdv']));
-		$eventsByDay[$day][] = $event['heureRdv'] . ':00 ' . $event['libelleMotif'] . ' avec ' . $event['nomClient'] . ' ' . $event['prenomClient'];
+		$eventsByDay[$day][] = [
+			'label'=> $event['heureRdv'] . ':00 ' . $event['libelleMotif'] . ' avec ' . $event['nomClient'] . ' ' . $event['prenomClient'],
+			'client'=> $event['numClient']
+		];
 	}
 
 	// Afficher les jours du mois
@@ -111,11 +114,11 @@ include VIEWS_DIR . '/menu.php';
 
 		// Si un événement existe pour ce jour, afficher les détails
 		if (array_key_exists($jour, $eventsByDay)) {
-			echo "<ul class='event-list'>";
+			echo "<div class='event-list'>";
 			foreach ($eventsByDay[$jour] as $eventDetail) {
-				echo "<li class='event-item'>" . htmlspecialchars($eventDetail) . "</li>";
+				echo "<form action='/clients/syntheseClient.php' method='post'><input type='hidden' name='numClient' value =".$eventDetail['client']."/><button class='event-item'>" . htmlspecialchars($eventDetail['label']) . "</button></form>";
 			}
-			echo "</ul>";
+			echo "</div>";
 		}
 
 		echo "</td>";
