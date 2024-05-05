@@ -33,12 +33,20 @@
 
 
         } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
-            $sql = "DELETE FROM Compte WHERE idCompte = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$idCompte]);
+            //vérification s'il existe encore des comptes clients qui possède ce type de compte
+            $stmt = $conn->prepare("SELECT COUNT(*) FROM compteClient WHERE idCompte= ? ");
+                $stmt->execute([$idCompte]);
+                $count = $stmt->fetchColumn();
 
-            $_SESSION['deleteSuccess'] = true;
-            $deleteSuccessful = true;
+                if ($count == 0) {
+                    $sql = "DELETE FROM Compte WHERE idCompte = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute([$idCompte]);
+                    $_SESSION['deleteSuccess'] = true;
+                    $deleteSuccessful = true;
+            }else{
+                echo '<script>alert("Suppression du type de compte impossible tant qu\'il existe des comptes clients avec ce type de compte");</script>';
+            }
         } else {
             $sql = "SELECT * FROM Compte WHERE idCompte = ?";
             $stmt = $conn->prepare($sql);
@@ -72,7 +80,7 @@
                 value="<?php echo isset($compte['nomTypeCompte']) ? htmlspecialchars($compte['nomTypeCompte']) : ''; ?>">
         </p>
         <p>
-            <label for="description">Nom du Compte:</label>
+            <label for="description">Description du Compte:</label>
             <input type="text" id="description" name="description"
                 value="<?php echo isset($compte['description']) ? htmlspecialchars($compte['description']) : ''; ?>">
         </p>

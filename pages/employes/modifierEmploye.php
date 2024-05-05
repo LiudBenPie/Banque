@@ -36,7 +36,7 @@
 
             $sql = "UPDATE employe SET nom = ?, login = ?, motDePasse = ?, categorie = ?, actif = ? WHERE numEmploye = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nom, $login, $hashedPassword, $categorie, $numEmploye, $actif]);
+            $stmt->execute([$nom, $login, $hashedPassword, $categorie, $actif, $numEmploye]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
@@ -58,7 +58,7 @@
     <!-- Formulaire pour la mise à jour et la suppression des informations de l'employé -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierEmploye.php" method="post" name="monForm" class="row g-3 rounded shadow">
-            <legend>INFORMATION DE L'EMPLOYE</legend>
+            <legend class="text-warning">INFORMATION DE L'EMPLOYE</legend>
             <!-- Champs du formulaire avec les informations à jour de l'employé -->
             <div class="form-group">
                 <input type="hidden" class="form-control" name="numEmploye" value="<?php echo isset($employe['numEmploye']) ? htmlspecialchars($employe['numEmploye']) : ''; ?>">
@@ -85,10 +85,13 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="actif" class="form-label">L'employé est-il en poste :</label>
-                <input type="booleen" class="form-control" id="actif" name="actif" value="<?php echo isset($employe['actif']) ? htmlspecialchars($employe['actif']) : ''; ?>">
+                <select class="form-control" id="actif" name="actif">
+                    <option value="1" <?php echo (isset($employe['actif']) && $employe['actif'] == 1) ? 'selected' : ''; ?>>Oui</option>
+                    <option value="0" <?php echo (isset($employe['actif']) && $employe['actif'] == 0) ? 'selected' : ''; ?>>Non</option>
+                </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+                <button type="submit" name="action" value="modifier" class="btn btn-outline-warning">Mettre à jour</button>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
             </div>

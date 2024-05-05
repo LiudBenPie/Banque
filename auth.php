@@ -55,4 +55,15 @@ class Auth {
         }
         return $_SESSION[$this->sessionName];
     }
+
+    // Added method to get user details
+    public function getUser() {
+        if(!$this->isLoggedIn()){
+            return null;
+        }
+        $userId = $_SESSION[$this->sessionName];
+        $stmt = $this->pdo->prepare("SELECT * FROM employe WHERE numEmploye = ?");
+        $stmt->execute([$userId]);
+        return $stmt->fetch();
+    }
 }

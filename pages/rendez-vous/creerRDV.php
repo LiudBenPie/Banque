@@ -14,7 +14,7 @@ include VIEWS_DIR . '/menu.php';
 ?>
     <div class="container mt-5" style="max-width: 700px;">
         <form action="/rendez-vous/sauvegarderRdv.php" method="post" class="row g-3 rounded shadow">
-            <legend>Créer un Nouveau RDV</legend>
+            <legend class="text-warning">Créer un Nouveau RDV</legend>
             <div class="form-group">
                 <label for="dateRdv" class="form-label">Date du RDV:</label>
                 <input type="date" class="form-control" id="dateRdv" name="dateRdv" required>
@@ -74,7 +74,7 @@ include VIEWS_DIR . '/menu.php';
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn">Planifier RDV</button>
+                <button type="submit" class="btn btn-outline-warning">Planifier RDV</button>
             </div>
         </form>
     </div>

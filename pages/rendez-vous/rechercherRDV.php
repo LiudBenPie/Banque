@@ -23,7 +23,7 @@
     ?>
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierRDV.php" method="post" class="row g-3 rounded shadow">
-            <legend>Les rdv avec nos conseillers</legend>
+            <legend class="text-warning">Les rdv avec nos conseillers</legend>
             <div class="form-group">
                 <label for="rdv" class="form-label">Sélectionnez le rendez-vous à modifier :</label>
                 <select name="numRdv" id="numRdv" class="form-control">
@@ -35,7 +35,7 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn">Modifier</button>
+                <button type="submit" class="btn btn-outline-warning">Modifier</button>
             </div>
         </form>
     </div>

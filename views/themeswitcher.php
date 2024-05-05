@@ -21,11 +21,11 @@
 
 <div class="d-flex align-items-center gap-3">
     <div class="d-flex align-items-center dropdown color-modes">
-        <button class="btn btn-link px-0 text-decoration-none dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
+        <button class="btn px-0 text-decoration-none dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
             <svg class="bi my-1 me-2 theme-icon-active" style="height: 16px; width: 16px;">
                 <use href="#circle-half"></use>
             </svg>
-            <span class="ms-2" id="bd-theme-text">Themes</span>
+            <span class="ms-2" id="bd-theme-text">Thèmes</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme" style="--bs-dropdown-min-width: 8rem;">
             <li>

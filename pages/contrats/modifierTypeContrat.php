@@ -22,10 +22,11 @@
 
         if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
             $nomTypeContrat = $_POST['nomTypeContrat'];
+            $description = $_POST['description'];
 
-            $sql = "UPDATE contrat SET nomTypeContrat = ? WHERE numContrat = ?";
+            $sql = "UPDATE contrat SET nomTypeContrat = ?, description = ? WHERE numContrat = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomTypeContrat, $numContrat]);
+            $stmt->execute([$nomTypeContrat, $description, $numContrat]);
 
             $_SESSION['updateSuccess'] = true;
             $updateSuccessful = true;
@@ -57,7 +58,7 @@
     <!-- Formulaire pour la mise à jour et la suppression des informations du contrat -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="modifierTypeContrat.php" method="post" name="monForm" class="row g-3 rounded shadow">
-            <legend>MODIFICATION DU TYPE DE CONTRAT</legend>
+            <legend class="text-warning">MODIFICATION DU TYPE DE CONTRAT</legend>
 
             <!-- Champs du formulaire avec les informations à jour du contrat -->
             <div class="form-group">
@@ -68,12 +69,16 @@
                 <label for="nomTypeContrat">Nom du Contrat:</label>
                 <input type="text" id="nomTypeContrat" name="nomTypeContrat" value="<?php echo isset($contrat['nomTypeContrat']) ? htmlspecialchars($contrat['nomTypeContrat']) : ''; ?>">
             </div>
-
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="modifier" class="btn">Mettre à jour</button>
+            <div class="form-group">
+            <label for="description">Description du Contrat:</label>
+            <input type="text" id="description" name="description"
+                value="<?php echo isset($contrat['description']) ? htmlspecialchars($contrat['description']) : ''; ?>">
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" name="action" value="supprimer" class="btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de contrat ?')">Supprimer</button>
+                <button type="submit" name="action" value="modifier" class="btn btn-outline-warning">Mettre à jour</button>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="action" value="supprimer" class="btn btn-outline-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce type de contrat ?')">Supprimer</button>
             </div>
     </div>
     </form>

@@ -70,7 +70,7 @@ if ($createSuccessful) {
     <!-- Formulaire pour la création du contrat -->
     <div class="container mt-5" style="max-width: 700px;">
         <form action="rechercherCompte.php" method="post" name="monForm" class="row g-3 rounded shadow">
-            <legend>Réalisation d'un dépot ou d'un retrait</legend>
+            <legend class="text-warning">Réalisation d'un dépot ou d'un retrait</legend>
             <div class="form-group">
                 <label for="montant" class="form-label">Montant :</label>
                 <input type="number" class="form-control" name="montant" id="montant" required min="0">

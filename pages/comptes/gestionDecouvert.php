@@ -59,7 +59,7 @@
     ?>
     <div class="container mt-5" style="max-width: 700px;">
         <form action="gestionDecouvert.php" method="post" class="row g-3 rounded shadow">
-            <legend>Les comptes de la banque</legend>
+            <legend class="text-warning">Les comptes de la banque</legend>
             <div class="form-group">
                 <!-- Sélection du compte à modifier -->
                 <label for="idCompteClient" class="form-label">Sélectionnez un compte :</label>
