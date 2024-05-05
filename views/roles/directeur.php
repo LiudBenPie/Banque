@@ -23,7 +23,7 @@
                             Contrats
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/contrats/creerContrat.php">Créer la liste des contrats</a></li>
+                            <li><a class="dropdown-item" href="/contrats/creerContrat.php">Créer un type de contrat</a></li>
                             <li><a class="dropdown-item" href="/contrats/rechercherTypeContrat.php">Gérer la liste des contrats existants</a></li>
                         </ul>
                     </li>
@@ -33,7 +33,7 @@
                             Comptes
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/comptes/creerCompte.php">Créer la liste des comptes</a></li>
+                            <li><a class="dropdown-item" href="/comptes/creerCompte.php">Créer un type de compte</a></li>
                             <li><a class="dropdown-item" href="/comptes/rechercherTypeCompte.php">Gérer la liste des comptes existants</a></li>
                         </ul>
                     </li>
@@ -49,7 +49,7 @@
                     </li>
                     <!-- Visualiser les statistiques de la banque -->
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/contrats/statistique.php"> Statistiques</a>
+                        <a class="nav-link text-white" href="/contrats/statistique.php">Statistiques</a>
                     </li>
                 </ul>
                 <?php 
