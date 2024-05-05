@@ -24,12 +24,6 @@
             $numClient = $nomClientParts[0];
             $nomcon = $_POST['nomcon'];
 
-            // Recherche du numéro de client à partir du nom du client
-            $sql = "SELECT numClient FROM client WHERE nom = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$nomcli]);
-            $rowcli = $stmt->fetch(PDO::FETCH_ASSOC);
-
             // Recherche du numéro de contrat à partir du nom du contrat
             $sql = "SELECT numContrat FROM contrat WHERE nomTypeContrat = ?";
             $stmt = $conn->prepare($sql);
