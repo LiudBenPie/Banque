@@ -13,8 +13,8 @@ label{
 }
 
 /* input */
-input[readonly] {
-    background-color: #b5b8a8;
+[data-bs-theme="light"] input[readonly] {
+    background-color: #b0b0b0;
     background-image: url('../images/readonly.png');
     background-size: 15px;
     background-position: right 15px center;
@@ -30,7 +30,6 @@ input[readonly] {
 
 
 /* background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #ad8d4c 78%); */
-
 
 .container{
     justify-content: center;

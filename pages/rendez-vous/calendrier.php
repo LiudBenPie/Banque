@@ -66,7 +66,7 @@ include VIEWS_DIR . '/menu.php';
 				<?php endfor; ?>
 			</select>
 
-			<button type="submit">Modifier</button>
+			<button type="submit" class="btn btn-outline-warning">Modifier</button>
 		</form>
 	</div>
 

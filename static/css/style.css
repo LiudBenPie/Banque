@@ -1,7 +1,7 @@
 /* General body styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #c2bebec8;
     margin: 0;
     padding: 0;
 }
@@ -31,16 +31,6 @@ body {
     margin-right: 10px; /* Espacement entre les sélecteurs */
 }
 
-.selection-form button {
-    padding: 10px 20px;
-    background-color: #0056b3; /* Couleur d'arrière-plan du bouton */
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    white-space: nowrap; /* Empêche le texte du bouton de passer à la ligne */
-}
-
 /* Réponse sur petits écrans */
 @media (max-width: 768px) {
     .selection-form {
@@ -68,7 +58,7 @@ table {
 
 /* Calendar header */
 table th {
-    background-color: #003580; /* A dark blue background */
+    background-color:  #6b500d; /* A dark blue background */
     color: white;
     padding: 10px 0;
     text-align: center;
