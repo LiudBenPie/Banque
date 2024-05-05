@@ -39,16 +39,24 @@
         <form action="creerEmploye.php" method="post" name="monForm" class="row g-3 rounded shadow">
             <legend class="text-warning">Créer un nouveau employé</legend>
             <div class="form-group">
-                <label for="nomEmploye" class="form-label">Nom de l'employé :</label>
-                <input type="text" name="nomEmploye" id="nomEmploye" class="form-control" required>
+            <label for="nomEmploye" class="form-label">Nom de l'employé :</label>
+            <input type="text" name="nomEmploye" id="nomEmploye" class="form-control" required title="Les noms ne doivent contenir que des lettres ou des tirets.">
+            <script>
+            document.getElementById('nomEmploye').addEventListener('keypress', function(event) {
+            // Bloque tout ce qui n'est pas une lettre ou un tiret
+            if (!/[a-zA-Z-]/.test(event.key)) {
+                event.preventDefault(); // Empêche la saisie de caractères non autorisés
+            }
+                });
+            </script>
             </div>
             <div class="form-group">
                 <label for="login" class="form-label">Login :</label>
-                <input type="text" name="login" id="login" class="form-control" required>
+                <input type="text" name="login" id="login" minlength="6" maxlength="20" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="motDePasse" class="form-label">Mot de passe :</label>
-                <input type="password" name="motDePasse" id="motDePasse" class="form-control" required>
+                <input type="password" name="motDePasse" id="motDePasse" class="form-control" minlength="6" maxlength="20" required>
             </div>
             <div class="form-group">
                 <label for="categorie" class="form-label">Catégorie : </label>
