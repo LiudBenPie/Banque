@@ -39,7 +39,7 @@
                 <input type="text" name="libellemotif" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="listepiece" class="form-label">Liste des pièces : </label>
+                <label for="listepiece" class="form-label">Liste des pièces à fournir : </label>
                 <textarea name="listepiece" class="form-control" required></textarea>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">

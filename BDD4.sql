@@ -127,12 +127,13 @@ INSERT INTO Compte (nomTypeCompte, description) VALUES
 INSERT INTO Employe (nom, login, motDePasse, categorie, actif) VALUES
 ('Benoit', 'Benoit', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
 ('Liudmyla', 'Liudmyla', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur', 1),
-('Marc', 'Marc', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent', 1),
+('Pierre', 'Pierre','$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent', 1),
 ('Oleg', 'COleg', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 0),
-('Pierre', 'Pierre', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
+('Marc', 'Marc','$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
 ('Max', 'Max', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
 ('Natalie', 'Natalie', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent', 0),
 ('Clelia', 'Clelia', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 0);
+
 
 -- Insertion des clients
 INSERT INTO Client (nom, prenom, adresse, mail, numTel, dateNaissance, idSituation, numEmploye) VALUES
