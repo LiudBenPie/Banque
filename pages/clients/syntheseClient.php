@@ -14,7 +14,7 @@
     require('../../init.php');
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
-
+    echo '<div class="p-3">';
     // Vérifie si le formulaire a été soumis et que numClient est défini
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['numClient'])) {
         // Récupération du numéro de client sélectionné
@@ -171,6 +171,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
 </body>
 
 </html>
