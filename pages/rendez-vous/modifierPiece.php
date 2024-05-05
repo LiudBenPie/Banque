@@ -79,6 +79,9 @@
                 <label for="listePieces" class="form-label">Liste des Pièces:</label>
                 <input type="text" class="form-control" id="listePieces" name="listePieces" value="<?php echo isset($motif['listePieces']) ? htmlspecialchars($motif['listePieces']) : ''; ?>">
             </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-outline-warning" name="action" value="modifier">Mettre à jour</button>
+            </div>
             <?php
             // Récupération de la liste des motifs sauf le motif actuel
             $sql = "SELECT idMotif, libelleMotif FROM motif WHERE idMotif<>?";
@@ -99,9 +102,6 @@
                     <?php endforeach; ?>
                 </select>
                 </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn btn-outline-warning" name="action" value="modifier">Mettre à jour</button>
-            </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" class="btn btn-outline-warning" name="action" value="supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce motif ?')">Supprimer</button>
             </div>
