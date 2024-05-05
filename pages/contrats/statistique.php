@@ -20,7 +20,7 @@
 
     $totalRdv = 0; // Variable pour stocker le nombre total de rendez-vous
     ?>
-    <form action="statContrat.php" method="post">
+    <form action="statistique.php" method="post">
         <label for="datedebut">Date de début :</label>
         <input type="date" name="datedebut" id="datedebut" value="<?php echo isset($_POST['datedebut']) ? $_POST['datedebut'] : ''; ?>" required>
         <label for="datefin">Date de fin :</label>
@@ -47,7 +47,7 @@
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Affichage de la somme des soldes des comptes clients ouverts dans la période spécifiée
-                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique des contrats</h3><p>Nombre de contrats ouverts <br> entre $datedebut et $datefin : " . $result['nombre_contrat'].'</p>';
+                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique des contrats</h3><p>Nombre de contrats ouverts <br> entre $datedebut et $datefin : " . $result['nombre_contrat'] . '</p>';
 
                 // Requête SQL pour récupérer les données entre deux dates
                 $sqlcontrat = "SELECT nomTypeContrat, COUNT(*) AS nombre_contrats FROM ContratClient
@@ -87,16 +87,38 @@
                         label: 'Nombre de contrat',
                         data: " . json_encode($valuescontrat) . ",
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.8)', 'rgba(255, 206, 86, 0.8)',
-                            'rgba(75, 192, 192, 0.8)', 'rgba(153, 102, 255, 0.8)',
-                            'rgba(255, 159, 64, 0.8)'
+                            'rgba(255, 99, 132, 0.8)', // Rose
+                            'rgba(54, 162, 235, 0.8)', // Bleu
+                            'rgba(255, 206, 86, 0.8)', // Jaune
+                            'rgba(75, 192, 192, 0.8)', // Vert
+                            'rgba(153, 102, 255, 0.8)', // Violet
+                            'rgba(102, 51, 153, 0.8)', // Violet
+                            'rgba(255, 153, 51, 0.8)', // Orange
+                            'rgba(0, 128, 128, 0.8)', // Sarcelle
+                            'rgba(255, 80, 80, 0.8)', // Rouge doux
+                            'rgba(0, 204, 102, 0.8)', // Vert clair
+                            'rgba(102, 178, 255, 0.8)', // Bleu clair
+                            'rgba(229, 204, 255, 0.8)', // Lavande
+                            'rgba(255, 218, 128, 0.8)', // Pêche
+                            'rgba(0, 102, 204, 0.8)', // Bleu
+                            'rgba(204, 0, 204, 0.8)' // Magenta
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)'
+                            'rgba(255, 99, 132, 1)', // Rose
+                            'rgba(54, 162, 235, 1)', // Bleu
+                            'rgba(255, 206, 86, 1)', // Jaune
+                            'rgba(75, 192, 192, 1)', // Vert
+                            'rgba(153, 102, 255, 1)', // Violet
+                            'rgba(102, 51, 153, 1)', // Violet
+                            'rgba(255, 153, 51, 1)', // Orange
+                            'rgba(0, 128, 128, 1)', // Sarcelle
+                            'rgba(255, 80, 80, 1)', // Rouge doux
+                            'rgba(0, 204, 102, 1)', // Vert clair
+                            'rgba(102, 178, 255, 1)', // Bleu clair
+                            'rgba(229, 204, 255, 1)', // Lavande
+                            'rgba(255, 218, 128, 1)', // Pêche
+                            'rgba(0, 102, 204, 1)', // Bleu
+                            'rgba(204, 0, 204, 1)' // Magenta
                         ],
                         borderWidth: 1
                     }]
@@ -125,7 +147,7 @@
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Affichage de la somme des soldes des comptes clients ouverts dans la période spécifiée
-                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center;box-shadow: 0 4px 8px rgba(0,0,0,0.1);  '><h3 style='text-align: center'>Statistique des rendez-vous</h3><p>Nombre de rdv pris <br> entre $datedebut et $datefin : " . $result['nombre_rdv'].'</p>';
+                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center;box-shadow: 0 4px 8px rgba(0,0,0,0.1);  '><h3 style='text-align: center'>Statistique des rendez-vous</h3><p>Nombre de rdv pris <br> entre $datedebut et $datefin : " . $result['nombre_rdv'] . '</p>';
 
                 // Requête SQL pour récupérer les données
                 $sql = "SELECT nom, MONTH(dateRdv) AS mois, COUNT(*) AS nombre_rdv FROM rdv 
@@ -143,7 +165,7 @@
                 // Prepare data for the pie chart
                 $labelsPie = [];
                 $valuesPie = [];
-                $pieColors = ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)', 'rgba(255, 206, 86, 0.8)', 'rgba(75, 192, 192, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(255, 159, 64, 0.8)'];
+                $pieColors = ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)', 'rgba(255, 206, 86, 0.8)', 'rgba(75, 192, 192, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(255, 159, 64, 0.8)', 'rgba(102, 51, 153, 0.8)', 'rgba(255, 153, 51, 0.8)', 'rgba(0, 128, 128, 0.8)', 'rgba(255, 80, 80, 0.8)', 'rgba(0, 204, 102, 0.8)', 'rgba(102, 178, 255, 0.8)', 'rgba(229, 204, 255, 0.8)', 'rgba(255, 218, 128, 0.8)', 'rgba(0, 102, 204, 0.8)', 'rgba(204, 0, 204, 0.8)'];
 
                 // Prepare data for the bar chart
                 $labelsBar = array_values($moisEnLettres);
@@ -186,37 +208,48 @@
                 ];
 
                 // JavaScript script to generate the pie chart
-                echo '<canvas id="myChartPie"></canvas>       
-        <script>
-        var ctxPie = document.getElementById("myChartPie").getContext("2d");
-        var myChartPie = new Chart(ctxPie, {
-            type: "pie",
-            data: {
-                labels: ' . json_encode(array_values($labelsPie)) . ',
-                datasets: [{
-                    label: "Nombre de rendez-vous",
-                    data: ' . json_encode(array_values($valuesPie)) . ',
-                    backgroundColor: ' . json_encode(array_slice($pieColors, 0, count($valuesPie))) . ',
-                    borderColor: [
-                        "rgba(255, 99, 132, 1)",
-                        "rgba(54, 162, 235, 1)",
-                        "rgba(255, 206, 86, 1)",
-                        "rgba(75, 192, 192, 1)",
-                        "rgba(153, 102, 255, 1)"
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                plugins: {
-                    title: {
-                        display: true,
-                        text: "Répartition des rendez-vous par conseiller"
+                echo '<canvas id="myChartPie"></canvas>
+                <script>
+                var ctxPie = document.getElementById("myChartPie").getContext("2d");
+                var myChartPie = new Chart(ctxPie, {
+                type: "pie",
+                data: {
+                    labels: ' . json_encode(array_values($labelsPie)) . ',
+                    datasets: [{
+                        label: "Nombre de rendez-vous",
+                        data: ' . json_encode(array_values($valuesPie)) . ',
+                        backgroundColor: ' . json_encode(array_slice($pieColors, 0, count($valuesPie))) . ',
+                        borderColor: [
+                            "rgba(255, 99, 132, 1)", // Rose
+                            "rgba(54, 162, 235, 1)", // Bleu
+                            "rgba(255, 206, 86, 1)", // Jaune
+                            "rgba(75, 192, 192, 1)", // Vert
+                            "rgba(153, 102, 255, 1)", // Violet
+                            "rgba(102, 51, 153, 1)", // Violet
+                            "rgba(255, 153, 51, 1)", // Orange
+                            "rgba(0, 128, 128, 1)", // Sarcelle
+                            "rgba(255, 80, 80, 1)", // Rouge doux
+                            "rgba(0, 204, 102, 1)", // Vert clair
+                            "rgba(102, 178, 255, 1)", // Bleu clair
+                            "rgba(229, 204, 255, 1)", // Lavande
+                            "rgba(255, 218, 128, 1)", // Pêche
+                            "rgba(0, 102, 204, 1)", // Bleu
+                            "rgba(204, 0, 204, 1)" // Magenta
+                        ],
+                        borderWidth: 1
+                    }]
+                    },
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: "Répartition des rendez-vous par conseiller"
+                            }
+                        }
                     }
-                }
-            }
-        });
-        </script>';
+                });
+                </script>';
+
 
                 // Data in JSON format for the bar chart
                 $dataBar = [
@@ -274,7 +307,7 @@
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Affichage de la somme des soldes des comptes clients ouverts dans la période spécifiée
-                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique du solde</h3><p>Somme des soldes des comptes clients ouverts <br> entre $datedebut et $datefin : " . $result['somme_solde'].'</p>';
+                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique du solde</h3><p>Somme des soldes des comptes clients ouverts <br> entre $datedebut et $datefin : " . $result['somme_solde'] . '</p>';
 
                 // Requête SQL pour récupérer les soldes des clients
                 $sql = "SELECT SUM(solde) AS solde_client, nom, prenom 
@@ -320,14 +353,34 @@
                         "rgba(54, 162, 235, 0.8)", // Bleu
                         "rgba(255, 206, 86, 0.8)", // Jaune
                         "rgba(75, 192, 192, 0.8)", // Vert
-                        "rgba(153, 102, 255, 0.8)" // Violet
+                        "rgba(153, 102, 255, 0.8)", // Violet
+                        "rgba(102, 51, 153, 0.8)", // Violet
+                        "rgba(255, 153, 51, 0.8)", // Orange
+                        "rgba(0, 128, 128, 0.8)", // Sarcelle
+                        "rgba(255, 80, 80, 0.8)", // Rouge doux
+                        "rgba(0, 204, 102, 0.8)", // Vert clair
+                        "rgba(102, 178, 255, 0.8)", // Bleu clair
+                        "rgba(229, 204, 255, 0.8)", // Lavande
+                        "rgba(255, 218, 128, 0.8)", // Pêche
+                        "rgba(0, 102, 204, 0.8)", // Bleu
+                        "rgba(204, 0, 204, 0.8)" // Magenta
                     ],
                     borderColor: [
-                        "rgba(255, 99, 132, 1)",
-                        "rgba(54, 162, 235, 1)",
-                        "rgba(255, 206, 86, 1)",
-                        "rgba(75, 192, 192, 1)",
-                        "rgba(153, 102, 255, 1)"
+                        "rgba(255, 99, 132, 1)", // Rose
+                        "rgba(54, 162, 235, 1)", // Bleu
+                        "rgba(255, 206, 86, 1)", // Jaune
+                        "rgba(75, 192, 192, 1)", // Vert
+                        "rgba(153, 102, 255, 1)", // Violet
+                        "rgba(102, 51, 153, 1)", // Violet
+                        "rgba(255, 153, 51, 1)", // Orange
+                        "rgba(0, 128, 128, 1)", // Sarcelle
+                        "rgba(255, 80, 80, 1)", // Rouge doux
+                        "rgba(0, 204, 102, 1)", // Vert clair
+                        "rgba(102, 178, 255, 1)", // Bleu clair
+                        "rgba(229, 204, 255, 1)", // Lavande
+                        "rgba(255, 218, 128, 1)", // Pêche
+                        "rgba(0, 102, 204, 1)", // Bleu
+                        "rgba(204, 0, 204, 1)" // Magenta
                     ],
                     borderWidth: 1
                 }]
@@ -390,7 +443,87 @@
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Affichage du nombre de clients ayant un compte ou un contrat à la date spécifiée
-                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique des clients</h3><p>Nombre de clients ayant un compte ou un contrat <br> entre le " . $datedebut . " et le " . $datefin . " est de : " . $result['nombre_client'] ."</p></div>";
+                echo "<div style='width: 25%; float: left; vertical-align: middle; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); '><h3 style='text-align: center'>Statistique des clients</h3><p>Nombre de clients ayant un compte ou un contrat <br> entre le " . $datedebut . " et le " . $datefin . " est de : " . $result['nombre_client'] . "</p>";
+
+                // Histogramme des clients par mois
+                // Préparer la requête SQL
+                $sql = "SELECT YEAR(dateInscription) AS year, MONTH(dateInscription) AS month, COUNT(DISTINCT numClient) AS nombre_client , Count(DISTINCT idCompte) AS nombre_compte, count(DISTINCT numcontrat) As nombre_contrat
+                FROM (
+                    SELECT numClient, dateOuverture AS dateInscription
+                    FROM CompteClient
+                    UNION ALL
+                    SELECT numClient, dateOuvertureContrat AS dateInscription
+                    FROM ContratClient
+                ) AS DatesInscription
+                WHERE dateInscription BETWEEN ? AND ?
+                GROUP BY YEAR(dateInscription), MONTH(dateInscription)
+                ORDER BY year, month;";
+
+                // Préparer et exécuter la déclaration SQL
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$datedebut, $datefin]);
+                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Initialiser la structure de données pour le graphique
+                $labelsBar = [];
+                $datasetsBar = [];
+                $dataByYearMonth = [];
+
+                // Remplir le dataset pour chaque mois de chaque année
+                foreach ($results as $row) {
+                $yearMonth = $row['year'] . '-' . sprintf('%02d', $row['month']); // Formate 'année-mois' comme 'AAAA-MM'
+                $labelsBar[] = $yearMonth;
+                $dataByYearMonth[$yearMonth] = (int) $row['nombre_client'];
+                }
+
+                // Préparer les datasets pour le graphique en barres
+                $datasetsBar[] = [
+                'label' => 'Nombre de nouveaux clients',
+                'data' => array_values($dataByYearMonth),
+                'backgroundColor' => 'rgba(54, 162, 235, 0.6)', // Vous pouvez changer la couleur
+                'borderColor' => 'rgba(54, 162, 235, 1)',
+                'borderWidth' => 1
+                ];
+
+                // Compiler toutes les données dans un tableau pour le graphique
+                $dataBar = [
+                'labels' => array_unique($labelsBar),
+                'datasets' => $datasetsBar
+                ];
+                
+                echo '<canvas id="myChartBar"></canvas>
+                <script>
+                var ctxBar = document.getElementById("myChartBar").getContext("2d");
+                var myChartBar = new Chart(ctxBar, {
+                type: "bar",
+                data: ' . json_encode($dataBar) . ',
+                options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Nombre total de nouveaux clients"
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        title: {
+                            display: true,
+                            text: "Mois"
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Nombre de clients"
+                        }
+                    }
+                }
+                }
+                });
+                </script></div>'; 
             }
         } catch (PDOException $e) {
             // Gestion des erreurs PDO

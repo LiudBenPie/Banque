@@ -48,10 +48,8 @@
                         </ul>
                     </li>
                     <!-- Visualiser les statistiques de la banque -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/contrats/statistique.php" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-                            Statistiques
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contrats/statistique.php"> Statistiques</a>
                     </li>
                 </ul>
                 <?php
@@ -66,6 +64,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    </body>
 
-</html>
+    </html>
