@@ -45,6 +45,16 @@
         }
     }
 
+    // Récupère les informations du compte après la mise à jour 
+    if (isset($_POST['numContrat'])) {
+        $numContrat = $_POST['numContrat'];
+        $sql = "SELECT * FROM Contrat WHERE numContrat = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$numContrat]);
+        $contrat = $stmt->fetch();
+    }
+
+
     // Affiche une alerte si la mise à jour a été réussie
     if ($updateSuccessful) {
         echo '<script>alert("Les informations du contrat ont été mises à jour avec succès.");</script>';

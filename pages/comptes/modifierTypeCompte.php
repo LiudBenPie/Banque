@@ -53,6 +53,16 @@
         }
     }
 
+     // Récupère les informations du compte après la mise à jour 
+     if (isset($_POST['idCompte'])) {
+        $idCompte = $_POST['idCompte'];
+        $sql = "SELECT * FROM Compte WHERE idCompte = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$idCompte]);
+        $compte = $stmt->fetch();
+    }
+
+
     // Affiche une alerte si la mise à jour a été réussie
     if ($updateSuccessful) {
         echo '<script>alert("Les informations du compte ont été mises à jour avec succès.");</script>';

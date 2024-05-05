@@ -11,7 +11,7 @@
     require('../../init.php');
     checkAcl('auth');
     include VIEWS_DIR . '/menu.php';
-
+    $createSuccessful = false;
     // Vérifier que le formulaire a été soumis
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Collecter les données du formulaire
@@ -26,6 +26,7 @@
         $stmt = $conn->prepare("SELECT COUNT(*) FROM rdv WHERE dateRdv = ? AND heureRdv = ? AND numEmploye = ?");
         $stmt->execute([$dateRdv, $heureRdv, $numEmploye]);
         $count = $stmt->fetchColumn();
+        // Marque que la mise à jour a été réussie
 
         if ($count == 0) {
             try {
@@ -33,8 +34,11 @@
                 // Préparer une requête SQL pour insérer les données
                 $stmt = $conn->prepare("INSERT INTO rdv (dateRdv, heureRdv, numEmploye, idMotif, numClient) VALUES (?, ?, ?, ?, ?)");
                 $stmt->execute([$dateRdv, $heureRdv, $numEmploye, $idMotif, $numClient]);
-
-                echo "RDV ajouté avec succès!";
+                $createSuccessful = true;
+                if ($createSuccessful) {
+                    echo '<script>alert("RDV ajouté avec succès!");</script>';
+                }
+                exit;
             } catch (PDOException $e) {
                 echo "Erreur : " . $e->getMessage();
             }

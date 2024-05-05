@@ -27,7 +27,7 @@ include VIEWS_DIR . '/menu.php';
                 <label for="numEmploye" class="form-label">Numero du Conseiller :</label>
                 <select name="numEmploye" class="form-control" id="numEmploye">
                     <?php
-                    $sql = "SELECT numEmploye, nom FROM employe WHERE categorie = 'Conseiller'";
+                    $sql = "SELECT numEmploye, nom FROM employe WHERE categorie = 'Conseiller' AND actif=1";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $conseillers = $stmt->fetchAll();

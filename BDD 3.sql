@@ -118,23 +118,33 @@ INSERT INTO Situation (description) VALUES
 INSERT INTO Compte (nomTypeCompte, description) VALUES
 ('Compte Courant', 'Pour les opérations quotidiennes'),
 ('Livret A', 'Épargne réglementée avec un taux d’intérêt exonéré d’impôts'),
-('PEL', 'Plan Épargne Logement pour un projet immobilier');
+('PEL', 'Plan Épargne Logement pour un projet immobilier'),
+('Compte Épargne', 'Compte pour mettre de côté une partie de vos revenus'),
+('Compte Joint', 'Compte partagé entre plusieurs personnes pour des dépenses communes'),
+('Compte Chèque', 'Compte permettant l’émission de chèques pour paiement');
 
 -- Insertion des employés
 INSERT INTO Employe (nom, login, motDePasse, categorie, actif) VALUES
 ('Conseiller Y', 'Conseiller Y', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
 ('Directeur', 'Directeur', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur', 1),
 ('Agent', 'Agent', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent', 1),
-('Conseiller X', 'Conseiller X', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1);
+('Conseiller X', 'Conseiller X', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 0);
+('Pierre', 'Pierre', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 1),
+('Max', 'Max', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Directeur', 0),
+('Natalie', 'Natalie', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Agent', 0),
+('Clelia', 'Clelia', '$2y$10$4ieMYxLS0BSGqTNQBwI.SOfFUG.VIQPq5cIjDQGg73Bbraw/9Cr1m', 'Conseiller', 0);
 
 -- Insertion des clients
 INSERT INTO Client (nom, prenom, adresse, mail, numTel, dateNaissance, idSituation, numEmploye) VALUES
 ('Durand', 'Alice', '12 rue des Lilas', 'alice.durand@example.com', '0123456789',  '1985-04-12', 1, 1),
-('Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', '1978-08-23', 2, 2),
-('Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', '1990-11-30', 3, 2),
-('Dupont', 'Jean', '24 rue des Roses', 'jean.dupont@example.com', '0123456789', '1980-05-15', 1, 1),
-('Martin', 'Sophie', '36 avenue Victor Hugo', 'sophie.martin@example.net', '9876543210', '1975-09-28', 2, 2),
-('Lefevre', 'Pierre', '50 rue du Commerce', 'pierre.lefevre@example.org', '5678901234', '1992-03-10', 3, 3);
+('Moreau', 'Bob', '45 avenue du Général', 'bob.moreau@example.net', '9876543210', '1978-08-23', 2, 5),
+('Petit', 'Clara', '78 boulevard de la Liberté', 'clara.petit@example.org', '5678901234', '1990-11-30', 3, 5),
+('Dupont', 'Jean', '24 rue des Roses', 'jean.dupont@example.com', '0123456789', '1980-05-15', 1, 5),
+('Martin', 'Sophie', '36 avenue Victor Hugo', 'sophie.martin@example.net', '9876543210', '1975-09-28', 2, 1),
+('Lefevre', 'Pierre', '50 rue du Commerce', 'pierre.lefevre@example.org', '5678901234', '1992-03-10', 3, 1);
+('Roux', 'Émilie', '112 rue de Belleville', 'emilie.roux@example.com', '1234567890', '1993-02-27', 4, 1),
+('Blanc', 'Lucas', '88 chemin des Oliviers', 'lucas.blanc@example.net', '2345678901', '1986-07-19', 5, 1),
+('Noir', 'Julie', '43 allée des Acacias', 'julie.noir@example.org', '3456789012', '1979-12-15', 6, 5);
 
 -- Insertion des comptes clients
 INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idCompte) VALUES
@@ -161,6 +171,7 @@ INSERT INTO CompteClient (dateOuverture, solde, montantDecouvert, numClient, idC
 ('2023-07-15', 3100.00, 800.00, 6, 1),
 ('2024-05-09', 2800.00, 700.00, 6, 2),
 ('2022-10-25', 6000.00, 1400.00, 6, 3);
+
  
 -- Insertion des opérations
 INSERT INTO Operation (montant,  dateOperation, typeOp, idCompteClient) VALUES
