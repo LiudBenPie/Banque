@@ -36,7 +36,7 @@
             $sql = "UPDATE rdv SET idMotif= ? WHERE idMotif = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$idtransfert, $idMotif]);
-            
+
             $sql = "DELETE FROM motif WHERE idMotif = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$idMotif]);
@@ -79,21 +79,16 @@
                 <label for="listePieces" class="form-label">Liste des Pièces:</label>
                 <input type="text" class="form-control" id="listePieces" name="listePieces" value="<?php echo isset($motif['listePieces']) ? htmlspecialchars($motif['listePieces']) : ''; ?>">
             </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn btn-outline-warning" name="action" value="modifier">Mettre à jour</button>
-            </div>
             <?php
             // Récupération de la liste des motifs sauf le motif actuel
             $sql = "SELECT idMotif, libelleMotif FROM motif WHERE idMotif<>?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$idMotif]);
             $idtransfert = $stmt->fetchAll();
-
             //liste déroulante du nouveau motif à afficher pour les rendez-vous archiver
             ?>
-            <div class="container mt-5" style="max-width: 700px;">
-                <label for="idtransfert">Sélectionnez le nouveau motif à afficher (pour la suppression du motif actuel) :</label>
-                <div class="form-group">
+            <div class="form-group">
+                <label for="idtransfert" class="form-label">Sélectionnez le nouveau motif à afficher (pour la suppression du motif actuel) :</label>
                 <select name="idtransfert" id="idtransfert" class="form-control">
                     <?php foreach ($idtransfert as $idtransferts) : ?>
                         <option value="<?php echo $idtransferts['idMotif']; ?>">
@@ -101,7 +96,10 @@
                         </option>
                     <?php endforeach; ?>
                 </select>
-                </div>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-outline-warning" name="action" value="modifier">Mettre à jour</button>
+            </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" class="btn btn-outline-warning" name="action" value="supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce motif ?')">Supprimer</button>
             </div>
