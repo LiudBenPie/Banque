@@ -1,5 +1,6 @@
 <?php
 class Auth {
+    // Cette ligne déclare une propriété protégée $pdo, qui est utilisée pour stocker l'objet PDO, représentant la connexion à la base de données.
     protected $pdo;
     protected $sessionName = 'user';
 

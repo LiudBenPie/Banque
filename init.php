@@ -10,6 +10,7 @@ require('connect.php');
 require('auth.php');
 session_start();
 
+//l'instance pour gérer l'authentification 
 $auth = new Auth($conn);
 
 // liste de contrôle d'accès
